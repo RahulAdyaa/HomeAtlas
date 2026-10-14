@@ -3,6 +3,7 @@ import io
 from pathlib import Path
 from types import SimpleNamespace
 import uuid
+import zipfile
 
 import fitz
 from PIL import Image, ImageDraw, ImageFont
@@ -11,6 +12,14 @@ import pytest
 from worker.config import Settings
 from worker.ingestion import extract, validate_file, split_text
 from worker.retrieval import rank_candidates, answer_from_evidence
+
+
+def write_xlsx(path):
+    with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as workbook:
+        workbook.writestr('xl/workbook.xml', '''<?xml version="1.0"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Appliances" sheetId="1" r:id="rId1"/></sheets></workbook>''')
+        workbook.writestr('xl/_rels/workbook.xml.rels', '''<?xml version="1.0"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Target="worksheets/sheet1.xml" Type="worksheet"/></Relationships>''')
+        workbook.writestr('xl/sharedStrings.xml', '''<?xml version="1.0"?><sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><si><t>Item</t></si><si><t>Warranty</t></si><si><t>Washer</t></si><si><t>Expires 2028</t></si></sst>''')
+        workbook.writestr('xl/worksheets/sheet1.xml', '''<?xml version="1.0"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData><row r="1"><c r="A1" t="s"><v>0</v></c><c r="B1" t="s"><v>1</v></c></row><row r="2"><c r="A2" t="s"><v>2</v></c><c r="B2" t="s"><v>3</v></c></row></sheetData></worksheet>''')
 
 
 class NoModels:
@@ -72,6 +81,36 @@ def test_rejects_signature_mismatch(tmp_path):
     path.write_text('not a PDF')
     with pytest.raises(ValueError, match='signature'):
         validate_file(path, 'application/pdf')
+
+
+def test_txt_and_csv_are_searchable_and_keep_row_provenance(tmp_path):
+    text = tmp_path / 'notes.txt'
+    text.write_text('Filter replacement every six months.\nKeep receipt in kitchen.', encoding='utf-8')
+    text_chunks = extract(text, 'text/plain', tmp_path / 'derived-text')
+    assert 'six months' in text_chunks[0].text
+    assert text_chunks[0].metadata['extractor'] == 'text'
+
+    csv_file = tmp_path / 'records.csv'
+    csv_file.write_text('Item,Warranty\nWasher,Expires 2028\n', encoding='utf-8')
+    csv_chunks = extract(csv_file, 'text/csv', tmp_path / 'derived-csv')
+    assert 'Washer' in csv_chunks[0].text and 'Expires 2028' in csv_chunks[0].text
+    assert csv_chunks[0].metadata == {'sheet': 'CSV', 'row_start': 1, 'row_end': 2, 'extractor': 'csv'}
+
+
+def test_xlsx_extracts_cached_cell_values_with_sheet_and_row_citations(tmp_path):
+    path = tmp_path / 'records.xlsx'
+    write_xlsx(path)
+    chunks = extract(path, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', tmp_path / 'derived-xlsx')
+    assert len(chunks) == 1
+    assert 'Appliances' in chunks[0].text and 'Washer' in chunks[0].text and 'Expires 2028' in chunks[0].text
+    assert chunks[0].metadata == {'sheet': 'Appliances', 'row_start': 1, 'row_end': 2, 'extractor': 'xlsx'}
+
+
+def test_rejects_invalid_excel_archive(tmp_path):
+    path = tmp_path / 'broken.xlsx'
+    path.write_bytes(b'not a workbook')
+    with pytest.raises(ValueError, match='Invalid Excel'):
+        validate_file(path, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 
 def test_private_path_blocks_escape_and_symlink(tmp_path):

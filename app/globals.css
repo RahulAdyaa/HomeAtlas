@@ -14,3 +14,4 @@
 .sidebar-close{display:none}@media(max-width:700px){.sidebar-close{display:grid;position:absolute;right:15px;top:25px}}
 @media(max-width:700px){.month-calendar{padding:20px 10px}.calendar-grid{gap:3px}.calendar-grid button{min-height:42px}.scene-controls>.icon-button{width:40px;height:40px}}
 .citation-page{position:relative}.citation-highlight{position:absolute;border:2px solid #b3a461;background:#e8d78918;box-shadow:0 0 0 1px #fff8;pointer-events:none}
+.citation-text-preview{padding:18px;background:var(--paper);color:var(--ink);overflow-wrap:anywhere}.citation-text-preview strong{display:block;margin-bottom:10px}.citation-text-preview p{white-space:pre-wrap;margin:0;line-height:1.6}

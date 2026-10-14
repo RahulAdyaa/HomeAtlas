@@ -9,7 +9,7 @@ Built with Next.js and TypeScript, Better Auth, PostgreSQL, a Python ingestion/r
 ## What you can do
 
 - **Keep a usable home inventory:** organize rooms and items, record brands, model and serial numbers, purchase dates, warranty dates, notes, and maintenance history.
-- **Build a private record library:** upload PDFs, photos, audio, and video; attach sources to a room or item; retain immutable source versions and processing status.
+- **Build a private record library:** upload PDFs, UTF-8 TXT/CSV, Excel `.xlsx`/`.xlsm`, common raster images, audio, and video; attach sources to a room or item; retain immutable source versions and processing status. Legacy `.xls` workbooks should be saved as `.xlsx` first.
 - **Ask across modalities:** search manuals, receipts, scanned pages, photos, voice recordings, and sampled video frames. Answers link to exact PDF pages/regions or audio/video timestamps.
 - **Get grounded answers:** combine lexical retrieval, BGE text embeddings, SigLIP2 image similarity, and reranking; Qwen3-VL drafts an evidence-based answer. Quotes and citations are verified, and the app abstains when it cannot find adequate evidence.
 - **Manage a household together:** owner/editor/viewer roles, invitations, private bookmarks, saved searches, reminders, recurring tasks, and a household activity trail.
@@ -58,15 +58,19 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    Upload[PDF · photo · audio · video] --> Validate[Check file signature, type, size]
+    Upload[PDF · TXT/CSV · XLSX · image · audio · video] --> Validate[Check file signature, type, size]
     Validate --> Store[Store immutable original privately]
     Store --> Queue[Create durable PostgreSQL job]
     Queue --> Extract{Worker extracts evidence}
     Extract -->|Digital PDF| PDF[Extract text and page regions]
+    Extract -->|TXT or CSV| Text[Extract UTF-8 text and row references]
+    Extract -->|Excel XLSX/XLSM| Sheet[Extract worksheet values and row references]
     Extract -->|Scan or photo| OCR[OCR text from scans and photos]
     Extract -->|Audio or video audio| Audio[Whisper transcript with timestamps]
     Extract -->|Video frames| FrameOCR[OCR text from sampled video frames]
     PDF --> Index[Keep source/version and page/time provenance]
+    Text --> Index
+    Sheet --> Index
     OCR --> Index
     FrameOCR --> Index
     Audio --> Index
@@ -153,7 +157,7 @@ Detailed exercised results and remaining limitations are in [verification](docs/
 
 ## Data and inference
 
-Uploads are signature/type/size checked, stored as private immutable originals, queued in PostgreSQL, and processed asynchronously. PDFs retain page and region coordinates; OCR scans/photos retain provenance; local Whisper produces timestamped audio/video segments; FFmpeg samples video frames. Citation opening always rechecks household membership and source/version IDs.
+Uploads are signature/type/size checked, stored as private immutable originals, queued in PostgreSQL, and processed asynchronously. UTF-8 text/CSV is indexed with row references; Excel `.xlsx`/`.xlsm` values are extracted without evaluating formulas and cited by worksheet/row; legacy `.xls` must be converted to `.xlsx`. PDFs retain page and region coordinates; Pillow-supported raster images are OCR'd and retain provenance; local Whisper produces timestamped audio/video segments; FFmpeg samples video frames. Citation opening always rechecks household membership and source/version IDs.
 
 Retrieval filters by household and permissions before assembling candidates. Lexical and local text-vector search are fused/reranked; image vectors occupy a separate compatible space. Local Qwen produces evidence-reviewed explanations with verified quotations and supporting PDF page images. A second model pass reviews each section; see [detailed answers](docs/DETAILED_ANSWERS.md) for the limits of visual interpretation. Answers without adequate evidence abstain. Hazardous-work queries recommend a qualified professional.
 
