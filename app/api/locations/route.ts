@@ -1,6 +1,7 @@
 import {z} from 'zod';
 import {api,ApiError,audit,scope,requireRole,uuid,shortText} from '@/lib/server';
 import {pool,transaction,camel} from '@/lib/db';
+import {removePrivateFile} from '@/lib/storage';
 import {presets} from '@/lib/locations';
 export const runtime='nodejs';
 const vector=z.object({x:z.number().finite().min(-100).max(100),y:z.number().finite().min(0).max(10),z:z.number().finite().min(-100).max(100)});
@@ -10,12 +11,14 @@ const inputSchema=z.discriminatedUnion('action',[
  z.object({action:z.literal('create'),parentId:uuid,type:z.enum(['room','zone','container']),...fields}),
  z.object({action:z.literal('update'),id:uuid,parentId:uuid,...fields}),
  z.object({action:z.literal('delete'),id:uuid}),
+ z.object({action:z.literal('deleteSource'),id:uuid}),
  z.object({action:z.literal('attach'),id:uuid,kind:z.enum(['source','item']),locationId:uuid}),
  z.object({action:z.literal('layout'),nodes:z.array(z.object({id:uuid,...fields})).max(400)}),
 ]);
 export const GET=api(async request=>{const c=await scope(request);return Response.json({locations:(await pool.query('SELECT * FROM locations WHERE household_id=$1 ORDER BY created_at,id',[c.householdId])).rows.map(r=>camel(r))})});
 export const POST=api(async request=>{
  const c=await scope(request);requireRole(c,['owner','editor']);const input=inputSchema.parse(await request.json());
+ const files:string[]=[];
  const result=await transaction(async db=>{
   const member=(await db.query('SELECT role FROM memberships WHERE household_id=$1 AND user_id=$2 FOR SHARE',[c.householdId,c.user.id])).rows[0];if(!member||member.role==='viewer')throw new ApiError(403,'Editor access required.');
   await db.query('SELECT id FROM households WHERE id=$1 FOR UPDATE',[c.householdId]);
@@ -35,10 +38,15 @@ export const POST=api(async request=>{
    if(used)throw new ApiError(409,'Move the documents, items and child locations before deleting this location.');
    if(n.type==='room'){const related=(await db.query('SELECT 1 FROM tasks WHERE room_id=$1 UNION ALL SELECT 1 FROM chunks WHERE room_id=$1 LIMIT 1',[input.id])).rows.length;if(related)throw new ApiError(409,'This room has historical records and cannot be deleted.');await db.query('DELETE FROM rooms WHERE id=$1 AND household_id=$2',[input.id,c.householdId])}
    await db.query('DELETE FROM locations WHERE id=$1 AND household_id=$2',[input.id,c.householdId]);
+  } else if(input.action==='deleteSource'){
+   const source=(await db.query('SELECT id FROM sources WHERE id=$1 AND household_id=$2 FOR UPDATE',[input.id,c.householdId])).rows[0];if(!source)throw new ApiError(404,'Document not found.');
+   if((await db.query("SELECT 1 FROM ingestion_jobs WHERE source_id=$1 AND household_id=$2 AND status IN ('queued','processing')",[input.id,c.householdId])).rows.length)throw new ApiError(409,'Wait for processing to finish before deleting this document.');
+   files.push(...(await db.query('SELECT storage_path AS path FROM source_versions WHERE source_id=$1 AND household_id=$2 UNION SELECT image_path AS path FROM chunks WHERE source_id=$1 AND household_id=$2 AND image_path IS NOT NULL',[input.id,c.householdId])).rows.map(r=>r.path));
+   await db.query('DELETE FROM sources WHERE id=$1 AND household_id=$2',[input.id,c.householdId]);
   } else if(input.action==='attach'){
    await get(input.locationId);const table=input.kind==='source'?'sources':'items';
    if(!(await db.query(`UPDATE ${table} SET location_id=$3 WHERE id=$1 AND household_id=$2 RETURNING id`,[input.id,c.householdId,input.locationId])).rows.length)throw new ApiError(404,'Record not found.');
   }
   await audit(db,c.householdId,c.user.id,'location.'+input.action,id);return {id};
- });return Response.json(result);
+ });await Promise.allSettled(files.map(file=>removePrivateFile(file)));return Response.json(result);
 });
