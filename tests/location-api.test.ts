@@ -1,9 +1,14 @@
 import {beforeAll,afterAll,it,expect} from 'vitest';
+import {mkdtemp,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {emptyLocation} from '../lib/home-layout';
 import {randomUUID} from 'node:crypto';
-let pool:typeof import('../lib/db').pool,route:typeof import('../app/api/locations/route'),cookie='',actor='';
+let pool:typeof import('../lib/db').pool,route:typeof import('../app/api/locations/route'),cookie='',actor='',directory='';
 const home=randomUUID(),other=randomUUID(),origin='http://localhost:3000';
 const request=(body:object)=>new Request(origin+'/api/locations?householdId='+home,{method:'POST',headers:{origin,cookie,'content-type':'application/json'},body:JSON.stringify(body)});
 beforeAll(async()=>{
+ directory=await mkdtemp(join(tmpdir(),'homeatlas-location-'));process.env.STORAGE_ROOT=directory;
  process.env.BETTER_AUTH_SECRET??='location-test-secret-at-least-32-characters';process.env.BETTER_AUTH_URL=origin;
  ({pool}=await import('../lib/db'));route=await import('../app/api/locations/route');const {auth}=await import('../lib/auth');
  const email=randomUUID()+'@example.invalid',password='Fixture-'+randomUUID();actor=(await auth.api.signUpEmail({body:{name:'Location fixture',email,password}})).user.id;
@@ -11,7 +16,7 @@ beforeAll(async()=>{
  for(const id of [home,other])await pool.query('INSERT INTO households(id,name,created_by) VALUES($1,$2,$3)',[id,'Fixture home',actor]);
  await pool.query("INSERT INTO memberships(household_id,user_id,role) VALUES($1,$2,'owner')",[home,actor]);
 });
-afterAll(async()=>{await pool.query('DELETE FROM households WHERE id=ANY($1::uuid[])',[[home,other]]);await pool.query('DELETE FROM "user" WHERE id=$1',[actor]);await pool.end()});
+afterAll(async()=>{await pool.query('DELETE FROM households WHERE id=ANY($1::uuid[])',[[home,other]]);await pool.query('DELETE FROM "user" WHERE id=$1',[actor]);await pool.end();await rm(directory,{recursive:true,force:true})});
 it('creates room/zone/container, moves documents, updates paths, and blocks invalid edits',async()=>{
  const create=async(parentId:string,type:string,name:string)=>{const res=await route.POST(request({action:'create',parentId,type,name}));expect(res.status).toBe(200);return(await res.json()).id};
  const room=await create(home,'room','Study'),zone=await create(room,'zone','Desk'),container=await create(zone,'container','Top drawer');
@@ -23,6 +28,24 @@ it('creates room/zone/container, moves documents, updates paths, and blocks inva
  expect((await route.POST(request({action:'delete',id:container}))).status).toBe(409);
  expect((await route.POST(request({action:'deleteSource',id:source}))).status).toBe(200);
  expect((await route.POST(request({action:'delete',id:container}))).status).toBe(200);
+ const added=emptyLocation(home,home,'room');added.name='Layout room';added.position.x=12;
+ expect((await route.POST(request({action:'layout',nodes:[added]}))).status).toBe(200);
+ expect((await pool.query('SELECT position FROM locations WHERE id=$1',[added.id])).rows[0].position.x).toBe(12);
+ const invalid={...added,id:randomUUID(),parentId:other};
+ expect((await route.POST(request({action:'layout',nodes:[{...added,name:'Should roll back'},invalid]}))).status).toBe(404);
+ expect((await pool.query('SELECT name FROM locations WHERE id=$1',[added.id])).rows[0].name).toBe('Layout room');
+ expect((await route.POST(request({action:'demo'}))).status).toBe(200);
+ expect((await (await route.POST(request({action:'demo'}))).json()).seeded).toBe(false);
+ expect((await pool.query("SELECT title,location_path FROM sources WHERE household_id=$1 AND title LIKE 'SAMPLE%'",[home])).rows).toHaveLength(4);
+ const photo=randomUUID(),item=randomUUID();
+ await pool.query("INSERT INTO sources(id,household_id,title,mime_type,created_by) VALUES($1,$2,'Photo','image/png',$3)",[photo,home,actor]);
+ await pool.query("INSERT INTO items(id,household_id,room_id,name) VALUES($1,$2,$3,'Photo item')",[item,home,room]);
+ expect((await route.POST(request({action:'photo',kind:'item',id:item,photoSourceId:photo}))).status).toBe(200);
+ expect((await route.POST(request({action:'photo',kind:'item',id:item,photoSourceId:randomUUID()}))).status).toBe(400);
+ expect((await route.POST(request({action:'deleteSource',id:photo}))).status).toBe(200);
+ expect((await pool.query('SELECT photo_source_id FROM items WHERE id=$1',[item])).rows[0].photo_source_id).toBeNull();
+ const sample=(await pool.query("SELECT id FROM sources WHERE household_id=$1 AND title LIKE 'SAMPLE%' LIMIT 1",[home])).rows[0];
+ expect((await route.POST(request({action:'deleteSource',id:sample.id}))).status).toBe(200);
  await pool.query("UPDATE memberships SET role='viewer' WHERE household_id=$1 AND user_id=$2",[home,actor]);
  expect((await route.POST(request({action:'delete',id:zone}))).status).toBe(403);
 });

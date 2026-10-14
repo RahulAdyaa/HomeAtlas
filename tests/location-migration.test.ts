@@ -13,6 +13,9 @@ it('migrates legacy rooms idempotently, maintains paths and enforces household h
   await db.query('INSERT INTO rooms(id,household_id,name,kind) VALUES($1,$2,$3,$4)',[r,h,'Study','study']);
   await db.query("INSERT INTO sources(id,household_id,room_id,title,mime_type,created_by) VALUES($1,$2,$3,'Fixture.txt','text/plain',$4)",[s,h,r,actor]);
   await db.query('SET CONSTRAINTS ALL IMMEDIATE');
+  await db.query('ALTER TABLE sources DISABLE TRIGGER source_location');
+  await db.query("UPDATE sources SET location_id=NULL,location_path='' WHERE id=$1",[s]);
+  await db.query('ALTER TABLE sources ENABLE TRIGGER source_location');
   // Reapply the real migration to populated legacy-compatible fixtures.
   await db.query(await readFile(new URL('../db/002_locations.sql',import.meta.url),'utf8'));
   expect((await db.query('SELECT location_id,location_path,room_id FROM sources WHERE id=$1',[s])).rows[0]).toEqual({location_id:r,location_path:'Study',room_id:r});

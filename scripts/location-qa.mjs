@@ -1,0 +1,46 @@
+import {chromium,expect} from '@playwright/test';
+import {browserExecutable} from './browser-runtime.mjs';
+import pg from 'pg';
+import {randomUUID} from 'node:crypto';
+import {mkdir,rm} from 'node:fs/promises';
+import path from 'node:path';
+const origin='http://localhost:3000',pool=new pg.Pool({connectionString:process.env.DATABASE_URL});
+const browser=await chromium.launch({headless:true,executablePath:browserExecutable(),args:['--enable-unsafe-swiftshader']});
+let actor,household;const errors=[];const output='/tmp/homeatlas-location-qa';await mkdir(output,{recursive:true});
+try{
+ const context=await browser.newContext({viewport:{width:1440,height:1000}}),request=context.request;
+ const post=async(url,data)=>{const response=await request.post(origin+url,{data,headers:{origin}});if(!response.ok())throw new Error(`${url}: ${response.status()} ${await response.text()}`);return response.json()};
+ const email='location-browser-'+randomUUID()+'@example.invalid',password='Location-QA-'+randomUUID();
+ actor=(await post('/api/auth/sign-up/email',{name:'Layout browser fixture',email,password})).user.id;
+ await pool.query('UPDATE "user" SET "emailVerified"=true WHERE id=$1',[actor]);
+ await post('/api/auth/sign-in/email',{email,password});
+ household=(await post('/api/atlas',{action:'createHousehold',name:'Layout QA home',starterRooms:false})).household.id;
+ await post('/api/locations?householdId='+household,{action:'demo'});
+ const page=await context.newPage();page.on('pageerror',error=>errors.push(error.stack||error.message));
+ await page.goto(origin+'/?householdId='+household);await page.getByRole('navigation',{name:'Main navigation'}).getByRole('button',{name:'My home',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Edit floor plan'})).toBeVisible();await expect(page.locator('canvas')).toBeVisible();await page.waitForTimeout(1500);
+ expect(await page.locator('[data-home-label]').evaluateAll(labels=>{const rects=labels.filter(e=>getComputedStyle(e).visibility!=='hidden').map(e=>e.getBoundingClientRect());return rects.every((r,i)=>rects.every((s,j)=>i===j||r.right<=s.left||r.left>=s.right||r.bottom<=s.top||r.top>=s.bottom))})).toBe(true);
+ await page.screenshot({path:output+'/overview.png',fullPage:true});
+ await page.getByRole('complementary',{name:'Location details'}).getByRole('button',{name:/^Study/}).click();
+ await expect(page.getByRole('navigation',{name:'Home location breadcrumb'}).getByRole('button',{name:'Study'})).toBeVisible();
+ await page.waitForTimeout(900);await page.getByRole('complementary',{name:'Location details'}).getByRole('button',{name:/^Desk/}).click();
+ await page.getByRole('complementary',{name:'Location details'}).getByRole('button',{name:/^Top drawer/}).click();
+ await expect(page.getByRole('button',{name:'SAMPLE — PAN card location ↗',exact:true})).toBeVisible();
+ await page.screenshot({path:output+'/drawer.png',fullPage:true});
+ await page.reload();await expect(page.getByRole('navigation',{name:'Home location breadcrumb'}).getByRole('button',{name:'Top drawer'})).toBeVisible();
+ await page.getByRole('button',{name:'Edit floor plan'}).click();
+ await page.getByRole('combobox',{name:'Editing layout'}).selectOption({label:'Study'});
+ await page.getByRole('combobox',{name:'Furniture preset'}).selectOption('cabinet');
+ await page.getByRole('button',{name:'＋ Add / drag cabinet'}).click();await page.getByRole('textbox',{name:'Name',exact:true}).fill('QA cabinet');
+ await page.getByRole('spinbutton',{name:'Width (m)',exact:true}).fill('1.75');
+ await page.screenshot({path:output+'/editor.png',fullPage:true});await page.getByRole('button',{name:'Save layout',exact:true}).click();await expect(page.getByRole('button',{name:'Edit floor plan'})).toBeVisible();
+ const atlas=await (await request.get(origin+'/api/atlas?householdId='+household)).json();expect(atlas.locations.find(n=>n.name==='QA cabinet').size.x).toBe(1.75);
+ await page.setViewportSize({width:390,height:844});await page.reload();await expect(page.getByRole('button',{name:'Edit floor plan'})).toBeVisible();await expect(page.locator('canvas')).toBeVisible();await page.waitForTimeout(1200);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:output+'/mobile.png',fullPage:true});
+ const fallback=await context.newPage();await fallback.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(kind,...args){if(kind==='webgl2'||kind==='webgl')return null;return original.call(this,kind,...args)}});
+ await fallback.goto(origin+'/?householdId='+household+'&location='+atlas.locations.find(n=>n.name==='Study').id);await expect(fallback.getByText('Room list · all locations remain available without 3D.')).toBeVisible();
+ expect(errors).toEqual([]);console.log(JSON.stringify({passed:['3D canvas','room zoom','container panel','deep-link reload','layout save persistence','390px overflow','WebGL fallback','no page exceptions'],screenshots:output}));
+}finally{
+ if(household){await pool.query('DELETE FROM households WHERE id=$1',[household]);for(const folder of ['originals','derived'])await rm(path.resolve(process.env.STORAGE_ROOT||'.data/storage',folder,household),{recursive:true,force:true})}
+ if(actor)await pool.query('DELETE FROM "user" WHERE id=$1',[actor]);await pool.end();await browser.close();
+}

@@ -4,9 +4,12 @@
 
 Built with Next.js and TypeScript, Better Auth, PostgreSQL, a Python ingestion/retrieval worker, and locally run AI models. The tested inference profile uses Ollama for Qwen3-VL and local BGE, SigLIP2, Whisper, and Tesseract components; household content is not sent to a hosted model API.
 
-![HomeAtlas interactive home view](docs/screenshots/home-3d-desktop.png)
+![HomeAtlas interactive home view](docs/screenshots/locations-overview.png)
 
 ## What you can do
+
+- **Find records down to the drawer:** Home → Room → Zone → optional Container, full paths in searchable evidence, and direct answer links into the home view.
+- **Design and explore your home:** data-driven isometric 3D, room zoom, clickable furniture, attached storage, and a grid-based floor-plan editor with doors/windows. [Upgrade guide and checks](docs/LOCATION_UPGRADE.md).
 
 - **Keep a usable home inventory:** organize rooms and items, record brands, model and serial numbers, purchase dates, warranty dates, notes, and maintenance history.
 - **Build a private record library:** upload PDFs, UTF-8 TXT/CSV, Excel `.xlsx`/`.xlsm`, common raster images, audio, and video; attach sources to a room or item; retain immutable source versions and processing status. Legacy `.xls` workbooks should be saved as `.xlsx` first.
@@ -17,6 +20,8 @@ Built with Next.js and TypeScript, Better Auth, PostgreSQL, a Python ingestion/r
 - **Explore the home visually:** interactive 3D room/item view, keyboard controls, mobile layouts, reduced-motion behavior, and a WebGL fallback.
 
 ## Verified results
+
+The 14 October hierarchy/layout regression run passed **73 JavaScript tests and 23 Python tests**, plus browser checks for room/container navigation, saved layout edits, mobile width and WebGL fallback. These results and their limits are documented in the [location upgrade report](docs/LOCATION_UPGRADE.md). 120fps is a design target, not a measured claim.
 
 These are local test and evaluation results recorded in the repository reports on 13 October 2026, not production service-level guarantees.
 

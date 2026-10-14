@@ -6,7 +6,7 @@ async function main(){
  const {runMigrations}=await getMigrations(auth.options);
  await runMigrations();
  const db=await pool.connect();
- try {for(const file of ['001_core.sql','002_locations.sql']) {
+ try {for(const file of ['001_core.sql','002_locations.sql','003_location_photos.sql']) {
   const sql=await readFile(new URL('../db/'+file,import.meta.url),'utf8');
   await db.query('BEGIN');
   try {await db.query(sql);await db.query('COMMIT');} catch(error){await db.query('ROLLBACK');throw error;}

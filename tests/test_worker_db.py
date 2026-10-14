@@ -100,6 +100,15 @@ def test_success_publishes_chunks_and_charges_once(database):
     with psycopg.connect(database.cfg.database_url, row_factory=dict_row) as conn:
         assert conn.execute('SELECT status FROM ingestion_jobs WHERE id=%s', (job['id'],)).fetchone()['status'] == 'ready'
         assert conn.execute('SELECT count(*) AS n FROM chunks WHERE version_id=%s', (job['version_id'],)).fetchone()['n'] == 1
+        chunk = conn.execute('SELECT text,metadata FROM chunks WHERE version_id=%s', (job['version_id'],)).fetchone()
+        assert chunk['text'].startswith('Location: Worker integration test\n\n')
+        assert chunk['metadata']['location_path'] == 'Worker integration test'
+        assert chunk['text'] in engine.seen  # Path was present at embedding time, not appended after inference.
+        conn.execute("UPDATE locations SET name='Renamed home' WHERE id=%s", (job['household_id'],))
+        moved = conn.execute('SELECT text,metadata,embedding FROM chunks WHERE version_id=%s', (job['version_id'],)).fetchone()
+        assert moved['text'].startswith('Location: Renamed home\n\n')
+        assert moved['metadata']['location_embedding_pending'] is True
+        assert moved['embedding'] is None
         assert conn.execute("SELECT count(*) AS n FROM credit_ledger WHERE operation_id=%s AND kind='charge'", (job['operation_id'],)).fetchone()['n'] == 1
         account = conn.execute('SELECT available,reserved FROM credit_accounts WHERE household_id=%s', (job['household_id'],)).fetchone()
         assert account == {'available': 95, 'reserved': 0}
