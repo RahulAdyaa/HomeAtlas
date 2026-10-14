@@ -1,0 +1,10 @@
+node_modules
+.next
+.data
+.env*
+worker/.venv
+data/models
+.git
+docs/screenshots
+test-results
+**/__pycache__

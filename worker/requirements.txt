@@ -1,0 +1,14 @@
+fastapi==0.115.12
+uvicorn==0.34.0
+psycopg[binary]==3.2.6
+python-dotenv==1.0.1
+PyMuPDF==1.25.5
+Pillow==11.1.0
+pytesseract==0.3.13
+numpy==1.26.4
+torch==2.7.0
+transformers==4.57.3
+sentencepiece==0.2.0
+openai-whisper==20250625
+pytest==8.3.5
+httpx==0.28.1

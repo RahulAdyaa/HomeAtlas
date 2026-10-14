@@ -1,0 +1,21 @@
+{
+  "artifacts": {
+    "RAG_EVALUATION_REPORT.md": "6f5ffa7a31d871d10201dc31a65b7b0f9d877bdbe2a1ed6a24ba048460a5f76c",
+    "results.json": "9c11694a6c7e6c81d5bc9f57878b25a43d6244e62abf3fa5bf3c04640c2c0002",
+    "results.csv": "c0b41bcbf3488142fe2189924d505ddce18edd9acb9fca06fa404f707a033b0a",
+    "testset.json": "e74cd9dafb47194bbd4d9f8569275917cfe9532507c24182c0ebf50827144f01",
+    "README.md": "96cfc35e40af04358edbb0bb3eb97b5e5d1993727c12894278130961703b233a",
+    "requirements.lock.txt": "d76bbb8a49710878be9f0ce22cb7816aed61ada5ae1843a1c56b4dfef2121fdc",
+    "run_eval.py": "4c72617e86f4171c67c64c91f28b0c79f58fae39a073443fc63c361b85d4e095",
+    "judges.py": "e4a3ceb7dad592a55c1d8e08e8b4f342665769a69cbd15365159fb9061d8e28e",
+    "report.py": "39815989d25967f55a85b0ce60132ec5bd5090ce3069a4e766dba5de9b6f488e",
+    "build_testset.py": "a2f410d418d709ef0a8053fd8fecc4d8be0da11164707499943f52add531f912",
+    "test_metrics.py": "963bbcb1f819f828f718dfc4bb1df4466ed5d498d01b67362cb71c1c458830d5"
+  },
+  "app_source_hashes": {
+    "worker/ingestion.py": "69194b6d3184d0ef01f19192b66c440efd7cae023c373387fa237b8adab36e85",
+    "worker/retrieval.py": "6f3b40245a437a57fba13c4686b6fff1d7b00c894078678db6e2002119cd52a1",
+    "worker/models.py": "f63b2936b44abe1510d2b0632c67a428d7cf577ba936b30e80296d665dbe340e"
+  },
+  "validation": "60 rows, five PDFs, four robustness variants, all K metrics, actual RAGAS similarity, judge nulls checked"
+}

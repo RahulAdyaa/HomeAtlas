@@ -1,0 +1,18 @@
+import {chromium,expect} from '@playwright/test';
+import {browserExecutable} from './browser-runtime.mjs';
+import fs from 'node:fs/promises';
+import crypto from 'node:crypto';
+const executablePath=browserExecutable();
+const browser=await chromium.launch({executablePath,headless:true});const context=await browser.newContext({viewport:{width:1280,height:950}});const page=await context.newPage();page.setDefaultTimeout(20000);const errors=[];page.on('pageerror',e=>errors.push(e.message));
+const email=`passkey-${Date.now()}@example.test`,password=crypto.randomBytes(18).toString('base64url');
+try{
+ const response=await context.request.post('http://localhost:3000/api/auth/sign-up/email',{headers:{Origin:'http://localhost:3000'},data:{name:'Passkey Test',email,password,callbackURL:'/'}});expect(response.status()).toBe(200);
+ let message;for(const f of await fs.readdir('.data/mail')){const m=JSON.parse(await fs.readFile('.data/mail/'+f));if(m.to===email&&m.subject.includes('Verify'))message=m}expect(message).toBeTruthy();await page.goto(message.text.match(/https?:\/\/[^\s]+/)[0]);await expect(page.getByRole('button',{name:'Create my home'})).toBeVisible();
+ await page.getByLabel('Home name').fill('Passkey verification home');await page.getByRole('button',{name:'Create my home'}).click();await expect(page.getByRole('navigation',{name:'Main navigation'})).toBeVisible();
+ const cdp=await context.newCDPSession(page);await cdp.send('WebAuthn.enable');const {authenticatorId}=await cdp.send('WebAuthn.addVirtualAuthenticator',{options:{protocol:'ctap2',transport:'internal',hasResidentKey:true,hasUserVerification:true,isUserVerified:true,automaticPresenceSimulation:true}});
+ await page.getByRole('navigation',{name:'Main navigation'}).getByRole('button',{name:'Settings',exact:true}).click();await page.getByRole('button',{name:'Add passkey',exact:true}).click();await expect(page.getByText('My HomeAtlas device',{exact:true})).toBeVisible({timeout:30000});
+ const credentials=await cdp.send('WebAuthn.getCredentials',{authenticatorId});expect(credentials.credentials).toHaveLength(1);console.log('PASS WebAuthn passkey registered in actual browser');
+ await page.getByRole('button',{name:'Sign out',exact:true}).click();await expect(page.getByRole('button',{name:'Make yourself at home'})).toBeVisible();await page.getByRole('button',{name:'Sign in',exact:false}).first().click();await page.getByRole('button',{name:'Sign in with a passkey',exact:true}).click();await expect(page.getByRole('navigation',{name:'Main navigation'})).toBeVisible({timeout:30000});
+ const atlas=await(await context.request.get('http://localhost:3000/api/atlas')).json();expect(atlas.user.email).toBe(email);expect(errors).toHaveLength(0);console.log('PASS passwordless passkey sign-in established household session');
+ await fs.writeFile('docs/PASSKEY_VERIFICATION.md','# Passkey verification\n\n13 October 2026: Playwright Chromium with a CDP CTAP2 resident-key virtual authenticator successfully registered a passkey through the HomeAtlas security UI, signed out, signed in using the passkey UI, and read the correct authenticated household. No browser errors were captured. Registration used the real Better Auth endpoint and PostgreSQL, with the actual local verification-email link.\n\nThis exercises browser WebAuthn protocol and session handling. It does not certify physical Touch ID, Face ID, hardware security keys, cross-device credential syncing, or production HTTPS origin configuration.\n');
+}catch(e){await page.screenshot({path:'docs/screenshots/passkey-failure.png',fullPage:true});console.error(e);process.exitCode=1}finally{await browser.close()}

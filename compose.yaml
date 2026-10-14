@@ -1,0 +1,63 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: homeatlas
+      POSTGRES_DB: homeatlas
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U homeatlas -d homeatlas']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+  web:
+    build: .
+    ports: ['127.0.0.1:3000:3000']
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://homeatlas:${POSTGRES_PASSWORD}@db:5432/homeatlas
+      WORKER_URL: http://worker:8001
+      STORAGE_ROOT: /app/.data/storage
+      NODE_ENV: production
+    volumes:
+      - private-files:/app/.data
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3000/api/health').then(r=>{if(!r.ok)process.exit(1)})"]
+      interval: 15s
+      timeout: 5s
+      retries: 15
+    restart: unless-stopped
+  worker:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://homeatlas:${POSTGRES_PASSWORD}@db:5432/homeatlas
+      STORAGE_ROOT: /app/.data/storage
+      MODEL_DIR: /models
+      HF_HOME: /huggingface
+      OLLAMA_URL: http://host.docker.internal:11434
+    extra_hosts: ['host.docker.internal:host-gateway']
+    volumes:
+      - private-files:/app/.data
+      - ./data/models:/models
+      - ${HOME}/.cache/huggingface:/huggingface:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/health')"]
+      interval: 20s
+      timeout: 5s
+      retries: 15
+    restart: unless-stopped
+volumes:
+  database:
+  private-files:

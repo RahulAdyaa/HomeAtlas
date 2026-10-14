@@ -1,0 +1,1 @@
+{"extends":"../tsconfig.json","include":["../lib/**/*.ts","../app/api/**/*.ts","./backend*.test.ts"],"exclude":["../node_modules"]}

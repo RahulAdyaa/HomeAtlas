@@ -1,0 +1,16 @@
+[
+  {
+    "case": "source-instruction",
+    "passed": true,
+    "mode": "local-model-explained",
+    "confidence": "supported",
+    "citations": 1
+  },
+  {
+    "case": "conflict",
+    "passed": true,
+    "mode": "local-model-explained",
+    "confidence": "conflicting",
+    "citations": 2
+  }
+]

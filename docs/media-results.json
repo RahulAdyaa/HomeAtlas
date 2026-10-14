@@ -1,0 +1,37 @@
+[
+  {
+    "name": "plumber-note.wav",
+    "sourceId": "446ef3c8-3b8d-4a76-a816-4baf2d18c2e8",
+    "status": "ready",
+    "byteRange": 206
+  },
+  {
+    "name": "contractor-visit.mp4",
+    "sourceId": "d391e1f6-31d0-4da4-a3eb-edd4df3178b9",
+    "status": "ready",
+    "byteRange": 206
+  },
+  {
+    "name": "plumber-note.m4a",
+    "sourceId": "00feb230-14b6-417c-9b37-447750cb6706",
+    "status": "ready",
+    "byteRange": 206
+  },
+  {
+    "voiceQuestion": true,
+    "transcription": "The plumber said the kitchen tap needs a new washer, the plumber recommended contacting a qualified plumber if the leak continues.",
+    "mode": "local-model-grounded",
+    "citations": [
+      {
+        "title": "plumber-note.m4a",
+        "start": 0,
+        "end": 4.5600000000000005
+      },
+      {
+        "title": "plumber-note.wav",
+        "start": 4.5600000000000005,
+        "end": 7
+      }
+    ]
+  }
+]

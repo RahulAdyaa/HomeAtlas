@@ -1,0 +1,14 @@
+import {chromium} from '@playwright/test';
+import {browserExecutable} from './browser-runtime.mjs';
+import fs from 'node:fs/promises';
+const executablePath=browserExecutable();
+const browser=await chromium.launch({executablePath,headless:true});
+const page=await browser.newPage({viewport:{width:1440,height:1050},deviceScaleFactor:1,reducedMotion:'reduce'});
+page.on('pageerror',e=>console.error('PAGE ERROR',e.message));
+await page.goto('http://localhost:3000');
+await page.getByRole('heading',{name:'Your home. On the record.'}).waitFor();
+await page.screenshot({path:'docs/screenshots/landing-desktop.png',fullPage:true});
+await page.setViewportSize({width:390,height:844});
+await page.screenshot({path:'docs/screenshots/landing-phone.png',fullPage:true});
+console.log('Landing page responsive screenshots captured.');
+await browser.close();

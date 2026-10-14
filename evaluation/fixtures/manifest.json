@@ -1,0 +1,398 @@
+[
+  {
+    "id": "text",
+    "file": "fixtures/text.pdf",
+    "pages": [
+      {
+        "page": 1,
+        "text": "HomeAtlas evaluation: text record 1\nUnit T1 has a warranty of 18 months.\nUnit T1 requires a service inspection every 3 months.\nThe service provider for unit T1 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+      },
+      {
+        "page": 2,
+        "text": "HomeAtlas evaluation: text record 2\nUnit T2 has a warranty of 24 months.\nUnit T2 requires a service inspection every 4 months.\nThe service provider for unit T2 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+      },
+      {
+        "page": 3,
+        "text": "HomeAtlas evaluation: text record 3\nUnit T3 has a warranty of 30 months.\nUnit T3 requires a service inspection every 5 months.\nThe service provider for unit T3 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+      },
+      {
+        "page": 4,
+        "text": "HomeAtlas evaluation: text record 4\nUnit T4 has a warranty of 36 months.\nUnit T4 requires a service inspection every 6 months.\nThe service provider for unit T4 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+      }
+    ],
+    "tables": [],
+    "figures": [],
+    "license": "CC0; original evaluation fixture"
+  },
+  {
+    "id": "table",
+    "file": "fixtures/table.pdf",
+    "pages": [
+      {
+        "page": 1,
+        "text": "HomeAtlas evaluation: table record 1\nCosts below are monthly. Table 1 lists appliance modes.\nMode Power W Cost USD\nEco 21 4\nNormal 41 7\nBoost 71 11"
+      },
+      {
+        "page": 2,
+        "text": "HomeAtlas evaluation: table record 2\nCosts below are monthly. Table 2 lists appliance modes.\nMode Power W Cost USD\nEco 22 5\nNormal 42 8\nBoost 72 12"
+      },
+      {
+        "page": 3,
+        "text": "HomeAtlas evaluation: table record 3\nCosts below are monthly. Table 3 lists appliance modes.\nMode Power W Cost USD\nEco 23 6\nNormal 43 9\nBoost 73 13"
+      },
+      {
+        "page": 4,
+        "text": "HomeAtlas evaluation: table record 4\nCosts below are monthly. Table 4 lists appliance modes.\nMode Power W Cost USD\nEco 24 7\nNormal 44 10\nBoost 74 14"
+      }
+    ],
+    "tables": [
+      {
+        "page": 1,
+        "cells": [
+          [
+            "Mode",
+            "Power W",
+            "Cost USD"
+          ],
+          [
+            "Eco",
+            "21",
+            "4"
+          ],
+          [
+            "Normal",
+            "41",
+            "7"
+          ],
+          [
+            "Boost",
+            "71",
+            "11"
+          ]
+        ],
+        "bbox": [
+          45,
+          150,
+          540,
+          410
+        ]
+      },
+      {
+        "page": 2,
+        "cells": [
+          [
+            "Mode",
+            "Power W",
+            "Cost USD"
+          ],
+          [
+            "Eco",
+            "22",
+            "5"
+          ],
+          [
+            "Normal",
+            "42",
+            "8"
+          ],
+          [
+            "Boost",
+            "72",
+            "12"
+          ]
+        ],
+        "bbox": [
+          45,
+          150,
+          540,
+          410
+        ]
+      },
+      {
+        "page": 3,
+        "cells": [
+          [
+            "Mode",
+            "Power W",
+            "Cost USD"
+          ],
+          [
+            "Eco",
+            "23",
+            "6"
+          ],
+          [
+            "Normal",
+            "43",
+            "9"
+          ],
+          [
+            "Boost",
+            "73",
+            "13"
+          ]
+        ],
+        "bbox": [
+          45,
+          150,
+          540,
+          410
+        ]
+      },
+      {
+        "page": 4,
+        "cells": [
+          [
+            "Mode",
+            "Power W",
+            "Cost USD"
+          ],
+          [
+            "Eco",
+            "24",
+            "7"
+          ],
+          [
+            "Normal",
+            "44",
+            "10"
+          ],
+          [
+            "Boost",
+            "74",
+            "14"
+          ]
+        ],
+        "bbox": [
+          45,
+          150,
+          540,
+          410
+        ]
+      }
+    ],
+    "figures": [],
+    "license": "CC0; original evaluation fixture"
+  },
+  {
+    "id": "image",
+    "file": "fixtures/image.pdf",
+    "pages": [
+      {
+        "page": 1,
+        "text": "HomeAtlas evaluation: image record 1"
+      },
+      {
+        "page": 2,
+        "text": "HomeAtlas evaluation: image record 2"
+      },
+      {
+        "page": 3,
+        "text": "HomeAtlas evaluation: image record 3"
+      },
+      {
+        "page": 4,
+        "text": "HomeAtlas evaluation: image record 4"
+      }
+    ],
+    "tables": [],
+    "figures": [
+      {
+        "page": 1,
+        "bbox": [
+          35,
+          130,
+          565,
+          420
+        ],
+        "description": "Left-to-right flow: blue INLET, gold MESH, green HEPA, salmon FAN. Cartridge H100. Fan has 2 speed levels.",
+        "facts": [
+          "INLET",
+          "MESH",
+          "HEPA",
+          "FAN",
+          "H100",
+          "2"
+        ]
+      },
+      {
+        "page": 2,
+        "bbox": [
+          35,
+          130,
+          565,
+          420
+        ],
+        "description": "Left-to-right flow: blue INLET, gold MESH, green HEPA, salmon FAN. Cartridge H200. Fan has 3 speed levels.",
+        "facts": [
+          "INLET",
+          "MESH",
+          "HEPA",
+          "FAN",
+          "H200",
+          "3"
+        ]
+      },
+      {
+        "page": 3,
+        "bbox": [
+          35,
+          130,
+          565,
+          420
+        ],
+        "description": "Left-to-right flow: blue INLET, gold MESH, green HEPA, salmon FAN. Cartridge H300. Fan has 4 speed levels.",
+        "facts": [
+          "INLET",
+          "MESH",
+          "HEPA",
+          "FAN",
+          "H300",
+          "4"
+        ]
+      },
+      {
+        "page": 4,
+        "bbox": [
+          35,
+          130,
+          565,
+          420
+        ],
+        "description": "Left-to-right flow: blue INLET, gold MESH, green HEPA, salmon FAN. Cartridge H400. Fan has 5 speed levels.",
+        "facts": [
+          "INLET",
+          "MESH",
+          "HEPA",
+          "FAN",
+          "H400",
+          "5"
+        ]
+      }
+    ],
+    "license": "CC0; original evaluation fixture"
+  },
+  {
+    "id": "chart",
+    "file": "fixtures/chart.pdf",
+    "pages": [
+      {
+        "page": 1,
+        "text": "HomeAtlas evaluation: chart record 1"
+      },
+      {
+        "page": 2,
+        "text": "HomeAtlas evaluation: chart record 2"
+      },
+      {
+        "page": 3,
+        "text": "HomeAtlas evaluation: chart record 3"
+      },
+      {
+        "page": 4,
+        "text": "HomeAtlas evaluation: chart record 4"
+      }
+    ],
+    "tables": [],
+    "figures": [
+      {
+        "page": 1,
+        "bbox": [
+          30,
+          120,
+          570,
+          465
+        ],
+        "description": "Blue bars represent usage; x-axis Month (Jan, Feb, Mar), y-axis kWh. Values [25, 45, 65]. Usage increases every month.",
+        "facts": [
+          "25",
+          "45",
+          "65",
+          "kWh",
+          "Month",
+          "usage"
+        ]
+      },
+      {
+        "page": 2,
+        "bbox": [
+          30,
+          120,
+          570,
+          465
+        ],
+        "description": "Blue bars represent usage; x-axis Month (Jan, Feb, Mar), y-axis kWh. Values [30, 50, 70]. Usage increases every month.",
+        "facts": [
+          "30",
+          "50",
+          "70",
+          "kWh",
+          "Month",
+          "usage"
+        ]
+      },
+      {
+        "page": 3,
+        "bbox": [
+          30,
+          120,
+          570,
+          465
+        ],
+        "description": "Blue bars represent usage; x-axis Month (Jan, Feb, Mar), y-axis kWh. Values [35, 55, 75]. Usage increases every month.",
+        "facts": [
+          "35",
+          "55",
+          "75",
+          "kWh",
+          "Month",
+          "usage"
+        ]
+      },
+      {
+        "page": 4,
+        "bbox": [
+          30,
+          120,
+          570,
+          465
+        ],
+        "description": "Blue bars represent usage; x-axis Month (Jan, Feb, Mar), y-axis kWh. Values [40, 60, 80]. Usage increases every month.",
+        "facts": [
+          "40",
+          "60",
+          "80",
+          "kWh",
+          "Month",
+          "usage"
+        ]
+      }
+    ],
+    "license": "CC0; original evaluation fixture"
+  },
+  {
+    "id": "scanned",
+    "file": "fixtures/scanned.pdf",
+    "pages": [
+      {
+        "page": 1,
+        "text": "HomeAtlas evaluation: scanned record 1\nPump S1 was inspected on 2026-01-15.\nPump S1 pressure was 3 bar.\nTechnician: Morgan 1.\nNext inspection: 2027."
+      },
+      {
+        "page": 2,
+        "text": "HomeAtlas evaluation: scanned record 2\nPump S2 was inspected on 2026-02-15.\nPump S2 pressure was 4 bar.\nTechnician: Morgan 2.\nNext inspection: 2027."
+      },
+      {
+        "page": 3,
+        "text": "HomeAtlas evaluation: scanned record 3\nPump S3 was inspected on 2026-03-15.\nPump S3 pressure was 5 bar.\nTechnician: Morgan 3.\nNext inspection: 2027."
+      },
+      {
+        "page": 4,
+        "text": "HomeAtlas evaluation: scanned record 4\nPump S4 was inspected on 2026-04-15.\nPump S4 pressure was 6 bar.\nTechnician: Morgan 4.\nNext inspection: 2027."
+      }
+    ],
+    "tables": [],
+    "figures": [],
+    "license": "CC0; original evaluation fixture"
+  }
+]

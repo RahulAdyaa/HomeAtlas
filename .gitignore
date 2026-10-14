@@ -1,0 +1,15 @@
+node_modules/
+.next/
+.env
+.env.local
+.data/
+worker/.venv/
+__pycache__/
+*.pyc
+playwright-report/
+test-results/
+data/models/
+*.tsbuildinfo
+
+# Fontshare binaries are self-hosted locally, not redistributed in the source repository.
+public/fonts/Satoshi-*.woff2

@@ -1,0 +1,1320 @@
+{
+  "seed": 741,
+  "ground_truth": "Authored from fixture specifications, not app answers; scan render visually reviewed.",
+  "questions": [
+    {
+      "id": "text-01",
+      "modality": "text",
+      "question": "How long is the warranty for unit T1?",
+      "reference_answer": "Unit T1 has a warranty of 18 months.",
+      "source_document": "text.pdf",
+      "source_pages": [
+        1
+      ],
+      "evidence_terms": [
+        "18",
+        "months"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "text-p1-c000"
+      ]
+    },
+    {
+      "id": "text-02",
+      "modality": "text",
+      "question": "How often does unit T1 need a service inspection?",
+      "reference_answer": "Unit T1 requires a service inspection every 3 months.",
+      "source_document": "text.pdf",
+      "source_pages": [
+        1
+      ],
+      "evidence_terms": [
+        "3",
+        "months"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "text-p1-c000"
+      ]
+    },
+    {
+      "id": "text-03",
+      "modality": "text",
+      "question": "How long is the warranty for unit T2?",
+      "reference_answer": "Unit T2 has a warranty of 24 months.",
+      "source_document": "text.pdf",
+      "source_pages": [
+        2
+      ],
+      "evidence_terms": [
+        "24",
+        "months"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "text-p2-c001"
+      ]
+    },
+    {
+      "id": "text-04",
+      "modality": "text",
+      "question": "How often does unit T2 need a service inspection?",
+      "reference_answer": "Unit T2 requires a service inspection every 4 months.",
+      "source_document": "text.pdf",
+      "source_pages": [
+        2
+      ],
+      "evidence_terms": [
+        "4",
+        "months"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "text-p2-c001"
+      ]
+    },
+    {
+      "id": "text-05",
+      "modality": "text",
+      "question": "How long is the warranty for unit T3?",
+      "reference_answer": "Unit T3 has a warranty of 30 months.",
+      "source_document": "text.pdf",
+      "source_pages": [
+        3
+      ],
+      "evidence_terms": [
+        "30",
+        "months"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "text-p3-c002"
+      ]
+    },
+    {
+      "id": "text-06",
+      "modality": "text",
+      "question": "How often does unit T3 need a service inspection?",
+      "reference_answer": "Unit T3 requires a service inspection every 5 months.",
+      "source_document": "text.pdf",
+      "source_pages": [
+        3
+      ],
+      "evidence_terms": [
+        "5",
+        "months"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "text-p3-c002"
+      ]
+    },
+    {
+      "id": "text-07",
+      "modality": "text",
+      "question": "How long is the warranty for unit T4?",
+      "reference_answer": "Unit T4 has a warranty of 36 months.",
+      "source_document": "text.pdf",
+      "source_pages": [
+        4
+      ],
+      "evidence_terms": [
+        "36",
+        "months"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "text-p4-c003"
+      ]
+    },
+    {
+      "id": "text-08",
+      "modality": "text",
+      "question": "How often does unit T4 need a service inspection?",
+      "reference_answer": "Unit T4 requires a service inspection every 6 months.",
+      "source_document": "text.pdf",
+      "source_pages": [
+        4
+      ],
+      "evidence_terms": [
+        "6",
+        "months"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "text-p4-c003"
+      ]
+    },
+    {
+      "id": "text-09",
+      "modality": "text",
+      "question": "Give the warranty durations for units T1 and T4.",
+      "reference_answer": "T1: 18 months; T4: 36 months.",
+      "source_document": "text.pdf",
+      "source_pages": [
+        1,
+        4
+      ],
+      "evidence_terms": [
+        "18",
+        "36"
+      ],
+      "type": "multi-chunk",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "text-p1-c000",
+        "text-p4-c003"
+      ]
+    },
+    {
+      "id": "text-10",
+      "modality": "text",
+      "question": "Summarize the service inspection intervals for all four T units.",
+      "reference_answer": "T1: 3, T2: 4, T3: 5, T4: 6 months.",
+      "source_document": "text.pdf",
+      "source_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "evidence_terms": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "type": "summary",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "text-p1-c000",
+        "text-p2-c001",
+        "text-p3-c002",
+        "text-p4-c003"
+      ]
+    },
+    {
+      "id": "text-11",
+      "modality": "text",
+      "question": "What is the Wi-Fi password listed in the text records?",
+      "reference_answer": "Not found.",
+      "source_document": "text.pdf",
+      "source_pages": [],
+      "evidence_terms": [],
+      "type": "unanswerable",
+      "unanswerable": true,
+      "source_regions": [],
+      "reference_chunks": []
+    },
+    {
+      "id": "text-12",
+      "modality": "text",
+      "question": "What serial number is shown on the purple emergency valve in the text records?",
+      "reference_answer": "Not found; no such valve is documented.",
+      "source_document": "text.pdf",
+      "source_pages": [],
+      "evidence_terms": [],
+      "type": "unanswerable",
+      "unanswerable": true,
+      "source_regions": [],
+      "reference_chunks": []
+    },
+    {
+      "id": "table-01",
+      "modality": "table",
+      "question": "In table 1, what is the Boost power in watts?",
+      "reference_answer": "Boost power is 71 W.",
+      "source_document": "table.pdf",
+      "source_pages": [
+        1
+      ],
+      "evidence_terms": [
+        "Boost",
+        "71"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "table-p1-c000"
+      ]
+    },
+    {
+      "id": "table-02",
+      "modality": "table",
+      "question": "In table 1, what is the monthly Normal cost in USD?",
+      "reference_answer": "Normal monthly cost is 7 USD.",
+      "source_document": "table.pdf",
+      "source_pages": [
+        1
+      ],
+      "evidence_terms": [
+        "Normal",
+        "7"
+      ],
+      "type": "cross-modal",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "table-p1-c000"
+      ]
+    },
+    {
+      "id": "table-03",
+      "modality": "table",
+      "question": "In table 2, what is the Boost power in watts?",
+      "reference_answer": "Boost power is 72 W.",
+      "source_document": "table.pdf",
+      "source_pages": [
+        2
+      ],
+      "evidence_terms": [
+        "Boost",
+        "72"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "table-p2-c001"
+      ]
+    },
+    {
+      "id": "table-04",
+      "modality": "table",
+      "question": "In table 2, what is the monthly Normal cost in USD?",
+      "reference_answer": "Normal monthly cost is 8 USD.",
+      "source_document": "table.pdf",
+      "source_pages": [
+        2
+      ],
+      "evidence_terms": [
+        "Normal",
+        "8"
+      ],
+      "type": "cross-modal",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "table-p2-c001"
+      ]
+    },
+    {
+      "id": "table-05",
+      "modality": "table",
+      "question": "In table 3, what is the Boost power in watts?",
+      "reference_answer": "Boost power is 73 W.",
+      "source_document": "table.pdf",
+      "source_pages": [
+        3
+      ],
+      "evidence_terms": [
+        "Boost",
+        "73"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "table-p3-c002"
+      ]
+    },
+    {
+      "id": "table-06",
+      "modality": "table",
+      "question": "In table 3, what is the monthly Normal cost in USD?",
+      "reference_answer": "Normal monthly cost is 9 USD.",
+      "source_document": "table.pdf",
+      "source_pages": [
+        3
+      ],
+      "evidence_terms": [
+        "Normal",
+        "9"
+      ],
+      "type": "cross-modal",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "table-p3-c002"
+      ]
+    },
+    {
+      "id": "table-07",
+      "modality": "table",
+      "question": "In table 4, what is the Boost power in watts?",
+      "reference_answer": "Boost power is 74 W.",
+      "source_document": "table.pdf",
+      "source_pages": [
+        4
+      ],
+      "evidence_terms": [
+        "Boost",
+        "74"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "table-p4-c003"
+      ]
+    },
+    {
+      "id": "table-08",
+      "modality": "table",
+      "question": "In table 4, what is the monthly Normal cost in USD?",
+      "reference_answer": "Normal monthly cost is 10 USD.",
+      "source_document": "table.pdf",
+      "source_pages": [
+        4
+      ],
+      "evidence_terms": [
+        "Normal",
+        "10"
+      ],
+      "type": "cross-modal",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "table-p4-c003"
+      ]
+    },
+    {
+      "id": "table-09",
+      "modality": "table",
+      "question": "Give Boost power in table 1 and table 4.",
+      "reference_answer": "Table 1: 71 W; table 4: 74 W.",
+      "source_document": "table.pdf",
+      "source_pages": [
+        1,
+        4
+      ],
+      "evidence_terms": [
+        "71",
+        "74"
+      ],
+      "type": "multi-chunk",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "table-p1-c000",
+        "table-p4-c003"
+      ]
+    },
+    {
+      "id": "table-10",
+      "modality": "table",
+      "question": "What period applies to the Eco cost of 4 USD in table 1?",
+      "reference_answer": "The Eco cost is 4 USD per month.",
+      "source_document": "table.pdf",
+      "source_pages": [
+        1
+      ],
+      "evidence_terms": [
+        "4",
+        "monthly"
+      ],
+      "type": "cross-modal",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "table-p1-c000"
+      ]
+    },
+    {
+      "id": "table-11",
+      "modality": "table",
+      "question": "What is the Wi-Fi password listed in the table records?",
+      "reference_answer": "Not found.",
+      "source_document": "table.pdf",
+      "source_pages": [],
+      "evidence_terms": [],
+      "type": "unanswerable",
+      "unanswerable": true,
+      "source_regions": [],
+      "reference_chunks": []
+    },
+    {
+      "id": "table-12",
+      "modality": "table",
+      "question": "What serial number is shown on the purple emergency valve in the table records?",
+      "reference_answer": "Not found; no such valve is documented.",
+      "source_document": "table.pdf",
+      "source_pages": [],
+      "evidence_terms": [],
+      "type": "unanswerable",
+      "unanswerable": true,
+      "source_regions": [],
+      "reference_chunks": []
+    },
+    {
+      "id": "image-01",
+      "modality": "image",
+      "question": "What cartridge identifier is shown in diagram 1?",
+      "reference_answer": "The cartridge is H100.",
+      "source_document": "image.pdf",
+      "source_pages": [
+        1
+      ],
+      "evidence_terms": [
+        "H100"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          35,
+          130,
+          565,
+          420
+        ]
+      ],
+      "reference_chunks": [
+        "image-p1-c000"
+      ]
+    },
+    {
+      "id": "image-02",
+      "modality": "image",
+      "question": "In diagram 1, which stage is immediately before the fan?",
+      "reference_answer": "The HEPA stage is immediately before the FAN.",
+      "source_document": "image.pdf",
+      "source_pages": [
+        1
+      ],
+      "evidence_terms": [
+        "HEPA",
+        "FAN"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          35,
+          130,
+          565,
+          420
+        ]
+      ],
+      "reference_chunks": [
+        "image-p1-c000"
+      ]
+    },
+    {
+      "id": "image-03",
+      "modality": "image",
+      "question": "What cartridge identifier is shown in diagram 2?",
+      "reference_answer": "The cartridge is H200.",
+      "source_document": "image.pdf",
+      "source_pages": [
+        2
+      ],
+      "evidence_terms": [
+        "H200"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          35,
+          130,
+          565,
+          420
+        ]
+      ],
+      "reference_chunks": [
+        "image-p2-c001"
+      ]
+    },
+    {
+      "id": "image-04",
+      "modality": "image",
+      "question": "In diagram 2, which stage is immediately before the fan?",
+      "reference_answer": "The HEPA stage is immediately before the FAN.",
+      "source_document": "image.pdf",
+      "source_pages": [
+        2
+      ],
+      "evidence_terms": [
+        "HEPA",
+        "FAN"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          35,
+          130,
+          565,
+          420
+        ]
+      ],
+      "reference_chunks": [
+        "image-p2-c001"
+      ]
+    },
+    {
+      "id": "image-05",
+      "modality": "image",
+      "question": "What cartridge identifier is shown in diagram 3?",
+      "reference_answer": "The cartridge is H300.",
+      "source_document": "image.pdf",
+      "source_pages": [
+        3
+      ],
+      "evidence_terms": [
+        "H300"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          35,
+          130,
+          565,
+          420
+        ]
+      ],
+      "reference_chunks": [
+        "image-p3-c002"
+      ]
+    },
+    {
+      "id": "image-06",
+      "modality": "image",
+      "question": "In diagram 3, which stage is immediately before the fan?",
+      "reference_answer": "The HEPA stage is immediately before the FAN.",
+      "source_document": "image.pdf",
+      "source_pages": [
+        3
+      ],
+      "evidence_terms": [
+        "HEPA",
+        "FAN"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          35,
+          130,
+          565,
+          420
+        ]
+      ],
+      "reference_chunks": [
+        "image-p3-c002"
+      ]
+    },
+    {
+      "id": "image-07",
+      "modality": "image",
+      "question": "What cartridge identifier is shown in diagram 4?",
+      "reference_answer": "The cartridge is H400.",
+      "source_document": "image.pdf",
+      "source_pages": [
+        4
+      ],
+      "evidence_terms": [
+        "H400"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          35,
+          130,
+          565,
+          420
+        ]
+      ],
+      "reference_chunks": [
+        "image-p4-c003"
+      ]
+    },
+    {
+      "id": "image-08",
+      "modality": "image",
+      "question": "In diagram 4, which stage is immediately before the fan?",
+      "reference_answer": "The HEPA stage is immediately before the FAN.",
+      "source_document": "image.pdf",
+      "source_pages": [
+        4
+      ],
+      "evidence_terms": [
+        "HEPA",
+        "FAN"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          35,
+          130,
+          565,
+          420
+        ]
+      ],
+      "reference_chunks": [
+        "image-p4-c003"
+      ]
+    },
+    {
+      "id": "image-09",
+      "modality": "image",
+      "question": "Give cartridge identifiers shown in diagrams 1 and 4.",
+      "reference_answer": "H100 and H400.",
+      "source_document": "image.pdf",
+      "source_pages": [
+        1,
+        4
+      ],
+      "evidence_terms": [
+        "H100",
+        "H400"
+      ],
+      "type": "multi-chunk",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "image-p1-c000",
+        "image-p4-c003"
+      ]
+    },
+    {
+      "id": "image-10",
+      "modality": "image",
+      "question": "Summarize the airflow sequence in diagram 2.",
+      "reference_answer": "INLET, MESH, HEPA, FAN.",
+      "source_document": "image.pdf",
+      "source_pages": [
+        2
+      ],
+      "evidence_terms": [
+        "INLET",
+        "MESH",
+        "HEPA",
+        "FAN"
+      ],
+      "type": "summary",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "image-p2-c001"
+      ]
+    },
+    {
+      "id": "image-11",
+      "modality": "image",
+      "question": "What is the Wi-Fi password listed in the image records?",
+      "reference_answer": "Not found.",
+      "source_document": "image.pdf",
+      "source_pages": [],
+      "evidence_terms": [],
+      "type": "unanswerable",
+      "unanswerable": true,
+      "source_regions": [],
+      "reference_chunks": []
+    },
+    {
+      "id": "image-12",
+      "modality": "image",
+      "question": "What serial number is shown on the purple emergency valve in the image records?",
+      "reference_answer": "Not found; no such valve is documented.",
+      "source_document": "image.pdf",
+      "source_pages": [],
+      "evidence_terms": [],
+      "type": "unanswerable",
+      "unanswerable": true,
+      "source_regions": [],
+      "reference_chunks": []
+    },
+    {
+      "id": "chart-01",
+      "modality": "chart",
+      "question": "What is March energy usage in chart 1?",
+      "reference_answer": "March usage is 65 kWh.",
+      "source_document": "chart.pdf",
+      "source_pages": [
+        1
+      ],
+      "evidence_terms": [
+        "65",
+        "kWh"
+      ],
+      "type": "numeric/chart-reading",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          30,
+          120,
+          570,
+          465
+        ]
+      ],
+      "reference_chunks": [
+        "chart-p1-c000"
+      ]
+    },
+    {
+      "id": "chart-02",
+      "modality": "chart",
+      "question": "What trend does chart 1 show from January to March?",
+      "reference_answer": "Usage increases from January through March.",
+      "source_document": "chart.pdf",
+      "source_pages": [
+        1
+      ],
+      "evidence_terms": [
+        "increases"
+      ],
+      "type": "numeric/chart-reading",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          30,
+          120,
+          570,
+          465
+        ]
+      ],
+      "reference_chunks": [
+        "chart-p1-c000"
+      ]
+    },
+    {
+      "id": "chart-03",
+      "modality": "chart",
+      "question": "What is March energy usage in chart 2?",
+      "reference_answer": "March usage is 70 kWh.",
+      "source_document": "chart.pdf",
+      "source_pages": [
+        2
+      ],
+      "evidence_terms": [
+        "70",
+        "kWh"
+      ],
+      "type": "numeric/chart-reading",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          30,
+          120,
+          570,
+          465
+        ]
+      ],
+      "reference_chunks": [
+        "chart-p2-c001"
+      ]
+    },
+    {
+      "id": "chart-04",
+      "modality": "chart",
+      "question": "What trend does chart 2 show from January to March?",
+      "reference_answer": "Usage increases from January through March.",
+      "source_document": "chart.pdf",
+      "source_pages": [
+        2
+      ],
+      "evidence_terms": [
+        "increases"
+      ],
+      "type": "numeric/chart-reading",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          30,
+          120,
+          570,
+          465
+        ]
+      ],
+      "reference_chunks": [
+        "chart-p2-c001"
+      ]
+    },
+    {
+      "id": "chart-05",
+      "modality": "chart",
+      "question": "What is March energy usage in chart 3?",
+      "reference_answer": "March usage is 75 kWh.",
+      "source_document": "chart.pdf",
+      "source_pages": [
+        3
+      ],
+      "evidence_terms": [
+        "75",
+        "kWh"
+      ],
+      "type": "numeric/chart-reading",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          30,
+          120,
+          570,
+          465
+        ]
+      ],
+      "reference_chunks": [
+        "chart-p3-c002"
+      ]
+    },
+    {
+      "id": "chart-06",
+      "modality": "chart",
+      "question": "What trend does chart 3 show from January to March?",
+      "reference_answer": "Usage increases from January through March.",
+      "source_document": "chart.pdf",
+      "source_pages": [
+        3
+      ],
+      "evidence_terms": [
+        "increases"
+      ],
+      "type": "numeric/chart-reading",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          30,
+          120,
+          570,
+          465
+        ]
+      ],
+      "reference_chunks": [
+        "chart-p3-c002"
+      ]
+    },
+    {
+      "id": "chart-07",
+      "modality": "chart",
+      "question": "What is March energy usage in chart 4?",
+      "reference_answer": "March usage is 80 kWh.",
+      "source_document": "chart.pdf",
+      "source_pages": [
+        4
+      ],
+      "evidence_terms": [
+        "80",
+        "kWh"
+      ],
+      "type": "numeric/chart-reading",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          30,
+          120,
+          570,
+          465
+        ]
+      ],
+      "reference_chunks": [
+        "chart-p4-c003"
+      ]
+    },
+    {
+      "id": "chart-08",
+      "modality": "chart",
+      "question": "What trend does chart 4 show from January to March?",
+      "reference_answer": "Usage increases from January through March.",
+      "source_document": "chart.pdf",
+      "source_pages": [
+        4
+      ],
+      "evidence_terms": [
+        "increases"
+      ],
+      "type": "numeric/chart-reading",
+      "unanswerable": false,
+      "source_regions": [
+        [
+          30,
+          120,
+          570,
+          465
+        ]
+      ],
+      "reference_chunks": [
+        "chart-p4-c003"
+      ]
+    },
+    {
+      "id": "chart-09",
+      "modality": "chart",
+      "question": "Give March usage in charts 1 and 4.",
+      "reference_answer": "65 kWh and 80 kWh.",
+      "source_document": "chart.pdf",
+      "source_pages": [
+        1,
+        4
+      ],
+      "evidence_terms": [
+        "65",
+        "80"
+      ],
+      "type": "multi-chunk",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "chart-p1-c000",
+        "chart-p4-c003"
+      ]
+    },
+    {
+      "id": "chart-10",
+      "modality": "chart",
+      "question": "What are the axis labels and legend of chart 2?",
+      "reference_answer": "X-axis: Month; y-axis: kWh; blue represents usage.",
+      "source_document": "chart.pdf",
+      "source_pages": [
+        2
+      ],
+      "evidence_terms": [
+        "Month",
+        "kWh",
+        "usage"
+      ],
+      "type": "numeric/chart-reading",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "chart-p2-c001"
+      ]
+    },
+    {
+      "id": "chart-11",
+      "modality": "chart",
+      "question": "What is the Wi-Fi password listed in the chart records?",
+      "reference_answer": "Not found.",
+      "source_document": "chart.pdf",
+      "source_pages": [],
+      "evidence_terms": [],
+      "type": "unanswerable",
+      "unanswerable": true,
+      "source_regions": [],
+      "reference_chunks": []
+    },
+    {
+      "id": "chart-12",
+      "modality": "chart",
+      "question": "What serial number is shown on the purple emergency valve in the chart records?",
+      "reference_answer": "Not found; no such valve is documented.",
+      "source_document": "chart.pdf",
+      "source_pages": [],
+      "evidence_terms": [],
+      "type": "unanswerable",
+      "unanswerable": true,
+      "source_regions": [],
+      "reference_chunks": []
+    },
+    {
+      "id": "scanned-01",
+      "modality": "scanned",
+      "question": "When was pump S1 inspected?",
+      "reference_answer": "Pump S1 was inspected on 2026-01-15.",
+      "source_document": "scanned.pdf",
+      "source_pages": [
+        1
+      ],
+      "evidence_terms": [
+        "2026-01-15"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "scanned-p1-c000",
+        "scanned-p1-c001",
+        "scanned-p1-c002",
+        "scanned-p1-c003",
+        "scanned-p1-c004"
+      ]
+    },
+    {
+      "id": "scanned-02",
+      "modality": "scanned",
+      "question": "What was the recorded pressure for pump S1?",
+      "reference_answer": "Pump S1 pressure was 3 bar.",
+      "source_document": "scanned.pdf",
+      "source_pages": [
+        1
+      ],
+      "evidence_terms": [
+        "3",
+        "bar"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "scanned-p1-c000",
+        "scanned-p1-c001",
+        "scanned-p1-c002",
+        "scanned-p1-c003",
+        "scanned-p1-c004"
+      ]
+    },
+    {
+      "id": "scanned-03",
+      "modality": "scanned",
+      "question": "When was pump S2 inspected?",
+      "reference_answer": "Pump S2 was inspected on 2026-02-15.",
+      "source_document": "scanned.pdf",
+      "source_pages": [
+        2
+      ],
+      "evidence_terms": [
+        "2026-02-15"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "scanned-p2-c005",
+        "scanned-p2-c006",
+        "scanned-p2-c007",
+        "scanned-p2-c008",
+        "scanned-p2-c009"
+      ]
+    },
+    {
+      "id": "scanned-04",
+      "modality": "scanned",
+      "question": "What was the recorded pressure for pump S2?",
+      "reference_answer": "Pump S2 pressure was 4 bar.",
+      "source_document": "scanned.pdf",
+      "source_pages": [
+        2
+      ],
+      "evidence_terms": [
+        "4",
+        "bar"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "scanned-p2-c005",
+        "scanned-p2-c006",
+        "scanned-p2-c007",
+        "scanned-p2-c008",
+        "scanned-p2-c009"
+      ]
+    },
+    {
+      "id": "scanned-05",
+      "modality": "scanned",
+      "question": "When was pump S3 inspected?",
+      "reference_answer": "Pump S3 was inspected on 2026-03-15.",
+      "source_document": "scanned.pdf",
+      "source_pages": [
+        3
+      ],
+      "evidence_terms": [
+        "2026-03-15"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "scanned-p3-c010",
+        "scanned-p3-c011",
+        "scanned-p3-c012",
+        "scanned-p3-c013",
+        "scanned-p3-c014"
+      ]
+    },
+    {
+      "id": "scanned-06",
+      "modality": "scanned",
+      "question": "What was the recorded pressure for pump S3?",
+      "reference_answer": "Pump S3 pressure was 5 bar.",
+      "source_document": "scanned.pdf",
+      "source_pages": [
+        3
+      ],
+      "evidence_terms": [
+        "5",
+        "bar"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "scanned-p3-c010",
+        "scanned-p3-c011",
+        "scanned-p3-c012",
+        "scanned-p3-c013",
+        "scanned-p3-c014"
+      ]
+    },
+    {
+      "id": "scanned-07",
+      "modality": "scanned",
+      "question": "When was pump S4 inspected?",
+      "reference_answer": "Pump S4 was inspected on 2026-04-15.",
+      "source_document": "scanned.pdf",
+      "source_pages": [
+        4
+      ],
+      "evidence_terms": [
+        "2026-04-15"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "scanned-p4-c015",
+        "scanned-p4-c016",
+        "scanned-p4-c017",
+        "scanned-p4-c018",
+        "scanned-p4-c019"
+      ]
+    },
+    {
+      "id": "scanned-08",
+      "modality": "scanned",
+      "question": "What was the recorded pressure for pump S4?",
+      "reference_answer": "Pump S4 pressure was 6 bar.",
+      "source_document": "scanned.pdf",
+      "source_pages": [
+        4
+      ],
+      "evidence_terms": [
+        "6",
+        "bar"
+      ],
+      "type": "factual",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "scanned-p4-c015",
+        "scanned-p4-c016",
+        "scanned-p4-c017",
+        "scanned-p4-c018",
+        "scanned-p4-c019"
+      ]
+    },
+    {
+      "id": "scanned-09",
+      "modality": "scanned",
+      "question": "Give recorded pressures for pumps S1 and S4.",
+      "reference_answer": "S1: 3 bar; S4: 6 bar.",
+      "source_document": "scanned.pdf",
+      "source_pages": [
+        1,
+        4
+      ],
+      "evidence_terms": [
+        "3",
+        "6",
+        "bar"
+      ],
+      "type": "multi-chunk",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "scanned-p1-c000",
+        "scanned-p1-c001",
+        "scanned-p1-c002",
+        "scanned-p1-c003",
+        "scanned-p1-c004",
+        "scanned-p4-c015",
+        "scanned-p4-c016",
+        "scanned-p4-c017",
+        "scanned-p4-c018",
+        "scanned-p4-c019"
+      ]
+    },
+    {
+      "id": "scanned-10",
+      "modality": "scanned",
+      "question": "Summarize the inspection year and next inspection year for the pumps.",
+      "reference_answer": "Inspected in 2026; next inspection in 2027.",
+      "source_document": "scanned.pdf",
+      "source_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "evidence_terms": [
+        "2026",
+        "2027"
+      ],
+      "type": "summary",
+      "unanswerable": false,
+      "source_regions": [],
+      "reference_chunks": [
+        "scanned-p1-c000",
+        "scanned-p1-c001",
+        "scanned-p1-c002",
+        "scanned-p1-c003",
+        "scanned-p1-c004",
+        "scanned-p2-c005",
+        "scanned-p2-c006",
+        "scanned-p2-c007",
+        "scanned-p2-c008",
+        "scanned-p2-c009",
+        "scanned-p3-c010",
+        "scanned-p3-c011",
+        "scanned-p3-c012",
+        "scanned-p3-c013",
+        "scanned-p3-c014",
+        "scanned-p4-c015",
+        "scanned-p4-c016",
+        "scanned-p4-c017",
+        "scanned-p4-c018",
+        "scanned-p4-c019"
+      ]
+    },
+    {
+      "id": "scanned-11",
+      "modality": "scanned",
+      "question": "What is the Wi-Fi password listed in the scanned records?",
+      "reference_answer": "Not found.",
+      "source_document": "scanned.pdf",
+      "source_pages": [],
+      "evidence_terms": [],
+      "type": "unanswerable",
+      "unanswerable": true,
+      "source_regions": [],
+      "reference_chunks": []
+    },
+    {
+      "id": "scanned-12",
+      "modality": "scanned",
+      "question": "What serial number is shown on the purple emergency valve in the scanned records?",
+      "reference_answer": "Not found; no such valve is documented.",
+      "source_document": "scanned.pdf",
+      "source_pages": [],
+      "evidence_terms": [],
+      "type": "unanswerable",
+      "unanswerable": true,
+      "source_regions": [],
+      "reference_chunks": []
+    }
+  ]
+}

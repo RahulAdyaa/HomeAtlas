@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-13",
+  "cases": [
+    {
+      "case": "filter",
+      "sourceRecall": true,
+      "citationCorrectness": true,
+      "groundedness": true,
+      "abstention": false,
+      "mode": "local-model-grounded",
+      "latencyMs": 9517,
+      "models": {
+        "text": "BAAI/bge-small-en-v1.5@5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+        "image": "google/siglip2-base-patch16-224@75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+        "reranker": "BAAI/bge-reranker-base@2cfc18c9415c912f9d8155881c133215df768a70",
+        "generation": "qwen3-vl:4b-instruct"
+      }
+    },
+    {
+      "case": "warranty",
+      "sourceRecall": true,
+      "citationCorrectness": true,
+      "groundedness": true,
+      "abstention": false,
+      "mode": "local-model-grounded",
+      "latencyMs": 6451,
+      "models": {
+        "text": "BAAI/bge-small-en-v1.5@5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+        "image": "google/siglip2-base-patch16-224@75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+        "reranker": "BAAI/bge-reranker-base@2cfc18c9415c912f9d8155881c133215df768a70",
+        "generation": "qwen3-vl:4b-instruct"
+      }
+    },
+    {
+      "case": "reset",
+      "sourceRecall": true,
+      "citationCorrectness": true,
+      "groundedness": true,
+      "abstention": false,
+      "mode": "local-model-grounded",
+      "latencyMs": 6613,
+      "models": {
+        "text": "BAAI/bge-small-en-v1.5@5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+        "image": "google/siglip2-base-patch16-224@75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+        "reranker": "BAAI/bge-reranker-base@2cfc18c9415c912f9d8155881c133215df768a70",
+        "generation": "qwen3-vl:4b-instruct"
+      }
+    },
+    {
+      "case": "missing",
+      "sourceRecall": true,
+      "citationCorrectness": true,
+      "groundedness": true,
+      "abstention": true,
+      "mode": "abstention",
+      "latencyMs": 3206,
+      "models": {
+        "text": "BAAI/bge-small-en-v1.5@5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+        "image": "google/siglip2-base-patch16-224@75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+        "reranker": "BAAI/bge-reranker-base@2cfc18c9415c912f9d8155881c133215df768a70",
+        "generation": "qwen3-vl:4b-instruct"
+      }
+    },
+    {
+      "case": "photo",
+      "sourceRecall": true,
+      "citationCorrectness": true,
+      "groundedness": true,
+      "abstention": false,
+      "mode": "local-model-grounded",
+      "latencyMs": 10685,
+      "models": {
+        "text": "BAAI/bge-small-en-v1.5@5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+        "image": "google/siglip2-base-patch16-224@75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+        "reranker": "BAAI/bge-reranker-base@2cfc18c9415c912f9d8155881c133215df768a70",
+        "generation": "qwen3-vl:4b-instruct"
+      }
+    }
+  ],
+  "sourceRecall": 1,
+  "citationCorrectness": 1,
+  "groundedness": 1,
+  "missingEvidenceAbstention": true
+}
