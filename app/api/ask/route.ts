@@ -4,12 +4,12 @@ import { api, ApiError, audit, linkedIds, rateLimit, scope, uuid } from '@/lib/s
 import { pool,transaction,camel } from '@/lib/db';
 import { prices,reserve,settle } from '@/lib/credits';
 import { maxUploadBytes,removePrivateFile,validateFile,writeQueryMedia } from '@/lib/storage';
-import {lookupLocation} from '@/lib/location-lookup';
+import {lookupSavedRecord} from '@/lib/item-facts';
 import {locationLink,locationSentence} from '@/lib/locations';
 import { callWorker } from '@/lib/worker';
 export const runtime='nodejs';
 export const maxDuration=300;
-const replySchema=z.object({locationMatches:z.array(z.object({kind:z.enum(['item','source']),id:uuid,name:z.string(),locationId:uuid,locationPath:z.string(),locationUrl:z.string(),locationDescription:z.string(),photoSourceId:uuid.nullish()})).max(60).default([]),answer:z.string().max(30000),confidence:z.string().max(80),mode:z.string().max(80),citations:z.array(z.object({id:uuid,sourceId:uuid,versionId:uuid,text:z.string().min(8).max(12000)}).passthrough()).max(30),diagnostics:z.record(z.string(),z.unknown()).optional()});
+const replySchema=z.object({recordFacts:z.array(z.object({kind:z.literal('item'),id:uuid,name:z.string(),field:z.string(),label:z.string(),value:z.string().nullable(),locationPath:z.string()})).max(5).default([]),locationMatches:z.array(z.object({kind:z.enum(['item','source']),id:uuid,name:z.string(),locationId:uuid,locationPath:z.string(),locationUrl:z.string(),locationDescription:z.string(),photoSourceId:uuid.nullish()})).max(60).default([]),answer:z.string().max(30000),confidence:z.string().max(80),mode:z.string().max(80),citations:z.array(z.object({id:uuid,sourceId:uuid,versionId:uuid,text:z.string().min(8).max(12000)}).passthrough()).max(30),diagnostics:z.record(z.string(),z.unknown()).optional()});
 export const POST=api(async(request)=>{
  const context=await scope(request);await rateLimit(`ask:${context.user.id}`,12);
  if(Number(request.headers.get('content-length')??0)>maxUploadBytes+65536)throw new ApiError(413,'This question attachment is too large.');
@@ -39,12 +39,12 @@ export const POST=api(async(request)=>{
   if(media)mediaPath=await writeQueryMedia(context.householdId,media);
   let transcription:string|undefined;
   if(audio instanceof File){const transcript=await callWorker('/transcribe',{householdId:context.householdId,actorId:context.user.id,audioPath:mediaPath},request.signal);transcription=z.string().trim().min(1).max(3000).parse(transcript.text);question=question?`${question}\nVoice note: ${transcription}`.slice(0,3000):transcription;}
-  const recorded=image instanceof File?null:await lookupLocation(pool,context.householdId,question,itemId,roomId);
+  const recorded=image instanceof File?null:await lookupSavedRecord(pool,context.householdId,question,itemId,roomId);
   const raw=recorded??await callWorker('/query',{householdId:context.householdId,actorId:context.user.id,question,itemId,roomId,imagePath:image instanceof File?mediaPath:undefined},request.signal);
   const reply=replySchema.parse(raw);
   const answer=await transaction(async(db)=>{
    const member=(await db.query('SELECT role FROM memberships WHERE household_id=$1 AND user_id=$2 FOR SHARE',[context.householdId,context.user.id])).rows[0];if(!member)throw new ApiError(403,'Your household membership was removed.');
-   if(recorded){const current=await lookupLocation(db,context.householdId,question,itemId,roomId);Object.assign(reply,current??{answer:'This item location changed while checking. Please ask again.',confidence:'insufficient',mode:'abstention',locationMatches:[]});}
+   if(recorded){const current=await lookupSavedRecord(db,context.householdId,question,itemId,roomId);Object.assign(reply,current??{answer:'This saved record changed while checking. Please ask again.',confidence:'insufficient',mode:'abstention',locationMatches:[],recordFacts:[]});}
    if(member.role!=='owner')delete reply.diagnostics;
    const citations=[];
    for(const citation of reply.citations){
@@ -56,7 +56,7 @@ export const POST=api(async(request)=>{
    const result={...reply,citations,operationId,cost,conversationId,...(transcription?{transcription}:{})};
    await db.query('INSERT INTO conversations(id,household_id,user_id,title) VALUES($1,$2,$3,$4)',[conversationId,context.householdId,context.user.id,question.slice(0,160)]);
    await db.query("INSERT INTO messages(household_id,conversation_id,role,content) VALUES($1,$2,'user',$3)",[context.householdId,conversationId,question]);
-   await db.query("INSERT INTO messages(household_id,conversation_id,role,content,citations,metadata) VALUES($1,$2,'assistant',$3,$4,$5)",[context.householdId,conversationId,result.answer,JSON.stringify(citations),JSON.stringify({confidence:result.confidence,mode:result.mode,locationMatches:result.locationMatches})]);
+   await db.query("INSERT INTO messages(household_id,conversation_id,role,content,citations,metadata) VALUES($1,$2,'assistant',$3,$4,$5)",[context.householdId,conversationId,result.answer,JSON.stringify(citations),JSON.stringify({confidence:result.confidence,mode:result.mode,locationMatches:result.locationMatches,recordFacts:result.recordFacts})]);
    if(!await settle(db,context.householdId,operationId,true))throw new ApiError(409,'This question reservation expired or was refunded. Start a new question to try again.');
    await db.query('UPDATE credit_reservations SET result=$3 WHERE household_id=$1 AND operation_id=$2',[context.householdId,operationId,JSON.stringify(result)]);
    await audit(db,context.householdId,context.user.id,'Asked household records',conversationId,{mode:result.mode,citations:citations.length});return result;

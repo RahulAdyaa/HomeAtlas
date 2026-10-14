@@ -27,6 +27,8 @@ flowchart TD
 
 `004_bookmark_locations.sql` preserves structured inventory/document location matches in saved answers. Questions such as “Where is my PAN card?” first match the item's saved name and current location (case and punctuation insensitive), without requiring an uploaded source or model inference. Duplicate names return all matching locations. Unknown identities continue through document RAG; SAMPLE fixtures are excluded before inference unless the question explicitly asks about sample/demo records. Non-location questions retain the existing multimodal retrieval pipeline.
 
+Saved-field questions also check the inventory before calling document RAG. The server-owned field allowlist covers serial number, model, make/brand, purchase date, warranty end date, category and notes. Values are preserved as strings, including leading zeros and spacing. Common Aadhaar/Aadhar spellings and optional identity-card suffixes map to the same record name. Missing fields continue to document retrieval; different values in duplicate records produce an explicit conflict. The existing household/item/room scope and credit reservation rules still apply. `scripts/item-facts-qa.mjs` exercises the running authenticated HTTP routes with disposable fictional data, without requiring a document upload.
+
 ## Using the interface
 
 1. Open **My home**. Orbit by dragging, zoom by scrolling/pinching, pan with the orbit controls, or use **Reset view**.
@@ -58,7 +60,7 @@ node --env-file=.env.local --import tsx scripts/seed-demo.ts HOUSEHOLD_UUID
 
 ## Verification
 
-- 79 JavaScript tests passed, including real PostgreSQL migration/backfill, tenant and role guards, hierarchy CRUD, atomic layout rollback, idempotent seed, photo links, source deletion, saved-answer location refresh, hierarchy exports, inventory-only location lookup/moves/duplicate names, billing replay and existing authentication/credit/upload tests.
+- 83 JavaScript tests passed, including real PostgreSQL migration/backfill, tenant and role guards, hierarchy CRUD, atomic layout rollback, idempotent seed, photo links, source deletion, saved-answer location refresh, hierarchy exports, inventory-only location lookup/moves/duplicate names, billing replay, saved item-field answers, spelling variants, exact-value preservation, missing/conflicting fields and existing authentication/credit/upload tests.
 - 24 Python tests passed, including database ingestion/credit invariants and assertions that location paths are present at embedding time and refreshed after renames, plus demo exclusion before inference.
 - Browser fixture: a live RAG location question, its saved answer opening the correct drawer, hierarchy export, rendered 3D, collision-free visible labels, room/container navigation, deep-link reload, saved furniture resize, 390px mobile overflow, WebGL fallback, and no uncaught page exceptions.
 - Typecheck and production build checked separately.

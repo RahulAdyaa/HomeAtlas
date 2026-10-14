@@ -1,7 +1,8 @@
+import {normalizeRecordName,recordNameSql} from './record-names';
 import type {DB} from './db';
 import {locationLink,locationSentence} from './locations';
 export type LocationMatch={kind:'item'|'source';id:string;name:string;locationId:string;locationPath:string;locationUrl:string;locationDescription:string;photoSourceId?:string|null;recordRemoved?:boolean};
-const key=(value:string)=>value.toLowerCase().replace(/[^a-z0-9]+/g,'');
+
 export function locationTarget(question:string):string|null{
  const text=question.trim().replace(/[?!.]+$/,'');
  const match=text.match(/^(?:where\s+(?:is|are|can\s+i\s+find|did\s+i\s+(?:put|keep|store)|have\s+i\s+(?:put|kept|stored))|(?:please\s+)?(?:find|locate))\s+(.+)$/i);
@@ -22,15 +23,15 @@ export function locationReply(matches:LocationMatch[]){
 }
 export async function lookupLocation(db:DB,householdId:string,question:string,itemId?:string|null,roomId?:string|null){
  const target=locationTarget(question);if(!target)return null;
- const normalized=key(target),demo=includeDemo(question);if(!normalized)return null;
+ const normalized=normalizeRecordName(target),demo=includeDemo(question);if(!normalized)return null;
  const items=(await db.query(`SELECT id,name,location_id,location_path,photo_source_id FROM items
  WHERE household_id=$1 AND ($2::uuid IS NULL OR id=$2) AND ($4::uuid IS NULL OR room_id=$4)
- AND (regexp_replace(lower(name),'[^a-z0-9]+','','g')=$3 OR ($2::uuid IS NOT NULL AND $3 IN ('it','thisitem','this')))
+ AND (${recordNameSql('name')}=$3 OR ($2::uuid IS NOT NULL AND $3 IN ('it','thisitem','this')))
  ORDER BY created_at,id LIMIT 30`,[householdId,itemId||null,normalized,roomId||null])).rows;
  // Title matching works even before OCR finishes. This answers the recorded location, not document contents.
  const sources=(await db.query(`SELECT s.id,s.title,s.location_id,s.location_path,s.photo_source_id FROM sources s
  WHERE s.household_id=$1 AND ($2::uuid IS NULL OR s.item_id=$2) AND ($4::uuid IS NULL OR s.room_id=$4)
- AND regexp_replace(lower(regexp_replace(s.title,'\\.[A-Za-z0-9]{1,12}$','','g')),'[^a-z0-9]+','','g')=$3
+ AND ${recordNameSql("regexp_replace(s.title,'\\.[A-Za-z0-9]{1,12}$','','g')")}=$3
  AND ($5::boolean OR (s.title !~* '^SAMPLE[[:space:]—:-]' AND NOT EXISTS(SELECT 1 FROM chunks c WHERE c.source_id=s.id AND c.household_id=s.household_id AND c.metadata->>'sample'='true')))
  ORDER BY s.created_at,s.id LIMIT 30`,[householdId,itemId||null,normalized,roomId||null,demo])).rows;
  const matches=[...items.map(r=>recordLocation(householdId,'item',r)),...sources.map(r=>recordLocation(householdId,'source',r))];
