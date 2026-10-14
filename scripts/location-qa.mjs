@@ -9,7 +9,7 @@ const browser=await chromium.launch({headless:true,executablePath:browserExecuta
 let actor,household;const errors=[];const output='/tmp/homeatlas-location-qa';await mkdir(output,{recursive:true});
 try{
  const context=await browser.newContext({viewport:{width:1440,height:1000}}),request=context.request;
- const post=async(url,data)=>{const response=await request.post(origin+url,{data,headers:{origin}});if(!response.ok())throw new Error(`${url}: ${response.status()} ${await response.text()}`);return response.json()};
+ const post=async(url,data)=>{const response=await request.post(origin+url,{data,headers:{origin},timeout:180000});if(!response.ok())throw new Error(`${url}: ${response.status()} ${await response.text()}`);return response.json()};
  const email='location-browser-'+randomUUID()+'@example.invalid',password='Location-QA-'+randomUUID();
  actor=(await post('/api/auth/sign-up/email',{name:'Layout browser fixture',email,password})).user.id;
  await pool.query('UPDATE "user" SET "emailVerified"=true WHERE id=$1',[actor]);
@@ -21,13 +21,28 @@ try{
  await expect(page.getByRole('button',{name:'Edit floor plan'})).toBeVisible();await expect(page.locator('canvas')).toBeVisible();await page.waitForTimeout(1500);
  expect(await page.locator('[data-home-label]').evaluateAll(labels=>{const rects=labels.filter(e=>getComputedStyle(e).visibility!=='hidden').map(e=>e.getBoundingClientRect());return rects.every((r,i)=>rects.every((s,j)=>i===j||r.right<=s.left||r.left>=s.right||r.bottom<=s.top||r.top>=s.bottom))})).toBe(true);
  await page.screenshot({path:output+'/overview.png',fullPage:true});
- await page.getByRole('complementary',{name:'Location details'}).getByRole('button',{name:/^Study/}).click();
+ await page.locator('[data-home-label]').filter({hasText:'Study'}).click();
  await expect(page.getByRole('navigation',{name:'Home location breadcrumb'}).getByRole('button',{name:'Study'})).toBeVisible();
  await page.waitForTimeout(900);await page.getByRole('complementary',{name:'Location details'}).getByRole('button',{name:/^Desk/}).click();
  await page.getByRole('complementary',{name:'Location details'}).getByRole('button',{name:/^Top drawer/}).click();
  await expect(page.getByRole('button',{name:'SAMPLE — PAN card location ↗',exact:true})).toBeVisible();
  await page.screenshot({path:output+'/drawer.png',fullPage:true});
  await page.reload();await expect(page.getByRole('navigation',{name:'Home location breadcrumb'}).getByRole('button',{name:'Top drawer'})).toBeVisible();
+ const answer=await post('/api/ask?householdId='+household,{question:'Where is the sample PAN card?',operationId:randomUUID()});
+ expect(answer.citations.length).toBeGreaterThan(0);
+ const located=answer.citations.find(c=>c.locationPath==='Study > Desk > Top drawer');expect(located).toBeTruthy();
+ expect(located.locationUrl).toContain('location='+located.locationId);
+ const bookmark=await post('/api/atlas?householdId='+household,{action:'bookmark',title:'QA saved location',question:'Where is the sample PAN card?',answer:answer.answer,citations:answer.citations});
+ expect(bookmark.bookmark.citations.find(c=>c.id===located.id).locationUrl).toBe(located.locationUrl);
+ const exported=await (await request.get(origin+'/api/export?householdId='+household)).json();expect(exported.version).toBe(2);expect(exported.locations.some(n=>n.id===located.locationId)).toBe(true);
+ await page.reload();
+ await page.getByRole('navigation',{name:'Main navigation'}).getByRole('button',{name:'Ask my home ASK',exact:true}).click();
+ await page.getByRole('button',{name:'QA saved location',exact:true}).click();
+ const locationLink=page.getByRole('link',{name:'Show location in 3D ↗'}).filter({hasText:'Show location in 3D'});
+ await expect(locationLink.first()).toBeVisible();
+ await page.locator(`a[href="${located.locationUrl}"]`).first().click();
+ await expect(page.getByRole('navigation',{name:'Home location breadcrumb'}).getByRole('button',{name:'Top drawer'})).toBeVisible();
+
  await page.getByRole('button',{name:'Edit floor plan'}).click();
  await page.getByRole('combobox',{name:'Editing layout'}).selectOption({label:'Study'});
  await page.getByRole('combobox',{name:'Furniture preset'}).selectOption('cabinet');
@@ -39,7 +54,7 @@ try{
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:output+'/mobile.png',fullPage:true});
  const fallback=await context.newPage();await fallback.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(kind,...args){if(kind==='webgl2'||kind==='webgl')return null;return original.call(this,kind,...args)}});
  await fallback.goto(origin+'/?householdId='+household+'&location='+atlas.locations.find(n=>n.name==='Study').id);await expect(fallback.getByText('Room list · all locations remain available without 3D.')).toBeVisible();
- expect(errors).toEqual([]);console.log(JSON.stringify({passed:['3D canvas','room zoom','container panel','deep-link reload','layout save persistence','390px overflow','WebGL fallback','no page exceptions'],screenshots:output}));
+ expect(errors).toEqual([]);console.log(JSON.stringify({passed:['live RAG location answer','saved answer location link','hierarchy export','3D canvas','room zoom','container panel','deep-link reload','layout save persistence','390px overflow','WebGL fallback','no page exceptions'],screenshots:output}));
 }finally{
  if(household){await pool.query('DELETE FROM households WHERE id=$1',[household]);for(const folder of ['originals','derived'])await rm(path.resolve(process.env.STORAGE_ROOT||'.data/storage',folder,household),{recursive:true,force:true})}
  if(actor)await pool.query('DELETE FROM "user" WHERE id=$1',[actor]);await pool.end();await browser.close();

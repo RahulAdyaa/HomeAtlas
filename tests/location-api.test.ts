@@ -4,13 +4,13 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {emptyLocation} from '../lib/home-layout';
 import {randomUUID} from 'node:crypto';
-let pool:typeof import('../lib/db').pool,route:typeof import('../app/api/locations/route'),cookie='',actor='',directory='';
+let pool:typeof import('../lib/db').pool,route:typeof import('../app/api/locations/route'),atlasRoute:typeof import('../app/api/atlas/route'),exportRoute:typeof import('../app/api/export/route'),cookie='',actor='',directory='';
 const home=randomUUID(),other=randomUUID(),origin='http://localhost:3000';
 const request=(body:object)=>new Request(origin+'/api/locations?householdId='+home,{method:'POST',headers:{origin,cookie,'content-type':'application/json'},body:JSON.stringify(body)});
 beforeAll(async()=>{
  directory=await mkdtemp(join(tmpdir(),'homeatlas-location-'));process.env.STORAGE_ROOT=directory;
  process.env.BETTER_AUTH_SECRET??='location-test-secret-at-least-32-characters';process.env.BETTER_AUTH_URL=origin;
- ({pool}=await import('../lib/db'));route=await import('../app/api/locations/route');const {auth}=await import('../lib/auth');
+ ({pool}=await import('../lib/db'));route=await import('../app/api/locations/route');atlasRoute=await import('../app/api/atlas/route');exportRoute=await import('../app/api/export/route');const {auth}=await import('../lib/auth');
  const email=randomUUID()+'@example.invalid',password='Fixture-'+randomUUID();actor=(await auth.api.signUpEmail({body:{name:'Location fixture',email,password}})).user.id;
  await pool.query('UPDATE "user" SET "emailVerified"=true WHERE id=$1',[actor]);cookie=(await auth.api.signInEmail({body:{email,password},asResponse:true})).headers.getSetCookie().map(c=>c.split(';')[0]).join('; ');
  for(const id of [home,other])await pool.query('INSERT INTO households(id,name,created_by) VALUES($1,$2,$3)',[id,'Fixture home',actor]);
@@ -44,8 +44,16 @@ it('creates room/zone/container, moves documents, updates paths, and blocks inva
  expect((await route.POST(request({action:'photo',kind:'item',id:item,photoSourceId:randomUUID()}))).status).toBe(400);
  expect((await route.POST(request({action:'deleteSource',id:photo}))).status).toBe(200);
  expect((await pool.query('SELECT photo_source_id FROM items WHERE id=$1',[item])).rows[0].photo_source_id).toBeNull();
- const sample=(await pool.query("SELECT id FROM sources WHERE household_id=$1 AND title LIKE 'SAMPLE%' LIMIT 1",[home])).rows[0];
- expect((await route.POST(request({action:'deleteSource',id:sample.id}))).status).toBe(200);
+ const sample=(await pool.query("SELECT c.id,s.id AS source_id,c.version_id,s.location_id FROM sources s JOIN chunks c ON c.source_id=s.id AND c.household_id=s.household_id WHERE s.household_id=$1 AND s.title LIKE 'SAMPLE%' LIMIT 1",[home])).rows[0];
+ const bookmarked=await atlasRoute.POST(request({action:'bookmark',title:'Saved fixture',answer:'Original evidence',citations:[{id:sample.id,sourceId:sample.source_id,versionId:sample.version_id,locationUrl:'https://untrusted.invalid'}]}));
+ expect(bookmarked.status).toBe(200);expect((await bookmarked.json()).bookmark.citations[0].locationUrl).toBe('/?householdId='+home+'&location='+sample.location_id);
+ await pool.query("UPDATE locations SET name='Renamed location' WHERE id=$1",[sample.location_id]);
+ const get=new Request(origin+'/api/atlas?householdId='+home,{headers:{cookie}});
+ const reloaded=await (await atlasRoute.GET(get)).json();expect(reloaded.bookmarks[0].citations[0].locationPath).toContain('Renamed location');
+ const exported=await (await exportRoute.GET(get)).json();expect(exported.version).toBe(2);expect(exported.locations.some((n:{id:string})=>n.id===sample.location_id)).toBe(true);
+
+ expect((await route.POST(request({action:'deleteSource',id:sample.source_id}))).status).toBe(200);
+ const removed=await (await atlasRoute.GET(get)).json();expect(removed.bookmarks[0].citations[0].sourceRemoved).toBe(true);expect(removed.bookmarks[0].citations[0].locationUrl).toBeUndefined();
  await pool.query("UPDATE memberships SET role='viewer' WHERE household_id=$1 AND user_id=$2",[home,actor]);
  expect((await route.POST(request({action:'delete',id:zone}))).status).toBe(403);
 });

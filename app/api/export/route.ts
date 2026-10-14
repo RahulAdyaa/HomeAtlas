@@ -6,8 +6,8 @@ export const GET=api(async(request)=>{
  const output=await transaction(async(db)=>{
   await db.query('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
   const membership=(await db.query('SELECT role FROM memberships WHERE household_id=$1 AND user_id=$2',[context.householdId,context.user.id])).rows[0];if(membership?.role!=='owner')throw new Error('Permission changed');
-  const data:Record<string,unknown>={format:'HomeAtlas household export',version:1,exportedAt:new Date().toISOString(),householdId:context.householdId};
-  for(const table of ['rooms','items','tasks','maintenance_events','sources','source_versions','chunks','conversations','messages','bookmarks','credit_ledger','audit_events']){
+  const data:Record<string,unknown>={format:'HomeAtlas household export',version:2,exportedAt:new Date().toISOString(),householdId:context.householdId};
+  for(const table of ['locations','rooms','items','tasks','maintenance_events','sources','source_versions','chunks','conversations','messages','bookmarks','credit_ledger','audit_events']){
    // Table names are a server-owned allowlist, never request data.
    const{rows}=await db.query(`SELECT * FROM ${table} WHERE household_id=$1`,[context.householdId]);
    data[table]=rows.map(row=>{delete row.storage_path;delete row.image_path;delete row.embedding;delete row.image_embedding;return camel(row);});

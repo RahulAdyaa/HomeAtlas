@@ -21,7 +21,7 @@ Built with Next.js and TypeScript, Better Auth, PostgreSQL, a Python ingestion/r
 
 ## Verified results
 
-The 14 October hierarchy/layout regression run passed **73 JavaScript tests and 23 Python tests**, plus browser checks for room/container navigation, saved layout edits, mobile width and WebGL fallback. These results and their limits are documented in the [location upgrade report](docs/LOCATION_UPGRADE.md). 120fps is a design target, not a measured claim.
+The 14 October hierarchy/layout regression run passed **76 JavaScript tests and 23 Python tests**, plus a live RAG-to-drawer browser flow, saved-answer links, hierarchy export, room/container navigation, saved layout edits, mobile width and WebGL fallback. These results and their limits are documented in the [location upgrade report](docs/LOCATION_UPGRADE.md). 120fps is a design target, not a measured claim.
 
 These are local test and evaluation results recorded in the repository reports on 13 October 2026, not production service-level guarantees.
 

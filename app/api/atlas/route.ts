@@ -1,3 +1,5 @@
+import {locationLink,locationSentence} from '@/lib/locations';
+import {refreshSavedLocations} from '@/lib/saved-locations';
 import { z } from 'zod';
 import { createHash, randomBytes } from 'node:crypto';
 import { api, ApiError, audit, freshAuthentication, linkedIds, rateLimit, requireRole, scope, session, shortText, uuid } from '@/lib/server';
@@ -45,7 +47,7 @@ export const GET=api(async(request)=>{
  ]);
  const [rooms,items,sources,tasks,activity,account,ledger,members,bookmarks,history,locations]=results.map(x=>x.rows.map(row=>camel(row)));
  const acc=account[0] as {available:number,reserved:number};
- return Response.json({user:signed.user,household:{id:hid,name:context.membership.name,kind:context.membership.kind,address:context.membership.address,createdAt:context.membership.household_created_at},membership:{role:context.role,userId:signed.user.id,householdId:hid},households:membershipRows.rows.map(row=>camel(row)),rooms,items,sources,tasks,activity,credits:{...acc,balance:acc.available+acc.reserved,monthlyAllowance,prices,ledger},members,bookmarks,history,locations});
+ return Response.json({user:signed.user,household:{id:hid,name:context.membership.name,kind:context.membership.kind,address:context.membership.address,createdAt:context.membership.household_created_at},membership:{role:context.role,userId:signed.user.id,householdId:hid},households:membershipRows.rows.map(row=>camel(row)),rooms,items,sources,tasks,activity,credits:{...acc,balance:acc.available+acc.reserved,monthlyAllowance,prices,ledger},members,bookmarks:refreshSavedLocations(bookmarks,sources as {id:string;title?:string;locationId?:string;locationPath?:string}[],hid),history,locations});
 });
 export const POST=api(async(request)=>{
  const raw=await request.json();const input=actions.parse(raw);const signed=await session(request);
@@ -110,7 +112,7 @@ export const POST=api(async(request)=>{
     await linkedIds(db,hid,input.itemId);
     // Persist canonical citation fields from authorized immutable chunks, never browser-supplied content or paths.
     const citations=[];
-    for(const citation of input.citations){const{rows}=await db.query('SELECT c.id,c.source_id,c.version_id,s.title,c.page,c.bbox,c.text,c.start_seconds AS start,c.end_seconds AS end FROM chunks c JOIN sources s ON s.id=c.source_id AND s.household_id=c.household_id WHERE c.household_id=$1 AND c.id=$2 AND c.source_id=$3 AND c.version_id=$4',[hid,citation.id,citation.sourceId,citation.versionId]);if(!rows.length)throw new ApiError(404,'Citation not found.');citations.push(camel(rows[0]));}
+    for(const citation of input.citations){const{rows}=await db.query('SELECT c.id,c.source_id,c.version_id,s.title,s.location_id,s.location_path,c.metadata,c.modality,c.page,c.bbox,c.text,c.start_seconds AS start,c.end_seconds AS end FROM chunks c JOIN sources s ON s.id=c.source_id AND s.household_id=c.household_id WHERE c.household_id=$1 AND c.id=$2 AND c.source_id=$3 AND c.version_id=$4',[hid,citation.id,citation.sourceId,citation.versionId]);if(!rows.length)throw new ApiError(404,'Citation not found.');citations.push({...camel(rows[0]),locationUrl:locationLink(hid,rows[0].location_id),locationDescription:locationSentence(rows[0].title,rows[0].location_path)});}
     const{rows}=await db.query('INSERT INTO bookmarks(household_id,user_id,title,question,answer,citations,item_id) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *',[hid,signed.user.id,input.title,input.question,input.answer,JSON.stringify(citations),input.itemId??null]);
     if(input.itemId)await db.query('INSERT INTO maintenance_events(household_id,item_id,user_id,description) VALUES($1,$2,$3,$4)',[hid,input.itemId,signed.user.id,`${input.title}\n${input.answer}`]);
     return{bookmark:camel(rows[0])};

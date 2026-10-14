@@ -21,7 +21,7 @@ flowchart TD
  Metadata --> Scene[Open room / zone / container in 3D]
 ```
 
-`002_locations.sql` backfills room nodes using the existing room UUIDs. It does not move existing room attachments. Tenant-scoped foreign keys and parent-type constraints enforce the hierarchy. The home node is also a valid attachment for previously unassigned records. Changes to ancestor names/parents refresh descendant paths. Original chunk content is retained in `metadata.content_text`; the location prefix is included before embedding. Moves clear stale vectors and mark them for asynchronous rebuilding. Lexical retrieval remains available while this runs. The worker uses a compare-and-swap when publishing refreshed embeddings, and checks attachment changes again before publishing ingestion results. Historical citations remain addressable.
+`002_locations.sql` backfills room nodes using the existing room UUIDs. It does not move existing room attachments. Tenant-scoped foreign keys and parent-type constraints enforce the hierarchy. The home node is also a valid attachment for previously unassigned records. Changes to ancestor names/parents refresh descendant paths. Original chunk content is retained in `metadata.content_text`; the location prefix is included before embedding. Moves clear stale vectors and mark them for asynchronous rebuilding. Lexical retrieval remains available while this runs. The worker uses a compare-and-swap when publishing refreshed embeddings, and checks attachment changes again before publishing ingestion results. Historical citations remain addressable. Saved answers retain canonical citation metadata and refresh their location navigation against the current household source list. Deleted sources are marked as removed, and stale evidence buttons are disabled. Export format version 2 includes all location nodes and their layout data.
 
 `003_location_photos.sql` adds optional household-scoped photo references to documents and items. Upload a photo to the location, then choose it from the record's Photo selector. Removing that image clears its photo references.
 
@@ -56,11 +56,11 @@ node --env-file=.env.local --import tsx scripts/seed-demo.ts HOUSEHOLD_UUID
 
 ## Verification
 
-- 73 JavaScript tests passed, including real PostgreSQL migration/backfill, tenant and role guards, hierarchy CRUD, atomic layout rollback, idempotent seed, photo links, source deletion and existing authentication/credit/upload tests.
+- 76 JavaScript tests passed, including real PostgreSQL migration/backfill, tenant and role guards, hierarchy CRUD, atomic layout rollback, idempotent seed, photo links, source deletion, saved-answer location refresh, hierarchy exports and existing authentication/credit/upload tests.
 - 23 Python tests passed, including database ingestion/credit invariants and assertions that location paths are present at embedding time and refreshed after renames.
-- Browser fixture: rendered 3D, collision-free visible labels, room/container navigation, deep-link reload, saved furniture resize, 390px mobile overflow, WebGL fallback, and no uncaught page exceptions.
+- Browser fixture: a live RAG location question, its saved answer opening the correct drawer, hierarchy export, rendered 3D, collision-free visible labels, room/container navigation, deep-link reload, saved furniture resize, 390px mobile overflow, WebGL fallback, and no uncaught page exceptions.
 - Typecheck and production build checked separately.
 
-Reproduce with `npm test`, `HOMEATLAS_DB_TESTS=1 worker/.venv/bin/python -m pytest tests/test_worker.py tests/test_worker_db.py -q`, and `node --env-file=.env.local scripts/location-qa.mjs` while the web app runs. Browser fixtures use a disposable account/household and clean up their records and files. Screenshots go to `/tmp/homeatlas-location-qa`.
+Reproduce with `npm test`, `HOMEATLAS_DB_TESTS=1 worker/.venv/bin/python -m pytest tests/test_worker.py tests/test_worker_db.py -q`, and `node --env-file=.env.local scripts/location-qa.mjs` while the web app runs. Test files run sequentially because migration replay changes the shared PostgreSQL schema; concurrency assertions inside each test still run in parallel. Browser fixtures use a disposable account/household and clean up their records and files. Screenshots go to `/tmp/homeatlas-location-qa`.
 
 Performance depends on GPU, screen refresh rate and layout complexity. **120fps is a target, not a measured guarantee.** No heavy imported models or continuous idle rendering are used. The editor is a manual layout tool; floor-plan image reconstruction is not implemented.
