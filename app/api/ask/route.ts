@@ -4,6 +4,7 @@ import { api, ApiError, audit, linkedIds, rateLimit, scope, uuid } from '@/lib/s
 import { pool,transaction,camel } from '@/lib/db';
 import { prices,reserve,settle } from '@/lib/credits';
 import { maxUploadBytes,removePrivateFile,validateFile,writeQueryMedia } from '@/lib/storage';
+import {locationLink,locationSentence} from '@/lib/locations';
 import { callWorker } from '@/lib/worker';
 export const runtime='nodejs';
 export const maxDuration=300;
@@ -44,9 +45,9 @@ export const POST=api(async(request)=>{
    if(member.role!=='owner')delete reply.diagnostics;
    const citations=[];
    for(const citation of reply.citations){
-    const{rows}=await db.query('SELECT c.id,c.source_id,c.version_id,s.title,c.page,c.bbox,c.text,c.start_seconds AS start,c.end_seconds AS end,c.modality,c.metadata FROM chunks c JOIN sources s ON s.id=c.source_id AND s.household_id=c.household_id WHERE c.household_id=$1 AND c.id=$2 AND c.source_id=$3 AND c.version_id=$4',[context.householdId,citation.id,citation.sourceId,citation.versionId]);
+    const{rows}=await db.query('SELECT c.id,c.source_id,c.version_id,s.title,s.location_id,s.location_path,c.page,c.bbox,c.text,c.start_seconds AS start,c.end_seconds AS end,c.modality,c.metadata FROM chunks c JOIN sources s ON s.id=c.source_id AND s.household_id=c.household_id WHERE c.household_id=$1 AND c.id=$2 AND c.source_id=$3 AND c.version_id=$4',[context.householdId,citation.id,citation.sourceId,citation.versionId]);
     if(!rows.length||!rows[0].text.includes(citation.text))throw new ApiError(502,'The answer included evidence that could not be verified. Please try again.');
-    citations.push({...camel(rows[0]),text:citation.text,number:citations.length+1});
+    citations.push({...camel(rows[0]),text:citation.text,locationUrl:locationLink(context.householdId,rows[0].location_id),locationDescription:locationSentence(rows[0].title,rows[0].location_path),number:citations.length+1});
    }
    const conversationId=randomUUID();
    const result={...reply,citations,operationId,cost,conversationId,...(transcription?{transcription}:{})};

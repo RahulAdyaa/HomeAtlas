@@ -53,10 +53,10 @@ def heartbeat(job: dict, done: threading.Event, cfg: Settings):
 
 
 def job_source(conn, job: dict) -> dict:
-    source = conn.execute('''SELECT v.*,s.room_id,s.item_id,m.role FROM source_versions v
+    source = conn.execute('''SELECT v.*,s.room_id,s.item_id,s.location_id,s.location_path,m.role FROM source_versions v
         JOIN sources s ON s.id=v.source_id AND s.household_id=v.household_id
         JOIN memberships m ON m.household_id=v.household_id AND m.user_id=%s
-        WHERE v.id=%s AND v.household_id=%s AND v.source_id=%s AND m.role IN ('owner','editor')''',
+        WHERE v.id=%s AND v.household_id=%s AND v.source_id=%s AND m.role IN ('owner','editor') FOR SHARE OF s''',
         (job['actor_id'], job['version_id'], job['household_id'], job['source_id'])).fetchone()
     if not source:
         raise PermissionError('Upload permission was removed or source no longer exists')
@@ -78,6 +78,9 @@ def process_job(job: dict, cfg: Settings = settings, engine: LocalModels = model
             raise ValueError('Original file integrity check failed')
         artifacts = cfg.storage / 'derived' / str(job['household_id']) / str(job['version_id']) / str(job['claim_token'])
         chunks = extract(path, source['mime_type'], artifacts, cfg)
+        for chunk in chunks:
+            chunk.metadata['content_text'] = chunk.text
+            chunk.text = f"Location: {source['location_path']}\n\n{chunk.text}"
         embeddings = engine.embed_text([chunk.text for chunk in chunks])
         image_vectors = {}
         for chunk in chunks:
@@ -87,7 +90,12 @@ def process_job(job: dict, cfg: Settings = settings, engine: LocalModels = model
             lease = conn.execute("SELECT id FROM ingestion_jobs WHERE id=%s AND claim_token=%s AND status='processing' FOR UPDATE", (job['id'], job['claim_token'])).fetchone()
             if not lease:
                 return  # A reclaimed worker owns this job; it alone may publish or settle.
-            job_source(conn, job)  # Permission can be revoked during a long extraction.
+            current = job_source(conn, job)  # Lock attachment through publication.
+            if current['location_path'] != source['location_path'] or current['location_id'] != source['location_id']:
+                source = current
+                for chunk in chunks:
+                    chunk.text = f"Location: {source['location_path']}\n\n{chunk.metadata['content_text']}"
+                embeddings = engine.embed_text([chunk.text for chunk in chunks])
             # Old rows remain addressable by saved citations, while only this index generation is searched.
             conn.execute("UPDATE chunks SET metadata=jsonb_set(metadata,'{active}','false'::jsonb) WHERE household_id=%s AND version_id=%s", (job['household_id'], job['version_id']))
             for index, chunk in enumerate(chunks):
@@ -95,7 +103,7 @@ def process_job(job: dict, cfg: Settings = settings, engine: LocalModels = model
                 chunk_id = uuid.uuid5(uuid.UUID(str(job['version_id'])), fingerprint)
                 image_vector = image_vectors.get(chunk.image_path)
                 metadata = dict(chunk.metadata, source_sha256=source['sha256'], source_version=source['version'],
-                                permissions='household-members', extractor_version='homeatlas-1', active=True)
+                                location_id=str(source['location_id']), location_path=source['location_path'], permissions='household-members', extractor_version='homeatlas-1', active=True)
                 conn.execute('''INSERT INTO chunks(id,household_id,source_id,version_id,item_id,room_id,text,page,bbox,
                     start_seconds,end_seconds,modality,embedding,embedding_model,model_revision,image_path,metadata,image_embedding,image_embedding_model)
                     VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT(id) DO UPDATE SET
@@ -128,9 +136,24 @@ def process_job(job: dict, cfg: Settings = settings, engine: LocalModels = model
         thread.join(timeout=2)
 
 
+def refresh_location_embeddings(cfg: Settings, engine: LocalModels = models):
+    # Compare-and-swap prevents a rename during inference publishing an outdated vector.
+    with connect(cfg) as conn:
+        rows = conn.execute("SELECT id,text FROM chunks WHERE metadata->>'location_embedding_pending'='true' LIMIT 32").fetchall()
+    if not rows:
+        return
+    vectors = engine.embed_text([r['text'] for r in rows])
+    if not vectors:
+        return
+    with connect(cfg) as conn:
+        for row, vector in zip(rows, vectors):
+            conn.execute("UPDATE chunks SET embedding=%s,embedding_model=%s,model_revision=%s,metadata=metadata-'location_embedding_pending' WHERE id=%s AND text=%s", (vector, engine.text_identity, engine.cfg.text_revision, row['id'], row['text']))
+
+
 def run(stop: threading.Event, cfg: Settings = settings):
     while not stop.is_set():
         try:
+            refresh_location_embeddings(cfg)
             job = claim_job(cfg)
             if job:
                 process_job(job, cfg)

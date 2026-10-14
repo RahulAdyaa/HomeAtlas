@@ -41,10 +41,11 @@ export const GET=api(async(request)=>{
   pool.query(`SELECT m.user_id,m.role,m.created_at,u.name,${context.role==='owner'?'u.email':'NULL::text AS email'} FROM memberships m JOIN "user" u ON u.id=m.user_id WHERE m.household_id=$1 ORDER BY m.created_at`,[hid]),
   pool.query('SELECT * FROM bookmarks WHERE household_id=$1 AND user_id=$2 ORDER BY created_at DESC',[hid,signed.user.id]),
   pool.query('SELECT * FROM maintenance_events WHERE household_id=$1 ORDER BY created_at DESC LIMIT 100',[hid]),
+  pool.query('SELECT * FROM locations WHERE household_id=$1 ORDER BY created_at,id',[hid]),
  ]);
- const [rooms,items,sources,tasks,activity,account,ledger,members,bookmarks,history]=results.map(x=>x.rows.map(row=>camel(row)));
+ const [rooms,items,sources,tasks,activity,account,ledger,members,bookmarks,history,locations]=results.map(x=>x.rows.map(row=>camel(row)));
  const acc=account[0] as {available:number,reserved:number};
- return Response.json({user:signed.user,household:{id:hid,name:context.membership.name,kind:context.membership.kind,address:context.membership.address,createdAt:context.membership.household_created_at},membership:{role:context.role,userId:signed.user.id,householdId:hid},households:membershipRows.rows.map(row=>camel(row)),rooms,items,sources,tasks,activity,credits:{...acc,balance:acc.available+acc.reserved,monthlyAllowance,prices,ledger},members,bookmarks,history});
+ return Response.json({user:signed.user,household:{id:hid,name:context.membership.name,kind:context.membership.kind,address:context.membership.address,createdAt:context.membership.household_created_at},membership:{role:context.role,userId:signed.user.id,householdId:hid},households:membershipRows.rows.map(row=>camel(row)),rooms,items,sources,tasks,activity,credits:{...acc,balance:acc.available+acc.reserved,monthlyAllowance,prices,ledger},members,bookmarks,history,locations});
 });
 export const POST=api(async(request)=>{
  const raw=await request.json();const input=actions.parse(raw);const signed=await session(request);

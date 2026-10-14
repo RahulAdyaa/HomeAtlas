@@ -24,7 +24,7 @@ export async function validateFile(file:File,allowed:'all'|'image'|'audio'='all'
  else if(head.subarray(0,4).toString()==='fLaC'){mime='audio/flac';extension='.flac';}
  else if(head.subarray(0,4).toString()==='FORM'&&['AIFF','AIFC'].includes(head.subarray(8,12).toString())){mime='audio/aiff';extension='.aiff';}
  else if(head.subarray(0,4).toString()==='OggS'){mime='audio/ogg';extension='.ogg';}
- else if(head.subarray(0,4).toString()==='ftyp'){mime=file.type.startsWith('audio/')||['.m4a','.m4b','.aac'].includes(suffix)?'audio/mp4':'video/mp4';extension=mime==='audio/mp4'?(suffix==='.aac'?'.aac':'.m4a'):'.mp4';}
+ else if(head.subarray(4,8).toString()==='ftyp'){mime=file.type.startsWith('audio/')||['.m4a','.m4b','.aac'].includes(suffix)?'audio/mp4':'video/mp4';extension=mime==='audio/mp4'?(suffix==='.aac'?'.aac':'.m4a'):'.mp4';}
  else if(head.subarray(0,4).equals(Buffer.from([0x1a,0x45,0xdf,0xa3]))){mime=file.type.startsWith('audio/')?'audio/webm':suffix==='.mkv'?'video/x-matroska':'video/webm';extension=mime==='video/x-matroska'?'.mkv':'.webm';}
  else if(head.subarray(0,4).toString()==='RIFF'&&head.subarray(8,12).toString()==='AVI '){mime='video/x-msvideo';extension='.avi';}
  else if(head[0]===0xff&&(head[1]===0xf1||head[1]===0xf9)){mime='audio/aac';extension='.aac';}
@@ -50,7 +50,7 @@ export async function validateFile(file:File,allowed:'all'|'image'|'audio'='all'
  // Reject extension/magic mismatches, while allowing browsers to omit a MIME type.
  if(file.type&&file.type!=='application/octet-stream'){
   const normalized=file.type.split(';')[0].toLowerCase().replace('audio/x-wav','audio/wav').replace('audio/x-m4a','audio/mp4').replace('image/jpg','image/jpeg').replace('image/x-icon','image/x-icon').replace('application/vnd.ms-excel','application/vnd.ms-excel');
-  const compatible=normalized===mime||(normalized==='audio/mp3'&&mime==='audio/mpeg')||(normalized==='audio/x-aiff'&&mime==='audio/aiff')||(normalized==='application/octet-stream')||(suffix==='.csv'&&normalized==='text/plain')||(suffix==='.txt'&&normalized==='text/plain')||(['.xlsx','.xlsm'].includes(suffix)&&normalized==='application/zip')||(suffix==='.au'&&normalized==='audio/basic')||(additionalRasterExtensions.has(suffix)&&normalized.startsWith('image/'))||(/^\.[a-z0-9]{1,12}$/.test(suffix)&&normalized.startsWith('audio/'));
+  const compatible=normalized===mime||(normalized==='audio/mp3'&&mime==='audio/mpeg')||(normalized==='audio/x-aiff'&&mime==='audio/aiff')||(normalized==='application/octet-stream')||(suffix==='.csv'&&normalized==='text/plain')||(suffix==='.txt'&&normalized==='text/plain')||(['.xlsx','.xlsm'].includes(suffix)&&normalized==='application/zip')||(suffix==='.au'&&normalized==='audio/basic')||(additionalRasterExtensions.has(suffix)&&normalized.startsWith('image/'))||(/^\.[a-z0-9]{1,12}$/.test(suffix)&&normalized.startsWith('audio/')&&mime.startsWith('audio/'));
   if(!compatible)throw new ApiError(415,'The file content does not match its declared type.');
  }
  return {bytes,mime,extension,sha256:createHash('sha256').update(bytes).digest('hex'),name};
