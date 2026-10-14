@@ -1,42 +1,66 @@
 'use client';
 import {Canvas,useFrame,useThree} from '@react-three/fiber';
-import {ContactShadows,OrbitControls,OrthographicCamera,RoundedBox} from '@react-three/drei';
-import {Suspense,useState,useRef,useEffect,useMemo} from 'react';
-import {CanvasTexture,Group,MathUtils,SRGBColorSpace} from 'three';
-import {RotateCcw,RotateCw,Maximize2,Box as BoxIcon} from 'lucide-react';
-import HomeIllustration from './HomeIllustration';
+import {Html,OrbitControls,OrthographicCamera,RoundedBox} from '@react-three/drei';
+import {Component,useEffect,useMemo,useRef,useState,type ReactNode} from 'react';
+import {Vector3, type MeshStandardMaterial} from 'three';
+import type {OrbitControls as Controls} from 'three-stdlib';
+import {ancestry,descendants,type LocationNode} from '@/lib/locations';
 import type {RecordRow} from './types';
-type Props={rooms:RecordRow[];items?:RecordRow[];onRoom:(id:string)=>void;onItem?:(item:RecordRow)=>void;preview?:boolean};
-const colors=['#E6E7EA','#F8FAFC','#b9bfcd','#b9bfcd','#d5d8e0','#ffffff'];
-function Block({p,s,c,rotation=0}:{p:[number,number,number];s:[number,number,number];c:string;rotation?:number}){return <RoundedBox args={s} radius={.035} smoothness={2} position={p} rotation={[0,rotation,0]} castShadow receiveShadow><meshStandardMaterial color={c} roughness={.8}/></RoundedBox>}
-function Plant({p}:{p:[number,number,number]}){return <group position={p}><mesh position={[0,.17,0]} castShadow><cylinderGeometry args={[.2,.15,.34,12]}/><meshStandardMaterial color="#b9bfcd"/></mesh><mesh position={[0,.52,0]} castShadow><sphereGeometry args={[.27,12,12]}/><meshStandardMaterial color="#b9bfcd"/></mesh><mesh position={[.13,.71,.04]} castShadow><sphereGeometry args={[.19,12,12]}/><meshStandardMaterial color="#E6E7EA"/></mesh></group>}
-function RoomLabel({text,position,onClick}:{text:string;position:[number,number,number];onClick:()=>void}){
- const texture=useMemo(()=>{const c=document.createElement('canvas');c.width=256;c.height=80;const g=c.getContext('2d')!;g.fillStyle='#09122A';g.beginPath();g.roundRect(0,0,256,80,18);g.fill();g.fillStyle='#F8FAFC';g.font='500 35px Satoshi';g.textAlign='center';g.textBaseline='middle';g.fillText(text.slice(0,22),128,41);const t=new CanvasTexture(c);t.colorSpace=SRGBColorSpace;return t},[text]);
- useEffect(()=>()=>texture.dispose(),[texture]);
- return <sprite position={position} scale={[2.2,.68,1]} onClick={e=>{e.stopPropagation();onClick()}}><spriteMaterial map={texture} toneMapped={false} transparent depthTest={false} depthWrite={false}/></sprite>
+import styles from './HomeSpace.module.css';
+type Props={locations:LocationNode[];sources:RecordRow[];items:RecordRow[];selected?:string;roomId?:string;onSelect:(id:string)=>void};
+const tuple=(x:number,y:number,z:number):[number,number,number]=>[x,y,z];
+function Block({p,s,c,glow=false}:{p:[number,number,number];s:[number,number,number];c:string;glow?:boolean}){
+ const material=useRef<MeshStandardMaterial>(null);const {invalidate}=useThree();const started=useRef(0);
+ useEffect(()=>{started.current=performance.now();invalidate()},[glow,invalidate]);
+ useFrame(()=>{if(!material.current)return;const elapsed=performance.now()-started.current;material.current.emissiveIntensity=glow?.25+(elapsed<4000?Math.sin(elapsed/220)*.2:0):0;if(glow&&elapsed<4000)invalidate()});
+ return <RoundedBox args={s} radius={Math.min(.05,...s.map(v=>v/4))} smoothness={2} position={p} castShadow receiveShadow><meshStandardMaterial ref={material} color={c} roughness={.85} emissive={glow?'#4865df':'#000000'}/></RoundedBox>
 }
-function Furniture({kind}:{kind:string}){
- if(kind==='bedroom')return <><Block p={[-.35,.27,-.05]} s={[1.5,.45,1.9]} c="#d5d8e0"/><Block p={[-.35,.54,-.05]} s={[1.53,.12,1.94]} c="#b9bfcd"/><Block p={[-.35,.64,-.65]} s={[1.15,.14,.48]} c="#b9bfcd"/><Block p={[-.35,.63,.37]} s={[1.53,.1,1.12]} c="#F8FAFC"/><Block p={[.78,.3,-.65]} s={[.44,.55,.5]} c="#b9bfcd"/><mesh position={[.78,.8,-.65]}><coneGeometry args={[.18,.27,16]}/><meshStandardMaterial color="#F8FAFC"/></mesh></>;
- if(kind==='kitchen')return <><Block p={[-.2,.44,-1.1]} s={[2.1,.88,.6]} c="#ffffff"/><Block p={[-.2,.91,-1.1]} s={[2.15,.1,.65]} c="#d5d8e0"/><Block p={[.92,.79,.5]} s={[.54,1.5,.59]} c="#ffffff"/><Block p={[-.55,.45,.25]} s={[.9,.9,.7]} c="#ffffff"/><mesh position={[-.55,.48,.62]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[.25,.25,.05,24]}/><meshStandardMaterial color="#d5d8e0"/></mesh><Block p={[-.2,.97,-1.1]} s={[.44,.035,.33]} c="#d5d8e0"/></>;
- if(kind==='bathroom'||kind==='laundry')return <><Block p={[-.55,.3,-.5]} s={[1.2,.6,1.6]} c="#F8FAFC"/><Block p={[-.55,.63,-.5]} s={[1.05,.08,1.45]} c="#F8FAFC"/><Block p={[.8,.46,-.9]} s={[.68,.9,.6]} c="#F8FAFC"/><Block p={[.8,.94,-.9]} s={[.74,.08,.66]} c="#E6E7EA"/><Plant p={[.9,0,.75]}/></>;
- if(kind==='study')return <><Block p={[0,.77,-.65]} s={[1.9,.14,.8]} c="#E6E7EA"/><Block p={[-.73,.34,-.65]} s={[.13,.7,.7]} c="#ffffff"/><Block p={[.73,.34,-.65]} s={[.13,.7,.7]} c="#ffffff"/><Block p={[0,1.04,-.84]} s={[.75,.4,.07]} c="#E6E7EA"/><Block p={[0,.32,.38]} s={[.55,.5,.55]} c="#ffffff"/><Plant p={[.94,0,.8]}/></>;
- return <><Block p={[-.3,.25,-.66]} s={[1.9,.45,.68]} c="#d5d8e0"/><Block p={[-.3,.57,-.92]} s={[1.95,.55,.14]} c="#E6E7EA"/><Block p={[-1.2,.43,-.66]} s={[.16,.5,.76]} c="#E6E7EA"/><Block p={[.6,.43,-.66]} s={[.16,.5,.76]} c="#E6E7EA"/><Block p={[-.56,.51,-.63]} s={[.46,.12,.45]} c="#d5d8e0"/><Block p={[.05,.51,-.63]} s={[.46,.12,.45]} c="#F8FAFC"/><Block p={[0,.23,.5]} s={[1.1,.4,.68]} c="#F8FAFC"/><Plant p={[.93,0,.85]}/></>
+// Presets are normalized furniture; saved node dimensions and transforms set their actual size.
+function Furniture({node,selected}:{node:LocationNode;selected:boolean}){
+ const c=node.color,k=node.preset;
+ const block=(p:[number,number,number],s:[number,number,number],color=c)=><Block p={p} s={s} c={color} glow={selected}/>;
+ return <group scale={[node.size.x,node.size.y,node.size.z]}>
+ {['desk','table','counter'].includes(k)?<>{block([0,.9,0],[1,.14,1])}{[-.4,.4].flatMap(x=>[-.4,.4].map(z=><Block key={x+':'+z} p={[x,.43,z]} s={[.08,.86,.08]} c="#9b8f81"/>))}{k==='desk'&&block([0,1.14,-.3],[.42,.35,.06],'#5b6880')}</>:
+ k==='bed'?<>{block([0,.3,0],[1,.6,1])}{block([0,.65,.1],[.98,.15,.75],'#f8fafc')}{block([0,.76,-.32],[.7,.16,.24],'#ffffff')}</>:
+ ['sofa','chair'].includes(k)?<>{block([0,.35,0],[1,.7,1])}{block([0,.8,-.4],[1,.4,.18])}{block([-.45,.65,0],[.1,.3,1])}{block([.45,.65,0],[.1,.3,1])}</>:
+ ['storage','washroom','area'].includes(k)?<>{block([0,.04,0],[1,.08,1])}{node.attached&&<><Block p={[0,.5,-.49]} s={[1,1,.03]} c="#f4f5f7"/><Block p={[-.49,.5,0]} s={[.03,1,1]} c="#f4f5f7"/><Block p={[.49,.5,0]} s={[.03,1,1]} c="#f4f5f7"/><Block p={[-.35,.5,.49]} s={[.3,1,.03]} c="#f4f5f7"/><Block p={[.35,.5,.49]} s={[.3,1,.03]} c="#f4f5f7"/><Block p={[0,.94,.49]} s={[.4,.12,.03]} c="#f4f5f7"/></>}</>:
+ k==='toilet'?<>{block([0,.3,.1],[.7,.6,.7],'#ffffff')}{block([0,.7,-.32],[.75,.6,.3],'#ffffff')}</>:
+ k==='sink'?<>{block([0,.45,0],[.8,.9,.8])}{block([0,.94,0],[1,.12,1],'#ffffff')}{block([0,1.02,0],[.65,.05,.65],'#d5e5ee')}</>:
+ k==='window'?<>{block([0,.5,0],[1,1,.1],'#b7ddea')}{block([0,.5,.06],[.04,1,.02],'#ffffff')}</>:
+ k==='door'?block([0,.5,0],[1,1,.08],'#dec9ac'):
+ <>{block([0,.5,0],[1,1,1])}{k==='washer'?<mesh position={[0,.5,.505]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[.3,.3,.02,20]}/><meshStandardMaterial color="#8198ab"/></mesh>:block([0,.6,.505],[.04,.16,.025],'#ffffff')}</>}
+ </group>
 }
-function Apartment({rooms,items=[],onRoom,onItem,rotation,reduced,preview}:{rotation:number;reduced:boolean}&Props){
- const group=useRef<Group>(null);const {invalidate}=useThree();const entered=useRef(false);const height=Math.max(1,Math.ceil(rooms.length/3))*2.85;
- useFrame((_,delta)=>{if(!group.current)return;const target=rotation*Math.PI/4;group.current.rotation.y=reduced?target:MathUtils.damp(group.current.rotation.y,target,7,delta);if(!entered.current){group.current.position.y=reduced?0:MathUtils.damp(group.current.position.y,0,6,delta);if(Math.abs(group.current.position.y)<.001)entered.current=true;}if(Math.abs(group.current.rotation.y-target)>.0001||!entered.current)invalidate()});
- return <group ref={group} position={[0,reduced?0:-.3,0]}><Block p={[0,-.23,0]} s={[8.25,.4,height+.4]} c="#ffffff"/>{rooms.map((room,i)=>{const x=(i%3-1)*2.7,z=(Math.floor(i/3)-(Math.ceil(rooms.length/3)-1)/2)*2.85;const roomItems=items.filter(a=>a.roomId===room.id);return <group key={room.id} position={[x,0,z]}>
- <mesh rotation={[-Math.PI/2,0,0]} position={[0,.01,0]} receiveShadow onClick={e=>{e.stopPropagation();onRoom(room.id)}}><planeGeometry args={[2.6,2.76]}/><meshStandardMaterial color={colors[i%colors.length]} roughness={.95}/></mesh>
- <Block p={[0,.64,-1.38]} s={[2.71,1.3,.1]} c="#ffffff"/>{i%3===0&&<Block p={[-1.35,.64,0]} s={[.1,1.3,2.85]} c="#E6E7EA"/>}{i%3===2&&<Block p={[1.35,.64,0]} s={[.1,1.3,2.85]} c="#b9bfcd"/>}
- <Furniture kind={room.kind||'living'}/>
- {!preview&&<RoomLabel text={room.name||'Room'} position={[0,.24,1.13]} onClick={()=>onRoom(room.id)}/>}
- {!preview&&roomItems.slice(0,4).map((item,n)=><group key={item.id} position={[-.7+n*.5,1.05,0]} onClick={e=>{e.stopPropagation();onItem?.(item)}}><mesh castShadow><sphereGeometry args={[.09,14,14]}/><meshStandardMaterial color="#3559C7" emissive="#3559C7" emissiveIntensity={.5}/></mesh><mesh rotation={[-Math.PI/2,0,0]} position={[0,-.05,0]}><ringGeometry args={[.12,.15,24]}/><meshBasicMaterial color="#3559C7" transparent opacity={.65}/></mesh></group>)}
- </group>})}</group>
+function Walls({node,cut=false}:{node:LocationNode;cut?:boolean}){
+ const {x:w,z:d,y:h}=node.size;
+ return <>{(['north','south','east','west'] as const).map(wall=>{
+ const horizontal=wall==='north'||wall==='south',length=horizontal?w:d;
+ const openings=(node.openings||[]).filter(o=>o.wall===wall).map(o=>({...o,start:Math.max(-length/2,o.offset*length-length/2-o.width/2),end:Math.min(length/2,o.offset*length-length/2+o.width/2)})).sort((a,b)=>a.start-b.start);
+ const parts:ReactNode[]=[];const wallHeight=cut||wall==='south'||wall==='east'?.22:h;
+ const piece=(a:number,b:number,bottom:number,top:number,color='#f7f8fb')=>{if(b<=a||top<=bottom)return;parts.push(<Block key={parts.length} p={horizontal?[(a+b)/2,(top+bottom)/2,wall==='north'?-d/2:d/2]:[wall==='west'?-w/2:w/2,(top+bottom)/2,(a+b)/2]} s={horizontal?[b-a,top-bottom,.09]:[.09,top-bottom,b-a]} c={color}/>)};
+ let cursor=-length/2;for(const o of openings){piece(cursor,o.start,0,wallHeight);if(o.kind==='window'){piece(o.start,o.end,0,Math.min(.8,wallHeight));if(wallHeight>.8)piece(o.start,o.end,.8,Math.min(1.8,wallHeight),'#c2e1ed')}piece(o.start,o.end,o.kind==='door'?2:1.8,wallHeight);cursor=Math.max(cursor,o.end)}piece(cursor,length/2,0,wallHeight);return <group key={wall}>{parts}</group>;
+ })}</>
 }
-function FittedCamera({preview,rooms}:{preview?:boolean;rooms:number}){const {size}=useThree();const depth=Math.max(2,Math.ceil(rooms/3));const zoom=Math.min(size.width/12.5,size.height/(7+depth*1.4));return <OrthographicCamera makeDefault position={[11,12,15]} zoom={zoom}/>}
-export default function HouseScene(props:Props){
- const [view,setView]=useState(0),[ready,setReady]=useState(false),[webgl,setWebgl]=useState(true),[reduced,setReduced]=useState(true);
- useEffect(()=>{const mq=window.matchMedia('(prefers-reduced-motion: reduce)');setReduced(mq.matches);const listener=()=>setReduced(mq.matches);mq.addEventListener('change',listener);const c=document.createElement('canvas');const ctx=c.getContext('webgl2');setWebgl(!!ctx);ctx?.getExtension('WEBGL_lose_context')?.loseContext();setReady(true);return()=>mq.removeEventListener('change',listener)},[]);
- if(!ready||!webgl)return <div className="scene-static"><HomeIllustration/>{ready&&!webgl&&<p>3D is unavailable on this device. Every room is available below.</p>}</div>;
- return <div className={'scene-viewport '+(props.preview?'scene-preview':'')}><div className="scene-canvas" role="img" aria-label="Illustrative 3D home map"><Canvas shadows frameloop="demand" dpr={[1,1.5]} gl={{antialias:true,alpha:true}} fallback={<HomeIllustration/>}><FittedCamera preview={props.preview} rooms={props.rooms.length}/><ambientLight intensity={1.2}/><directionalLight position={[3,9,5]} intensity={2} castShadow shadow-mapSize={[1024,1024]} shadow-bias={-.001}/><Suspense fallback={null}><Apartment {...props} rotation={view} reduced={reduced}/><ContactShadows position={[0,-.44,0]} opacity={.3} scale={20} blur={2.4} far={7} frames={1}/></Suspense><OrbitControls enablePan={false} enableZoom={false} enableDamping={!reduced} minPolarAngle={.35} maxPolarAngle={1.12}/></Canvas></div>{!props.preview&&<><div className="scene-controls" role="group" aria-label="3D view controls"><button className="icon-button" aria-label="Rotate home left" onClick={()=>setView(view-1)}><RotateCcw size={17}/></button><span>A familiar perspective</span><button className="icon-button" aria-label="Rotate home right" onClick={()=>setView(view+1)}><RotateCw size={17}/></button><button className="icon-button" aria-label="Reset home view" onClick={()=>setView(0)}><Maximize2 size={16}/></button></div>{!!props.items?.length&&<div className="scene-items"><span><BoxIcon size={13}/> Item markers</span>{props.items.map(item=><button key={item.id} onClick={()=>props.onItem?.(item)}>{item.name}</button>)}</div>}</>}</div>
+function Label({node,count,onSelect}:{node:LocationNode;count:number;onSelect:()=>void}){return <Html center position={[0,node.type==='room'?.25:node.size.y+.3,node.type==='room'?node.size.z*.25:0]} zIndexRange={[40,0]}><button data-home-label className={styles.label} title={`${node.name} · ${count} documents`} onClick={e=>{e.stopPropagation();onSelect()}}>{node.name}<small>{count} documents</small></button></Html>}
+function LabelCollisions(){const {gl,size}=useThree();useFrame(()=>{
+ const root=gl.domElement.parentElement;if(!root)return;const bounds=root.getBoundingClientRect();const occupied:DOMRect[]=[];
+ root.querySelectorAll<HTMLElement>('[data-home-label]').forEach(el=>{const rect=el.getBoundingClientRect();const visible=rect.left>=bounds.left&&rect.right<=bounds.right&&rect.top>=bounds.top&&rect.bottom<=bounds.bottom&&!occupied.some(r=>rect.left<r.right+8&&rect.right>r.left-8&&rect.top<r.bottom+8&&rect.bottom>r.top-8);el.style.visibility=visible?'visible':'hidden';el.style.pointerEvents=visible?'auto':'none';if(visible)occupied.push(rect)});
+ });return null}
+function Camera({locations,roomId,reset}:{locations:LocationNode[];roomId?:string;reset:number}){
+ const controls=useRef<Controls>(null);const {camera,size,invalidate}=useThree();const motion=useRef<{start:number;from:Vector3;to:Vector3;targetFrom:Vector3;targetTo:Vector3;zoomFrom:number;zoomTo:number}|null>(null);
+ const rooms=locations.filter(n=>n.type==='room');const focus=rooms.find(n=>n.id===roomId);
+ const bounds=useMemo(()=>{if(!rooms.length)return {x:0,z:0,w:12,d:12};const minX=Math.min(...rooms.map(n=>n.position.x-n.size.x/2)),maxX=Math.max(...rooms.map(n=>n.position.x+n.size.x/2)),minZ=Math.min(...rooms.map(n=>n.position.z-n.size.z/2)),maxZ=Math.max(...rooms.map(n=>n.position.z+n.size.z/2));return{x:(minX+maxX)/2,z:(minZ+maxZ)/2,w:maxX-minX,d:maxZ-minZ}},[locations]);
+ useEffect(()=>{if(!controls.current)return;const x=focus?.position.x??bounds.x,z=focus?.position.z??bounds.z;const span=Math.max(focus?.size.x??bounds.w,focus?.size.z??bounds.d,4);motion.current={start:performance.now(),from:camera.position.clone(),to:new Vector3(x+12,15,z+14),targetFrom:controls.current.target.clone(),targetTo:new Vector3(x,0,z),zoomFrom:camera.zoom,zoomTo:Math.min(size.width/(span*1.65),size.height/(span*1.2))};invalidate()},[roomId,reset,bounds,size.width,size.height,camera,invalidate]);
+ useFrame(()=>{const m=motion.current;if(!m||!controls.current)return;const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;const t=reduced?1:Math.min(1,(performance.now()-m.start)/800),ease=t*t*(3-2*t);camera.position.lerpVectors(m.from,m.to,ease);controls.current.target.lerpVectors(m.targetFrom,m.targetTo,ease);camera.zoom=m.zoomFrom+(m.zoomTo-m.zoomFrom)*ease;camera.updateProjectionMatrix();controls.current.update();if(t===1)motion.current=null;else invalidate()});
+ return <OrbitControls ref={controls} makeDefault enableDamping minPolarAngle={.2} maxPolarAngle={1.25} minZoom={8} maxZoom={180} onStart={()=>{motion.current=null}}/>
+}
+class Boundary extends Component<{children:ReactNode;fallback:ReactNode},{failed:boolean}>{state={failed:false};static getDerivedStateFromError(){return{failed:true}}render(){return this.state.failed?this.props.fallback:this.props.children}}
+export default function HouseScene({locations,sources,items,selected,roomId,onSelect}:Props){
+ const [webgl,setWebgl]=useState<boolean|null>(null),[reset,setReset]=useState(0),[hover,setHover]=useState('');
+ useEffect(()=>{try{const canvas=document.createElement('canvas'),context=canvas.getContext('webgl2');setWebgl(!!context);context?.getExtension('WEBGL_lose_context')?.loseContext()}catch{setWebgl(false)}},[]);
+ const count=(id:string)=>{const ids=descendants(locations,id);return sources.filter(s=>ids.has(s.locationId||s.roomId)).length};
+ const path=selected?ancestry(locations,selected):[];
+ const fallback=<div className={styles.fallback}><p>Room list · all locations remain available without 3D.</p>{locations.filter(n=>n.type!=='home').map(n=><button key={n.id} onClick={()=>onSelect(n.id)}>{ancestry(locations,n.id).filter(a=>a.type!=='home').map(a=>a.name).join(' › ')} · {count(n.id)} documents</button>)}</div>;
+ if(webgl===null)return <div className={styles.canvas}>Preparing your home…</div>;if(!webgl)return fallback;
+ return <Boundary fallback={fallback}><div className={styles.scene}><div className={styles.canvas} aria-label="Interactive 3D home"><Canvas shadows frameloop="demand" dpr={[1,1.5]} gl={{antialias:true}} onCreated={({gl})=>gl.domElement.addEventListener('webglcontextlost',()=>setWebgl(false),{once:true})}><color attach="background" args={['#f1f4f9']}/><OrthographicCamera makeDefault position={[18,18,20]} zoom={35}/><ambientLight intensity={1.5}/><directionalLight position={[5,16,8]} intensity={2} castShadow shadow-mapSize={[1024,1024]} shadow-camera-left={-30} shadow-camera-right={30} shadow-camera-top={30} shadow-camera-bottom={-30}/>{locations.filter(n=>n.type==='room'&&(!roomId||n.id===roomId)).map(room=><group key={room.id} position={[room.position.x,room.position.y,room.position.z]} rotation={[0,room.rotation*Math.PI/180,0]} onClick={e=>{e.stopPropagation();onSelect(room.id)}} onPointerOver={e=>{e.stopPropagation();setHover(room.id)}} onPointerOut={()=>setHover('')}><Block p={[0,-.12,0]} s={[room.size.x,.24,room.size.z]} c={hover===room.id?'#d3ddf7':room.color} glow={path.some(n=>n.id===room.id)}/><Walls node={room} cut={!!roomId}/>{locations.filter(n=>n.parentId===room.id).map(zone=><group key={zone.id} position={[zone.position.x,zone.position.y,zone.position.z]} rotation={[0,zone.rotation*Math.PI/180,0]} onClick={e=>{e.stopPropagation();onSelect(zone.id)}}><Furniture node={zone} selected={path.some(n=>n.id===zone.id)}/>{roomId&&<Label node={zone} count={count(zone.id)} onSelect={()=>onSelect(zone.id)}/>}</group>)}{!roomId&&<Label node={room} count={count(room.id)} onSelect={()=>onSelect(room.id)}/>}</group>)}<Camera locations={locations} roomId={roomId} reset={reset}/><LabelCollisions/></Canvas></div><div className={styles.sceneTools}><span aria-live="polite">{hover?`${locations.find(n=>n.id===hover)?.name} · ${count(hover)} documents`:'Drag to orbit · pinch or scroll to zoom'}</span><button onClick={()=>setReset(r=>r+1)}>Reset view</button></div></div></Boundary>
 }
