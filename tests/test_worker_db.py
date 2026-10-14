@@ -145,3 +145,17 @@ def test_source_integrity_failure_refunds(database):
         result = conn.execute('SELECT status,error FROM ingestion_jobs WHERE id=%s', (job['id'],)).fetchone()
         assert result['status'] == 'failed' and 'integrity' in result['error']
         assert conn.execute('SELECT status FROM credit_reservations WHERE operation_id=%s', (job['operation_id'],)).fetchone()['status'] == 'refunded'
+
+
+def test_sample_records_are_excluded_before_inference_unless_explicitly_requested(database):
+    sample = create_source(database, 0, 'Fictional sample PAN card is in the Study.')
+    with psycopg.connect(database.cfg.database_url) as conn:
+        conn.execute("UPDATE chunks SET metadata=metadata || '{\"sample\":true}'::jsonb WHERE id=%s", (sample,))
+    ordinary = ObservedModels(database.cfg)
+    reply = query_records(str(database.households[0]), database.users[0], 'Where is my PAN card?', cfg=database.cfg, engine=ordinary)
+    assert reply['mode'] == 'abstention'
+    assert reply['citations'] == []
+    assert not any('Fictional' in value for value in ordinary.seen)
+    demo = ObservedModels(database.cfg)
+    reply = query_records(str(database.households[0]), database.users[0], 'Where is the sample PAN card?', cfg=database.cfg, engine=demo)
+    assert reply['citations'] and 'Study' in reply['answer']

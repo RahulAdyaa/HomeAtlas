@@ -4,13 +4,13 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {emptyLocation} from '../lib/home-layout';
 import {randomUUID} from 'node:crypto';
-let pool:typeof import('../lib/db').pool,route:typeof import('../app/api/locations/route'),atlasRoute:typeof import('../app/api/atlas/route'),exportRoute:typeof import('../app/api/export/route'),cookie='',actor='',directory='';
+let pool:typeof import('../lib/db').pool,route:typeof import('../app/api/locations/route'),atlasRoute:typeof import('../app/api/atlas/route'),exportRoute:typeof import('../app/api/export/route'),askRoute:typeof import('../app/api/ask/route'),cookie='',actor='',directory='';
 const home=randomUUID(),other=randomUUID(),origin='http://localhost:3000';
 const request=(body:object)=>new Request(origin+'/api/locations?householdId='+home,{method:'POST',headers:{origin,cookie,'content-type':'application/json'},body:JSON.stringify(body)});
 beforeAll(async()=>{
  directory=await mkdtemp(join(tmpdir(),'homeatlas-location-'));process.env.STORAGE_ROOT=directory;
  process.env.BETTER_AUTH_SECRET??='location-test-secret-at-least-32-characters';process.env.BETTER_AUTH_URL=origin;
- ({pool}=await import('../lib/db'));route=await import('../app/api/locations/route');atlasRoute=await import('../app/api/atlas/route');exportRoute=await import('../app/api/export/route');const {auth}=await import('../lib/auth');
+ ({pool}=await import('../lib/db'));route=await import('../app/api/locations/route');atlasRoute=await import('../app/api/atlas/route');exportRoute=await import('../app/api/export/route');askRoute=await import('../app/api/ask/route');const {auth}=await import('../lib/auth');
  const email=randomUUID()+'@example.invalid',password='Fixture-'+randomUUID();actor=(await auth.api.signUpEmail({body:{name:'Location fixture',email,password}})).user.id;
  await pool.query('UPDATE "user" SET "emailVerified"=true WHERE id=$1',[actor]);cookie=(await auth.api.signInEmail({body:{email,password},asResponse:true})).headers.getSetCookie().map(c=>c.split(';')[0]).join('; ');
  for(const id of [home,other])await pool.query('INSERT INTO households(id,name,created_by) VALUES($1,$2,$3)',[id,'Fixture home',actor]);
@@ -54,6 +54,20 @@ it('creates room/zone/container, moves documents, updates paths, and blocks inva
 
  expect((await route.POST(request({action:'deleteSource',id:sample.source_id}))).status).toBe(200);
  const removed=await (await atlasRoute.GET(get)).json();expect(removed.bookmarks[0].citations[0].sourceRemoved).toBe(true);expect(removed.bookmarks[0].citations[0].locationUrl).toBeUndefined();
+ const living=await create(home,'room','Living room'),pan=randomUUID();
+ await pool.query("INSERT INTO items(id,household_id,room_id,name) VALUES($1,$2,$3,'Pan card')",[pan,home,living]);
+ const operation=randomUUID();const question={question:'where is my PAN Card?',operationId:operation};
+ const reply=await askRoute.POST(request(question));expect(reply.status).toBe(200);const answer=await reply.json();
+ expect(answer.answer).toBe('Pan card is recorded in Living room.');expect(answer.mode).toBe('recorded-location');expect(answer.locationMatches[0]).toMatchObject({id:pan,kind:'item',locationId:living});expect(answer.citations).toEqual([]);
+ const replay=await askRoute.POST(request(question));expect((await replay.json()).replayed).toBe(true);
+ const saved=await atlasRoute.POST(request({action:'bookmark',title:'PAN location',answer:answer.answer,locationMatches:[{kind:'item',id:pan,locationPath:'Forged room'}]}));expect(saved.status).toBe(200);expect((await saved.json()).bookmark.locationMatches[0].locationPath).toBe('Living room');
+ const missing=await atlasRoute.POST(request({action:'bookmark',title:'Invalid reference',locationMatches:[{kind:'item',id:randomUUID()}]}));expect(missing.status).toBe(404);
+ const {lookupLocation}=await import('../lib/location-lookup');expect(await lookupLocation(pool,other,'Where is my PAN card?')).toBeNull();
+ await pool.query("UPDATE items SET room_id=$2 WHERE id=$1",[pan,room]);
+ const moved=await askRoute.POST(request({...question,operationId:randomUUID()}));expect((await moved.json()).answer).toBe('Pan card is recorded in Study.');
+ const savedAgain=await (await atlasRoute.GET(get)).json();expect(savedAgain.bookmarks.find((b:{title:string})=>b.title==='PAN location').locationMatches[0].locationPath).toBe('Study');
+ const duplicate=randomUUID();await pool.query("INSERT INTO items(id,household_id,room_id,name) VALUES($1,$2,$3,'PAN Card')",[duplicate,home,living]);
+ const ambiguous=await lookupLocation(pool,home,'Where is my PAN card?');expect(ambiguous?.confidence).toBe('conflicting');expect(ambiguous?.locationMatches).toHaveLength(2);
  await pool.query("UPDATE memberships SET role='viewer' WHERE household_id=$1 AND user_id=$2",[home,actor]);
  expect((await route.POST(request({action:'delete',id:zone}))).status).toBe(403);
 });

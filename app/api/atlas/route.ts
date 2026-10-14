@@ -1,3 +1,4 @@
+import {recordLocation} from '@/lib/location-lookup';
 import {locationLink,locationSentence} from '@/lib/locations';
 import {refreshSavedLocations} from '@/lib/saved-locations';
 import { z } from 'zod';
@@ -23,7 +24,7 @@ const actions=z.discriminatedUnion('action',[
  z.object({action:z.literal('acceptInvite'),token:z.string().min(32).max(128)}),
  z.object({action:z.literal('updateMember'),userId:z.string().min(1).max(128),role:z.enum(['owner','editor','viewer']),password:z.string().optional()}),
  z.object({action:z.literal('removeMember'),userId:z.string().min(1).max(128),password:z.string().optional()}),
- z.object({action:z.literal('bookmark'),title:shortText,question:z.string().max(4000).default(''),answer:z.string().max(16000).default(''),citations:z.array(z.object({id:uuid,sourceId:uuid,versionId:uuid}).passthrough()).max(30).default([]),itemId:optionalId}),
+ z.object({action:z.literal('bookmark'),title:shortText,question:z.string().max(4000).default(''),answer:z.string().max(16000).default(''),locationMatches:z.array(z.object({kind:z.enum(['item','source']),id:uuid})).max(60).default([]),citations:z.array(z.object({id:uuid,sourceId:uuid,versionId:uuid}).passthrough()).max(30).default([]),itemId:optionalId}),
  z.object({action:z.literal('deleteHousehold'),confirmName:shortText,password:z.string().optional()}),
 ]);
 export const GET=api(async(request)=>{
@@ -47,7 +48,7 @@ export const GET=api(async(request)=>{
  ]);
  const [rooms,items,sources,tasks,activity,account,ledger,members,bookmarks,history,locations]=results.map(x=>x.rows.map(row=>camel(row)));
  const acc=account[0] as {available:number,reserved:number};
- return Response.json({user:signed.user,household:{id:hid,name:context.membership.name,kind:context.membership.kind,address:context.membership.address,createdAt:context.membership.household_created_at},membership:{role:context.role,userId:signed.user.id,householdId:hid},households:membershipRows.rows.map(row=>camel(row)),rooms,items,sources,tasks,activity,credits:{...acc,balance:acc.available+acc.reserved,monthlyAllowance,prices,ledger},members,bookmarks:refreshSavedLocations(bookmarks,sources as {id:string;title?:string;locationId?:string;locationPath?:string}[],hid),history,locations});
+ return Response.json({user:signed.user,household:{id:hid,name:context.membership.name,kind:context.membership.kind,address:context.membership.address,createdAt:context.membership.household_created_at},membership:{role:context.role,userId:signed.user.id,householdId:hid},households:membershipRows.rows.map(row=>camel(row)),rooms,items,sources,tasks,activity,credits:{...acc,balance:acc.available+acc.reserved,monthlyAllowance,prices,ledger},members,bookmarks:refreshSavedLocations(bookmarks,sources as {id:string;title?:string;locationId?:string;locationPath?:string}[],hid,items as {id:string;name?:string;locationId?:string;locationPath?:string}[]),history,locations});
 });
 export const POST=api(async(request)=>{
  const raw=await request.json();const input=actions.parse(raw);const signed=await session(request);
@@ -113,7 +114,9 @@ export const POST=api(async(request)=>{
     // Persist canonical citation fields from authorized immutable chunks, never browser-supplied content or paths.
     const citations=[];
     for(const citation of input.citations){const{rows}=await db.query('SELECT c.id,c.source_id,c.version_id,s.title,s.location_id,s.location_path,c.metadata,c.modality,c.page,c.bbox,c.text,c.start_seconds AS start,c.end_seconds AS end FROM chunks c JOIN sources s ON s.id=c.source_id AND s.household_id=c.household_id WHERE c.household_id=$1 AND c.id=$2 AND c.source_id=$3 AND c.version_id=$4',[hid,citation.id,citation.sourceId,citation.versionId]);if(!rows.length)throw new ApiError(404,'Citation not found.');citations.push({...camel(rows[0]),locationUrl:locationLink(hid,rows[0].location_id),locationDescription:locationSentence(rows[0].title,rows[0].location_path)});}
-    const{rows}=await db.query('INSERT INTO bookmarks(household_id,user_id,title,question,answer,citations,item_id) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *',[hid,signed.user.id,input.title,input.question,input.answer,JSON.stringify(citations),input.itemId??null]);
+    const locationMatches=[];
+    for(const ref of input.locationMatches){const table=ref.kind==='item'?'items':'sources';const row=(await db.query(`SELECT * FROM ${table} WHERE id=$1 AND household_id=$2`,[ref.id,hid])).rows[0];if(!row)throw new ApiError(404,'Location record not found.');locationMatches.push(recordLocation(hid,ref.kind,row));}
+    const{rows}=await db.query('INSERT INTO bookmarks(household_id,user_id,title,question,answer,citations,item_id,location_matches) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *',[hid,signed.user.id,input.title,input.question,input.answer,JSON.stringify(citations),input.itemId??null,JSON.stringify(locationMatches)]);
     if(input.itemId)await db.query('INSERT INTO maintenance_events(household_id,item_id,user_id,description) VALUES($1,$2,$3,$4)',[hid,input.itemId,signed.user.id,`${input.title}\n${input.answer}`]);
     return{bookmark:camel(rows[0])};
    }

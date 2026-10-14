@@ -8,6 +8,7 @@ Built with Next.js and TypeScript, Better Auth, PostgreSQL, a Python ingestion/r
 
 ## What you can do
 
+- **Ask where an item is:** location questions check saved inventory and document locations directly, with links to the recorded room or drawer. Sample records are excluded from ordinary document retrieval.
 - **Find records down to the drawer:** Home → Room → Zone → optional Container, full paths in searchable evidence, and direct answer links into the home view.
 - **Design and explore your home:** data-driven isometric 3D, room zoom, clickable furniture, attached storage, and a grid-based floor-plan editor with doors/windows. [Upgrade guide and checks](docs/LOCATION_UPGRADE.md).
 
@@ -21,7 +22,7 @@ Built with Next.js and TypeScript, Better Auth, PostgreSQL, a Python ingestion/r
 
 ## Verified results
 
-The 14 October hierarchy/layout regression run passed **76 JavaScript tests and 23 Python tests**, plus a live RAG-to-drawer browser flow, saved-answer links, hierarchy export, room/container navigation, saved layout edits, mobile width and WebGL fallback. These results and their limits are documented in the [location upgrade report](docs/LOCATION_UPGRADE.md). 120fps is a design target, not a measured claim.
+The 14 October hierarchy/layout regression run passed **79 JavaScript tests and 24 Python tests**, plus a live RAG-to-drawer browser flow, saved-answer links, hierarchy export, room/container navigation, saved layout edits, mobile width and WebGL fallback. These results and their limits are documented in the [location upgrade report](docs/LOCATION_UPGRADE.md). 120fps is a design target, not a measured claim.
 
 These are local test and evaluation results recorded in the repository reports on 13 October 2026, not production service-level guarantees.
 

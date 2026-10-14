@@ -190,10 +190,11 @@ def query_records(household_id: str, actor_id: str, question: str, item_id: str 
             JOIN memberships m ON m.household_id=c.household_id AND m.user_id=%s
             WHERE c.household_id=%s AND s.status='ready'
             AND COALESCE(c.metadata->>'active','true')='true'
+            AND (%s::boolean OR (COALESCE(c.metadata->>'sample','false')<>'true' AND s.title !~* '^SAMPLE[[:space:]—:-]'))
             AND (%s::uuid IS NULL OR c.item_id=%s::uuid)
             AND (%s::uuid IS NULL OR c.room_id=%s::uuid)
             ORDER BY c.created_at DESC LIMIT 10000
-        ''', (actor_id, household_id, item_id, item_id, room_id, room_id)).fetchall()
+        ''', (actor_id, household_id, bool(re.search(r'\b(sample|demo|demonstration|example)\b', question, re.I)), item_id, item_id, room_id, room_id)).fetchall()
     image = cfg.private_path(image_path) if image_path else None
     retrieval_question = question
     if image:
