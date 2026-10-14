@@ -8,6 +8,7 @@ __pycache__/
 *.pyc
 playwright-report/
 test-results/
+docs/screenshots/journey-failure.png
 data/models/
 *.tsbuildinfo
 
