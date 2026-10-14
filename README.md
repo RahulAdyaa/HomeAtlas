@@ -95,27 +95,31 @@ flowchart TD
 | Local inference | Qwen3-VL 4B Instruct, BGE small + reranker, SigLIP2, Whisper tiny |
 | Interactive home view | React Three Fiber, Three.js, Drei |
 
-This application was built in the `homeatlas/` directory. The parent workspace may also contain an unrelated attendance prototype; it is not part of this project.
+## Run HomeAtlas locally
 
-## Local setup
+The tested native setup needs Node.js 22.16+ (Node 26 tested), npm, Python 3.10–3.12 (3.12 tested), PostgreSQL 15 command-line tools, FFmpeg/FFprobe, Tesseract, and [Ollama](https://ollama.com/) for local model inference. The app and development database bind to loopback; do not expose this development configuration on a network.
 
-Prerequisites: Node 22.16+ (tested with Node 26), npm, Python 3.12, PostgreSQL 15+, FFmpeg/FFprobe, Tesseract, and a running Ollama service. The application binds to loopback by default. The native development database has a distinct port/data directory and uses loopback-only trust authentication; do not expose this development configuration on a network.
-
-From `homeatlas/`:
+1. Install the prerequisites above and start Ollama. If it is not already running, start its local service with `ollama serve` in a separate terminal.
+2. Clone the repository and run setup from its root:
 
 ```sh
+git clone https://github.com/RahulAdyaa/HomeAtlas.git
+cd HomeAtlas
 npm run setup
 ```
 
-The setup initializes the isolated database at port 54329 if needed, generates private local secrets, installs the locked JS/Python dependencies, applies Better Auth and application migrations, and starts the worker and website. Open http://localhost:3000. The first dev/build run prepares Satoshi webfonts from the official Fontshare source when absent, then serves them locally. The script preserves existing data and `.env.local`. Stop the foreground command with Ctrl+C; PostgreSQL persists. Stop the owned database separately with `pg_ctl -D .data/postgres stop` when needed.
+The setup initializes an isolated PostgreSQL database on port 54329, creates private local secrets in `.env.local`, installs locked JavaScript/Python dependencies, applies migrations, and starts the worker and web app. It preserves existing `.env.local` and database data on later runs. The first run downloads the official Satoshi webfonts if they are not present.
 
-For genuine neural retrieval, local vision inference and transcription, explicitly download the free model artifacts once:
+3. For full local neural retrieval, image understanding, and transcription, open a second terminal in the cloned repository and download the pinned model artifacts once:
 
 ```sh
+cd HomeAtlas
 bash scripts/models.sh
 ```
 
-Models consume several GB of disk and RAM. Missing local models do not trigger hosted inference. The worker reports the available components and uses explicit extractive evidence or abstention when it cannot ground an answer. See [models](docs/MODELS.md) for pinned artifacts, licenses, tested profile, and GPU profile.
+4. Open [http://localhost:3000](http://localhost:3000), create an account, and verify it with **Open verification email** on the local sign-in page. Then create a household and upload a record.
+
+`npm run setup` remains in the foreground while the site is running; press Ctrl+C to stop it. PostgreSQL data persists between runs. Stop the owned database separately with `pg_ctl -D .data/postgres stop` when needed. Models use several GB of disk and memory; until they are installed, HomeAtlas does not call a hosted model and may use extractive answers or abstain. See [model details](docs/MODELS.md) for artifacts, licenses, and tested hardware.
 
 ### Development email
 
