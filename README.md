@@ -1,6 +1,101 @@
 # HomeAtlas
 
-A private, responsive home-records application built with Next.js, TypeScript, Better Auth, PostgreSQL, React Three Fiber, and a local Python ingestion/retrieval service. HomeAtlas lives in this directory; the parent repository's attendance prototype is separate.
+**Your home, on the record.** HomeAtlas is a private household inventory and multimodal RAG app: keep manuals, receipts, photos, voice notes, and videos together, then ask questions and get answers grounded in your own records.
+
+Built with Next.js and TypeScript, Better Auth, PostgreSQL, a Python ingestion/retrieval worker, and locally run AI models. The tested inference profile uses Ollama for Qwen3-VL and local BGE, SigLIP2, Whisper, and Tesseract components; household content is not sent to a hosted model API.
+
+![HomeAtlas interactive home view](docs/screenshots/home-3d-desktop.png)
+
+## What you can do
+
+- **Keep a usable home inventory:** organize rooms and items, record brands, model and serial numbers, purchase dates, warranty dates, notes, and maintenance history.
+- **Build a private record library:** upload PDFs, photos, audio, and video; attach sources to a room or item; retain immutable source versions and processing status.
+- **Ask across modalities:** search manuals, receipts, scanned pages, photos, voice recordings, and sampled video frames. Answers link to exact PDF pages/regions or audio/video timestamps.
+- **Get grounded answers:** combine lexical retrieval, BGE text embeddings, SigLIP2 image similarity, and reranking; Qwen3-VL drafts an evidence-based answer. Quotes and citations are verified, and the app abstains when it cannot find adequate evidence.
+- **Manage a household together:** owner/editor/viewer roles, invitations, private bookmarks, saved searches, reminders, recurring tasks, and a household activity trail.
+- **Keep access and operations accountable:** verified-email sign-in, passkeys, TOTP, session controls, household exports/deletion, and an auditable credit ledger.
+- **Explore the home visually:** interactive 3D room/item view, keyboard controls, mobile layouts, reduced-motion behavior, and a WebGL fallback.
+
+## Verified results
+
+These are local test and evaluation results recorded in the repository reports on 13 October 2026, not production service-level guarantees.
+
+| Area | Recorded result |
+| --- | --- |
+| Backend and account/security suite | 57 tests passed |
+| Python ingestion/retrieval worker | 17 tests passed |
+| Expanded browser feature audit | 17 checks passed; zero browser exceptions |
+| Live ingestion audit | 9 checks passed, including image and scanned-PDF OCR, retries, versions, citations, and credit reconciliation |
+| Responsive design/accessibility QA | 142 checks passed across four viewport sizes; zero failures |
+| Scoped multimodal RAG evaluation | 5/5 cases passed; supported-source recall 4/4, canonical citations 5/5, groundedness 5/5, missing-evidence abstention 1/1 |
+| Audio/video pipeline | WAV, M4A, and MP4 reached ready; Whisper voice question returned timestamped citations |
+| Inference safety examples | 2/2 local-model checks passed for embedded instructions and conflicting records |
+| TypeScript, optimized build, npm audit | Passed; zero reported npm vulnerabilities |
+
+The RAG evaluation is intentionally small (five clear English cases). It does not estimate broad accuracy, p95 latency, multilingual performance, arbitrary image-part matching, or production capacity. See [RAG evaluation limits](docs/RAG_EVALUATION.md#limits) and the [full verification report](docs/VERIFICATION.md).
+
+## System architecture
+
+The web application owns authentication, household authorization, APIs, and the UI. PostgreSQL stores household data and the durable job queue; originals and derived media stay in private filesystem storage. The Python worker processes queued sources and queries with local inference components.
+
+```mermaid
+flowchart LR
+    Person[Household member] --> Browser[Responsive web app<br/>Next.js + TypeScript]
+    Browser --> Auth[Better Auth<br/>verified email, passkeys, TOTP]
+    Browser --> API[Authenticated API<br/>role and household checks]
+    Auth --> API
+    API <--> DB[(PostgreSQL<br/>records, citations, credits, durable queue)]
+    API <--> Files[(Private file storage<br/>originals and derived previews)]
+    DB --> Worker[Python worker<br/>leased background jobs]
+    Files --> Worker
+    Worker --> Models[Local models and tools<br/>Qwen3-VL · BGE · SigLIP2<br/>Whisper · Tesseract · FFmpeg]
+    Models --> Worker
+    Worker --> DB
+    API --> Browser
+```
+
+## Multimodal ingestion and answer flow
+
+```mermaid
+flowchart TD
+    Upload[PDF · photo · audio · video] --> Validate[Check file signature, type, size]
+    Validate --> Store[Store immutable original privately]
+    Store --> Queue[Create durable PostgreSQL job]
+    Queue --> Extract{Worker extracts evidence}
+    Extract -->|Digital PDF| PDF[Extract text and page regions]
+    Extract -->|Scan or photo| OCR[OCR text from scans and photos]
+    Extract -->|Audio or video audio| Audio[Whisper transcript with timestamps]
+    Extract -->|Video frames| FrameOCR[OCR text from sampled video frames]
+    PDF --> Index[Keep source/version and page/time provenance]
+    OCR --> Index
+    FrameOCR --> Index
+    Audio --> Index
+    Index --> Embed[Text embeddings and image-space embeddings]
+    Embed --> DB[(Household-scoped PostgreSQL evidence)]
+
+    Question[Text question plus optional photo or voice note] --> Ask[Authorize household and item/room scope]
+    Ask --> Retrieve[Lexical + BGE + SigLIP retrieval]
+    DB --> Retrieve
+    Retrieve --> Rerank[BGE reranking]
+    Rerank --> Generate[Local Qwen3-VL answer from retrieved text/images]
+    Generate --> Verify[Verify exact quotations and source/version IDs]
+    Verify -->|Evidence is sufficient| Cite[Return answer with page/region/time citations]
+    Verify -->|Evidence is missing| Abstain[Abstain with no unsupported citation]
+```
+
+## Main components
+
+| Layer | Technology |
+| --- | --- |
+| Web UI and routes | Next.js 16, React, TypeScript |
+| Authentication | Better Auth; verified email, passkeys, TOTP |
+| Durable data and jobs | PostgreSQL; tenant-scoped relations, leased queue, credit ledger |
+| Original/derived media | Private filesystem storage with authenticated, version-aware reads |
+| Ingestion and retrieval | Python worker; PyMuPDF, Tesseract, Whisper, FFmpeg, lexical/vector retrieval |
+| Local inference | Qwen3-VL 4B Instruct, BGE small + reranker, SigLIP2, Whisper tiny |
+| Interactive home view | React Three Fiber, Three.js, Drei |
+
+This application was built in the `homeatlas/` directory. The parent workspace may also contain an unrelated attendance prototype; it is not part of this project.
 
 ## Local setup
 
