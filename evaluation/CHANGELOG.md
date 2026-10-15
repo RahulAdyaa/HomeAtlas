@@ -30,3 +30,11 @@ Baseline is frozen in `evaluation/baseline_results.json` before these changes. R
 
 - Multiple named alphanumeric units joined by `and/or` also use the exact-token union, even when a user does not say `compare`. Bare multipart numeric identifiers still require all parts.
 - `pytest tests/test_numeric_retrieval.py -q` — **3 passed**, including the natural multi-unit phrasing reported by the retrieval specialist.
+
+## Quote-only answer responsiveness
+
+- Problem: an exact quotation was returned as supported even after the independent reviewer rejected the generated explanation, or when no explanation was produced. Exact substring provenance does not prove the quotation answers the requested object/field.
+- Change: independently review quote-only fallbacks too. The review now explicitly rejects true but irrelevant facts and substitutions for missing objects/attributes. Keep exact immutable quote validation. A rejected quote-only review now abstains; this intentionally replaces the old unit-test expectation that any exact fallback quote should survive review failure.
+- Before: an irrelevant service-interval quote passed a serial-number question (one new regression failed, one passed).
+- After: `pytest tests/test_answer_responsiveness.py tests/test_worker.py tests/test_image_pipeline.py -q` — **28 passed**.
+- Full abstention/false-refusal impact: pending final specialist inference. This remains model-based review, not a correctness guarantee.

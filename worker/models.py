@@ -218,6 +218,9 @@ class LocalModels:
                      'Return the sectionIndex of each section whose EVERY factual claim, number, equation and table cell is supported by its cited text or image. '
                      'Return SECTION indices, not quote indices. Multiple sections may cite the same quote and still all pass. '
                      'For OCR text, compare identifiers and numbers against the actual image; OCR text may be wrong and is not independent confirmation. '
+                     'A supported section must also directly answer the user question, or an explicitly requested part of it. '
+                     'Reject a true quotation about a different object or field: a service interval does not answer a serial-number question. '
+                     'If the requested object, attribute or comparison is absent, return no supported sections; do not substitute nearby facts. '
                      'Reject unreadable values, unsupported interpretations, invented comparisons and outside knowledge. '
                      'Do not accept a claim merely because it sounds plausible. Return {"supported":[]} if none pass.'},
                      {'role': 'user', 'content': json.dumps({'question': question, 'sections': [dict(s, sectionIndex=i) for i, s in enumerate(sections)], 'quotes': [

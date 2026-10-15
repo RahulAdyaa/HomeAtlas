@@ -145,6 +145,21 @@ def answer_from_evidence(question: str, candidates: list[dict], engine: LocalMod
             if len(accepted) < len(generated.get('sections', [])):
                 answer += '\n\nSome proposed details could not be verified against these records and have been omitted.'
             mode = 'local-model-explained'
+    if generated and not accepted and hasattr(engine, 'verify_sections'):
+        # Exact substring checks only prove provenance. Independently review a
+        # quote-only fallback for responsiveness too; nearby true facts must not
+        # become a confident answer to a missing attribute/object question.
+        fallbacks = [{'heading': '', 'text': quote, 'evidence': [i]} for i, (_, quote) in enumerate(quotes)]
+        verified = engine.verify_sections(question, fallbacks, [
+            {'index': i, 'text': quote, 'image_path': row.get('image_path'), 'page': row.get('page'),
+             'bbox': row.get('bbox'), 'metadata': row.get('metadata', {})}
+            for i, (row, quote) in enumerate(quotes)])
+        valid = sorted({i for i in verified if type(i) is int and 0 <= i < len(quotes)})
+        if not valid:
+            return {'answer': 'The available records do not contain enough direct evidence to answer confidently.',
+                    'citations': [], 'confidence': 'insufficient', 'mode': 'abstention'}
+        quotes = [quotes[i] for i in valid]
+        answer = intro + '\n\n' + '\n\n'.join(f'“{quote}” [{i + 1}]' for i, (_, quote) in enumerate(quotes))
     if not accepted and any((row.get('metadata') or {}).get('visual_anchor') for row,_ in quotes):
         return {'answer': 'I found a matching image, but could not verify an answer from it. Try a clearer image or add a description.',
                 'confidence':'insufficient','mode':'abstention','citations':[]}

@@ -205,7 +205,7 @@ def test_explanation_rejects_unverified_sections_and_fabricated_references():
     assert 'omitted' in result['answer']
 
 
-def test_explanation_review_failure_preserves_verified_quotes():
+def test_explanation_review_failure_does_not_assume_quotes_are_responsive():
     class FailedReview(NoModels):
         def generate(self, *args, **kwargs):
             return {'quotes': [{'index': 0, 'quote': 'Replace filter every six months.'}], 'sections': [
@@ -214,7 +214,7 @@ def test_explanation_review_failure_preserves_verified_quotes():
             return []
     result = answer_from_evidence('Explain maintenance.', [row('Replace filter every six months.')], FailedReview())
     assert '$500' not in result['answer']
-    assert result['citations'][0]['text'] in result['answer']
+    assert result['mode'] == 'abstention' and result['citations'] == []
 
 
 def test_structured_table_and_speculation_guard():
