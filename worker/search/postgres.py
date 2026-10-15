@@ -37,9 +37,15 @@ def channel(name, question, scope, cfg, engine, config=CONFIG):
             vector=engine.embed_image_space(text=question)
             if not vector:return [],[]
             literal='['+','.join(map(str,vector))+']'
-            rows=conn.execute('WITH scoped AS MATERIALIZED ('+BASE+""") SELECT *,1-(image_embedding::vector <=> %s::vector) score FROM scoped
+            rows=conn.execute('WITH scoped AS MATERIALIZED ('+BASE+"""), pages AS (
+                SELECT *,row_number() OVER (
+                    PARTITION BY source_id,version_id,page,coalesce(image_path,id::text)
+                    ORDER BY coalesce(metadata->>'ocr_context','false')='true' DESC,length(text) DESC,id DESC
+                ) AS visual_page_rank FROM scoped
                 WHERE image_embedding_model=%s AND cardinality(image_embedding)=%s
-                ORDER BY image_embedding::vector <=> %s::vector,id LIMIT %s""",(*scope[:-1],literal,engine.image_identity,len(vector),literal,config['channel_top_k'])).fetchall()
+                ) SELECT *,1-(image_embedding::vector <=> %s::vector) score FROM pages
+                WHERE visual_page_rank=1
+                ORDER BY image_embedding::vector <=> %s::vector,id LIMIT %s""",(*scope[:-1],engine.image_identity,len(vector),literal,literal,config['channel_top_k'])).fetchall()
             rows=[d for d in rows if d['score']>=config['visual']['text_min']]
             return [Hit(str(d['id']),d['score']) for d in rows],rows
         if name=='word':
