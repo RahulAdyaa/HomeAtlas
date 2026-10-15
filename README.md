@@ -36,7 +36,8 @@ HomeAtlas combines a **Home → Room → Zone → optional Container** hierarchy
 - **Typo/Hinglish support:** Unicode/lowercase/punctuation normalization, repeated-letter handling, editable household/Indian-document aliases, fuzzy matching, and low-score spelling suggestions. Named paths boost relevance; explicit item/room scopes filter results.
 - **Optional reranker:** a local cross-encoder can rerank fused candidates behind a flag. It is disabled by default; evaluation must justify enabling it.
 - **Photo and voice input:** attach a photo, record a browser voice note, ask from a recording, or save the recording to the library. Voice questions use local Whisper. Microphone recording requires permission and HTTPS or localhost.
-- **Detailed explanations:** Qwen3-VL reads retrieved text and source images; a separate call to the same local Qwen model checks section support and question responsiveness, including quote-only fallbacks. This is not an independent external judge. Reliable native prose can omit redundant page-image tokens; OCR/graphics/visual questions retain relevant image evidence. Supporting PDF pages display inline, and a safe Markdown subset renders headings/tables.
+- **Detailed explanations:** Qwen3-VL reads retrieved text and source images; a separate call to the same local Qwen model checks support and question responsiveness, including quote-only fallbacks. Review uses each section's cited evidence rather than unrelated generated quotes/images; final citations retain only accepted sections' references and use consecutive display numbers. This is not an independent external judge. Reliable native prose can omit redundant previews; relevant OCR/graphics/visual evidence remains. Supporting PDF pages display inline, and a safe Markdown subset renders headings/tables.
+- **Text-only numeric guard:** before model review, proposed numeric literals/identifiers must occur in that section's own referenced text, with bounded formatting normalization. Unsupported new numeric values are rejected; unverified arithmetic can abstain. Referenced visuals bypass this text-only check because image facts may be absent from OCR. Literal coverage does not establish correct object/value pairing, units, dates, or spelled-out-number truth.
 - **Canonical citations:** exact quotation and source/version checks, PDF page/region previews, worksheet/row references, media timestamps, and location links. These establish provenance, not that every synthesized claim is true.
 - **Answer states:** supported, conflicting, extractive/direct evidence, and insufficient-evidence/abstention states. These are categorical labels, **not calibrated trust probabilities**.
 - **Bookmarks:** private saved searches/answers with citations and location references; editors can save an answer into shared item history. Saved location references refresh against current records.
@@ -63,10 +64,12 @@ Application changes were made only after the baseline snapshot was frozen. [CHAN
 - Retrieve separate exact-number records for comparison/multi-unit questions, while retaining strict checks for ordinary identifiers.
 - Avoid unnecessary reliable-native-prose page images; preserve OCR, graphics markers, visual headings and explicit chart/diagram questions. Reprocess older native PDFs for the new graphics marker; a conservative fallback remains for old indexes.
 - Review quote-only fallback responsiveness as well as drafted sections, and handle warranty-plural/expiry phrasing in the unrelated-subject gate.
+- Remove unused quote/image context before support review; retain only accepted sections' cited evidence in the answer, with consecutive citation numbering and unchanged provenance.
+- Reject unsupported text-only numeric literals before the same-model review. The controlled unsupported-number case is now rejected deterministically; referenced visuals and semantic relationships still depend on fallible model review. A derived total/difference absent from cited text can abstain instead of being independently computed.
 - Repair **Settings → Clear answer cache** to send DELETE, and replace the Python-version-specific digest helper with bounded SHA256 reads. Full Python 3.10 runtime verification remains unmeasured; Python 3.12 is recommended.
 - Bypass recognized personal-card identifier queries/answers in the optional cache, bump policy generation, and prune recognized legacy sensitive entries. Before deployment, stop old services, purge only the ephemeral answer cache without reading payloads, then start the updated code. Original documents/items remain in their private store.
 
-The recorded combined regression run passed **92 Python tests**, **87 JavaScript tests**, and TypeScript checking. The **9 real-database tests are an overlapping subset**, not an additional suite to add to 92. These regression outcomes do not replace RAG quality metrics. Full final measurements and before/after tradeoffs remain pending; weights, thresholds, frozen gold, and metric formulas were not changed to improve scores.
+The latest recorded combined regression run passed **109 Python tests**, **87 JavaScript tests**, and TypeScript checking. Earlier regression counts and the **9-test real-database subset overlap** these suites; they are not extra tests to add to the latest totals. These regression outcomes do not replace RAG quality metrics. Full final measurements and before/after tradeoffs remain pending; weights, thresholds, frozen gold, and metric formulas were not changed to improve scores.
 
 ## Evaluation results
 
@@ -361,7 +364,7 @@ flowchart TD
     Visual --> RRF
     RRF --> Rank[Optional reranking + neighboring evidence]
     Rank --> Generate[Qwen3-VL evidence-based draft]
-    Generate --> Review[Section review + exact quotation checks]
+    Generate --> Review[Cited-evidence numeric guard + section review + quote checks]
     Review --> Check
     Check --> Answer[Answer/citations, conflict, or abstention]
     Answer --> Store[Version-checked text cache write]
@@ -511,7 +514,7 @@ python evaluation/run_eval.py --phase final
 python evaluation/run_eval.py --check --phase final
 ```
 
-`--group` supports specialist names or A–L; the final phase requires both complete post-fix passes from every specialist. `--aggregate-only` reads existing observations and is not a new inference run. A partial suite fails completeness checks and does not become a frozen snapshot. Input/app hashes and immutable snapshots prevent silently overwriting a baseline with changed code or observations. See [evaluation setup/options](evaluation/README.md) and [contract](evaluation/CONTRACT.md). Independent verification has checked clean-archive CLI/preflight behavior; a fresh dependency install plus full inference from a clean machine has **not** been established.
+`--group` supports specialist names or A–L; the final phase requires both complete post-fix passes from every specialist. If using `--app-root`, set `EVAL_APP_ROOT` to that same directory and keep model/runtime/interpreter variables consistent; the frozen runner does not override a conflicting exported value. `--aggregate-only` reads existing observations and is not a new inference run. A partial suite fails completeness checks and does not become a frozen snapshot. Input/app hashes and immutable aggregate snapshots reject an incompatible summary, but specialist dispatch writes raw result files before aggregation. Do not dispatch the baseline phase into published results on a fixed checkout. Historical reproduction needs a separate matching application checkout, development database, runtime, raw-results directory, and disposable artifact copy; preserve the sealed original baseline and raw records. See [evaluation setup/options](evaluation/README.md) and [contract](evaluation/CONTRACT.md). Independent verification has checked clean-archive CLI/preflight behavior; a fresh dependency install plus full inference from a clean machine has **not** been established.
 <!-- EVALUATION_COMMANDS_END -->
 
 ## Share or deploy
@@ -528,7 +531,7 @@ Compose publishes web on loopback port 3000; keep database/worker/Ollama private
 
 ## Limitations
 
-- **Grounding is not certainty:** quote checks establish provenance; model explanations, OCR, and visual interpretations can be wrong. Missing-evidence refusals and aggregates require measured evaluation.
+- **Grounding is not certainty:** quote checks establish provenance; model explanations, OCR, and visual interpretations can be wrong. The text-only numeric guard blocks unsupported literals, not incorrect object/value associations, units/date meaning, every spelling/format, or referenced visual numeric claims. Unverified derived numbers can abstain and reduce completeness. Missing-evidence refusals and aggregates require measured evaluation.
 - **No numeric trust calibration:** confidence is categorical. AUROC/Brier/ECE/reliability calibration need a defined score and labeled outcomes.
 - **No conversational context:** each ask is independent despite stored message rows. Restate the object/question explicitly.
 - **Visual/table gaps:** no dedicated figure detector, caption generator, semantic table structure model, or chart parser. Tiny text, handwriting, blur/noise, complex charts, and brief video events can fail. The clean synthetic scan sample does not validate real phone photos or identity cards.

@@ -145,9 +145,12 @@
         "worker/models.py",
         "worker/vision_assets.py",
         "worker/retrieval.py",
-        "components/AnswerContent.tsx"
+        "components/AnswerContent.tsx",
+        "worker/numeric_evidence.py",
+        "tests/test_cited_evidence.py",
+        "tests/test_numeric_evidence.py"
       ],
-      "qualification": "Same Qwen model in separate call reviews support and quote-only responsiveness; not independent benchmark judge. Native prose avoids redundant previews; graphics/OCR retained. No correctness guarantee."
+      "qualification": "Same Qwen in a separate call reviews support/responsiveness using section-cited evidence. Unused images/quotes omitted and unused final citations removed with dense display numbers. Text-only numeric literals must occur in each section own references; referenced visuals bypass literal gate. Not an independent judge or semantic truth proof; new derived numbers can abstain."
     },
     {
       "id": "private_bookmarks",
@@ -300,6 +303,16 @@
         "worker/Dockerfile"
       ],
       "qualification": "Bounded SHA256 fix removes file_digest dependency; tests run on Python3.12. Full Python3.10 runtime not verified; README recommends3.12."
+    },
+    {
+      "id": "text_only_numeric_literal_guard",
+      "status": "Implemented with bounded scope",
+      "sources": [
+        "worker/numeric_evidence.py",
+        "worker/models.py",
+        "tests/test_numeric_evidence.py"
+      ],
+      "qualification": "Reject unsupported numeric/identifier literals in text-only section references before HTTP review; bounded numeric/date/ID formatting. Referenced visuals skip gate; value association, units/date semantics, spelled-out numbers and all formats not guaranteed. Arithmetic absent from source may abstain; direct saved facts unchanged."
     }
   ],
   "prohibited_claims": [
@@ -957,10 +970,12 @@
   "baseline_summary_source": "evaluation/baseline_results.json",
   "baseline_source_fingerprint": "e89dd896bea27ebdf4ac879f91549f28c82c4004f7ffbb7b9b8c41fa68b08b25",
   "formatting": "Six significant digits; full-precision values and CI reasons retained in linked raw results/CSV.",
-  "post_fix_source_fingerprint": "434af1474f3308073290faf17401460e8fe537bbe37b9441c212b089e6f263ca",
+  "post_fix_source_fingerprint": "7748ac952e9b3d48d2eac191ac042c685111bab9838374a091640b9a7d535830",
   "post_fix_evidence": [
     "evaluation/CHANGELOG.md",
     "evaluation/results/fixer-agent.json"
   ],
-  "post_fix_status": "Source and regression documentation updated. Complete final metric tables pending; no final quality improvement inferred from tests."
+  "post_fix_status": "Cycle2 cited-evidence alignment and text-only numeric guard source/regression documentation updated. Final tables wait for canonical final_results.json; candidate_history is not definitive final.",
+  "post_fix_regression_source": "evaluation/results/fixer-agent.json#fix_cycles/2-numeric-guard/checks",
+  "latest_regression_note": "109 Python and 87 JavaScript plus typecheck from actual fixer artifact; older counts and 9 DB subset overlap, not additive."
 }
