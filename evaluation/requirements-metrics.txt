@@ -1,0 +1,9 @@
+# Supplemental metrics packages. Install alongside requirements.lock.txt.
+# Pins were verified in the evaluation runtime; no model weights are downloaded.
+ragas==0.2.15
+bert-score==0.3.13
+rouge-score==0.1.2
+scipy==1.14.1
+numpy==1.26.4
+matplotlib==3.9.4
+contourpy==1.3.1
