@@ -114,7 +114,7 @@
         "worker/search/fuzzy.py",
         "worker/search/fusion.py"
       ],
-      "qualification": "Parallel dense/word/fuzzy, weighted RRF, location boost, candidate shortlists; cross-encoder optional and disabled by default."
+      "qualification": "Parallel channels/RRF preserved; visual page representatives prevent visual shortlist duplication; exact multi-record numeric union for supported intent. Final quality tradeoffs pending."
     },
     {
       "id": "normalization_and_aliases",
@@ -147,7 +147,7 @@
         "worker/retrieval.py",
         "components/AnswerContent.tsx"
       ],
-      "qualification": "Local Qwen draft/reviewer, exact quoted spans, source/version validation, supporting pages, safe heading/table display; synthesized visual/text claims can still be wrong."
+      "qualification": "Same Qwen model in separate call reviews support and quote-only responsiveness; not independent benchmark judge. Native prose avoids redundant previews; graphics/OCR retained. No correctness guarantee."
     },
     {
       "id": "private_bookmarks",
@@ -166,18 +166,20 @@
         "worker/search/cache.py",
         "db/005_hybrid_cache.sql",
         "app/api/ask/route.ts",
-        "app/api/cache/route.ts"
+        "app/api/cache/route.ts",
+        "tests/test_cache_privacy.py"
       ],
-      "qualification": "Household+user/version/config/scope keys, exact/semantic guards, reference validation, TTL/LRU, bypass, owner metrics/clear API; private answer/query content is retained intentionally."
+      "qualification": "Household/user/version/config/scope keys, guards/TTL/LRU/freshness remain; recognized personal-card identifiers bypass optional cache, recognized legacy entries pruned. Not universal PII detection; eligible prose remains private cached data."
     },
     {
       "id": "cache_clear_settings_button",
-      "status": "Known defect; not advertised as working",
+      "status": "Implemented; transport regression tested",
       "sources": [
         "components/HomeAtlas.tsx",
-        "app/api/cache/route.ts"
+        "lib/client-api.ts",
+        "tests/client-api.test.ts"
       ],
-      "qualification": "UI helper sends POST with {method: DELETE} as JSON instead of HTTP DELETE; reported to orchestrator for the sole fixer after baseline."
+      "qualification": "Post-baseline fix sends a bodyless HTTP DELETE with household scope; no new browser reliability measurement claimed by docs agent."
     },
     {
       "id": "authentication",
@@ -297,7 +299,7 @@
         "worker/jobs.py",
         "worker/Dockerfile"
       ],
-      "qualification": "Setup admits Python 3.10 but hashlib.file_digest requires 3.11+. Reported to orchestrator; README recommends 3.12 until fixed/tested."
+      "qualification": "Bounded SHA256 fix removes file_digest dependency; tests run on Python3.12. Full Python3.10 runtime not verified; README recommends3.12."
     }
   ],
   "prohibited_claims": [
@@ -954,5 +956,11 @@
   ],
   "baseline_summary_source": "evaluation/baseline_results.json",
   "baseline_source_fingerprint": "e89dd896bea27ebdf4ac879f91549f28c82c4004f7ffbb7b9b8c41fa68b08b25",
-  "formatting": "Six significant digits; full-precision values and CI reasons retained in linked raw results/CSV."
+  "formatting": "Six significant digits; full-precision values and CI reasons retained in linked raw results/CSV.",
+  "post_fix_source_fingerprint": "434af1474f3308073290faf17401460e8fe537bbe37b9441c212b089e6f263ca",
+  "post_fix_evidence": [
+    "evaluation/CHANGELOG.md",
+    "evaluation/results/fixer-agent.json"
+  ],
+  "post_fix_status": "Source and regression documentation updated. Complete final metric tables pending; no final quality improvement inferred from tests."
 }

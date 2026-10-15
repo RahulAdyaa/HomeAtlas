@@ -32,20 +32,20 @@ HomeAtlas combines a **Home → Room → Zone → optional Container** hierarchy
 
 - **Ingestion:** native PDF text, OCR for scans/photos and substantial embedded PDF images, UTF-8 text/CSV, Excel worksheet values, local audio transcription, and sampled video frames. Format/decoder limits are documented below.
 - **Parallel text retrieval:** multilingual E5 dense similarity, word BM25 over PostgreSQL lexical candidates, and character n-gram/edit-distance fuzzy matching, fused by weighted reciprocal rank fusion (RRF).
-- **Visual retrieval:** separate SigLIP2 image/text embeddings provide auxiliary candidates for text and photo questions. Similarity proposes evidence; it does not establish an answer's correctness.
+- **Visual retrieval:** separate SigLIP2 image/text embeddings provide auxiliary candidates for text and photo questions. Repeated OCR chunks share one representative visual candidate per source/version/page, preserving other evidence in the shortlist. Similarity proposes evidence; it does not establish an answer's correctness.
 - **Typo/Hinglish support:** Unicode/lowercase/punctuation normalization, repeated-letter handling, editable household/Indian-document aliases, fuzzy matching, and low-score spelling suggestions. Named paths boost relevance; explicit item/room scopes filter results.
 - **Optional reranker:** a local cross-encoder can rerank fused candidates behind a flag. It is disabled by default; evaluation must justify enabling it.
 - **Photo and voice input:** attach a photo, record a browser voice note, ask from a recording, or save the recording to the library. Voice questions use local Whisper. Microphone recording requires permission and HTTPS or localhost.
-- **Detailed explanations:** Qwen3-VL reads retrieved text and source images; a separate local review pass checks proposed sections. Supporting PDF pages display inline, and a safe Markdown subset renders headings/tables.
+- **Detailed explanations:** Qwen3-VL reads retrieved text and source images; a separate call to the same local Qwen model checks section support and question responsiveness, including quote-only fallbacks. This is not an independent external judge. Reliable native prose can omit redundant page-image tokens; OCR/graphics/visual questions retain relevant image evidence. Supporting PDF pages display inline, and a safe Markdown subset renders headings/tables.
 - **Canonical citations:** exact quotation and source/version checks, PDF page/region previews, worksheet/row references, media timestamps, and location links. These establish provenance, not that every synthesized claim is true.
 - **Answer states:** supported, conflicting, extractive/direct evidence, and insufficient-evidence/abstention states. These are categorical labels, **not calibrated trust probabilities**.
 - **Bookmarks:** private saved searches/answers with citations and location references; editors can save an answer into shared item history. Saved location references refresh against current records.
 
 ### Cache, collaboration, and operations
 
-- **Exact → semantic → full lookup:** normalized exact cache, then embedding similarity with key-term/number/intent/location guards, then saved-record lookup or hybrid RAG. Media questions bypass the text cache.
+- **Exact → semantic → full lookup:** eligible text queries use normalized exact cache, then embedding similarity with key-term/number/intent/location guards, then saved-record lookup or hybrid RAG. Media and recognized personal-card identifier requests bypass cache. Identifier-bearing answer/citation/fact content is also blocked from optional cache writes; this is a conservative rule, not universal PII detection.
 - **Invalidation:** cache scope includes household **and user**, query scope, configuration, and household data version. Mutations invalidate older generations; current citation/source/path checks run again before reuse.
-- **Cache controls:** configurable TTL, short negative-answer TTL, LRU bounds, request bypass, owner-only metrics, and an owner-only clear API. Guard rejection rate is distinct from measured false-hit rate.
+- **Cache controls:** configurable TTL, short negative-answer TTL, LRU bounds, request bypass, owner-only metrics, **Settings → Clear answer cache**, and an owner-only DELETE API. The button now sends the correct transport method. Recognized sensitive legacy entries are pruned in the authenticated cache scope; deployment should purge the old ephemeral cache once. Guard rejection rate is distinct from measured false-hit rate.
 - **Authentication:** verified-email/password sign-in, password reset, passkeys, authenticator TOTP/recovery codes, session review, revoke other sessions, and sign-out. Development has a password-protected local verification-email helper; deployment uses SMTP.
 - **Households:** multiple-household selection, owner/editor/viewer roles, email-bound expiring invitations, member role changes/removal, and last-owner protection.
 - **Maintenance:** one-time/recurring reminders, calendar view, completion history, upcoming-task indicators, and activity trail. Reminders appear in-app; scheduled maintenance emails are not implemented.
@@ -54,6 +54,19 @@ HomeAtlas combines a **Home → Room → Zone → optional Container** hierarchy
 - **Private operation:** authenticated range-capable file streaming, private originals/previews, leased PostgreSQL jobs with retry/reclaim handling, health endpoints, and local inference without a hosted-model requirement.
 
 The [source-backed feature inventory](evaluation/results/docs-agent.json) lists implementation evidence and known qualifications. Implemented features and measured reliability are separate; see [limitations](#limitations).
+
+## Evaluation-driven fixes
+
+Application changes were made only after the baseline snapshot was frozen. [CHANGELOG](evaluation/CHANGELOG.md) records the failing cases, changes, and affected regression outcomes; [fixer results](evaluation/results/fixer-agent.json) retain the actual commands.
+
+- Deduplicate repeated visual-page candidates before the visual top-K limit, while retaining text chunks in their own channels.
+- Retrieve separate exact-number records for comparison/multi-unit questions, while retaining strict checks for ordinary identifiers.
+- Avoid unnecessary reliable-native-prose page images; preserve OCR, graphics markers, visual headings and explicit chart/diagram questions. Reprocess older native PDFs for the new graphics marker; a conservative fallback remains for old indexes.
+- Review quote-only fallback responsiveness as well as drafted sections, and handle warranty-plural/expiry phrasing in the unrelated-subject gate.
+- Repair **Settings → Clear answer cache** to send DELETE, and replace the Python-version-specific digest helper with bounded SHA256 reads. Full Python 3.10 runtime verification remains unmeasured; Python 3.12 is recommended.
+- Bypass recognized personal-card identifier queries/answers in the optional cache, bump policy generation, and prune recognized legacy sensitive entries. Before deployment, stop old services, purge only the ephemeral answer cache without reading payloads, then start the updated code. Original documents/items remain in their private store.
+
+The recorded combined regression run passed **92 Python tests**, **87 JavaScript tests**, and TypeScript checking. The **9 real-database tests are an overlapping subset**, not an additional suite to add to 92. These regression outcomes do not replace RAG quality metrics. Full final measurements and before/after tradeoffs remain pending; weights, thresholds, frozen gold, and metric formulas were not changed to improve scores.
 
 ## Evaluation results
 
@@ -251,7 +264,7 @@ OCR uses only four clean synthetic scanned pages: low error here does **not** es
 | Text parse: 262,144 bytes, seconds | 0.00575183 [CI not measured] | 1/1 / — | 0.000315723 | Pending |
 | Text parse: 2,097,152 bytes, seconds | 0.0464653 [CI not measured] | 1/1 / — | 0.000203617 | Pending |
 
-**“No sensitive identifier in cache” requirement: NOT MET.** The synthetic identifier was retained in its authorized user's cache. This is separate from the isolation checks and is not evidence of a cross-household leak. Shared private process logs were deliberately not inspected. Publication-file screening covers the inspected tracked text, not private runtime stores.
+**Baseline “no sensitive identifier in cache” requirement: NOT MET.** The synthetic identifier was retained in its authorized user's cache. Post-baseline code now bypasses recognized personal-card identifiers and prunes recognized legacy entries; complete final-phase results are pending. This remains separate from isolation checks and is not evidence of a cross-household leak or a universal zero-PII guarantee. Shared private process logs were deliberately not inspected. Publication-file screening covers the inspected tracked text, not private runtime stores.
 
 Latency is observed on shared local hardware with model contention and experiment scheduling; it is not production capacity. Stage timing denominators vary because some queries abstain before generation or do not invoke verification, and token telemetry is conditional on observed calls. Concurrent probes measure saved inventory facts only. Large-file probes cover plain-text parser scaling only, not maximum-size multimodal upload/LLM throughput. All per-modality p50/p95, token/call counts, run variation, and conditional n values are in the scorecard.
 
@@ -270,7 +283,7 @@ Latency is observed on shared local hardware with model contention and experimen
 | Ingestion F | CER/WER, literal table/label/chart retention, chunk splitting/size distributions, previews, parser timing measured. Aligned table-cell accuracy/TEDS, figure detection recall, structured chart reading: **NOT MEASURED**, parser lacks these outputs. Caption quality/image hallucination: **NOT MEASURED**, no caption stage/independent judge. |
 | Cache H | Exact/semantic/correct-answer hits, near-misses, version invalidation, latency and instrumented LLM calls measured on stated workloads; small-probe limits apply. |
 | Calibration I | AUROC, Brier score, ECE and reliability table: **NOT MEASURED**, app emits categorical confidence without numeric correctness probabilities. |
-| Security J | Isolation, prompt injection, publication screening and authorized-cache persistence measured. Shared-log canary leak rate: **NOT MEASURED**, real private logs not read. No-sensitive-cache policy: **NOT MET**. |
+| Security J | Isolation, prompt injection, publication screening and authorized-cache persistence measured. Shared-log canary leak rate: **NOT MEASURED**, real private logs not read. Baseline no-sensitive-cache policy: **NOT MET**; post-fix recognized-identifier bypass awaits the consolidated final comparison. |
 | Systems K | Stage/modality p50/p95, observed tokens/calls, saved-fact concurrency and plain-text scaling measured. Full RAG concurrency, distinct timeout rate, real USD cost, 3D load time/active-render FPS: **NOT MEASURED**, absent instrumentation or unsupported workload. No hosted token invoice is not zero compute cost. |
 | Statistics L | Cluster-bootstrap intervals, repeated-run variance, exploratory paired permutation tests and Holm correction recorded; unsupported CI estimators remain explicit rather than invented. |
 
@@ -333,7 +346,7 @@ flowchart TD
 flowchart TD
     Q[Text/photo/voice question] --> Scope[Authentication + household/item/room scope]
     Scope --> Prep[Voice transcription / query-photo OCR]
-    Prep --> Cache[Text only: exact then guarded semantic cache]
+    Prep --> Cache[Eligible text: exact then guarded semantic cache]
     Cache -->|Valid hit| Check[Recheck access/version/citations]
     Cache -->|Miss or media| Facts[Saved inventory/location lookup when applicable]
     Facts -->|Saved record| Check
@@ -354,7 +367,7 @@ flowchart TD
     Answer --> Store[Version-checked text cache write]
 ```
 
-Photo queries bypass direct saved-record matching. Each ask is independent; stored conversation rows currently do not provide follow-up context.
+Photo queries bypass direct saved-record matching. Media and recognized personal-card identifier requests bypass answer caching. Each ask is independent; stored conversation rows currently do not provide follow-up context.
 
 ## Stack and models
 
@@ -449,9 +462,9 @@ RRF(chunk) = sum(channel_weight / (rrf_k + rank_in_channel))
 
 Defaults: `rrf_k=60`, `channel_top_k=30`, `top_n=5`, equal weights, reranker off. Larger `rrf_k` compresses rank-position differences. Tune against held-out questions rather than assuming fusion/reranking must outperform a single channel. PostgreSQL shortlists with `ts_rank_cd`/trigrams before BM25/fuzzy rescoring; this is not native full-corpus BM25. Dense distance is exact within authorized compatible evidence; ANN indexes are not implemented. Rerun migrations after alias edits and restart the worker.
 
-Named paths boost relevance; explicit room/item selections remain filters. Exact numeric matching protects identifiers but has known multi-record retrieval limits. Text-cache defaults: similarity `0.93`, TTL `604800` seconds, insufficient-answer TTL `300` seconds, `500` entries per household/user with LRU eviction. Source/item/location/chunk mutations increment the household version. Hits check key terms and current references/paths.
+Named paths boost relevance; explicit room/item selections remain filters. Single identifiers/multipart numbers retain exact token requirements. Explicit comparisons and supported multi-unit phrasing use a union of exact numeric tokens to retrieve separate named records; this fixes a prior all-tokens-in-one-chunk failure without fuzzy-matching a different number. Text-cache defaults: similarity `0.93`, TTL `604800` seconds, insufficient-answer TTL `300` seconds, `500` entries per household/user with LRU eviction. Source/item/location/chunk mutations increment the household version. Hits check key terms and current references/paths.
 
-Send `bypassCache: true` to `POST /api/ask` with a **new** `operationId`; idempotent replay returns its original result. Owners can inspect `GET /api/cache` and clear `DELETE /api/cache` using the household selector/header. Cached query/answer content is private application data, not absent from the authorized database. Guard rejection rate is not observed false-hit rate.
+Send `bypassCache: true` to `POST /api/ask` with a **new** `operationId`; idempotent replay returns its original result. Owners can inspect `GET /api/cache`, use **Settings → Clear answer cache**, or call `DELETE /api/cache` using the household selector/header. Recognized personal-card identifier queries/answers bypass optional caching; ordinary eligible questions can still retain private query/answer content. Arbitrary names, addresses, and every international identifier format are not guaranteed to be detected. Guard rejection rate is not observed false-hit rate.
 
 ## Run tests and evaluation
 
@@ -485,15 +498,15 @@ evaluation/.venv/bin/python -m pip install -r evaluation/requirements-metrics.tx
 export MODEL_DIR="$PWD/data/models"
 export EVAL_SHARED_RUNTIME="$PWD/evaluation/runtime"
 export EVAL_PYTHON="$PWD/evaluation/.venv/bin/python"
-python evaluation/run_eval.py --dry-run
-python evaluation/run_eval.py
+python evaluation/run_eval.py --dry-run --phase final
+python evaluation/run_eval.py --phase final
 ```
 
-The default executes both independent baseline passes and assembles statistics. Full local inference can take hours. It uses disposable fictional accounts/documents in the development database, with model work serialized where needed; customer documents are not the corpus. Resume is limited to the same source/data/phase/run identity, and a second run cannot reuse the first run's generated answer.
+On the current post-fix checkout, `--phase final` executes both independent final passes and assembles statistics. The runner defaults to `baseline`; reproducing the frozen pre-fix baseline requires its recorded application source, while changed source cannot overwrite that snapshot. Full local inference can take hours. It uses disposable fictional accounts/documents in the development database, with model work serialized where needed; customer documents are not the corpus. Resume is limited to the same source/data/phase/run identity, and a second run cannot reuse the first run's generated answer.
 
 ```sh
-python evaluation/run_eval.py --group retrieval
-python evaluation/run_eval.py --group A --group G
+python evaluation/run_eval.py --phase final --group retrieval
+python evaluation/run_eval.py --phase final --group A --group G
 python evaluation/run_eval.py --phase final
 python evaluation/run_eval.py --check --phase final
 ```
@@ -519,7 +532,7 @@ Compose publishes web on loopback port 3000; keep database/worker/Ollama private
 - **No numeric trust calibration:** confidence is categorical. AUROC/Brier/ECE/reliability calibration need a defined score and labeled outcomes.
 - **No conversational context:** each ask is independent despite stored message rows. Restate the object/question explicitly.
 - **Visual/table gaps:** no dedicated figure detector, caption generator, semantic table structure model, or chart parser. Tiny text, handwriting, blur/noise, complex charts, and brief video events can fail. The clean synthetic scan sample does not validate real phone photos or identity cards.
-- **Retrieval/cache tradeoffs:** RRF/reranking need not beat fuzzy search on typo-heavy questions; strict cache guards can miss paraphrases. Repeated visual page chunks and multi-record numeric questions are baseline failure cases under investigation.
+- **Retrieval/cache tradeoffs:** RRF/reranking need not beat fuzzy search on typo-heavy questions; strict cache guards and identifier privacy bypass can lower hit rate. Visual page crowding and multi-record numeric matching have regression-tested fixes; only complete final evaluation establishes their broader quality/latency tradeoffs.
 - **Capacity:** exact vectors, bounded lexical pools, private filesystem storage, and shared local inference need fresh scale/concurrency testing. No 120-FPS or latency SLA is claimed.
 - **Privacy boundary:** application membership checks/predicates and tenant foreign keys do not replace database RLS. Server/database administrators can access private originals, messages, cache, and exports. Host/DB compromise is outside this access boundary.
 - **Not implemented:** object-storage/MinIO integration, payments, floor-plan-image-to-layout generation, arbitrary office-file ingestion, physical item tracking, or emailed maintenance notifications.
