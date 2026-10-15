@@ -52,3 +52,10 @@ Baseline is frozen in `evaluation/baseline_results.json` before these changes. R
 - Problem: the Settings button passed `{method:'DELETE'}` as application data to a helper that always used POST for any body. The cache route accepts GET/DELETE, so the action failed with 405.
 - Change: separate the browser helper's transport method from its JSON/form payload. The button now sends a bodyless DELETE with the existing household scope.
 - After: `vitest run tests/client-api.test.ts` — **3 passed** (DELETE request, preserved GET/POST/multipart behavior, and API error propagation). The frozen baseline's failing UI transport behavior is the before evidence; the final security/UI probe will check the application outcome.
+
+## Python hashing compatibility
+
+- Problem: ingestion used `hashlib.file_digest`, unavailable on the advertised Python 3.10 runtime.
+- Change: compute the same SHA256 digest with bounded 1 MiB reads, avoiding that version-specific API.
+- Before: the original call cannot execute on Python 3.10 (API absent); the task environment itself runs Python 3.12, so no full Python 3.10 runtime validation is claimed.
+- After: `pytest tests/test_file_hash.py -q` — **2 passed**, including removal of `hashlib.file_digest` and multi-block/empty-file integrity.

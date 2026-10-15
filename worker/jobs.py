@@ -19,6 +19,14 @@ from .models import LocalModels, models
 log = logging.getLogger('homeatlas.jobs')
 
 
+def sha256_stream(stream):
+    """Bounded hashing also works on supported Python 3.10 (no file_digest)."""
+    digest = hashlib.sha256()
+    for block in iter(lambda: stream.read(1024 * 1024), b''):
+        digest.update(block)
+    return digest.hexdigest()
+
+
 def connect(cfg: Settings = settings):
     return psycopg.connect(cfg.database_url, row_factory=dict_row)
 
@@ -73,7 +81,7 @@ def process_job(job: dict, cfg: Settings = settings, engine: LocalModels = model
             source = job_source(conn, job)
         path = cfg.private_path(source['storage_path'])
         with path.open('rb') as original:
-            digest = hashlib.file_digest(original, 'sha256').hexdigest()
+            digest = sha256_stream(original)
         if digest != source['sha256']:
             raise ValueError('Original file integrity check failed')
         artifacts = cfg.storage / 'derived' / str(job['household_id']) / str(job['version_id']) / str(job['claim_token'])
