@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "agent": "verifier-agent",
+  "stage": "preflight",
+  "status": "FINAL VERIFICATION PENDING",
+  "audited_commit": "41a8a813276c8b26d0ef3011c2b609a1446843fa",
+  "timestamp_utc": "2026-10-15T12:07:52.266233+00:00",
+  "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
+  "app_source_fingerprint": "e89dd896bea27ebdf4ac879f91549f28c82c4004f7ffbb7b9b8c41fa68b08b25",
+  "produced_evaluation_metrics": false,
+  "performed_inference": false,
+  "checks": [
+    {
+      "id": "independence",
+      "status": "PASS",
+      "evidence": "Verifier performed static inspection, syntax/CLI checks, artifact/link checks and privacy checks only. No specialist evaluation, inference, score calculation or metric aggregation."
+    },
+    {
+      "id": "clean-archive-cli",
+      "status": "PASS",
+      "evidence": "git archive HEAD extracted into a temporary directory without node_modules, .env, weights or a virtual environment. python evaluation/run_eval.py --help and --dry-run succeeded; invalid group failed with exit code 2 and no traceback. No specialist was dispatched."
+    },
+    {
+      "id": "full-clean-checkout-evaluation",
+      "status": "NOT VERIFIED",
+      "evidence": "Fresh dependency installation and full inference were not run by the independent verifier. Requires running app, migrated disposable development PostgreSQL, installed Node/Python dependencies, Tesseract language packs, FFmpeg and pinned local model artifacts. An existing runtime passing pip check is not a clean-install test."
+    },
+    {
+      "id": "installed-runtime-lockfiles",
+      "status": "PASS",
+      "evidence": "Existing shared evaluation virtual environment matched both requirement files exactly; pip check found no broken requirements. Fresh installation/platform availability remains unverified."
+    },
+    {
+      "id": "syntax",
+      "status": "PASS",
+      "evidence": "All evaluation Python source files parsed with ast.parse. No application module was imported for this syntax check."
+    },
+    {
+      "id": "frozen-inputs",
+      "status": "PASS",
+      "evidence": "protocol.frozen_dataset verified frozen_manifest.json file hashes and dataset fingerprint."
+    },
+    {
+      "id": "source-provenance",
+      "status": "PASS",
+      "evidence": "Verifier checkout and main application source fingerprints match at audited revision. Different Git commits caused only by evaluation changes do not imply different app code."
+    },
+    {
+      "id": "isolated-app-root",
+      "status": "PENDING OWNER REPAIR",
+      "evidence": "Central --app-root sets environment but generation/retrieval imports resolve evaluator checkout; direct generation/homeatlas defaults contain developer absolute paths. Routed to source owners. Require source-hash equivalence before dispatch or explicit app-root imports/fingerprints; no baseline reinterpretation."
+    },
+    {
+      "id": "completeness-fail-closed",
+      "status": "PASS",
+      "evidence": "--check exited 2 on incomplete audited checkout observations, including absent generation result and outdated security coverage. It did not dispatch inference or create frozen baseline/final snapshots."
+    },
+    {
+      "id": "local-links",
+      "status": "PENDING ARTIFACT",
+      "evidence": "README local links resolve. evaluation/README.md references stats-metric-scorecard.csv, not yet produced at audited revision; statistics owner notified. Recheck after final aggregation."
+    },
+    {
+      "id": "screenshot",
+      "status": "PASS",
+      "evidence": "Visually inspected docs/screenshots/locations-overview.png. It shows Layout QA home and Layout browser fixture, consistent with scripts/location-qa.mjs synthetic account/home setup. Existing screenshot is not a new reliability measurement."
+    },
+    {
+      "id": "gitignore",
+      "status": "PASS",
+      "evidence": "Repository and evaluation/.gitignore exclude .env.local, .data, node_modules, worker/evaluation virtual environments, evaluation cache/runtime and model weights. git check-ignore confirmed effective repository rules."
+    },
+    {
+      "id": "tracked-private-files",
+      "status": "PASS",
+      "evidence": "No tracked private env files, virtual environments, runtime/cache trees, DB files or model artifacts found. .env.example is intentionally tracked."
+    },
+    {
+      "id": "credential-values",
+      "status": "PASS WITH QUALIFICATION",
+      "evidence": "No unique local WORKER_KEY/BETTER_AUTH_SECRET values found in tracked text; generic API-token/private-key patterns absent from README/evaluation. Exact DATABASE_URL matches are the intentional public loopback development default present in .env.example and setup/source tests, not a newly leaked unique credential. Deployment requires fresh secrets and private services."
+    },
+    {
+      "id": "synthetic-publication",
+      "status": "PASS",
+      "evidence": "README/evaluation tracked text contained no nonfixture email domains. Frozen manifest/corpus documents synthetic provenance. Real user logs, uploads and database document contents were not read."
+    },
+    {
+      "id": "mutable-generation-model",
+      "status": "PENDING PROVENANCE",
+      "evidence": "Qwen Ollama model tag is mutable. Asked generation owner to record actual artifact digest when observable and distinguish a post-run observation from historical proof."
+    },
+    {
+      "id": "readme-result-parity",
+      "status": "PENDING FINAL RESULTS",
+      "evidence": "README currently labels expanded results in progress. Final baseline/final parity, all metric/CI values, before/after claims and limitations cannot pass until final raw files, report and docs are complete."
+    },
+    {
+      "id": "github-hard-stop",
+      "status": "PASS",
+      "evidence": "No push, remote addition or pull-request action performed. This verification artifact is local only."
+    }
+  ],
+  "final_required_checks": [
+    "Every README measurement, denominator, interval and before/after claim against frozen specialist/statistics results",
+    "Final evaluator source-hash equivalence guard and portable documented command",
+    "Final local links and real screenshot provenance",
+    "Final staged/tracked privacy scan and effective repository ignores",
+    "Explicit clean-environment scope/limitations; never claim fresh installation or full evaluation without actual evidence"
+  ]
+}
