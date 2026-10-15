@@ -97,6 +97,16 @@ def assess_completeness(sources: dict, phase: str, app: Path) -> dict:
                     issues.append(f'{label}: performance import lacks complete same-pass PDF observations')
                 if config.get('generation_app_source_fingerprint') != current:
                     issues.append(f'{label}: imported generation source fingerprint mismatch')
+                reused = [q for q in rows if q.get('group') == 'K-generation-reused']
+                original_source = sources.get('generation-agent', {})
+                original_runs = select_runs(original_source, phase) if original_source else []
+                original = next((v for v in original_runs if v.get('run') == number), {})
+                original_rows = {q['id']: q for q in original.get('per_question', [])}
+                if len(reused) != 60 or {q.get('id') for q in reused} != expected_pdf:
+                    issues.append(f'{label}: reused performance question IDs incomplete')
+                elif any(q.get('timings') != original_rows.get(q['id'], {}).get('timings') or
+                         q.get('stage_calls') != original_rows.get(q['id'], {}).get('stage_calls') for q in reused):
+                    issues.append(f'{label}: reused performance observations differ from same-pass generation rows')
             if agent in {'homeatlas-agent', 'ingestion-agent'}:
                 # These groups run supplemental upload/cache/parser probes. Check
                 # the owner's declaration against the raw IDs, not a filename.
