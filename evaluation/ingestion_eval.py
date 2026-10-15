@@ -352,6 +352,111 @@ def score(corpus: list[dict], page_rows: list[dict], observed: dict) -> tuple[li
     return metrics, rows
 
 
+def attest_and_attach_samples(result: dict) -> None:
+    """Owner coverage attestation and CI inputs; never rewrite measurements."""
+    manifest = json.loads((EVALUATION / 'fixtures/manifest.json').read_text())
+    required_ids = set()
+    for document in manifest:
+        source = document['id']
+        required_ids.update(f'ingestion-page-{source}-{p["page"]}' for p in document['pages'])
+        if source in {'scanned', 'text'}:
+            required_ids.update(f'ocr-{source}-{p["page"]}' for p in document['pages'])
+        for table in document['tables']:
+            required_ids.add(f'table-{table["page"]}')
+            required_ids.update(f'table-cell-{table["page"]}-{r}-{c}'
+                                for r, cells in enumerate(table['cells']) for c in range(len(cells)))
+        for figure in document['figures']:
+            required_ids.add(f'figure-{source}-{figure["page"]}')
+            prefix = 'image-label' if source == 'image' else 'chart-value'
+            required_ids.update(f'{prefix}-{figure["page"]}-{value}'
+                                for value in (figure['facts'] if source == 'image' else figure['facts'][:3]))
+            if source == 'chart':
+                required_ids.update(f'chart-label-{figure["page"]}-{value}' for value in figure['facts'][3:])
+    required_ids.update(q['id'] for q in questions('pdf') if not q['unanswerable'])
+    rows = result['per_question']
+    actual_ids = [r['id'] for r in rows]
+    pages = [r for r in rows if r['kind'] == 'page']
+    observed = result['config']['observed_runtime']
+    sources = {d['id'] for d in manifest}
+    documents = observed['documents']
+    chunks = [c for page in pages for c in page['chunks']]
+    chunk_counts = {source: sum(c['fixture_source_id'] == source for c in chunks) for source in sources}
+    checks = {'required_probe_ids_exact': set(actual_ids) == required_ids,
+              'probe_ids_unique': len(actual_ids) == len(set(actual_ids)),
+              'source_ids_exact': {d['fixture_source_id'] for d in documents} == sources,
+              'page_count_exact': len(pages) == sum(len(d['pages']) for d in manifest),
+              'chunk_counts_match_document_observations': all(
+                  chunk_counts[d['fixture_source_id']] == d['chunk_count'] for d in documents),
+              'ocr_counts_match_page_observations': sum(len(p['ocr_calls']) for p in pages) == len(observed['ocr_invocations']),
+              'every_document_finished': all(d['status'] in {'success', 'failure'} for d in documents),
+              'fresh_extraction_no_replay': result['config']['fresh_extraction'] is True and observed['parser_cache_replay'] is False}
+    result['config']['complete'] = all(checks.values())
+    result['config']['coverage_attestation'] = {
+        'owner': 'ingestion-agent', 'required_source_ids': sorted(sources),
+        'required_probe_ids': sorted(required_ids), 'observed_probe_count': len(actual_ids),
+        'observed_page_count': len(pages), 'observed_chunk_counts_by_source': dict(sorted(chunk_counts.items())),
+        'observed_ocr_invocations': len(observed['ocr_invocations']), 'checks': checks,
+        'meaning': 'All frozen ingestion probes are recorded, including unsuccessful observations. Completion does not imply correctness. Chunk and OCR counts are observations, not a constraint that prevents a parser fix changing its outputs.'}
+    if not result['config']['complete']:
+        raise ValueError('Ingestion coverage incomplete: ' + ', '.join(k for k, value in checks.items() if not value))
+
+    samples = {}
+    def put(name, selected, value, estimator='mean'):
+        samples[name] = {'estimator': estimator,
+                         'samples': [{'id': row['id'], 'value': value(row)} for row in selected]}
+    for prefix, source in [('ocr.scanned', 'scanned'), ('native_text', 'text')]:
+        selected = [r for r in rows if r['kind'] == 'ocr-reference' and r['fixture_source_id'] == source]
+        for field in ['cer', 'wer']:
+            put(f'{prefix}.{field}_macro', selected, lambda r, f=field: r[f])
+    for name, kind, field in [
+            ('table.cell_text_recall', 'table-cell-text', 'literal_text_present'),
+            ('table.row_major_text_sequence_preserved_rate', 'table', 'row_major_token_sequence_preserved'),
+            ('table.structured_output_rate', 'table', 'structured_table_output'),
+            ('figure.page_preview_retention_rate', 'figure-asset', 'page_preview_retained'),
+            ('image.literal_label_recall', 'image-literal', 'present'),
+            ('chart.numeric_label_text_recall', 'chart-value-literal', 'present'),
+            ('chart.axis_legend_text_recall', 'chart-label-literal', 'present')]:
+        put(name, [r for r in rows if r['kind'] == kind], lambda r, f=field: int(r[f]))
+    put('chunking.table_split_rate', [r for r in rows if r['kind'] == 'table'],
+        lambda r: int(not r['entire_table_in_single_chunk']))
+    put('chunking.figure_label_caption_single_chunk_rate',
+        [r for r in rows if r['kind'] == 'figure-asset' and r['fixture_source_id'] == 'image'],
+        lambda r: int(r['all_label_and_caption_facts_in_single_chunk']))
+    evidence = [r for r in rows if r['kind'] == 'question-evidence']
+    for modality in ['overall', 'text', 'table', 'image', 'chart', 'scanned']:
+        selected = [r for r in evidence if modality == 'overall' or r['modality'] == modality]
+        for suffix, field in [('literal_evidence_term_coverage', 'term_coverage'),
+                              ('literal_evidence_all_terms_rate', 'all_terms_present'),
+                              ('literal_evidence_single_chunk_rate', 'all_terms_in_single_chunk')]:
+            put(f'chunking.{modality}.{suffix}', selected, lambda r, f=field: float(r[f]))
+        put(f'chunking.{modality}.reference_evidence_spread_rate', selected,
+            lambda r: int(r['all_terms_present'] and not r['all_terms_in_single_chunk']))
+        selected_chunks = [c for c in chunks if modality == 'overall' or c['fixture_source_id'] == modality]
+        lengths = {'content_characters': lambda c: len(c['metadata']['content_text']),
+                   'indexed_characters': lambda c: len(c['text']),
+                   'whitespace_words': lambda c: len(c['metadata']['content_text'].split())}
+        for suffix, function in lengths.items():
+            for statistic, estimator in [('mean', 'mean'), ('p50', 'p50'), ('p95', 'p95')]:
+                put(f'chunking.{modality}.{suffix}_{statistic}', selected_chunks, function, estimator)
+        put(f'chunking.{modality}.location_prefix_and_metadata_rate', selected_chunks,
+            lambda c: int(c['text'].startswith(f"Location: {c['location_path']}\n\n")
+                          and c['metadata']['location_path'] == c['location_path']))
+        selected_pages = [r for r in pages if modality == 'overall' or r['fixture_source_id'] == modality]
+        for suffix, estimator in [('mean', 'mean'), ('p50', 'p50'), ('p95', 'p95')]:
+            put(f'ingestion.{modality}.parser_seconds_per_page_{suffix}', selected_pages,
+                lambda r: r['parser_seconds'], estimator)
+    document_samples = [{'id': d['fixture_source_id'], **d} for d in documents]
+    put('ingestion.document_success_rate', document_samples, lambda d: int(d['status'] == 'success'))
+    points = {m['metric']: m for m in result['metrics']}
+    for name, observation in samples.items():
+        values = [s['value'] for s in observation['samples']]
+        estimated = statistics.mean(values) if observation['estimator'] == 'mean' else quantile(
+            values, .5 if observation['estimator'] == 'p50' else .95)
+        if len(values) != points[name]['n'] or not math.isclose(estimated, points[name]['value'], rel_tol=1e-12, abs_tol=1e-12):
+            raise ValueError(f'CI samples fail to reproduce original point: {name}')
+    result['statistic_samples'] = samples
+
+
 def main():
     parser = argument_parser(__doc__)
     args = parser.parse_args()
@@ -372,6 +477,7 @@ def main():
         row['run_id'] = f'{args.phase}-run-{args.run:02}'
     result = make_result('ingestion-agent', args.phase, args.run, metrics, rows, config, APP_ROOT)
     result['models']['observed'] = {key: observed[key] for key in ['ocr_backend', 'ocr_languages_configured', 'ocr_languages_available', 'tesseract_version', 'packages']}
+    attest_and_attach_samples(result)
     write_result(args.output, result)
     print(json.dumps({'saved': str(args.output), 'metrics': len(metrics), 'rows': len(rows),
                       'phase': args.phase, 'run': args.run}), flush=True)
