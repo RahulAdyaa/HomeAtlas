@@ -1,117 +1,194 @@
 # HomeAtlas
 
-**Your home, on the record.** HomeAtlas is a private household inventory and multimodal RAG app: keep manuals, receipts, photos, voice notes, and videos together, then ask questions and get answers grounded in your own records.
+**Your home, on the record.** A self-hosted household inventory and multimodal RAG app. Save a manual, receipt, photo, spreadsheet, or recording; record where it belongs; then search your own household evidence.
 
-Built with Next.js and TypeScript, Better Auth, PostgreSQL, a Python ingestion/retrieval worker, and locally run AI models. The tested inference profile uses Ollama for Qwen3-VL and local BGE, SigLIP2, Whisper, and Tesseract components; household content is not sent to a hosted model API.
+HomeAtlas combines a **Home → Room → Zone → optional Container** hierarchy, an editable **3D home**, **multilingual hybrid retrieval**, and **versioned answer caching**. Local models produce evidence-reviewed answers with links to source pages, regions, timestamps, and recorded locations.
 
-![HomeAtlas interactive home view](docs/screenshots/locations-overview.png)
+![HomeAtlas 3D home and location browser with fictional demonstration records](docs/screenshots/locations-overview.png)
 
-## What you can do
+*Existing application screenshot captured with fictional layout QA records. It illustrates the interface, not measured accuracy or performance.*
 
-- **Ask about saved item details:** serial numbers, model, brand, purchase dates and warranty dates are read directly from the matching household inventory record. Identity-card spelling variants are normalized, and conflicting entries are shown explicitly.
-- **Ask where an item is:** location questions check saved inventory and document locations directly, with links to the recorded room or drawer. Sample records are excluded from ordinary document retrieval.
-- **Find records down to the drawer:** Home → Room → Zone → optional Container, full paths in searchable evidence, and direct answer links into the home view.
-- **Design and explore your home:** data-driven isometric 3D, room zoom, clickable furniture, attached storage, and a grid-based floor-plan editor with doors/windows. [Upgrade guide and checks](docs/LOCATION_UPGRADE.md).
+## Features
 
-- **Keep a usable home inventory:** organize rooms and items, record brands, model and serial numbers, purchase dates, warranty dates, notes, and maintenance history.
-- **Build a private record library:** upload PDFs, UTF-8 TXT/CSV, Excel `.xlsx`/`.xlsm`, common raster images, audio, and video; attach sources to a room or item; retain immutable source versions and processing status. Legacy `.xls` workbooks should be saved as `.xlsx` first.
-- **Ask across modalities:** search manuals, receipts, scanned pages, photos, voice recordings, and sampled video frames. Answers link to exact PDF pages/regions or audio/video timestamps.
-- **Get grounded answers:** combine lexical retrieval, BGE text embeddings, SigLIP2 image similarity, and reranking; Qwen3-VL drafts an evidence-based answer. Quotes and citations are verified, and the app abstains when it cannot find adequate evidence.
-- **Manage a household together:** owner/editor/viewer roles, invitations, private bookmarks, saved searches, reminders, recurring tasks, and a household activity trail.
-- **Keep access and operations accountable:** verified-email sign-in, passkeys, TOTP, session controls, household exports/deletion, and an auditable credit ledger.
-- **Explore the home visually:** interactive 3D room/item view, keyboard controls, mobile layouts, reduced-motion behavior, and a WebGL fallback.
+### Inventory and document library
 
-## Verified results
+- **Inventory:** create/edit items with a room, category, brand, model, serial number, purchase date, warranty end date, and notes. Search by name and filter by room; keep an item's documents and maintenance history together.
+- **Saved facts:** supported serial-number, model, brand, date, category, and notes questions read matching inventory fields directly, without OCR. Conflicting saved values are shown explicitly. This is separate from automatically extracting fields from an upload.
+- **Recorded locations:** supported English/Hinglish location questions and document aliases return the stored full path and a **Show location in 3D** link. The app reports where you recorded an object; it cannot detect physical movement.
+- **Source lifecycle:** upload a new source or immutable version, inspect queued/processing/ready/failed status, retry/reprocess, open originals, preview PDF pages or extracted text, and move/delete documents from the location panel.
+- **Photos:** associate an uploaded image with an item/document or keep it directly at a location.
 
-The 14 October hierarchy/layout regression run passed **83 JavaScript tests and 24 Python tests**, plus a live RAG-to-drawer browser flow, saved-answer links, hierarchy export, room/container navigation, saved layout edits, mobile width and WebGL fallback. These results and their limits are documented in the [location upgrade report](docs/LOCATION_UPGRADE.md). 120fps is a design target, not a measured claim.
+### Home hierarchy and 3D editor
 
-These are local test and evaluation results recorded in the repository reports on 13 October 2026, not production service-level guarantees.
+- **Precise attachments:** items/documents can belong to the home, a room, a furniture/area zone, or a drawer/shelf/box container. Paths such as `Study > Desk > Top drawer` are stored with records and included in chunk text and metadata. Existing room attachments remain supported.
+- **Data-driven scene:** pastel floors, rounded low-poly furniture, subtle shadows, door/window openings, screen-aligned labels with collision hiding, hover counts, orbit/pan/zoom, and reset view.
+- **Click/tap to explore:** room camera transitions, cutaway walls, clickable zones/containers, breadcrumbs/back navigation, descendant record counts, and a details panel. Answer links select and briefly highlight the recorded location.
+- **Top-down layout editor:** grid snapping, add/resize/move/rotate rooms and furniture, rename/recolor nodes, edit doors/windows, and mark attached storage/washrooms. Numeric controls support keyboard/mobile editing.
+- **Furniture presets:** bed, sofa, table, chair, desk, wardrobe, cabinet, TV unit, counter, fridge, washing machine, toilet, sink, window, door, storage/washroom areas, drawer, shelf, and box.
+- **Demo home:** furnished living, kitchen, bedroom, study, bathroom, and laundry spaces with clearly labeled fictional sample documents. Ordinary retrieval excludes samples unless the query requests them.
+- **Responsive access:** light/dark themes, reduced-motion behavior, and a navigable location list if WebGL is unavailable or lost. No frame-rate guarantee is claimed.
 
-| Area | Recorded result |
-| --- | --- |
-| Backend and account/security suite | 57 tests passed |
-| Python ingestion/retrieval worker | 17 tests passed |
-| Expanded browser feature audit | 17 checks passed; zero browser exceptions |
-| Live ingestion audit | 9 checks passed, including image and scanned-PDF OCR, retries, versions, citations, and credit reconciliation |
-| Responsive design/accessibility QA | 142 checks passed across four viewport sizes; zero failures |
-| Scoped multimodal RAG evaluation | 5/5 cases passed; supported-source recall 4/4, canonical citations 5/5, groundedness 5/5, missing-evidence abstention 1/1 |
-| Audio/video pipeline | WAV, M4A, and MP4 reached ready; Whisper voice question returned timestamped citations |
-| Inference safety examples | 2/2 local-model checks passed for embedded instructions and conflicting records |
-| TypeScript, optimized build, npm audit | Passed; zero reported npm vulnerabilities |
+### Multimodal questions and grounded answers
 
-The RAG evaluation is intentionally small (five clear English cases). It does not estimate broad accuracy, p95 latency, multilingual performance, arbitrary image-part matching, or production capacity. See [RAG evaluation limits](docs/RAG_EVALUATION.md#limits) and the [full verification report](docs/VERIFICATION.md).
+- **Ingestion:** native PDF text, OCR for scans/photos and substantial embedded PDF images, UTF-8 text/CSV, Excel worksheet values, local audio transcription, and sampled video frames. Format/decoder limits are documented below.
+- **Parallel text retrieval:** multilingual E5 dense similarity, word BM25 over PostgreSQL lexical candidates, and character n-gram/edit-distance fuzzy matching, fused by weighted reciprocal rank fusion (RRF).
+- **Visual retrieval:** separate SigLIP2 image/text embeddings provide auxiliary candidates for text and photo questions. Similarity proposes evidence; it does not establish an answer's correctness.
+- **Typo/Hinglish support:** Unicode/lowercase/punctuation normalization, repeated-letter handling, editable household/Indian-document aliases, fuzzy matching, and low-score spelling suggestions. Named paths boost relevance; explicit item/room scopes filter results.
+- **Optional reranker:** a local cross-encoder can rerank fused candidates behind a flag. It is disabled by default; evaluation must justify enabling it.
+- **Photo and voice input:** attach a photo, record a browser voice note, ask from a recording, or save the recording to the library. Voice questions use local Whisper. Microphone recording requires permission and HTTPS or localhost.
+- **Detailed explanations:** Qwen3-VL reads retrieved text and source images; a separate local review pass checks proposed sections. Supporting PDF pages display inline, and a safe Markdown subset renders headings/tables.
+- **Canonical citations:** exact quotation and source/version checks, PDF page/region previews, worksheet/row references, media timestamps, and location links. These establish provenance, not that every synthesized claim is true.
+- **Answer states:** supported, conflicting, extractive/direct evidence, and insufficient-evidence/abstention states. These are categorical labels, **not calibrated trust probabilities**.
+- **Bookmarks:** private saved searches/answers with citations and location references; editors can save an answer into shared item history. Saved location references refresh against current records.
 
-## System architecture
+### Cache, collaboration, and operations
 
-The web application owns authentication, household authorization, APIs, and the UI. PostgreSQL stores household data and the durable job queue; originals and derived media stay in private filesystem storage. The Python worker processes queued sources and queries with local inference components.
+- **Exact → semantic → full lookup:** normalized exact cache, then embedding similarity with key-term/number/intent/location guards, then saved-record lookup or hybrid RAG. Media questions bypass the text cache.
+- **Invalidation:** cache scope includes household **and user**, query scope, configuration, and household data version. Mutations invalidate older generations; current citation/source/path checks run again before reuse.
+- **Cache controls:** configurable TTL, short negative-answer TTL, LRU bounds, request bypass, owner-only metrics, and an owner-only clear API. Guard rejection rate is distinct from measured false-hit rate.
+- **Authentication:** verified-email/password sign-in, password reset, passkeys, authenticator TOTP/recovery codes, session review, revoke other sessions, and sign-out. Development has a password-protected local verification-email helper; deployment uses SMTP.
+- **Households:** multiple-household selection, owner/editor/viewer roles, email-bound expiring invitations, member role changes/removal, and last-owner protection.
+- **Maintenance:** one-time/recurring reminders, calendar view, completion history, upcoming-task indicators, and activity trail. Reminders appear in-app; scheduled maintenance emails are not implemented.
+- **Credits:** internal allowances/monthly grants, atomic reservation/charge/refund, idempotent operations, append-only ledger, and CSV export. No payment service is integrated.
+- **Owner tools:** job/worker health, failures and attempts, usage/audit views, household JSON export, and confirmed deletion. Export omits private file paths/vectors; original files must be downloaded separately.
+- **Private operation:** authenticated range-capable file streaming, private originals/previews, leased PostgreSQL jobs with retry/reclaim handling, health endpoints, and local inference without a hosted-model requirement.
+
+The [source-backed feature inventory](evaluation/results/docs-agent.json) lists implementation evidence and known qualifications. Implemented features and measured reliability are separate; see [limitations](#limitations).
+
+## Evaluation results
+
+<!-- EVALUATION_SUMMARY_START -->
+The expanded evaluation is in progress. Final before/after tables will be published after complete baseline runs, fixes, complete final runs, and independent verification. Historical test counts are not presented as current accuracy results.
+
+The frozen synthetic benchmark contains **138 questions**: **60 PDF questions** across **5 original PDFs / 20 pages**, plus **78 household scenarios**, including **38 typo/Hinglish variants**. The [manifest](evaluation/frozen_manifest.json) pins inputs/seed/hashes; [specialist results](evaluation/results/) retain provenance. This is an authored synthetic corpus, not a production accuracy estimate.
+
+The consolidated report covers retrieval, generation, citation, abstention, ingestion, location, cache, calibration, security, latency, and uncertainty metrics. Unsupported/unavailable measurements remain **NOT MEASURED** with reasons. External-judge metrics are not replaced by lexical heuristics.
+<!-- EVALUATION_SUMMARY_END -->
+
+Historical evidence remains in [verification](docs/VERIFICATION.md), [hierarchy/layout checks](docs/LOCATION_UPGRADE.md), [hybrid evaluation](evaluation/HYBRID_EVALUATION_REPORT.md), and [image evaluation](evaluation/IMAGE_PIPELINE_REPORT.md). Their dates, model profiles, and datasets differ; do not combine them with the expanded benchmark.
+
+## How it works
+
+Next.js owns authentication, authorization, APIs, and UI. PostgreSQL stores records, evidence/search indexes, cache, jobs, and accounting. A private filesystem holds immutable originals/previews. The Python worker extracts/indexes evidence and calls local models.
 
 ```mermaid
 flowchart LR
-    Person[Household member] --> Browser[Responsive web app<br/>Next.js + TypeScript]
-    Browser --> Auth[Better Auth<br/>verified email, passkeys, TOTP]
-    Browser --> API[Authenticated API<br/>role and household checks]
+    Member[Household member] --> Web[Next.js + React UI]
+    Web --> Auth[Better Auth: email/passkeys/TOTP]
+    Web --> API[Authenticated Node APIs]
     Auth --> API
-    API <--> DB[(PostgreSQL<br/>records, citations, credits, durable queue)]
-    API <--> Files[(Private file storage<br/>originals and derived previews)]
-    DB --> Worker[Python worker<br/>leased background jobs]
+    API <--> DB[(PostgreSQL: records/evidence/jobs/cache/credits)]
+    API <--> Files[(Private originals + previews)]
+    DB --> Worker[Python worker: leased jobs + queries]
     Files --> Worker
-    Worker --> Models[Local models and tools<br/>Qwen3-VL · BGE · SigLIP2<br/>Whisper · Tesseract · FFmpeg]
-    Models --> Worker
+    Worker <--> Models[Local E5 / SigLIP2 / Qwen3-VL / Whisper / Tesseract]
     Worker --> DB
-    API --> Browser
 ```
 
-## Multimodal ingestion and answer flow
+```mermaid
+flowchart LR
+    Home[Home] --> Room[Room: Study] --> Zone[Zone: Desk] --> Container[Optional container: Top drawer]
+    Home -. attach .-> Record[Item/document + optional photo]
+    Room -. attach .-> Record
+    Zone -. attach .-> Record
+    Container -. attach .-> Record
+    Record --> Path[Stored location_path]
+    Path --> Evidence[Chunk text + metadata + search index]
+    Path --> Link[Answer link selects location in 3D]
+```
 
 ```mermaid
 flowchart TD
-    Upload[PDF · TXT/CSV · XLSX · image · audio · video] --> Validate[Check file signature, type, size]
-    Validate --> Store[Store immutable original privately]
-    Store --> Queue[Create durable PostgreSQL job]
-    Queue --> Extract{Worker extracts evidence}
-    Extract -->|Digital PDF| PDF[Extract text and page regions]
-    Extract -->|TXT or CSV| Text[Extract UTF-8 text and row references]
-    Extract -->|Excel XLSX/XLSM| Sheet[Extract worksheet values and row references]
-    Extract -->|Scan or photo| OCR[OCR text from scans and photos]
-    Extract -->|Audio or video audio| Audio[Whisper transcript with timestamps]
-    Extract -->|Video frames| FrameOCR[OCR text from sampled video frames]
-    PDF --> Index[Keep source/version and page/time provenance]
-    Text --> Index
-    Sheet --> Index
-    OCR --> Index
-    FrameOCR --> Index
-    Audio --> Index
-    Index --> Embed[Text embeddings and image-space embeddings]
-    Embed --> DB[(Household-scoped PostgreSQL evidence)]
-
-    Question[Text question plus optional photo or voice note] --> Ask[Authorize household and item/room scope]
-    Ask --> Retrieve[Lexical + BGE + SigLIP retrieval]
-    DB --> Retrieve
-    Retrieve --> Rerank[BGE reranking]
-    Rerank --> Generate[Local Qwen3-VL answer from retrieved text/images]
-    Generate --> Verify[Verify exact quotations and source/version IDs]
-    Verify -->|Evidence is sufficient| Cite[Return answer with page/region/time citations]
-    Verify -->|Evidence is missing| Abstain[Abstain with no unsupported citation]
+    Upload[Upload + attachment location] --> Validate[Type/signature/size validation]
+    Validate --> Original[Private immutable version] --> Job[Leased database job]
+    Job --> Kind{Source type}
+    Kind -->|PDF| PDF[Native text + page previews + OCR]
+    Kind -->|TXT/CSV/Excel| Rows[Text or worksheet/row evidence]
+    Kind -->|Image| OCR[Orientation + OCR + visual anchor]
+    Kind -->|Audio| Speech[Timestamped Whisper transcript]
+    Kind -->|Video| Frames[Transcript + sampled frames]
+    PDF --> Chunk[Chunks with page/box/row/time provenance]
+    Rows --> Chunk
+    OCR --> Chunk
+    Speech --> Chunk
+    Frames --> Chunk
+    Chunk --> Path[Location path in text and metadata]
+    Path --> Embed[E5 text + separate SigLIP2 image embeddings]
+    Embed --> Publish[Atomic evidence publication + credit settlement]
 ```
 
-## Main components
+```mermaid
+flowchart TD
+    Q[Text/photo/voice question] --> Scope[Authentication + household/item/room scope]
+    Scope --> Prep[Voice transcription / query-photo OCR]
+    Prep --> Cache[Text only: exact then guarded semantic cache]
+    Cache -->|Valid hit| Check[Recheck access/version/citations]
+    Cache -->|Miss or media| Facts[Saved inventory/location lookup when applicable]
+    Facts -->|Saved record| Check
+    Facts -->|Document question| Parallel[Parallel retrieval]
+    Parallel --> Dense[E5 dense]
+    Parallel --> Word[Word BM25]
+    Parallel --> Fuzzy[Character TF-IDF + edit distance]
+    Parallel --> Visual[Auxiliary SigLIP2 visual]
+    Dense --> RRF[Weighted RRF + location boost]
+    Word --> RRF
+    Fuzzy --> RRF
+    Visual --> RRF
+    RRF --> Rank[Optional reranking + neighboring evidence]
+    Rank --> Generate[Qwen3-VL evidence-based draft]
+    Generate --> Review[Section review + exact quotation checks]
+    Review --> Check
+    Check --> Answer[Answer/citations, conflict, or abstention]
+    Answer --> Store[Version-checked text cache write]
+```
 
-| Layer | Technology |
+Photo queries bypass direct saved-record matching. Each ask is independent; stored conversation rows currently do not provide follow-up context.
+
+## Stack and models
+
+Versions below resolve from [package-lock.json](package-lock.json) and [worker/requirements.lock.txt](worker/requirements.lock.txt). Model identities/dimensions are checked before vector comparison.
+
+| Component | Implementation |
 | --- | --- |
-| Web UI and routes | Next.js 16, React, TypeScript |
-| Authentication | Better Auth; verified email, passkeys, TOTP |
-| Durable data and jobs | PostgreSQL; tenant-scoped relations, leased queue, credit ledger |
-| Original/derived media | Private filesystem storage with authenticated, version-aware reads |
-| Ingestion and retrieval | Python worker; PyMuPDF, Tesseract, Whisper, FFmpeg, lexical/vector retrieval |
-| Local inference | Qwen3-VL 4B Instruct, BGE small + reranker, SigLIP2, Whisper tiny |
-| Interactive home view | React Three Fiber, Three.js, Drei |
+| Web | Next.js 16.4.0, React 19.3.0, TypeScript 7.0.2 |
+| Authentication | Better Auth 1.7.7, passkey and two-factor plugins |
+| 3D | Three.js 0.186.1, React Three Fiber 9.8.1, Drei 10.7.9 |
+| Database | PostgreSQL; `vector`, `pg_trgm`, `fuzzystrmatch`, ICU collation required; Compose uses pgvector/PostgreSQL 16 |
+| Worker | Python, FastAPI 0.115.12, Uvicorn 0.34.0, Psycopg 3.2.6 |
+| Parsing/media | PyMuPDF 1.25.5, Pillow 11.1.0, Tesseract/pytesseract 0.3.13, FFmpeg/FFprobe |
+| Inference | Local Ollama, PyTorch 2.7.0, Transformers 4.57.3, NumPy 1.26.4 |
+| Storage/queue/cache | Private filesystem + PostgreSQL; no Redis or object-store requirement |
 
-## Run HomeAtlas locally
+| Purpose | Model | Pin |
+| --- | --- | --- |
+| Multilingual text embeddings | `intfloat/multilingual-e5-small` | `614241f622f53c4eeff9890bdc4f31cfecc418b3` |
+| Image/text embeddings | `google/siglip2-base-patch16-224` | `75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2` |
+| Optional cross-encoder | `BAAI/bge-reranker-base` | `2cfc18c9415c912f9d8155881c133215df768a70` |
+| Generation + section review | Ollama `qwen3-vl:4b-instruct` | Record actual artifact digest per run/release; the tag is mutable |
+| Transcription | Local Whisper `tiny` | `openai-whisper==20250625`; weight download is hash-checked |
+| OCR | Installed Tesseract English/Hindi packs | `OCR_LANGUAGES=eng+hin`; installed packs only |
 
-The tested native setup needs Node.js 22.16+ (Node 26 tested), npm, Python 3.10–3.12 (3.12 tested), PostgreSQL 15 command-line tools, FFmpeg/FFprobe, Tesseract, and [Ollama](https://ollama.com/) for local model inference. The app and development database bind to loopback; do not expose this development configuration on a network.
+Downloads are explicit setup operations. Runtime uses local HF snapshots and the configured Ollama endpoint. Keep that endpoint private/local for this privacy profile. [worker/config.py](worker/config.py) and [.env.example](.env.example) define current defaults; [older model notes](docs/MODELS.md) describe historical BGE-small experiments and must not be read as the current E5 configuration.
 
-1. Install the prerequisites above and start Ollama. If it is not already running, start its local service with `ollama serve` in a separate terminal.
-2. Clone the repository and run setup from its root:
+## Upload formats and limits
+
+| Format | Evidence retained | Qualifications |
+| --- | --- | --- |
+| PDF | Text, page images, OCR, page/region coordinates | No dedicated semantic table/figure/chart parser |
+| UTF-8 `.txt` | Text chunks | Binary/non-UTF-8 rejected; `.docx` is not supported |
+| UTF-8 `.csv` | Parsed rows with row references | Textual evidence, no spreadsheet computation |
+| `.xlsx`, `.xlsm` | Stored worksheet values, sheet/row references | Formulas/macros are not executed; convert legacy `.xls` to `.xlsx` |
+| Raster images | OCR, original image, visual embedding | PNG/JPEG/WebP/GIF/BMP/TIFF/ICO and additional Pillow-decodable rasters; decoder availability varies; not all animation frames; SVG/HEIC not promised |
+| Audio | Transcript and segment timestamps | WAV/MP3/FLAC/AIFF/Ogg/M4A/WebM and validated FFmpeg-decodable audio; codec availability and speech clarity matter |
+| Video | Transcript + sampled frame evidence | MP4/WebM/MKV/AVI when FFmpeg can decode them; brief events can be missed |
+
+Default bounds: **50 MiB/upload**, **250 PDF pages**, **40 megapixels/image**, **900 seconds/media file**, and at most **30 sampled video frames**. These are configuration/code limits, not measured throughput. See [validation](lib/storage.ts), [settings](worker/config.py), and [extraction](worker/ingestion.py). A broad file picker does not guarantee every selected format/codec is decodable.
+
+## Run locally
+
+Install Node.js 22.16+ and npm, **Python 3.12**, PostgreSQL command-line tools with pgvector/pg_trgm/fuzzystrmatch and ICU support, FFmpeg/FFprobe, Tesseract with required language packs, and [Ollama](https://ollama.com/). Start Ollama first. Allow several GB of model storage and enough RAM for local inference; shared model loading can be slow.
+
+1. Clone and start native development:
 
 ```sh
 git clone https://github.com/RahulAdyaa/HomeAtlas.git
@@ -119,104 +196,113 @@ cd HomeAtlas
 npm run setup
 ```
 
-The setup initializes an isolated PostgreSQL database on port 54329, creates private local secrets in `.env.local`, installs locked JavaScript/Python dependencies, applies migrations, and starts the worker and web app. It preserves existing `.env.local` and database data on later runs. The first run downloads the official Satoshi webfonts if they are not present.
+Setup installs locked dependencies, creates `.env.local` with fresh local secrets if absent, initializes the loopback development database on port 54329, applies migrations, and starts worker/web services. It preserves existing local data/config. The first font setup downloads Satoshi assets. Install missing PostgreSQL extensions/ICU before migration.
 
-3. For full local neural retrieval, image understanding, and transcription, open a second terminal in the cloned repository and download the pinned model artifacts once:
+2. In a second terminal at the repository root, install models:
 
 ```sh
-cd HomeAtlas
 bash scripts/models.sh
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000), create an account, and verify it with **Open verification email** on the local sign-in page. Then create a household and upload a record.
+3. Open [http://localhost:3000](http://localhost:3000), register, and verify your email. Locally, enter your email/password in the sign-in form and choose **Open verification email**. Create a household, add an item/layout, upload a fictional record, wait for **Ready**, then ask. **My home → Add demo home** supplies labeled sample documents; include `sample` in a question to retrieve those records.
 
-`npm run setup` remains in the foreground while the site is running; press Ctrl+C to stop it. PostgreSQL data persists between runs. Stop the owned database separately with `pg_ctl -D .data/postgres stop` when needed. Models use several GB of disk and memory; until they are installed, HomeAtlas does not call a hosted model and may use extractive answers or abstain. See [model details](docs/MODELS.md) for artifacts, licenses, and tested hardware.
+`npm run setup` stays in the foreground. Ctrl+C stops web and a worker it started; PostgreSQL persists. To stop the owned database separately:
 
-### Development email
+```sh
+pg_ctl -D .data/postgres stop
+```
 
-Registration requires verified email. In the local development setup, enter your account email and password on the sign-in form, then click **Open verification email**. The button checks your password and opens a fresh verification link for your own unverified account. It is available only in development on loopback, with `ALLOW_LOCAL_MAIL=true` and no SMTP configured; it is disabled in production. Verification/reset/invitation messages remain private JSON files in `.data/mail/`. Do not commit or expose this directory. To deliver real email, configure the SMTP variables from `.env.example`. `ALLOW_LOCAL_MAIL=true` allows local spool delivery during a production-build smoke test; real deployment must use SMTP and set it to false.
+The development database uses loopback/trust authentication for one trusted computer. Do not expose it publicly. Keep `.env.local`, `.data/`, weights, virtual environments, and private uploads untracked.
 
-### Original test records
+### Email and updates
 
-`tests/fixtures/` contains two clearly fictional, original CC0 AirOne appliance PDFs and a page scan. Upload these to an item to exercise the manual/receipt journey. They are not manuals or repair advice for any real appliance. `scripts/create-fixtures.py` reproduces them.
+Development verification/reset/invitation messages use private local mail files when SMTP is absent and local mail is enabled. The password-protected verification helper is development/loopback only. For deployment, configure SMTP using [.env.example](.env.example), set `ALLOW_LOCAL_MAIL=false`, and set the final HTTPS `BETTER_AUTH_URL`; passkey origin/RP ID derive from it.
 
-## Verification
+For an existing installation:
+
+```sh
+node --env-file=.env.local --import tsx scripts/backend-migrate.ts
+worker/.venv/bin/python -m worker.download_models --text --image --whisper
+```
+
+Remove obsolete text-model overrides or use the pinned E5 model/revision, then restart the worker. Background rebuilding updates incompatible text vectors; lexical search remains available. Switching model families requires reindexing and evaluation.
+
+## Tune retrieval and cache
+
+Edit [retrieval settings](config/retrieval.json) and [aliases](config/search-aliases.json). Normalization applies at query/index time; it preserves numbers, performs NFKC/lowercase/punctuation handling, and collapses alphabetic runs longer than two characters before alias matching.
+
+```text
+RRF(chunk) = sum(channel_weight / (rrf_k + rank_in_channel))
+```
+
+Defaults: `rrf_k=60`, `channel_top_k=30`, `top_n=5`, equal weights, reranker off. Larger `rrf_k` compresses rank-position differences. Tune against held-out questions rather than assuming fusion/reranking must outperform a single channel. PostgreSQL shortlists with `ts_rank_cd`/trigrams before BM25/fuzzy rescoring; this is not native full-corpus BM25. Dense distance is exact within authorized compatible evidence; ANN indexes are not implemented. Rerun migrations after alias edits and restart the worker.
+
+Named paths boost relevance; explicit room/item selections remain filters. Exact numeric matching protects identifiers but has known multi-record retrieval limits. Text-cache defaults: similarity `0.93`, TTL `604800` seconds, insufficient-answer TTL `300` seconds, `500` entries per household/user with LRU eviction. Source/item/location/chunk mutations increment the household version. Hits check key terms and current references/paths.
+
+Send `bypassCache: true` to `POST /api/ask` with a **new** `operationId`; idempotent replay returns its original result. Owners can inspect `GET /api/cache` and clear `DELETE /api/cache` using the household selector/header. Cached query/answer content is private application data, not absent from the authorized database. Guard rejection rate is not observed false-hit rate.
+
+## Run tests and evaluation
+
+With app/database running and models installed:
 
 ```sh
 npm run typecheck
-node --env-file=.env.local --import tsx scripts/backend-migrate.ts
 node --env-file=.env.local node_modules/vitest/vitest.mjs run
-HOMEATLAS_DB_TESTS=1 worker/.venv/bin/python -m pytest tests/test_worker.py tests/test_worker_db.py
+HOMEATLAS_DB_TESTS=1 worker/.venv/bin/python -m pytest tests -q
 npm run build
+```
+
+Browser checks need Playwright Chromium (`npx playwright install chromium`) or a compatible `PLAYWRIGHT_EXECUTABLE_PATH`:
+
+```sh
 node scripts/journey.mjs
 node scripts/journey-mobile.mjs
 npm run qa
 node scripts/passkey-check.mjs
 ```
 
-The design QA command uses the fictional account/session produced by the browser journey above and refreshes that fixture once before its app checks. It audits four viewports, both app themes, fonts, axe accessibility, keyboard access, placeholder labels, WebGL controls and motion states.
+Journeys use fictional accounts/households; their credentials/session files stay in ignored `.data/`. They do not verify every physical passkey device or deployment.
 
-Browser checks require installed Playwright Chromium. Set `PLAYWRIGHT_EXECUTABLE_PATH` if using an existing compatible Chrome binary; otherwise run `npx playwright install chromium` and omit the override. Local browser scripts create isolated test accounts/households using original sample documents. Their credentials/session files go only into ignored `.data/`. They never email a real external recipient. The virtual-authenticator test exercises WebAuthn protocol, not physical-device syncing.
+<!-- EVALUATION_COMMANDS_START -->
+The expanded specialist runner/environment are being finalized. [evaluation/README.md](evaluation/README.md) describes the harness currently present; consolidated phase/group commands will be recorded here after clean-checkout verification. The new suite freezes input hashes and preserves independent baseline/final runs; incomplete runs are not labeled complete.
+<!-- EVALUATION_COMMANDS_END -->
 
-The latest full-site audit and fixes are in [FULL_SITE_AUDIT.md](docs/FULL_SITE_AUDIT.md). The repeatable expanded checks are `node scripts/feature-audit.mjs` and `node scripts/ingestion-audit.mjs`, after running the browser journey.
+## Share or deploy
 
-Detailed exercised results and remaining limitations are in [verification](docs/VERIFICATION.md), [security review](docs/SECURITY_REVIEW.md), and [RAG evaluation](docs/RAG_EVALUATION.md). Screenshots live in `docs/screenshots/`.
+The complete configuration needs persistent PostgreSQL, private files shared with a long-running Python worker, and local model inference. **Vercel alone cannot run this complete configuration.** The included deployment path is a self-hosted server/VM with Docker Compose and an HTTPS reverse proxy. Splitting web hosting requires deliberate networking/storage integration.
 
-## Data and inference
+Copy [.env.example](.env.example) to `.env`, replace every secret placeholder, configure SMTP/final HTTPS origin, install host model artifacts, then:
 
-Uploads are signature/type/size checked, stored as private immutable originals, queued in PostgreSQL, and processed asynchronously. UTF-8 text/CSV is indexed with row references; Excel `.xlsx`/`.xlsm` values are extracted without evaluating formulas and cited by worksheet/row; legacy `.xls` must be converted to `.xlsx`. PDFs retain page and region coordinates; Pillow-supported raster images are OCR'd and retain provenance; local Whisper produces timestamped audio/video segments; FFmpeg samples video frames. Citation opening always rechecks household membership and source/version IDs.
-
-Retrieval filters by household and permissions before assembling candidates. Lexical and local text-vector search are fused/reranked; image vectors occupy a separate compatible space. Local Qwen produces evidence-reviewed explanations with verified quotations and supporting PDF page images. A second model pass reviews each section; see [detailed answers](docs/DETAILED_ANSWERS.md) for the limits of visual interpretation. Answers without adequate evidence abstain. Hazardous-work queries recommend a qualified professional.
-
-Household owners manage membership, editors organize records, and viewers read/ask/save private bookmarks. No public file URLs exist. Application authorization and tenant foreign keys provide isolation; the application database role is a trusted service credential. A database-superuser or host compromise is outside that boundary.
-
-Credits are internal allowances. The server reserves credits atomically before work and settles a charge/refund once; an append-only ledger records balance/reservation deltas. Prices and monthly grants are environment-configurable. There is no payment service.
-
-## Architecture and operations
-
-- [Architecture, data flow and checklist](docs/ARCHITECTURE.md)
-- [Design language and screen requirements](design.md)
-- [Design references and asset provenance](docs/DESIGN_REFERENCES.md)
-- [Deployment, backup/restore and rollback](docs/DEPLOYMENT.md)
-- [Progress and unresolved work](docs/PROGRESS.md)
-
-Docker Compose is included. Copy `.env.example` to `.env`, replace every secret placeholder, and configure SMTP, then use `docker compose up --build`. PostgreSQL/worker stay on the private Compose network; only loopback port 3000 is published. Ollama runs on the host in this profile, and pinned HF artifacts are mounted read-only. Use an HTTPS reverse proxy for deployment. The current Docker runtime verification status is recorded in `docs/VERIFICATION.md`.
-
-## Important implementation choices
-
-The local profile uses a PostgreSQL durable queue with leased claims and atomic credit publication, private filesystem volumes, and household-bounded vector arrays. These make genuine development possible on the inspected 16 GiB Mac without requiring a Docker daemon, Redis, or MinIO. Queue claims use `FOR UPDATE SKIP LOCKED`; vectors are never mixed across model revisions or text/image spaces. Scale requires pgvector indexed search and object-storage integration; the Compose database image supports pgvector, but the current application does not claim to use ANN indexes or MinIO. See deployment limitations before sharing the service outside a single trusted host.
-
-No paid or hosted model APIs, payment providers, third-party agent installers, or end-user agent tools are required.
-
-### Hybrid retrieval and safe answer reuse
-
-Text questions use **multilingual E5-small** embeddings (384 dimensions), **word BM25** candidates from PostgreSQL `tsvector`, and **3–4 character TF-IDF plus Damerau edit matching** candidates from `pg_trgm`/`fuzzystrmatch`. The three channels execute concurrently; weighted reciprocal rank fusion adds `weight / (k + rank)` for each unique chunk. Defaults: `k=60`, 30 results per channel, 5 final results. Explicit image questions retain SigLIP visual retrieval and page-neighbor evidence expansion. Saved inventory facts and locations still use the authenticated database lookup before document generation.
-
-Edit [`config/retrieval.json`](config/retrieval.json) to tune channel weights, candidate counts, location boosts, thresholds, or the optional top-10 reranker. Larger `rrf_k` reduces rank-position differences; raise a channel's weight only after checking the evaluation set. [`config/search-aliases.json`](config/search-aliases.json) holds household/Indian-document aliases, applied to both queries and index text. After changing aliases, run migrations to rebuild the lexical index and restart the worker. Normalization uses NFKC, lowercase, punctuation removal and repeated-letter handling; digit strings are preserved. Explicit numeric terms must match, so a missing model/card number does not silently turn into a nearby number. Room names boost relevance; explicit UI room/item filters remain access-scoped filters. Low-score spelling suggestions are advisory only.
-
-The lookup order for text questions is **exact cache → semantic cache → saved-record lookup / hybrid RAG**. PostgreSQL stores cache entries separately per household **and user**, including query scope, data version, citations, paths, expiry, and usage count. Semantic matches require cosine ≥0.93 **and** matching content terms, numbers and intent. Semantic embeddings remove request phrasing and permit unique one-edit spelling corrections; unmatched object/location terms remain a miss. Media queries bypass this text cache. Cached answers still pass authorization, version and citation checks before the app returns them.
-
-Database triggers increment `households.data_version` for source, item, location and chunk mutations. Old generations are ignored; writes from an old in-flight generation are rejected. Defaults: 7-day TTL, 5-minute negative TTL, 500 entries per user/household, LRU eviction. Send `bypassCache: true` to `POST /api/ask` to force a fresh lookup (use a new `operationId`; idempotent replay still returns the original operation). Owners can use **Settings → Clear answer cache**, `DELETE /api/cache`, or inspect aggregate hit/latency metrics with `GET /api/cache`; pass the existing household selector/header. Live false-hit rate is unknown without labels; the API distinguishes guard rejections from measured false hits.
-
-**Setup/update:** PostgreSQL needs `vector`, `pg_trgm`, and `fuzzystrmatch` extensions and ICU collation support. The supplied Compose database already uses `pgvector/pgvector:pg16`; native PostgreSQL installs need pgvector built for their installed PostgreSQL version. Run `node --env-file=.env.local --import tsx scripts/backend-migrate.ts`, then `worker/.venv/bin/python -m worker.download_models --text`. Remove any old `TEXT_EMBEDDING_MODEL` override or use the pinned E5 model/revision in `.env.example`, and restart the worker. Existing arrays are preserved; background migration rebuilds incompatible vectors with the current model. Lexical search remains available during rebuilding. Neural inference stays local.
-
-**Measured results and limitations:** see [`evaluation/HYBRID_EVALUATION_REPORT.md`](evaluation/HYBRID_EVALUATION_REPORT.md) for all four channels, typo/identifier/no-match subsets, semantic-cache behavior and measured latency/LLM calls. This is a small fictional corpus, not a claim of perfect accuracy. PostgreSQL lexical shortlists use `ts_rank_cd` before BM25 rescoring over up to 120 candidates; fuzzy rescoring uses the same shortlist bound. Dense cosine search is exact within authorized records, without an ANN index. These choices suit household-sized collections; benchmark larger collections before changing bounds or adding ANN indexes.
-
-Reproduce the comparison and checks:
-
-```bash
-worker/.venv/bin/python evaluation/hybrid_eval.py
-HOMEATLAS_DB_TESTS=1 worker/.venv/bin/python -m pytest tests/test_worker.py tests/test_worker_db.py tests/test_hybrid_search.py tests/test_semantic_cache.py -q
-npm test
-node --env-file=.env.local scripts/hybrid-cache-qa.mjs
+```sh
+docker compose up --build -d
 ```
 
-The evaluation and live API script create and remove fictional households. They never read personal document contents. The cache benchmark reports warmed-model timings separately from cache priming; existing credit/idempotency accounting is unchanged.
+Compose publishes web on loopback port 3000; keep database/worker/Ollama private. Configure proxy upload/time limits, consistent database/file backups, and a constrained DB role. Verify auth/media access at the deployed origin. See [deployment, backup/restore, rollback](docs/DEPLOYMENT.md); container/public deployment is separate from native evaluation.
 
-### Image evidence and OCR
+## Limitations
 
-Image and scanned-PDF uploads use bounded OCR passes for block/sparse layouts, rotation recovery, and installed English/Hindi packs. EXIF orientation and transparent backgrounds are handled consistently. Nearby labels and values are indexed together with line boxes and confidence metadata. PDFs with native headings also OCR up to eight substantial embedded image regions per page. A visual-only source receives a citable anchor rather than an empty chunk.
+- **Grounding is not certainty:** quote checks establish provenance; model explanations, OCR, and visual interpretations can be wrong. Missing-evidence refusals and aggregates require measured evaluation.
+- **No numeric trust calibration:** confidence is categorical. AUROC/Brier/ECE/reliability calibration need a defined score and labeled outcomes.
+- **No conversational context:** each ask is independent despite stored message rows. Restate the object/question explicitly.
+- **Visual/table gaps:** no dedicated figure detector, caption generator, semantic table structure model, or chart parser. Tiny text, handwriting, blur/noise, complex charts, and brief video events can fail.
+- **Retrieval/cache tradeoffs:** RRF/reranking need not beat fuzzy search on typo-heavy questions; strict cache guards can miss paraphrases. Repeated visual page chunks and multi-record numeric questions are baseline failure cases under investigation.
+- **Capacity:** exact vectors, bounded lexical pools, private filesystem storage, and shared local inference need fresh scale/concurrency testing. No 120-FPS or latency SLA is claimed.
+- **Privacy boundary:** application membership checks/predicates and tenant foreign keys do not replace database RLS. Server/database administrators can access private originals, messages, cache, and exports. Host/DB compromise is outside this access boundary.
+- **Not implemented:** object-storage/MinIO integration, payments, floor-plan-image-to-layout generation, arbitrary office-file ingestion, physical item tracking, or emailed maintenance notifications.
+- **Evaluation scope:** synthetic data, small subgroups, shared-machine contention, and absent external-judge credentials limit generalization. Missing metrics stay missing; older reports may describe different models.
 
-An auxiliary **SigLIP text-to-image channel** now searches image evidence for ordinary text questions as well as photo questions. It supplements the three hybrid text channels; similarity proposes candidates and does not establish correctness. The generator and independent reviewer receive the original source views (up to 2048 px), plus up to two bounded detail crops for small numbers. Unverified visual-only answers and low-confidence identifier fallbacks abstain. Very small text, blur, handwriting, skew and complex charts remain limitations.
+## Repository guide
 
-See [`evaluation/IMAGE_PIPELINE_REPORT.md`](evaluation/IMAGE_PIPELINE_REPORT.md) for the measured OCR comparison and actual upload-to-answer checks. Reproduce with `python scripts/image-evidence-check.py`, `node --env-file=.env.local scripts/image-upload-qa.mjs`, and `python scripts/visual-grounding-check.py` using the worker virtual environment. The historical four-way hybrid comparison isolates the three text channels; its table does not include auxiliary visual retrieval. Existing ready PDF/image sources can be upgraded with `worker/.venv/bin/python scripts/reindex-image-sources.py HOUSEHOLD_UUID`; eligible already-paid jobs are reused, originals and historical citation rows remain, and no extra credit reservation is created.
+| Path | Responsibility |
+| --- | --- |
+| [app/api](app/api) | Household/source/query/citation/location/cache/export/health routes |
+| [components](components) | UI, evidence preview, 3D scene, layout editor |
+| [lib](lib) | Auth, saved facts/locations, credits, storage, DB helpers |
+| [db](db) | Additive location/search/cache/schema migrations |
+| [worker](worker) | Extraction/OCR/models/retrieval/cache/jobs |
+| [config](config) | Retrieval settings and aliases |
+| [evaluation](evaluation) | Frozen synthetic data, specialist results/reports |
+| [tests](tests) | Backend/hierarchy/media/retrieval/cache/auth regression tests |
+| [docs](docs) | Architecture, deployment/model notes, historical audits, real screenshots |
+
+Further reading: [architecture](docs/ARCHITECTURE.md), [design](design.md), [design references](docs/DESIGN_REFERENCES.md), [third-party notices](docs/THIRD_PARTY_NOTICES.md), [detailed-answer boundaries](docs/DETAILED_ANSWERS.md).

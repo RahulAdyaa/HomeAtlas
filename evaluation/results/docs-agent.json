@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "agent": "docs-agent",
+  "audit_date": "2026-10-15",
+  "app_baseline_commit": "5f33a9b157a4394e60f3bac0ede95d293f5bf3fc",
+  "method": "Read-only source and lockfile audit; inspected the existing fictional locations-overview screenshot. No live reliability metrics produced by this agent.",
+  "evaluation_numbers_status": "Final numerical README blocks deferred to stats results and independent verifier. Historical metrics removed from prominent current-result claims.",
+  "features": [
+    {
+      "id": "inventory",
+      "status": "Implemented",
+      "sources": [
+        "components/HomeAtlas.tsx",
+        "app/api/atlas/route.ts"
+      ],
+      "qualification": "Create/edit and name/room filtering; no general item-delete action advertised."
+    },
+    {
+      "id": "saved_inventory_facts",
+      "status": "Implemented",
+      "sources": [
+        "lib/item-facts.ts",
+        "lib/record-names.ts",
+        "app/api/ask/route.ts"
+      ],
+      "qualification": "Supported intent patterns read saved fields directly; not automatic extraction from uploaded identity documents."
+    },
+    {
+      "id": "recorded_locations",
+      "status": "Implemented",
+      "sources": [
+        "lib/location-lookup.ts",
+        "lib/locations.ts",
+        "lib/saved-locations.ts"
+      ],
+      "qualification": "Reports the recorded full path; physical movement is not detected; alias/intent matching is bounded."
+    },
+    {
+      "id": "hierarchy",
+      "status": "Implemented",
+      "sources": [
+        "db/002_locations.sql",
+        "db/003_location_photos.sql",
+        "app/api/locations/route.ts"
+      ],
+      "qualification": "Home, room, zone, optional container; photo association; paths included in chunk text/metadata."
+    },
+    {
+      "id": "scene_and_room_zoom",
+      "status": "Implemented",
+      "sources": [
+        "components/HouseScene.tsx",
+        "components/HomeWorkspace.tsx"
+      ],
+      "qualification": "Data-driven geometry, screen labels with collision hiding, cutaway walls, room transition, controls, selected-path pulse, breadcrumb navigation; no measured FPS claim."
+    },
+    {
+      "id": "layout_editor",
+      "status": "Implemented",
+      "sources": [
+        "components/LayoutEditor.tsx",
+        "lib/home-layout.ts"
+      ],
+      "qualification": "Grid snapping, rooms/furniture, resize/rotate, numeric controls, doors/windows, attached-space flag."
+    },
+    {
+      "id": "demo_home",
+      "status": "Implemented",
+      "sources": [
+        "lib/demo-home.ts",
+        "components/HomeWorkspace.tsx",
+        "worker/search/postgres.py"
+      ],
+      "qualification": "Furnished rooms and labeled synthetic sources; ordinary retrieval excludes samples unless requested."
+    },
+    {
+      "id": "source_versions_and_jobs",
+      "status": "Implemented",
+      "sources": [
+        "app/api/sources/route.ts",
+        "app/api/sources/[id]/retry/route.ts",
+        "worker/jobs.py"
+      ],
+      "qualification": "Immutable originals, async state, leased retries, active evidence generation; new versions do not establish duplicate-content deduplication."
+    },
+    {
+      "id": "source_preview_and_citations",
+      "status": "Implemented",
+      "sources": [
+        "components/DocumentPreview.tsx",
+        "components/HomeAtlas.tsx",
+        "app/api/citations/[id]/route.ts",
+        "app/api/sources/[id]/route.ts"
+      ],
+      "qualification": "Authenticated page/region/row/time evidence and original access; browser/media behavior requires its own live verification."
+    },
+    {
+      "id": "multiformat_ingestion",
+      "status": "Implemented with decoder limits",
+      "sources": [
+        "lib/storage.ts",
+        "worker/ingestion.py",
+        "worker/ocr.py"
+      ],
+      "qualification": "PDF, UTF-8 TXT/CSV, XLSX/XLSM values, Pillow-decodable rasters, FFmpeg-decodable media; no legacy XLS, arbitrary Office formats, executed macros/formulas, or universal codec promise."
+    },
+    {
+      "id": "hybrid_text_retrieval",
+      "status": "Implemented",
+      "sources": [
+        "worker/search/postgres.py",
+        "worker/search/dense.py",
+        "worker/search/word.py",
+        "worker/search/fuzzy.py",
+        "worker/search/fusion.py"
+      ],
+      "qualification": "Parallel dense/word/fuzzy, weighted RRF, location boost, candidate shortlists; cross-encoder optional and disabled by default."
+    },
+    {
+      "id": "normalization_and_aliases",
+      "status": "Implemented",
+      "sources": [
+        "config/search-aliases.json",
+        "worker/search/common.py",
+        "worker/search/suggestions.py",
+        "db/005_hybrid_cache.sql"
+      ],
+      "qualification": "NFKC/lowercase/punctuation, runs longer than two reduced, aliases, n-grams/edit matching and advisory low-score suggestions; not every typo guaranteed."
+    },
+    {
+      "id": "visual_and_voice_queries",
+      "status": "Implemented",
+      "sources": [
+        "components/HomeAtlas.tsx",
+        "app/api/ask/route.ts",
+        "worker/retrieval.py",
+        "worker/models.py"
+      ],
+      "qualification": "Photo attachment, browser microphone note, voice transcription, auxiliary SigLIP2 retrieval; media cache bypass; image queries bypass direct saved-record match."
+    },
+    {
+      "id": "generation_review",
+      "status": "Implemented with model uncertainty",
+      "sources": [
+        "worker/models.py",
+        "worker/vision_assets.py",
+        "worker/retrieval.py",
+        "components/AnswerContent.tsx"
+      ],
+      "qualification": "Local Qwen draft/reviewer, exact quoted spans, source/version validation, supporting pages, safe heading/table display; synthesized visual/text claims can still be wrong."
+    },
+    {
+      "id": "private_bookmarks",
+      "status": "Implemented",
+      "sources": [
+        "app/api/atlas/route.ts",
+        "lib/saved-locations.ts",
+        "components/HomeAtlas.tsx"
+      ],
+      "qualification": "Private saved searches/answers, canonical citations/current location references; optional editor item-history attachment."
+    },
+    {
+      "id": "cache",
+      "status": "Implemented",
+      "sources": [
+        "worker/search/cache.py",
+        "db/005_hybrid_cache.sql",
+        "app/api/ask/route.ts",
+        "app/api/cache/route.ts"
+      ],
+      "qualification": "Household+user/version/config/scope keys, exact/semantic guards, reference validation, TTL/LRU, bypass, owner metrics/clear API; private answer/query content is retained intentionally."
+    },
+    {
+      "id": "cache_clear_settings_button",
+      "status": "Known defect; not advertised as working",
+      "sources": [
+        "components/HomeAtlas.tsx",
+        "app/api/cache/route.ts"
+      ],
+      "qualification": "UI helper sends POST with {method: DELETE} as JSON instead of HTTP DELETE; reported to orchestrator for the sole fixer after baseline."
+    },
+    {
+      "id": "authentication",
+      "status": "Implemented",
+      "sources": [
+        "lib/auth.ts",
+        "components/auth-client.ts",
+        "components/HomeAtlas.tsx",
+        "lib/development-email.ts"
+      ],
+      "qualification": "Verified email/password, reset, passkeys, TOTP/recovery codes, active sessions, revoke other sessions, logout; production requires SMTP/HTTPS and device-specific testing."
+    },
+    {
+      "id": "household_roles",
+      "status": "Implemented",
+      "sources": [
+        "app/api/atlas/route.ts",
+        "lib/server.ts",
+        "components/HomeAtlas.tsx"
+      ],
+      "qualification": "Multiple-household selection, owner/editor/viewer, email-bound invitations, member updates/removal, last-owner protection; application checks, not database RLS."
+    },
+    {
+      "id": "maintenance",
+      "status": "Implemented",
+      "sources": [
+        "app/api/atlas/route.ts",
+        "components/MonthCalendar.tsx",
+        "components/HomeAtlas.tsx"
+      ],
+      "qualification": "In-app one-time/recurring tasks, calendar, completion and activity; no unattended maintenance emails."
+    },
+    {
+      "id": "credits",
+      "status": "Implemented",
+      "sources": [
+        "lib/credits.ts",
+        "db/001_core.sql",
+        "app/api/credits/export/route.ts"
+      ],
+      "qualification": "Monthly allowance, atomic reservation/charge/refund, idempotence, ledger and CSV; no payment provider."
+    },
+    {
+      "id": "owner_operations",
+      "status": "Implemented",
+      "sources": [
+        "app/api/admin/route.ts",
+        "app/api/export/route.ts",
+        "app/api/atlas/route.ts"
+      ],
+      "qualification": "Job/worker/usage/audit views, JSON export omitting storage/vector fields, confirmed deletion; originals separate."
+    },
+    {
+      "id": "responsive_themes_fallback",
+      "status": "Implemented",
+      "sources": [
+        "components/HomeAtlas.tsx",
+        "components/HouseScene.tsx",
+        "components/HomeSpace.module.css",
+        "app/globals.css"
+      ],
+      "qualification": "Light/dark, responsive navigation, reduced motion, WebGL unavailable/lost fallback; not a measured universal-accessibility claim."
+    },
+    {
+      "id": "private_storage_and_queue",
+      "status": "Implemented",
+      "sources": [
+        "lib/storage.ts",
+        "lib/media.ts",
+        "worker/jobs.py",
+        "compose.yaml"
+      ],
+      "qualification": "Private immutable files, authorized byte ranges, PostgreSQL leased queue; no active object-storage/Redis integration."
+    },
+    {
+      "id": "numeric_trust_calibration",
+      "status": "Not implemented",
+      "sources": [
+        "app/api/ask/route.ts",
+        "worker/retrieval.py"
+      ],
+      "qualification": "Confidence is categorical. AUROC/Brier/ECE cannot be claimed without numeric scores and labeled outcomes."
+    },
+    {
+      "id": "conversational_followups",
+      "status": "Not implemented",
+      "sources": [
+        "app/api/ask/route.ts"
+      ],
+      "qualification": "A fresh conversation is created for each ask; saved messages are not supplied as query history."
+    },
+    {
+      "id": "structured_pdf_vision_models",
+      "status": "Not implemented",
+      "sources": [
+        "worker/ingestion.py",
+        "worker/models.py"
+      ],
+      "qualification": "No dedicated table structure model, figure detector, caption model, or chart parser; OCR/page-image interpretation is distinct."
+    },
+    {
+      "id": "deployment",
+      "status": "Included configuration; separate validation required",
+      "sources": [
+        "compose.yaml",
+        "Dockerfile",
+        "worker/Dockerfile",
+        "docs/DEPLOYMENT.md"
+      ],
+      "qualification": "Persistent private files/DB and long-running model/worker processes required; Vercel alone does not host the complete included stack."
+    },
+    {
+      "id": "python_compatibility",
+      "status": "Python 3.12 recommended",
+      "sources": [
+        "scripts/local.sh",
+        "worker/jobs.py",
+        "worker/Dockerfile"
+      ],
+      "qualification": "Setup admits Python 3.10 but hashlib.file_digest requires 3.11+. Reported to orchestrator; README recommends 3.12 until fixed/tested."
+    }
+  ],
+  "prohibited_claims": [
+    "perfect accuracy",
+    "all file formats",
+    "calibrated numeric trust",
+    "production latency SLA",
+    "120 FPS measured",
+    "active S3/MinIO/Redis/payment integration",
+    "conversational query history"
+  ],
+  "screenshot": {
+    "path": "docs/screenshots/locations-overview.png",
+    "inspected": true,
+    "synthetic_fixture": true,
+    "qualifier": "Existing screenshot; no new screenshot measurement claimed."
+  }
+}
