@@ -59,3 +59,25 @@ Baseline is frozen in `evaluation/baseline_results.json` before these changes. R
 - Change: compute the same SHA256 digest with bounded 1 MiB reads, avoiding that version-specific API.
 - Before: the original call cannot execute on Python 3.10 (API absent); the task environment itself runs Python 3.12, so no full Python 3.10 runtime validation is claimed.
 - After: `pytest tests/test_file_hash.py -q` — **2 passed**, including removal of `hashlib.file_digest` and multi-block/empty-file integrity.
+
+## Personal identifier cache retention
+
+- Problem: the frozen security test found a fictional personal-card serial answer persisted in the optional response cache. Household/user isolation passed separately; isolation does not satisfy zero identifier retention.
+- Change: bypass cache lookup/write for personal-card identifier requests and detect identifier-bearing answer/citation/record-fact content even under generic questions. Ordinary household locations and appliance model/serial requests can still cache. Increment the cache policy generation, and remove sensitive legacy entries on authenticated lookup/write without logging their contents.
+- Before: the specialist baseline persisted its synthetic card serial answer (see the frozen security result, not a new estimate).
+- After: `pytest tests/test_cache_privacy.py tests/test_hybrid_search.py -q` — **35 passed**. Real PostgreSQL `HOMEATLAS_DB_TESTS=1 pytest tests/test_eval_fixes_db.py tests/test_semantic_cache.py -q` — **9 passed**, covering no sensitive write, removal of a synthetic legacy sensitive entry, populated appliance-cache exact hits, same-household user isolation, cross-household isolation, move/delete invalidation, TTL/LRU, SQL visual diversity and numeric unions.
+- Deployment action: stop old application/worker processes, clear the **ephemeral** `answer_cache` once without selecting payloads, then start the new code. This purges untouched legacy scopes too. It removes no uploaded source/item records. No schema migration is required.
+- Tradeoff: the frozen security fixture assumes the same personal-card serial requests should generate cache hits. Those hit assumptions are intentionally incompatible with identifier bypass; report their failures honestly and cite the separate populated non-sensitive cache regressions rather than changing the frozen tests. Cached-variant hit rate may fall.
+- Limits: this is a conservative personal-identifier policy, not a guarantee that arbitrary names, addresses or every international identifier format can never occur in free-form cached prose. Authorized original documents remain in their private source store.
+
+## Review independence and recommended work
+
+The answer-support check is a separate verification call using the **same configured local Qwen model**, not an independent external benchmark judge. External-judge-dependent evaluation metrics remain NOT MEASURED when no judge is configured.
+
+Recommended, not done in this narrow fix pass:
+
+- Conversation history and referent resolution: current stateless API does not safely resolve arbitrary follow-ups; this needs a new explicit conversation contract and isolation tests.
+- General structured table/figure/chart parsing and robust degraded-scan recovery: existing OCR/native extraction and visual review cannot guarantee every chart cell, label or blurred identifier. A parser redesign would exceed a safe bug fix.
+- Calibrated numerical trust scores: categorical confidence cannot support AUROC/Brier/ECE or reliability claims without a defined probability and separate calibration data.
+- Universal PII zero retention: broader policy/classification and data lifecycle controls are needed beyond the conservative identifier bypass above.
+- Strictly beating fuzzy-only typo MRR when that channel already scores 1.0 is mathematically impossible on this frozen subset; no metric, gold, threshold, or weight was changed to disguise that limit.

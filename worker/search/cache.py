@@ -11,8 +11,39 @@ from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 from .common import CONFIG, ALIASES, normalize, tokens, edit_distance
 
-CONFIG_VERSION=hashlib.sha256(json.dumps([CONFIG,ALIASES,'cache-v3'],sort_keys=True).encode()).hexdigest()
+CONFIG_VERSION=hashlib.sha256(json.dumps([CONFIG,ALIASES,'cache-v4-sensitive-identifiers'],sort_keys=True).encode()).hexdigest()
 FILLER=set('could would kindly tell show find locate stored kept located put know give details detail about information find out please'.split())
+
+PERSONAL_RECORD = re.compile(r'\b(aadhaar|aadhar|adhaar|adhar|pan|passport|uid|ssn|social security|voter|driving licen[cs]e)\b|आधार', re.I)
+CARD_RECORD = re.compile(r'\b(card|identity|identification)\b', re.I)
+IDENTIFIER = re.compile(r'\b(serial|number|identifier|identification|uid|ssn)\b', re.I)
+IDENTIFIER_VALUE = re.compile(r'\b[a-z]{5}\d{4}[a-z]\b|(?<!\d)(?:\d[ -]?){11}\d(?!\d)', re.I)
+
+
+def sensitive_identifier(query, answer=None):
+    """Do not retain personal card identifiers in this optional response cache.
+
+    Source records remain in their authorized document store. This conservative
+    policy is defense in depth, not a universal PII detector (names, free-form
+    addresses and every national identifier format are outside its guarantee).
+    """
+    answer = answer or {}
+    prose = [query, answer.get('answer', '')]
+    prose.extend(c.get('text', '') for c in answer.get('citations', []))
+    prose.extend(' '.join(str(f.get(k, '')) for k in ('name', 'field', 'label', 'value'))
+                 for f in answer.get('recordFacts', []))
+    text = ' '.join(str(p) for p in prose)
+    return bool(IDENTIFIER_VALUE.search(text) or
+                (IDENTIFIER.search(text) and (PERSONAL_RECORD.search(text) or CARD_RECORD.search(text))))
+
+
+def prune_sensitive(conn, hid, uid):
+    # Clean legacy entries for the authenticated scope without logging payloads.
+    # Deployment also clears the old cache generation once; no source is removed.
+    rows = conn.execute('SELECT id,query,answer FROM answer_cache WHERE household_id=%s AND user_id=%s', (hid,uid)).fetchall()
+    ids = [row['id'] for row in rows if sensitive_identifier(row['query'], row['answer'])]
+    if ids:
+        conn.execute('DELETE FROM answer_cache WHERE household_id=%s AND user_id=%s AND id=ANY(%s)', (hid,uid,ids))
 
 def numbers(query):
     return sorted(re.findall(r'\b\w*\d\w*(?:[-./]\w+)*\b',query.lower()))
@@ -90,6 +121,10 @@ def lookup(hid,uid,query,scope,cfg,engine,bypass=False):
         authorize(conn,hid,uid)
         version=conn.execute('SELECT data_version FROM households WHERE id=%s',(hid,)).fetchone()['data_version']
         result={'hit':False,'dataVersion':str(version),'configVersion':CONFIG_VERSION}
+        prune_sensitive(conn,hid,uid)
+        if sensitive_identifier(query):
+            metric(conn,hid,uid,'misses',(time.monotonic()-start)*1000)
+            return dict(result,bypassReason='sensitive-identifier')
         if bypass or not config['enabled']:return result
         args=(hid,uid,version,CONFIG_VERSION,scope)
         base='''SELECT * FROM answer_cache WHERE household_id=%s AND user_id=%s AND data_version=%s
@@ -126,6 +161,11 @@ def lookup(hid,uid,query,scope,cfg,engine,bypass=False):
 
 def store(hid,uid,query,scope,version,answer,latency,cfg,engine):
     if not CONFIG['cache']['enabled']:return False
+    if sensitive_identifier(query,answer):
+        with psycopg.connect(cfg.database_url,row_factory=dict_row) as conn:
+            authorize(conn,hid,uid)
+            prune_sensitive(conn,hid,uid)
+        return False
     refs=references(answer)
     if answer.get('confidence')!='insufficient' and not refs:return False
     vectors=engine.embed_text([semantic_text(query)],query=True)
