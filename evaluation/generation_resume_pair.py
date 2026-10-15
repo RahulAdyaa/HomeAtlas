@@ -2,8 +2,8 @@
 import os,time,json,subprocess,sys
 from pathlib import Path
 E=Path(__file__).resolve().parent;sys.path.insert(0,str(E))
-from protocol import questions,cache_key,digest,app_fingerprint
-from generation_eval import Engine,metrics_for
+from protocol import questions,digest
+from generation_eval import Engine,metrics_for,cache_key,app_fingerprint
 pid=int(sys.argv[1])
 while True:
  try:os.kill(pid,0)

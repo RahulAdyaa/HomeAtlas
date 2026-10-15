@@ -6,16 +6,25 @@ from importlib.metadata import version as package_version
 from pathlib import Path
 from dataclasses import replace
 from collections import Counter
-ROOT=Path(__file__).resolve().parents[1]; E=ROOT/'evaluation'
+E=Path(__file__).resolve().parent; EVALUATOR_ROOT=E.parent
+ROOT=Path(os.environ.get('EVAL_APP_ROOT',str(EVALUATOR_ROOT))).resolve()
 sys.path.insert(0,str(ROOT));sys.path.insert(0,str(E))
-os.environ.setdefault('MODEL_DIR','/Users/rahuladya/Documents/New project/homeatlas/data/models')
-os.environ.setdefault('EVAL_SHARED_RUNTIME','/Users/rahuladya/Documents/New project/homeatlas/evaluation/runtime')
+os.environ.setdefault('EVAL_SHARED_RUNTIME',str(E/'runtime'))
 os.environ['HF_HUB_OFFLINE']='1';os.environ['TRANSFORMERS_OFFLINE']='1';os.environ['RAGAS_DO_NOT_TRACK']='true'
-from protocol import argument_parser,questions,canonical_chunks,relevant_chunk_ids,cache_key,make_result,write_result,metric,shared_generation_slot,app_fingerprint,digest
+from protocol import argument_parser,questions,canonical_chunks,relevant_chunk_ids,cache_key as _cache_key,make_result as _make_result,write_result,metric,shared_generation_slot,app_fingerprint as _app_fingerprint,digest
 from worker.config import settings
 from worker.models import LocalModels
 from worker.ingestion import extract
 from worker.retrieval import rank_candidates,answer_from_evidence,unrelated_query
+
+# Fingerprints and inference imports must describe the same explicitly selected app.
+import worker.models as _worker_module
+if Path(_worker_module.__file__).resolve().parents[1] != ROOT:
+ raise RuntimeError('Worker imports do not match EVAL_APP_ROOT')
+def cache_key(stage,payload,phase,run):return _cache_key(stage,payload,phase,run,root=ROOT)
+def app_fingerprint():return _app_fingerprint(ROOT)
+def make_result(agent,phase,run,metrics,per_question,config=None):
+ return _make_result(agent,phase,run,metrics,per_question,config,root=ROOT)
 RUNTIME=E/'runtime'/'generation';RUNTIME.mkdir(parents=True,exist_ok=True)
 os.environ['MPLCONFIGDIR']=str(RUNTIME/'mpl');(RUNTIME/'mpl').mkdir(exist_ok=True)
 
@@ -141,16 +150,33 @@ def summarize(rows,consistency=None):
  out.extend(metric(k,None,len(rows),reason='No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment.') for k in unavailable)
  out.append(metric('citation_browser_clickthrough_correct_page_region',None,len(rows),reason='This runner validates canonical citation metadata and exact quotes; no supported browser page/region click-through was executed.'))
  if consistency:
-  out.append(metric('consistency_over_three_runs',avg([r['three_way_exact'] for r in consistency]),len(consistency),definition='Exact normalized agreement across3realpasses; predeclared first answerable question permodality n5.'))
+  out.append(metric('consistency_over_three_runs',avg([r['three_way_exact'] for r in consistency]),len(consistency),definition='Exact normalized agreement across three real passes; predeclared first answerable question per modality, n=5.'))
   out.append(metric('three_run_pairwise_token_f1',avg([r['pairwise_token_f1'] for r in consistency]),len(consistency)))
  else:out.append(metric('consistency_over_three_runs',None,0,reason='Third real generation sample is executed after mandatory run2; none observed for this result.'))
  out.append(metric('generation_model_calls',sum(1 for r in rows for c in r['stage_calls'] if c['stage']=='generation' and not c['cached']),len(rows)))
  out.append(metric('verification_model_calls',sum(1 for r in rows for c in r['stage_calls'] if c['stage']=='verification' and not c['cached']),len(rows)))
  return out
 
+def observe_model_artifact(engine,timing):
+ """Read-only metadata; an observation does not establish a historical immutable pin."""
+ from datetime import datetime,timezone
+ from urllib.parse import urlparse
+ from urllib.request import urlopen
+ observed={'captured_at_utc':datetime.now(timezone.utc).isoformat(),'capture_timing':timing,'requested_model':engine.cfg.generation_model,'endpoint':'configured self-hosted Ollama /api/tags','historical_pin_verified':False}
+ try:
+  endpoint=urlparse(engine.cfg.ollama_url)
+  if endpoint.scheme not in ('http','https') or endpoint.username or endpoint.password:raise ValueError('Invalid model metadata endpoint')
+  with urlopen(engine.cfg.ollama_url.rstrip('/')+'/api/tags',timeout=15) as response:data=json.load(response)
+  observed['artifacts']=[{k:model.get(k) for k in ['name','model','digest','modified_at']} for model in data.get('models',[]) if engine.cfg.generation_model in (model.get('name'),model.get('model'))]
+  observed['status']='MEASURED' if observed['artifacts'] else 'NOT MEASURED'
+  if not observed['artifacts']:observed['reason']='Configured tag absent from local model inventory'
+ except Exception as exc:observed.update(status='NOT MEASURED',reason=type(exc).__name__)
+ return observed
+
 def main():
  global CURRENT_HTTP_ENGINE
  parser=argument_parser(__doc__);args=parser.parse_args();engine=Engine(args.phase,args.run);CURRENT_HTTP_ENGINE=engine
+ artifact_before=observe_model_artifact(engine,'before this runner invocation, which may resume same-run cached answers')
  import worker.models as modelmodule
  original=modelmodule.urlopen
  class Response:
@@ -170,7 +196,7 @@ def main():
  rows_corpus=corpus(engine);rows=[]
  for q in questions('pdf'):
   rows.append(execute(q,rows_corpus,engine,args))
-  result=make_result('generation-agent',args.phase,args.run,summarize(rows),rows,{'resource_scheduling':'Shared generation lock serializes localmodelrequests; other evaluator CPU/embedding work can overlap. Stage wall latency includes lock wait; modelcallseconds exclude it. Developmenthost timings do not establish isolated productioncapacity.','scope':'Actual worker extraction, canonical prefixed chunks, rank_candidates with visual channel, production adjacency and unrelated-query gate, answer_from_evidence. In-memory corpus; HTTP authorization excluded.','citation_metric_definition':'Gold chunk/page metrics check independently authored source/page annotation and exact canonical quotation; not semantic per-claim support. Claim-level precision/recall/groundedness require a judge and remain unmeasured.','generation_model_requested':engine.cfg.generation_model,'served_generation_models_observed':sorted({u['served_model'] for r in rows for c in r['stage_calls'] for u in c.get('usage',[]) if u.get('served_model')}),'generation_identity_note':'Run1 original HTTP observer recordedusage withoutservedmodelname; requestedmodel recorded separately. No missing observedidentity is invented.','metric_library_versions':{name:package_version(name) for name in ['ragas','bert-score','rouge-score','numpy','torch','transformers']},'suite':'pdf','requested_n':60,'partial':True,'main_queries_complete':len(rows)==60,'judge_model':None,'judge_reason':'No free-tier judge credential configured','cache_scope':'generation and verification keyed by phase/run/app fingerprint; resumable only within run','observed_models':engine.status})
+  result=make_result('generation-agent',args.phase,args.run,summarize(rows),rows,{'application_root_selection':'EVAL_APP_ROOT' if os.environ.get('EVAL_APP_ROOT') else 'evaluator repository root','call_count_definition':'generation_model_calls and verification_model_calls count new requests represented in final per-question stage records; resumed model-response cache hits retain historical usage/durations and are not new calls. Interrupted predecessor invocations are not reconstructed as new calls.','resource_scheduling':'The shared lock serializes local model requests; other evaluator CPU/embedding work can overlap. Stage wall latency includes lock waiting; model-call seconds exclude it. Development host timings do not establish isolated production capacity.','scope':'Actual worker extraction, canonical prefixed chunks, rank_candidates with visual channel, production adjacency and unrelated-query gate, answer_from_evidence. In-memory corpus; HTTP authorization excluded.','citation_metric_definition':'Gold chunk/page metrics check independently authored source/page annotation and exact canonical quotation; not semantic per-claim support. Claim-level precision/recall/groundedness require a judge and remain unmeasured.','model_artifact_before':artifact_before,'generation_model_requested':engine.cfg.generation_model,'served_generation_models_observed':sorted({u['served_model'] for r in rows for c in r['stage_calls'] for u in c.get('usage',[]) if u.get('served_model')}),'generation_identity_note':'The historical baseline run 1 observer omitted served-model names. They are not inferred from requested tags. Each run lists only HTTP names actually captured.','metric_library_versions':{name:package_version(name) for name in ['ragas','bert-score','rouge-score','numpy','torch','transformers']},'suite':'pdf','requested_n':60,'partial':True,'main_queries_complete':len(rows)==60,'judge_model':None,'judge_reason':'No free-tier judge credential configured','cache_scope':'generation and verification keyed by phase/run/app fingerprint; resumable only within run','observed_models':engine.status})
   write_result(args.output,result)
  bert=reference_embeddings(rows,engine);consistency=[]
  if args.run==2:
@@ -182,6 +208,6 @@ def main():
    if not r1path.exists():continue
    r1=json.loads(r1path.read_text());aa=[r['result']['answer'] for r in [r1,r2,r3]]
    consistency.append({'id':q['id'],'run_ids':[r1['run_id'],r2['run_id'],r3['run_id']+'-third-pass'],'third_pass_result':r3,'three_way_exact':float(len({normalized(a) for a in aa})==1),'pairwise_token_f1':avg([f1(aa[0],aa[1]),f1(aa[0],aa[2]),f1(aa[1],aa[2])])})
- result=make_result('generation-agent',args.phase,args.run,summarize(rows,consistency),rows,{**result['config'],'partial':False,'completion':{'main_queries_complete':len(rows)==60,'reference_metrics_complete':True,'consistency_sample_complete':args.run==1 or len(consistency)==5},'custom_bertscore':bert,'observed_models':engine.status});result['three_run_consistency_sample']=consistency;write_result(args.output,result)
+ result=make_result('generation-agent',args.phase,args.run,summarize(rows,consistency),rows,{**result['config'],'partial':False,'completion':{'main_queries_complete':len(rows)==60,'reference_metrics_complete':True,'consistency_sample_complete':args.run==1 or len(consistency)==5},'custom_bertscore':bert,'model_artifact_after':observe_model_artifact(engine,'after main questions and consistency sample'),'observed_models':engine.status});result['three_run_consistency_sample']=consistency;write_result(args.output,result)
  print(json.dumps({'event':'run_complete','run':args.run,'questions':len(rows)}),flush=True)
 if __name__=='__main__':main()
