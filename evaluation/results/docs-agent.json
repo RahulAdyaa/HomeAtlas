@@ -4,7 +4,7 @@
   "audit_date": "2026-10-15",
   "app_baseline_commit": "5f33a9b157a4394e60f3bac0ede95d293f5bf3fc",
   "method": "Read-only source and lockfile audit; inspected the existing fictional locations-overview screenshot. No live reliability metrics produced by this agent.",
-  "evaluation_numbers_status": "Final numerical README blocks deferred to stats results and independent verifier. Historical metrics removed from prominent current-result claims.",
+  "evaluation_numbers_status": "Baseline tables formatted from frozen baseline_results.json; no final claims. Complete family inventory includes NOT MEASURED and NOT MET. Display formatting does not compute new metrics.",
   "features": [
     {
       "id": "inventory",
@@ -314,5 +314,645 @@
     "inspected": true,
     "synthetic_fixture": true,
     "qualifier": "Existing screenshot; no new screenshot measurement claimed."
-  }
+  },
+  "readme_metric_references": [
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/precision@5",
+      "label": "Precision"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/recall@5",
+      "label": "Recall"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/f1@5",
+      "label": "F1"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/hit@5",
+      "label": "Hit rate"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/mrr@5",
+      "label": "MRR"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/ndcg@5",
+      "label": "NDCG"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/map@5",
+      "label": "MAP"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/r_precision@5",
+      "label": "R-Precision"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/unique_source_ratio@5",
+      "label": "Unique-source ratio"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/modality_entropy@5",
+      "label": "Modality entropy"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/gold_modality_hit@5",
+      "label": "Gold-modality hit rate"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/dense/recall@5",
+      "label": "Dense \u2014 overall RECALL@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/dense/mrr@5",
+      "label": "Dense \u2014 overall MRR@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/word/recall@5",
+      "label": "Word BM25 \u2014 overall RECALL@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/word/mrr@5",
+      "label": "Word BM25 \u2014 overall MRR@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/fuzzy/recall@5",
+      "label": "Fuzzy \u2014 overall RECALL@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/fuzzy/mrr@5",
+      "label": "Fuzzy \u2014 overall MRR@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_text_diagnostic10/recall@5",
+      "label": "Three-text-channel RRF (diagnostic) \u2014 overall RECALL@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_text_diagnostic10/mrr@5",
+      "label": "Three-text-channel RRF (diagnostic) \u2014 overall MRR@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/recall@5",
+      "label": "Runtime text + visual RRF \u2014 overall RECALL@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/mrr@5",
+      "label": "Runtime text + visual RRF \u2014 overall MRR@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "typo/dense/mrr@5",
+      "label": "Dense \u2014 typo MRR@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "typo/word/mrr@5",
+      "label": "Word BM25 \u2014 typo MRR@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "typo/fuzzy/mrr@5",
+      "label": "Fuzzy \u2014 typo MRR@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "typo/hybrid_text_diagnostic10/mrr@5",
+      "label": "Three-text-channel RRF (diagnostic) \u2014 typo MRR@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "typo/hybrid_runtime/mrr@5",
+      "label": "Runtime text + visual RRF \u2014 typo MRR@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "text/hybrid_runtime/recall@5",
+      "label": "text \u2014 runtime recall@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "table/hybrid_runtime/recall@5",
+      "label": "table \u2014 runtime recall@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "image/hybrid_runtime/recall@5",
+      "label": "image \u2014 runtime recall@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "chart/hybrid_runtime/recall@5",
+      "label": "chart \u2014 runtime recall@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "scanned/hybrid_runtime/recall@5",
+      "label": "scanned \u2014 runtime recall@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "cross_modal/source_page_hit@5",
+      "label": "Cross-modal source-page hit@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "cross_modal/text_modality_hit@5",
+      "label": "Cross-modal text-modality hit@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "degraded_scan/hit@5",
+      "label": "Degraded-scan hit@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "degraded_scan/recall@5",
+      "label": "Degraded-scan recall@5"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/reranked_diagnostic10/recall@5",
+      "label": "Optional-reranker overall recall@5 (diagnostic)"
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "typo/reranked_diagnostic10/mrr@5",
+      "label": "Optional-reranker typo MRR@5 (diagnostic)"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "exact_match",
+      "label": "Exact match"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "token_f1",
+      "label": "Token F1"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "rouge_l",
+      "label": "ROUGE-L"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "custom_e5_bertscore_precision",
+      "label": "Custom E5 BERTScore precision"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "custom_e5_bertscore_recall",
+      "label": "Custom E5 BERTScore recall"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "custom_e5_bertscore_f1",
+      "label": "Custom E5 BERTScore F1"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "ragas_answer_similarity",
+      "label": "RAGAS AnswerSimilarity (local E5)"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "reference_term_coverage_diagnostic",
+      "label": "Reference-term coverage (diagnostic)"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "answer_reference_length_ratio",
+      "label": "Answer/reference length ratio (diagnostic)"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "consistency_over_three_runs",
+      "label": "Three-run consistency (predeclared subset)"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "three_run_pairwise_token_f1",
+      "label": "Three-run pairwise token F1 (subset)"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_exact_quote_rate",
+      "label": "Citation exact-quote validity, conditional"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_canonical_page_rate",
+      "label": "Canonical citation-page rate, conditional"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_authored_region_overlap_rate",
+      "label": "Citation authored-region overlap"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_precision",
+      "label": "Citation gold precision"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_recall",
+      "label": "Citation gold chunk recall"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_f1",
+      "label": "Citation gold F1"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_page_recall",
+      "label": "Citation gold page recall"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "abstention_precision",
+      "label": "Abstention precision"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "abstention_recall",
+      "label": "Abstention recall"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "false_refusal_rate",
+      "label": "False-refusal rate"
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "negative_answer_rate",
+      "label": "Negative-question non-abstention rate"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.room_accuracy",
+      "label": "Room accuracy"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.zone_accuracy",
+      "label": "Zone accuracy"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.container_accuracy",
+      "label": "Container accuracy \u2014 one probe only"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.full_path_accuracy",
+      "label": "Full-path accuracy"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.location_link_accuracy",
+      "label": "Location-link metadata accuracy"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.document_identifier_fact_presence",
+      "label": "Identifier fact presence in document answer"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.document_date_fact_presence",
+      "label": "Date fact presence in document answer"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.document_amount_fact_presence",
+      "label": "Amount fact presence in document answer"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.aggregate_fact_presence",
+      "label": "Aggregate fact presence"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.follow-up_fact_presence",
+      "label": "Follow-up fact presence"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.follow_up_history_support",
+      "label": "History support"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.upload_index_ready_rate",
+      "label": "Upload ready rate"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.upload_response_to_ready_mean_ms",
+      "label": "Upload response-to-ready mean, ms"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.duplicate_location_handling",
+      "label": "Duplicate location handling"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.move_freshness",
+      "label": "Move freshness"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.delete_freshness",
+      "label": "Delete freshness"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.exact_hit_rate",
+      "label": "Exact cache hit rate"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.exact_correct_answer_hit_rate",
+      "label": "Exact correct-answer hit rate"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.variant_hit_rate",
+      "label": "Semantic variant hit rate"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.variant_answer_accuracy",
+      "label": "Variant answer accuracy"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.variant_correct_answer_hit_rate",
+      "label": "Variant correct-answer hit rate"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.near_miss_false_hit_rate",
+      "label": "Near-miss false-hit rate"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.move_delete_invalidation",
+      "label": "Source move/delete invalidation"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.item_move_delete_freshness",
+      "label": "Item move/delete freshness"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.bypass_http_mean_ms",
+      "label": "Bypass HTTP mean, ms \u2014 saved facts"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.exact_http_mean_ms",
+      "label": "Exact-cache HTTP mean, ms \u2014 saved facts"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.semantic_http_mean_ms",
+      "label": "Semantic HTTP mean, ms \u2014 variants"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.generated_inprocess_bypass_llm_calls",
+      "label": "Generated in-process bypass LLM calls"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.generated_inprocess_cached_llm_calls",
+      "label": "Generated in-process cached LLM calls"
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.generated_inprocess_latency_saved_ms",
+      "label": "Generated in-process latency saved, ms"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "ocr.scanned.cer_macro",
+      "label": "Scanned OCR character error rate (macro)"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "ocr.scanned.wer_macro",
+      "label": "Scanned OCR word error rate (macro)"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "table.cell_text_recall",
+      "label": "Table literal cell-text recall"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "table.row_major_text_sequence_preserved_rate",
+      "label": "Table row-major text sequence retention"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "table.structured_output_rate",
+      "label": "PDF structured-table output rate"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "figure.page_preview_retention_rate",
+      "label": "Figure/image page-preview retention"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "image.literal_label_recall",
+      "label": "Image literal-label recall"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "chart.axis_legend_text_recall",
+      "label": "Chart axis/legend text recall"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "chart.numeric_label_text_recall",
+      "label": "Chart numeric-label text recall"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "chunking.overall.literal_evidence_single_chunk_rate",
+      "label": "Evidence single-chunk rate (literal diagnostic)"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "chunking.table_split_rate",
+      "label": "Table split rate (literal diagnostic)"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "chunking.figure_label_caption_single_chunk_rate",
+      "label": "Figure label/caption single-chunk rate (literal)"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "chunking.overall.content_characters_mean",
+      "label": "Content characters/chunk, mean"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "chunking.overall.content_characters_p95",
+      "label": "Content characters/chunk, p95"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "ingestion.overall.parser_seconds_per_page_mean",
+      "label": "Parser seconds/page, mean"
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "ingestion.overall.parser_seconds_per_page_p95",
+      "label": "Parser seconds/page, p95"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "security_isolation_pass_rate",
+      "label": "Household/user/cache isolation pass rate"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "prompt_injection_resistance_rate",
+      "label": "Prompt-injection resistance \u2014 output probes"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "prompt_injection_http_safety_rate",
+      "label": "Prompt-injection HTTP safety"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "prompt_injection_answer_fact_rate",
+      "label": "Prompt-injection answer fact presence"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "sensitive_answer_cache_persistence_rate",
+      "label": "Sensitive identifier persisted in authorized cache"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "publication_sensitive_value_leak_files",
+      "label": "Publication sensitive-value leak files"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "pdf_all_retrieval_seconds_p50",
+      "label": "PDF retrieval p50, seconds"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "pdf_all_retrieval_seconds_p95",
+      "label": "PDF retrieval p95, seconds"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "pdf_all_model_generation_seconds_p50",
+      "label": "PDF model generation p50, seconds"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "pdf_all_model_generation_seconds_p95",
+      "label": "PDF model generation p95, seconds"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "pdf_all_model_verification_seconds_p50",
+      "label": "PDF verification p50, seconds"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "pdf_all_model_verification_seconds_p95",
+      "label": "PDF verification p95, seconds"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "pdf_all_total_seconds_p50",
+      "label": "PDF total p50, seconds"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "pdf_all_total_seconds_p95",
+      "label": "PDF total p95, seconds"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "pdf_all_mean_actual_new_model_calls",
+      "label": "PDF model calls/query, mean"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "pdf_all_mean_prompt_tokens",
+      "label": "PDF prompt tokens, conditional mean"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "pdf_all_mean_completion_tokens",
+      "label": "PDF completion tokens, conditional mean"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "live_recorded_fact_concurrent_p95_ms",
+      "label": "Concurrent saved-fact p95, ms"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "live_recorded_fact_concurrent_failure_rate",
+      "label": "Concurrent saved-fact failure rate"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "parse_text_4096_bytes_seconds",
+      "label": "Text parse: 4,096 bytes, seconds"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "parse_text_262144_bytes_seconds",
+      "label": "Text parse: 262,144 bytes, seconds"
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "parse_text_2097152_bytes_seconds",
+      "label": "Text parse: 2,097,152 bytes, seconds"
+    }
+  ],
+  "baseline_summary_source": "evaluation/baseline_results.json",
+  "baseline_source_fingerprint": "e89dd896bea27ebdf4ac879f91549f28c82c4004f7ffbb7b9b8c41fa68b08b25",
+  "formatting": "Six significant digits; full-precision values and CI reasons retained in linked raw results/CSV."
 }
