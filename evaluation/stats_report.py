@@ -2,6 +2,7 @@
 from __future__ import annotations
 import csv
 import json
+import os
 from pathlib import Path
 
 
@@ -96,6 +97,23 @@ def write_outputs(evaluation: Path, payload: dict):
     for source in current['sources']:
         for run in source['runs']:
             lines.append(f'| {source["agent"]} | {run["run"]} | `{run["app_commit"]}` | {run["timestamp_utc"]} |')
+    if final and baseline:
+        keys = ['all/hybrid_runtime/precision@5', 'all/hybrid_runtime/recall@5',
+                'all/hybrid_runtime/mrr@5', 'all/hybrid_runtime/ndcg@5',
+                'all/hybrid_runtime/hit@5', 'typo/hybrid_runtime/mrr@5']
+        headline = [m for name in keys for m in all_metrics if m['agent'] == 'retrieval-agent' and m['metric'] == name]
+        # Keep regressions visible before the exhaustive grids. These are the
+        # original frozen metrics, not a favorable replacement score.
+        intro = ['', '## Main measured changes — including regressions', '',
+                 'The unchanged strict chunk metrics must be assessed together. '
+                 'Several retrieval measures declined after the fixes even where hit rate improved; '
+                 'neither a hit nor a more diverse result set proves that the answer is correct. '
+                 'The complete tables retain every setting and failing case.', '']
+        intro += table(headline, baseline_lookup)
+        intro += ['']
+        # Insert immediately after the opening outcome, before provenance.
+        insertion = lines.index('## Frozen scope and provenance')
+        lines[insertion:insertion] = intro
     lines += ['', 'Evaluation-only commits can differ between specialists; the application source hash is authoritative. '
               'The input audit runs once because it checks immutable files rather than performing model inference.', '',
               '## Statistical method', '',
@@ -183,6 +201,51 @@ def write_outputs(evaluation: Path, payload: dict):
                          '. ' + finding + ' '
                          'Household/user isolation is a separate check and does not remove this persistence. '
                          'Private process-log leakage remains NOT MEASURED; no real private logs were inspected.')
+    if final:
+        root = Path(os.environ.get('EVAL_APP_ROOT', str(evaluation.parent)))
+        lines += ['', '### Frozen security assumptions and provenance limitations', '',
+                  'The frozen security fixture expected a serial-number answer to remain cached. '
+                  'The identifier-cache privacy fix deliberately bypasses that retention path, so the '
+                  'retention-assumption probes must be interpreted separately from actual isolation. '
+                  'The raw failed probe IDs and counts below are retained; passing other probes '
+                  'does not justify calling every security feature perfect. '
+                  'The frozen cross-user/cross-household cache checks use that same now-uncached '
+                  'answer, so their final success does not establish isolation of a populated '
+                  'non-sensitive cache. The separate populated-cache regressions below have a '
+                  'different scope and are not substituted into the frozen score.', '',
+                  'The security evaluator also retains static baseline prose '
+                  '`strict_privacy_requirement.status=NOT_MET`. The display above follows the '
+                  'actual sensitive-answer persistence metric and its zero target, while preserving '
+                  'the raw configuration unchanged. A zero result on one synthetic canary does not '
+                  'establish universal PII detection or zero real-world leakage.', '',
+                  'Known baseline provenance limitation: security '
+                  '`generation_result_hash` points to a pre-finalization generation metadata object. '
+                  'The reused timing and stage-call rows match the finalized same-pass generation '
+                  'observations exactly; the metadata digest itself is stale. The immutable baseline '
+                  'is not rewritten. Final imports are taken after generation metadata stabilizes.', '']
+        security_path = root / 'evaluation/results/security-system-agent.json'
+        if security_path.is_file():
+            for security_run in json.loads(security_path.read_text()).get('runs', []):
+                if security_run.get('phase') != 'final':
+                    continue
+                probes = [r for r in security_run.get('per_question', []) if r.get('group') == 'J/K-live']
+                failed = [r['id'] for r in probes if not r.get('passed')]
+                lines += [f'Final run {security_run["run"]}: {len(probes)-len(failed)} of {len(probes)} '
+                          f'live probes passed (n={len(probes)}). Failed probe IDs: ' +
+                          (', '.join('`'+text(id)+'`' for id in failed) if failed else 'none') + '.', '']
+        fixer_path = root / 'evaluation/results/fixer-agent.json'
+        if fixer_path.is_file():
+            fixes = json.loads(fixer_path.read_text())
+            lines += ['### Separate post-fix regression checks', '',
+                      'These are the fixer’s observed test results, separate from the frozen RAG '
+                      'benchmark. Test subsets overlap; their counts must not be added together. '
+                      'Passing local regressions does not replace the measured retrieval or answer '
+                      'quality outcomes. Source: [fixer-agent.json](results/fixer-agent.json).', '',
+                      '| Check | Passed tests (n) | Failed tests | Status |',
+                      '| --- | --- | --- | --- |']
+            for check in fixes.get('checks', []):
+                lines.append(f'| `{text(check["command"])}` | {check.get("passed", "Not a test count")} | '
+                             f'{check.get("failed", "Not a test count")} | {text(check["status"])} |')
     chapters = [
         ('B/C/D: generation, citations and abstention', 'generation-agent',
          'Exact match, token F1 and ROUGE-L compare reference wording and can penalize valid longer answers. '
