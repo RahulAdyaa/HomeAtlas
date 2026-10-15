@@ -1,0 +1,1634 @@
+{
+  "schema_version": 1,
+  "agent": "testset-agent",
+  "runs": [
+    {
+      "schema_version": 1,
+      "agent": "testset-agent",
+      "phase": "baseline",
+      "run": 1,
+      "run_id": "baseline-run-01",
+      "timestamp_utc": "2026-10-15T07:06:17.675740+00:00",
+      "seed": 741,
+      "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
+      "app_commit": "5f33a9b157a4394e60f3bac0ede95d293f5bf3fc",
+      "app_source_fingerprint": "e89dd896bea27ebdf4ac879f91549f28c82c4004f7ffbb7b9b8c41fa68b08b25",
+      "app_files": {
+        "app/api/admin/route.ts": "b67bacea62dca51879db89c49c49f0fd0d13bd04442a0efd8d50570091db6b31",
+        "app/api/ask/route.ts": "2b98b3bcc7c1735f47c8215e4eb34af829b7780584166c8819b44579c9411397",
+        "app/api/atlas/route.ts": "728b2e1fd35c1ca0d18579fb28be1a36df61359700d0c2a18b3604ba81a55404",
+        "app/api/auth/[...all]/route.ts": "ebd5b4369a25eac1933db4b2451ef9a332cdb0f9e9665159b6913751d58207d3",
+        "app/api/cache/route.ts": "393bfc56bf98086c587197e08bcf40645116a5d574f291ec9cd0f01712d7d9af",
+        "app/api/citations/[id]/route.ts": "5f886196d238a3669c5a18ddde4f3d76df65a87db96811bfda893684651a0ac7",
+        "app/api/credits/export/route.ts": "ad1d017fa4cf226048b8b37170f5c183df4ae74401a3e9ecdae4baac7241d47c",
+        "app/api/development/verification/route.ts": "246c9cdb6491bc39548204a94cd548b6091467de6d44698f97fae3532217ad3d",
+        "app/api/export/route.ts": "ef42be7531e65662b187ed76e9c5add2a5c295ac364c7295c789a4d5c49b82ed",
+        "app/api/health/route.ts": "4ee0eafa21e8cb64551462aba3c2c2c858feb45aca84fc7b40cc82b8501dba39",
+        "app/api/locations/route.ts": "9ea949b5d735dbc6a9c1c200c44624fbc0ed62b81bf49081447e7adbd8159596",
+        "app/api/sources/[id]/retry/route.ts": "b7f5ac015e8696a3b544e6ce501de63a679dfb06c331acacacf2a4888e360a79",
+        "app/api/sources/[id]/route.ts": "97422d916b6e67ec171da7f934c5a7521cab8d2ed58c76a9d73c88a0e6126fba",
+        "app/api/sources/route.ts": "595377817498dd3ff5c396f5d2c0159dea20ca9d6c38a473ac87c535845743c2",
+        "config/retrieval.json": "9688ec33eee34cd8ea7cac80cea85e5f7e0db1baf310b49b73dd94d0d7bd1c2d",
+        "config/search-aliases.json": "7aeb5d0a2c876fab211f2b47b0347eb7440017e44624ad94b30c18819bb35a8f",
+        "db/001_core.sql": "2eeb3fd9ba1dc17f8de296e42160cc7f4746148dc0d1855551f058f85bb64726",
+        "db/002_locations.sql": "bd829d17422246734783edcec8bc13a615b965730d207c4c827f5a191f88d442",
+        "db/003_location_photos.sql": "76a00c3151bae0d87befd6d00e63ce16e2699801513ee412eb02e20517914217",
+        "db/004_bookmark_locations.sql": "bf278e2f801688fcea54a7cf9e38101f8a694f8c7d8472471d58e10c527134a7",
+        "db/005_hybrid_cache.sql": "41affc7b18ed5a3a2e0bffe097c44c6cc566a9a3907fd77707a266a2d0b5bf14",
+        "lib/auth.ts": "b218df4d5c246a9e2fffaf502e543adef85007f61dffad3f9f940385a06fad12",
+        "lib/credits.ts": "3c830a2f6d270cbe931cf5e47777c1e134b2a0bab94d453aae1dc88655d8b7bc",
+        "lib/db.ts": "9ee18dec6b1c1da29f26322e42806d80648db05c966e01c51834d713a5ed4a57",
+        "lib/demo-home.ts": "1df30b11d7f24b0d1332968b72581ac16682ddf634e0db1f0782db59e07f64f9",
+        "lib/development-email.ts": "f804b1a3beae2ab6d51a4391f0306c6b3b7967f9ef75dec0b1bba5d5d8882f5b",
+        "lib/email.ts": "daa21219aaeb0071c8baf690852df012708ef092adf5e20083382b993a2dee4b",
+        "lib/home-layout.ts": "29948ff756f28c719f0ba03b296fb5efbebbb28cb3df2bf37e9f262f517d21f8",
+        "lib/item-facts.ts": "29e77859fc1733070495b20fa04036cade29b65d6c538e69a05f6788703f444f",
+        "lib/location-lookup.ts": "51b091316946ef249ed4186f2fc797124dd3ef7ae6b537c616aacb9849008d84",
+        "lib/locations.ts": "5143f84916b700c7162b3da9062f084e2228e8c40f21c277729231c110c1d4bd",
+        "lib/media.ts": "3e5fd8ce7502a51e71b7818184a4003f06129ef654c0cd8e1b42256fecefd09f",
+        "lib/pg-types.ts": "f4e948f2918aff8f7dcec72555f30dadaf8d9f9a2868975b9307ddf9edb1a9c2",
+        "lib/record-names.ts": "4dbea74929c7c45a46f7ddf685b391142f050d6764797f34699f2ce5ea45b722",
+        "lib/saved-locations.ts": "1392327a6a0a52f28455e37d86c39ae37b595e6dabc20ba8a630721d2f5b8694",
+        "lib/server.ts": "54925d1111ea145db4055847691440cfe3d29f28e5ef72f9920f26b39eb5d9b7",
+        "lib/storage.ts": "f4ebd25aea8bfc5e61268a6ce71a164160c529efc29877a654510e2cdcf73986",
+        "lib/worker.ts": "034f9a59cf7f2e478a52805a80591bc4a3d29e3eb6533f4f67635c1a190010ad",
+        "package-lock.json": "b939354d248d7343fcb0229a3d9377c4fa6bf13ce883335b047cda1c4b176e09",
+        "package.json": "57b3dd7bf8eaf4a0f3ad418b25c0e277b9350046355708843a6919a980c89d99",
+        "worker/__init__.py": "f312d6cf7091412d802a0551fc1c5aea8fc3866ef154ce5b0d889eca89888cd5",
+        "worker/app.py": "0f6207c8e2d23b6f4a9d3dde9300f3e4c0252025388670a7072d37e68dce1790",
+        "worker/config.py": "ee87f131ba16ce223191cce59821ebe48c4a6a03b76064f1a4858964070191cd",
+        "worker/download_models.py": "76d3cd13b2a5107bed4a32037caf43c6baac1aa8ef13b2b0819fd6200ba38fb0",
+        "worker/ingestion.py": "7725d4ef98293174be086e3f0fa5c6bf7fbf5d58c33f2ef97cccef9a0cf4fbe7",
+        "worker/jobs.py": "f0308b8c84a72461ae59fe7049fdd958f46ea338e8a99e10d0e8d2408d71afb8",
+        "worker/models.py": "c4b16c69d397ba287e661e35ae80922e8c6fc5d96eff1c8334a1ab86c63a1253",
+        "worker/ocr.py": "8277b1b79f59ca755e266c6640966dfd0a1b5a99fa669c5591525cb219ad2e30",
+        "worker/pictures.py": "e2ba2caf1ec0a0b5f37d30d555446626faf29a9359e89e02b72f340c4ff1cdc2",
+        "worker/requirements.lock.txt": "3907433bfd5c1fbc716e5e61a1a4ff4013d25d61ba322fa1324e2f99cddeb80c",
+        "worker/requirements.txt": "501bc6f681d27f5bf120b951925dd10b9dd3888635c811b1f18f9117fd63dfa3",
+        "worker/retrieval.py": "c31824633992b4a169b39d62e77b4ad5e197cdabacefa0a8f91f25ca51d863a4",
+        "worker/search/__init__.py": "edcb3ca6c0c31d21cfb1fa7cfa320dd24cfb7950185ef8eebd62cd3373829e7c",
+        "worker/search/cache.py": "fbd27b1a23df92c3ad3db5973f3d243bfac951a432694aefb86c059ed1986b56",
+        "worker/search/common.py": "0b4c4e0620c3a35e2587fe38c7069432556001385e230205d70d138b73a951e1",
+        "worker/search/dense.py": "ee1f2173d523f43fc0dcef95a2590ef792949fd35ea5d4435e776ca0ad44e3e2",
+        "worker/search/fusion.py": "20677b20b693166267da67ed996b678ffd7d9d1173c48f086eb24b10e0b79449",
+        "worker/search/fuzzy.py": "61c5ef0a74544addd05d1b2d094b2d2c86c35c83864d9f912c5b73d353360847",
+        "worker/search/postgres.py": "3e497971fcc7db7995273e56545761c4e0ed1c0c1c975bbb3b9e963f16aa3f3f",
+        "worker/search/suggestions.py": "2a723784e5f8cf294c517fdf947de71e4d94322bab76bf3bcfedc2bbf35952c4",
+        "worker/search/visual.py": "00866511e472b4e9331434b3a4c6482ac6187affb8bc9f52c97877940c850c1b",
+        "worker/search/word.py": "20bce792d8792d9c6efc73b8923c2eb4f2f5e8bb3872a5c87ddd43410fbfb13b",
+        "worker/vision_assets.py": "63ac83b7f89a70de0ae89c289ee6097b2947319cf3b11e8dc40d075cd59b6524"
+      },
+      "config": {
+        "suite_counts": {
+          "pdf": 60,
+          "household": 78,
+          "all": 138
+        },
+        "fixtures": [
+          {
+            "file": "fixtures/chart.pdf",
+            "page_count": 4,
+            "sha256": "d5c72243d1561792a0dfe17f8315de8ae0501345d44ccf3026d245aa0f6b963f",
+            "metadata_keys": [
+              "author",
+              "creationDate",
+              "creator",
+              "encryption",
+              "format",
+              "keywords",
+              "modDate",
+              "producer",
+              "subject",
+              "title",
+              "trapped"
+            ],
+            "metadata_authored_personal_identity": false
+          },
+          {
+            "file": "fixtures/image.pdf",
+            "page_count": 4,
+            "sha256": "2d3aade25a7a6879ff18fd365981ec315bf6053b52faaf7efc4a384423d2c40e",
+            "metadata_keys": [
+              "author",
+              "creationDate",
+              "creator",
+              "encryption",
+              "format",
+              "keywords",
+              "modDate",
+              "producer",
+              "subject",
+              "title",
+              "trapped"
+            ],
+            "metadata_authored_personal_identity": false
+          },
+          {
+            "file": "fixtures/scanned.pdf",
+            "page_count": 4,
+            "sha256": "821bd29ff485ff4a0566816ec4746709f58789cb6e7664bdf7b48ef1aa844dbe",
+            "metadata_keys": [
+              "author",
+              "creationDate",
+              "creator",
+              "encryption",
+              "format",
+              "keywords",
+              "modDate",
+              "producer",
+              "subject",
+              "title",
+              "trapped"
+            ],
+            "metadata_authored_personal_identity": false
+          },
+          {
+            "file": "fixtures/table.pdf",
+            "page_count": 4,
+            "sha256": "f16c42a18ea172f013f55ca8251f9dfc7884a744188d39219594b6086a094971",
+            "metadata_keys": [
+              "author",
+              "creationDate",
+              "creator",
+              "encryption",
+              "format",
+              "keywords",
+              "modDate",
+              "producer",
+              "subject",
+              "title",
+              "trapped"
+            ],
+            "metadata_authored_personal_identity": false
+          },
+          {
+            "file": "fixtures/text.pdf",
+            "page_count": 4,
+            "sha256": "63187fa83b2ba9978ffe46e0422e914b894e309d1ca3697c95c03d8a5c1b793a",
+            "metadata_keys": [
+              "author",
+              "creationDate",
+              "creator",
+              "encryption",
+              "format",
+              "keywords",
+              "modDate",
+              "producer",
+              "subject",
+              "title",
+              "trapped"
+            ],
+            "metadata_authored_personal_identity": false
+          }
+        ],
+        "audit": "Original questions equality compared against git HEAD; PDF open/page metadata checked; no inference performed; no live DB or user data accessed."
+      },
+      "models": {
+        "published_defaults": {
+          "TEXT_EMBEDDING_MODEL": "intfloat/multilingual-e5-small",
+          "TEXT_EMBEDDING_REVISION": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+          "RERANKER_MODEL": "BAAI/bge-reranker-base",
+          "RERANKER_REVISION": "2cfc18c9415c912f9d8155881c133215df768a70",
+          "IMAGE_EMBEDDING_MODEL": "google/siglip2-base-patch16-224",
+          "IMAGE_EMBEDDING_REVISION": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+          "GENERATION_MODEL": "qwen3-vl:4b-instruct",
+          "OCR_BACKEND": "tesseract",
+          "OCR_LANGUAGES": "eng+hin"
+        },
+        "requirement": "Each actual runner must also record observed engine identities and overrides."
+      },
+      "metrics": [
+        {
+          "metric": "original_questions_preserved",
+          "value": 60,
+          "n": 60,
+          "status": "MEASURED",
+          "reason": null
+        },
+        {
+          "metric": "frozen_question_count",
+          "value": 138,
+          "n": 138,
+          "status": "MEASURED",
+          "reason": null
+        },
+        {
+          "metric": "frozen_pdf_count",
+          "value": 5,
+          "n": 5,
+          "status": "MEASURED",
+          "reason": null
+        },
+        {
+          "metric": "complete_ground_truth_records",
+          "value": 138,
+          "n": 138,
+          "status": "MEASURED",
+          "reason": null
+        },
+        {
+          "metric": "typo_hinglish_question_count",
+          "value": 38,
+          "n": 78,
+          "status": "MEASURED",
+          "reason": null
+        },
+        {
+          "metric": "external_judge_metrics",
+          "value": null,
+          "n": 0,
+          "status": "NOT MEASURED",
+          "reason": "No free-tier judge credential configured at dataset freeze; this agent performs dataset audit only."
+        }
+      ],
+      "per_question": [
+        {
+          "id": "text-01",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Desk > Top drawer"
+        },
+        {
+          "id": "text-02",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Desk > Top drawer"
+        },
+        {
+          "id": "text-03",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Desk > Top drawer"
+        },
+        {
+          "id": "text-04",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Desk > Top drawer"
+        },
+        {
+          "id": "text-05",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Desk > Top drawer"
+        },
+        {
+          "id": "text-06",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Desk > Top drawer"
+        },
+        {
+          "id": "text-07",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Desk > Top drawer"
+        },
+        {
+          "id": "text-08",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Desk > Top drawer"
+        },
+        {
+          "id": "text-09",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Desk > Top drawer"
+        },
+        {
+          "id": "text-10",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Desk > Top drawer"
+        },
+        {
+          "id": "text-11",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": true,
+          "location_path": null
+        },
+        {
+          "id": "text-12",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": true,
+          "location_path": null
+        },
+        {
+          "id": "table-01",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Kitchen > Cabinet > Manuals shelf"
+        },
+        {
+          "id": "table-02",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Kitchen > Cabinet > Manuals shelf"
+        },
+        {
+          "id": "table-03",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Kitchen > Cabinet > Manuals shelf"
+        },
+        {
+          "id": "table-04",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Kitchen > Cabinet > Manuals shelf"
+        },
+        {
+          "id": "table-05",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Kitchen > Cabinet > Manuals shelf"
+        },
+        {
+          "id": "table-06",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Kitchen > Cabinet > Manuals shelf"
+        },
+        {
+          "id": "table-07",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Kitchen > Cabinet > Manuals shelf"
+        },
+        {
+          "id": "table-08",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Kitchen > Cabinet > Manuals shelf"
+        },
+        {
+          "id": "table-09",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Kitchen > Cabinet > Manuals shelf"
+        },
+        {
+          "id": "table-10",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Kitchen > Cabinet > Manuals shelf"
+        },
+        {
+          "id": "table-11",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": true,
+          "location_path": null
+        },
+        {
+          "id": "table-12",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": true,
+          "location_path": null
+        },
+        {
+          "id": "image-01",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Window area"
+        },
+        {
+          "id": "image-02",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Window area"
+        },
+        {
+          "id": "image-03",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Window area"
+        },
+        {
+          "id": "image-04",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Window area"
+        },
+        {
+          "id": "image-05",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Window area"
+        },
+        {
+          "id": "image-06",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Window area"
+        },
+        {
+          "id": "image-07",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Window area"
+        },
+        {
+          "id": "image-08",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Window area"
+        },
+        {
+          "id": "image-09",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Window area"
+        },
+        {
+          "id": "image-10",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Study > Window area"
+        },
+        {
+          "id": "image-11",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": true,
+          "location_path": null
+        },
+        {
+          "id": "image-12",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": true,
+          "location_path": null
+        },
+        {
+          "id": "chart-01",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Living room > TV unit"
+        },
+        {
+          "id": "chart-02",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Living room > TV unit"
+        },
+        {
+          "id": "chart-03",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Living room > TV unit"
+        },
+        {
+          "id": "chart-04",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Living room > TV unit"
+        },
+        {
+          "id": "chart-05",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Living room > TV unit"
+        },
+        {
+          "id": "chart-06",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Living room > TV unit"
+        },
+        {
+          "id": "chart-07",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Living room > TV unit"
+        },
+        {
+          "id": "chart-08",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Living room > TV unit"
+        },
+        {
+          "id": "chart-09",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Living room > TV unit"
+        },
+        {
+          "id": "chart-10",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Living room > TV unit"
+        },
+        {
+          "id": "chart-11",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": true,
+          "location_path": null
+        },
+        {
+          "id": "chart-12",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": true,
+          "location_path": null
+        },
+        {
+          "id": "scanned-01",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Laundry > Shelf"
+        },
+        {
+          "id": "scanned-02",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Laundry > Shelf"
+        },
+        {
+          "id": "scanned-03",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Laundry > Shelf"
+        },
+        {
+          "id": "scanned-04",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Laundry > Shelf"
+        },
+        {
+          "id": "scanned-05",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Laundry > Shelf"
+        },
+        {
+          "id": "scanned-06",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Laundry > Shelf"
+        },
+        {
+          "id": "scanned-07",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Laundry > Shelf"
+        },
+        {
+          "id": "scanned-08",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Laundry > Shelf"
+        },
+        {
+          "id": "scanned-09",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Laundry > Shelf"
+        },
+        {
+          "id": "scanned-10",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": "Laundry > Shelf"
+        },
+        {
+          "id": "scanned-11",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": true,
+          "location_path": null
+        },
+        {
+          "id": "scanned-12",
+          "run_id": "baseline-run-01",
+          "suite": "pdf",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": true,
+          "location_path": null
+        },
+        {
+          "id": "household-001",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk > Top drawer"
+          ]
+        },
+        {
+          "id": "household-002",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk > Top drawer"
+          ]
+        },
+        {
+          "id": "household-003",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk > Top drawer"
+          ]
+        },
+        {
+          "id": "household-004",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk > Top drawer"
+          ]
+        },
+        {
+          "id": "household-005",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk > Top drawer"
+          ]
+        },
+        {
+          "id": "household-006",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk > Top drawer"
+          ]
+        },
+        {
+          "id": "household-007",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Cabinet"
+          ]
+        },
+        {
+          "id": "household-008",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Cabinet"
+          ]
+        },
+        {
+          "id": "household-009",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Cabinet"
+          ]
+        },
+        {
+          "id": "household-010",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Cabinet"
+          ]
+        },
+        {
+          "id": "household-011",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Bedroom > Wardrobe"
+          ]
+        },
+        {
+          "id": "household-012",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Bedroom > Wardrobe"
+          ]
+        },
+        {
+          "id": "household-013",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Bedroom > Wardrobe"
+          ]
+        },
+        {
+          "id": "household-014",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Bedroom > Wardrobe"
+          ]
+        },
+        {
+          "id": "household-015",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Cabinet"
+          ]
+        },
+        {
+          "id": "household-016",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Cabinet"
+          ]
+        },
+        {
+          "id": "household-017",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Cabinet"
+          ]
+        },
+        {
+          "id": "household-018",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Cabinet"
+          ]
+        },
+        {
+          "id": "household-019",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Cabinet"
+          ]
+        },
+        {
+          "id": "household-020",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Cabinet"
+          ]
+        },
+        {
+          "id": "household-021",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Cabinet"
+          ]
+        },
+        {
+          "id": "household-022",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Cabinet"
+          ]
+        },
+        {
+          "id": "household-023",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Laundry > Shelf"
+          ]
+        },
+        {
+          "id": "household-024",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Laundry > Shelf"
+          ]
+        },
+        {
+          "id": "household-025",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Laundry > Shelf"
+          ]
+        },
+        {
+          "id": "household-026",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Laundry > Shelf"
+          ]
+        },
+        {
+          "id": "household-027",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk"
+          ]
+        },
+        {
+          "id": "household-028",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk"
+          ]
+        },
+        {
+          "id": "household-029",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk"
+          ]
+        },
+        {
+          "id": "household-030",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk"
+          ]
+        },
+        {
+          "id": "household-031",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Drawer"
+          ]
+        },
+        {
+          "id": "household-032",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Drawer"
+          ]
+        },
+        {
+          "id": "household-033",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Drawer"
+          ]
+        },
+        {
+          "id": "household-034",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Drawer"
+          ]
+        },
+        {
+          "id": "household-035",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Storage"
+          ]
+        },
+        {
+          "id": "household-036",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Storage"
+          ]
+        },
+        {
+          "id": "household-037",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Storage"
+          ]
+        },
+        {
+          "id": "household-038",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Storage"
+          ]
+        },
+        {
+          "id": "household-039",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk > Top drawer"
+          ]
+        },
+        {
+          "id": "household-040",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Cabinet"
+          ]
+        },
+        {
+          "id": "household-041",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Bedroom > Wardrobe"
+          ]
+        },
+        {
+          "id": "household-042",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk"
+          ]
+        },
+        {
+          "id": "household-043",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Cabinet"
+          ]
+        },
+        {
+          "id": "household-044",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Cabinet"
+          ]
+        },
+        {
+          "id": "household-045",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Laundry > Shelf"
+          ]
+        },
+        {
+          "id": "household-046",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Drawer"
+          ]
+        },
+        {
+          "id": "household-047",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk"
+          ]
+        },
+        {
+          "id": "household-048",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > TV unit"
+          ]
+        },
+        {
+          "id": "household-049",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Storage"
+          ]
+        },
+        {
+          "id": "household-050",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Entry box"
+          ]
+        },
+        {
+          "id": "household-051",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Bedroom > Bedside drawer"
+          ]
+        },
+        {
+          "id": "household-052",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk"
+          ]
+        },
+        {
+          "id": "household-053",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Bedroom > Wardrobe"
+          ]
+        },
+        {
+          "id": "household-054",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Shelf"
+          ]
+        },
+        {
+          "id": "household-055",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk"
+          ]
+        },
+        {
+          "id": "household-056",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Bedroom > Wardrobe"
+          ]
+        },
+        {
+          "id": "household-057",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Storage"
+          ]
+        },
+        {
+          "id": "household-058",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Bedroom > Storage"
+          ]
+        },
+        {
+          "id": "household-059",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Cabinet"
+          ]
+        },
+        {
+          "id": "household-060",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk > Top drawer"
+          ]
+        },
+        {
+          "id": "household-061",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Laundry > Shelf"
+          ]
+        },
+        {
+          "id": "household-062",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Shelf"
+          ]
+        },
+        {
+          "id": "household-063",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk"
+          ]
+        },
+        {
+          "id": "household-064",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": false,
+          "unanswerable": true,
+          "location_path": []
+        },
+        {
+          "id": "household-065",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": false,
+          "unanswerable": true,
+          "location_path": []
+        },
+        {
+          "id": "household-066",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": false,
+          "unanswerable": true,
+          "location_path": []
+        },
+        {
+          "id": "household-067",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": false,
+          "unanswerable": true,
+          "location_path": []
+        },
+        {
+          "id": "household-068",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": false,
+          "unanswerable": true,
+          "location_path": []
+        },
+        {
+          "id": "aggregate-001",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Bedroom > Wardrobe"
+          ]
+        },
+        {
+          "id": "aggregate-002",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Drawer",
+            "Study > Desk"
+          ]
+        },
+        {
+          "id": "aggregate-003",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Cabinet",
+            "Laundry > Shelf"
+          ]
+        },
+        {
+          "id": "follow-up-001",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Kitchen > Cabinet"
+          ]
+        },
+        {
+          "id": "follow-up-002",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Laundry > Shelf"
+          ]
+        },
+        {
+          "id": "follow-up-003",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Cabinet"
+          ]
+        },
+        {
+          "id": "location-001",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Study > Desk > Top drawer"
+          ]
+        },
+        {
+          "id": "location-002",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": true,
+          "unanswerable": false,
+          "location_path": [
+            "Living room > Entry box"
+          ]
+        },
+        {
+          "id": "unanswerable-001",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": false,
+          "unanswerable": true,
+          "location_path": []
+        },
+        {
+          "id": "unanswerable-002",
+          "run_id": "baseline-run-01",
+          "suite": "household",
+          "reference_answer_present": true,
+          "source_mapping_present": false,
+          "unanswerable": true,
+          "location_path": []
+        }
+      ]
+    }
+  ]
+}

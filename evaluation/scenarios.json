@@ -1,0 +1,2835 @@
+{
+  "schema_version": 1,
+  "seed": 741,
+  "synthetic": true,
+  "provenance": "Original fictional corpus reused verbatim from evaluation/hybrid_testset.py; extra answers computed from those fixture facts. No customer DB or uploads read. UUID5 IDs stable across runs. JSON records are intentionally not represented as PDF pages.",
+  "hierarchy": [
+    {
+      "id": "3aeae002-606f-59ce-ad12-512712d4b741",
+      "name": "Synthetic evaluation home",
+      "type": "home",
+      "parent_id": null,
+      "location_path": "Synthetic evaluation home"
+    },
+    {
+      "id": "edb8c484-4801-510d-9fdb-c838dac1675c",
+      "name": "Study",
+      "type": "room",
+      "parent_id": "3aeae002-606f-59ce-ad12-512712d4b741",
+      "location_path": "Study"
+    },
+    {
+      "id": "327b7595-6ac4-56bc-afcf-07ee0776a8d7",
+      "name": "Desk",
+      "type": "zone",
+      "parent_id": "edb8c484-4801-510d-9fdb-c838dac1675c",
+      "location_path": "Study > Desk"
+    },
+    {
+      "id": "54f569f5-7ccb-5a06-b55a-bd3663270d78",
+      "name": "Top drawer",
+      "type": "container",
+      "parent_id": "327b7595-6ac4-56bc-afcf-07ee0776a8d7",
+      "location_path": "Study > Desk > Top drawer"
+    },
+    {
+      "id": "7a635979-3c0f-578b-ba31-e91905f42632",
+      "name": "Kitchen",
+      "type": "room",
+      "parent_id": "3aeae002-606f-59ce-ad12-512712d4b741",
+      "location_path": "Kitchen"
+    },
+    {
+      "id": "d8272543-628f-5564-92c8-bd712d2a6bd3",
+      "name": "Cabinet",
+      "type": "zone",
+      "parent_id": "7a635979-3c0f-578b-ba31-e91905f42632",
+      "location_path": "Kitchen > Cabinet"
+    },
+    {
+      "id": "51832bb5-5ff6-5301-b3ea-b078feb6d227",
+      "name": "Manuals shelf",
+      "type": "container",
+      "parent_id": "d8272543-628f-5564-92c8-bd712d2a6bd3",
+      "location_path": "Kitchen > Cabinet > Manuals shelf"
+    },
+    {
+      "id": "d96deba6-9993-5309-a2a1-49aa08bbb7c0",
+      "name": "Window area",
+      "type": "zone",
+      "parent_id": "edb8c484-4801-510d-9fdb-c838dac1675c",
+      "location_path": "Study > Window area"
+    },
+    {
+      "id": "ffdd258d-1b63-541f-a426-c6fab1908b5a",
+      "name": "Living room",
+      "type": "room",
+      "parent_id": "3aeae002-606f-59ce-ad12-512712d4b741",
+      "location_path": "Living room"
+    },
+    {
+      "id": "b6063f94-3f9a-53e0-bad6-f0b915ef5318",
+      "name": "TV unit",
+      "type": "zone",
+      "parent_id": "ffdd258d-1b63-541f-a426-c6fab1908b5a",
+      "location_path": "Living room > TV unit"
+    },
+    {
+      "id": "4da2b198-2bde-51c0-b654-2c9c273465bc",
+      "name": "Laundry",
+      "type": "room",
+      "parent_id": "3aeae002-606f-59ce-ad12-512712d4b741",
+      "location_path": "Laundry"
+    },
+    {
+      "id": "45176708-da6e-5f31-b537-1ac2473c7546",
+      "name": "Shelf",
+      "type": "zone",
+      "parent_id": "4da2b198-2bde-51c0-b654-2c9c273465bc",
+      "location_path": "Laundry > Shelf"
+    },
+    {
+      "id": "ed2d38ab-56ef-551d-9942-b6da3ca40a18",
+      "name": "Cabinet",
+      "type": "zone",
+      "parent_id": "ffdd258d-1b63-541f-a426-c6fab1908b5a",
+      "location_path": "Living room > Cabinet"
+    },
+    {
+      "id": "b2ba5f75-a6b3-58cc-8605-33ed8790f34c",
+      "name": "Bedroom",
+      "type": "room",
+      "parent_id": "3aeae002-606f-59ce-ad12-512712d4b741",
+      "location_path": "Bedroom"
+    },
+    {
+      "id": "c18db083-a60a-5aa2-8732-992656b8ae16",
+      "name": "Wardrobe",
+      "type": "zone",
+      "parent_id": "b2ba5f75-a6b3-58cc-8605-33ed8790f34c",
+      "location_path": "Bedroom > Wardrobe"
+    },
+    {
+      "id": "6bd06086-6b93-5e4b-ba42-0e050b20b341",
+      "name": "Drawer",
+      "type": "zone",
+      "parent_id": "7a635979-3c0f-578b-ba31-e91905f42632",
+      "location_path": "Kitchen > Drawer"
+    },
+    {
+      "id": "91adc497-c65d-544d-b73c-f3d1a2435aa7",
+      "name": "Storage",
+      "type": "zone",
+      "parent_id": "edb8c484-4801-510d-9fdb-c838dac1675c",
+      "location_path": "Study > Storage"
+    },
+    {
+      "id": "a5db88f2-f67a-55c0-a492-5e18465284ad",
+      "name": "Entry box",
+      "type": "zone",
+      "parent_id": "ffdd258d-1b63-541f-a426-c6fab1908b5a",
+      "location_path": "Living room > Entry box"
+    },
+    {
+      "id": "21f8b4ba-9e72-59af-88ee-d32021997f3a",
+      "name": "Bedside drawer",
+      "type": "zone",
+      "parent_id": "b2ba5f75-a6b3-58cc-8605-33ed8790f34c",
+      "location_path": "Bedroom > Bedside drawer"
+    },
+    {
+      "id": "c7a0521a-f730-553e-acdf-2216631fe588",
+      "name": "Shelf",
+      "type": "zone",
+      "parent_id": "7a635979-3c0f-578b-ba31-e91905f42632",
+      "location_path": "Kitchen > Shelf"
+    },
+    {
+      "id": "bb915a84-fb94-5e0d-af9b-15c252b06479",
+      "name": "Storage",
+      "type": "zone",
+      "parent_id": "b2ba5f75-a6b3-58cc-8605-33ed8790f34c",
+      "location_path": "Bedroom > Storage"
+    }
+  ],
+  "documents": [
+    {
+      "id": "2c9a56c2-c58e-5ed6-9566-4b0815896be0",
+      "key": "aadhaar",
+      "title": "Aadhaar card",
+      "location_id": "54f569f5-7ccb-5a06-b55a-bd3663270d78",
+      "location_path": "Study > Desk > Top drawer",
+      "tags": [
+        "identity"
+      ],
+      "text": "Aadhaar identity card number 0000 1111 2222.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "55f39a09-ed7c-50b8-94cb-59c9e1f88d03",
+      "synthetic": true
+    },
+    {
+      "id": "638673df-f0e3-5876-b7c9-2f6718c3d8d0",
+      "key": "pan",
+      "title": "PAN card",
+      "location_id": "ed2d38ab-56ef-551d-9942-b6da3ca40a18",
+      "location_path": "Living room > Cabinet",
+      "tags": [
+        "identity",
+        "tax"
+      ],
+      "text": "Permanent account number TESTP0001A.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "d5ecac91-e2d4-5487-9b92-1a31cab94bc4",
+      "synthetic": true
+    },
+    {
+      "id": "25fcf9c9-059f-5441-a863-b9ba82e07355",
+      "key": "passport",
+      "title": "Passport",
+      "location_id": "c18db083-a60a-5aa2-8732-992656b8ae16",
+      "location_path": "Bedroom > Wardrobe",
+      "tags": [
+        "travel",
+        "identity"
+      ],
+      "text": "Passport number DEMO12345. Expires June 2030.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "1274cecf-5f82-5815-9099-f859375a0af5",
+      "synthetic": true
+    },
+    {
+      "id": "bc6dd15b-da30-51ec-9eb3-13e9cb38e55c",
+      "key": "passport-photo",
+      "title": "Passport photograph",
+      "location_id": "327b7595-6ac4-56bc-afcf-07ee0776a8d7",
+      "location_path": "Study > Desk",
+      "tags": [
+        "photo",
+        "travel"
+      ],
+      "text": "Two passport photographs for visa application.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "deb13a42-5b22-56c7-82de-514faca5b7f1",
+      "synthetic": true
+    },
+    {
+      "id": "19ded8ec-d686-508b-a340-75bd21fa04fc",
+      "key": "licence",
+      "title": "Driving licence",
+      "location_id": "ed2d38ab-56ef-551d-9942-b6da3ca40a18",
+      "location_path": "Living room > Cabinet",
+      "tags": [
+        "vehicle",
+        "identity"
+      ],
+      "text": "Driving licence DL-DEMO-7654.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "637a83ad-1faa-5687-b5e2-e6be94a9b1b6",
+      "synthetic": true
+    },
+    {
+      "id": "89fb854f-0c64-5776-b03e-dd867df75701",
+      "key": "fridge",
+      "title": "Fridge warranty",
+      "location_id": "d8272543-628f-5564-92c8-bd712d2a6bd3",
+      "location_path": "Kitchen > Cabinet",
+      "tags": [
+        "appliance",
+        "warranty"
+      ],
+      "text": "Refrigerator FR-900 warranty expires May 2028.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e",
+      "synthetic": true
+    },
+    {
+      "id": "5636ed71-2d42-5033-b9d3-3bd831ff7eb8",
+      "key": "washer",
+      "title": "Washing machine warranty",
+      "location_id": "45176708-da6e-5f31-b537-1ac2473c7546",
+      "location_path": "Laundry > Shelf",
+      "tags": [
+        "appliance",
+        "warranty"
+      ],
+      "text": "Washing machine WM-800 warranty expires July 2029.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "84737b1d-29cb-5b92-a79a-42e5fde5abf0",
+      "synthetic": true
+    },
+    {
+      "id": "fa3a8845-ce40-5da8-88bf-852d8989ee05",
+      "key": "microwave",
+      "title": "Microwave receipt",
+      "location_id": "6bd06086-6b93-5e4b-ba42-0e050b20b341",
+      "location_path": "Kitchen > Drawer",
+      "tags": [
+        "appliance",
+        "receipt"
+      ],
+      "text": "Microwave MW-700 invoice paid 8000 rupees.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "3b5f8855-a176-5320-b6db-169e7e1f1033",
+      "synthetic": true
+    },
+    {
+      "id": "c17d337b-eeba-5707-88db-e57f840fb9f2",
+      "key": "laptop",
+      "title": "Laptop receipt",
+      "location_id": "327b7595-6ac4-56bc-afcf-07ee0776a8d7",
+      "location_path": "Study > Desk",
+      "tags": [
+        "electronics",
+        "receipt"
+      ],
+      "text": "Laptop LT-600 bill paid 50000 rupees.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "e5e8b746-3331-5445-aad2-66cc7d62afb6",
+      "synthetic": true
+    },
+    {
+      "id": "269fd9d6-077e-5fff-a727-0530d3afab63",
+      "key": "television",
+      "title": "Television manual",
+      "location_id": "b6063f94-3f9a-53e0-bad6-f0b915ef5318",
+      "location_path": "Living room > TV unit",
+      "tags": [
+        "electronics",
+        "manual"
+      ],
+      "text": "Television TV-500 model supports HDMI input.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "0d8662b9-0d7b-53e3-b012-5aedb908194f",
+      "synthetic": true
+    },
+    {
+      "id": "d678b00f-0a15-58c4-8869-b331f6e7d24d",
+      "key": "insurance",
+      "title": "Home insurance policy",
+      "location_id": "91adc497-c65d-544d-b73c-f3d1a2435aa7",
+      "location_path": "Study > Storage",
+      "tags": [
+        "insurance"
+      ],
+      "text": "Home insurance policy DEMO-HOME-44 renewal in September.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "1746830e-4571-5fb3-9856-8ccc51ccf050",
+      "synthetic": true
+    },
+    {
+      "id": "69ebe561-6ce0-5c6b-9af5-30b159b90256",
+      "key": "keys",
+      "title": "Spare keys",
+      "location_id": "a5db88f2-f67a-55c0-a492-5e18465284ad",
+      "location_path": "Living room > Entry box",
+      "tags": [
+        "keys"
+      ],
+      "text": "Spare house keys kept inside the blue entry box.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "a1d45f29-7969-5c6c-bb35-ca921bc53391",
+      "synthetic": true
+    },
+    {
+      "id": "efd15dc1-d315-528d-93e7-9d79efbeaf2e",
+      "key": "medicine",
+      "title": "Medicine prescription",
+      "location_id": "21f8b4ba-9e72-59af-88ee-d32021997f3a",
+      "location_path": "Bedroom > Bedside drawer",
+      "tags": [
+        "health"
+      ],
+      "text": "Prescription for fictional medicine TESTMED.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "dd87a670-2065-5d49-bab7-453e2d823f1f",
+      "synthetic": true
+    },
+    {
+      "id": "e21df2d3-911b-5add-9312-6087e6820888",
+      "key": "electricity",
+      "title": "Electricity bill",
+      "location_id": "327b7595-6ac4-56bc-afcf-07ee0776a8d7",
+      "location_path": "Study > Desk",
+      "tags": [
+        "utilities"
+      ],
+      "text": "Electricity bill meter EM-2222 paid 1500 rupees.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "9cc56f49-9831-5262-86c2-fcdf28239ea9",
+      "synthetic": true
+    },
+    {
+      "id": "e1fe5b60-6e71-54fb-ab94-f5c8a95e2703",
+      "key": "birth",
+      "title": "Birth certificate",
+      "location_id": "c18db083-a60a-5aa2-8732-992656b8ae16",
+      "location_path": "Bedroom > Wardrobe",
+      "tags": [
+        "identity"
+      ],
+      "text": "Birth certificate fictional registration BC-5555.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "de1e56b6-c45a-55c6-99a1-d027f085c68e",
+      "synthetic": true
+    },
+    {
+      "id": "6640859d-c8ea-585a-8820-4bf276b27c7e",
+      "key": "filter",
+      "title": "Purifier filter manual",
+      "location_id": "c7a0521a-f730-553e-acdf-2216631fe588",
+      "location_path": "Kitchen > Shelf",
+      "tags": [
+        "appliance"
+      ],
+      "text": "Air purifier replacement filter HA-200. Replace every six months.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "afe349ed-0ba0-5243-9d68-d177939ebed6",
+      "synthetic": true
+    },
+    {
+      "id": "82378a29-27e9-5327-bafa-6797b38d632d",
+      "key": "router",
+      "title": "Router manual",
+      "location_id": "327b7595-6ac4-56bc-afcf-07ee0776a8d7",
+      "location_path": "Study > Desk",
+      "tags": [
+        "electronics"
+      ],
+      "text": "Router model RT-400 reset takes ten seconds.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "908aa429-20d4-52d4-abc6-b553921685f3",
+      "synthetic": true
+    },
+    {
+      "id": "b9877946-0559-5cd6-9c33-a7dda0cd7c06",
+      "key": "ac",
+      "title": "Air conditioner warranty",
+      "location_id": "c18db083-a60a-5aa2-8732-992656b8ae16",
+      "location_path": "Bedroom > Wardrobe",
+      "tags": [
+        "appliance"
+      ],
+      "text": "Air conditioner AC-300 warranty ends November 2027.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "2f6318ab-9def-5fd4-a289-4b1f1720e6a4",
+      "synthetic": true
+    },
+    {
+      "id": "dc2f9a3d-0933-5ebb-a8af-23af9abcd815",
+      "key": "bank",
+      "title": "Bank statement",
+      "location_id": "91adc497-c65d-544d-b73c-f3d1a2435aa7",
+      "location_path": "Study > Storage",
+      "tags": [
+        "finance"
+      ],
+      "text": "Fictional bank statement account DEMO-7788.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "098ecd6e-a267-59fb-a87b-585f1049c913",
+      "synthetic": true
+    },
+    {
+      "id": "30e302a1-cd0a-5f63-9ee1-6020b02daddc",
+      "key": "school",
+      "title": "School certificate",
+      "location_id": "bb915a84-fb94-5e0d-af9b-15c252b06479",
+      "location_path": "Bedroom > Storage",
+      "tags": [
+        "education"
+      ],
+      "text": "School leaving certificate number SC-9999.",
+      "modality": "text",
+      "page": null,
+      "chunk_id": "9a1bde18-ba73-505a-9ab7-ffc4552d3bdc",
+      "synthetic": true
+    }
+  ],
+  "questions": [
+    {
+      "id": "household-001",
+      "question": "where is Adhaar",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Aadhaar identity card number 0000 1111 2222.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "2c9a56c2-c58e-5ed6-9566-4b0815896be0"
+      ],
+      "reference_chunks": [
+        "55f39a09-ed7c-50b8-94cb-59c9e1f88d03"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "2c9a56c2-c58e-5ed6-9566-4b0815896be0",
+          "chunk_id": "55f39a09-ed7c-50b8-94cb-59c9e1f88d03",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/0"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk > Top drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-002",
+      "question": "Aadhar kahan hai",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Aadhaar identity card number 0000 1111 2222.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "2c9a56c2-c58e-5ed6-9566-4b0815896be0"
+      ],
+      "reference_chunks": [
+        "55f39a09-ed7c-50b8-94cb-59c9e1f88d03"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "2c9a56c2-c58e-5ed6-9566-4b0815896be0",
+          "chunk_id": "55f39a09-ed7c-50b8-94cb-59c9e1f88d03",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/0"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk > Top drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-003",
+      "question": "find AAADHAAAR",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Aadhaar identity card number 0000 1111 2222.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "2c9a56c2-c58e-5ed6-9566-4b0815896be0"
+      ],
+      "reference_chunks": [
+        "55f39a09-ed7c-50b8-94cb-59c9e1f88d03"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "2c9a56c2-c58e-5ed6-9566-4b0815896be0",
+          "chunk_id": "55f39a09-ed7c-50b8-94cb-59c9e1f88d03",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/0"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk > Top drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-004",
+      "question": "adhar card",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Aadhaar identity card number 0000 1111 2222.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "2c9a56c2-c58e-5ed6-9566-4b0815896be0"
+      ],
+      "reference_chunks": [
+        "55f39a09-ed7c-50b8-94cb-59c9e1f88d03"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "2c9a56c2-c58e-5ed6-9566-4b0815896be0",
+          "chunk_id": "55f39a09-ed7c-50b8-94cb-59c9e1f88d03",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/0"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk > Top drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-005",
+      "question": "aadhr serial number",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Aadhaar identity card number 0000 1111 2222.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "2c9a56c2-c58e-5ed6-9566-4b0815896be0"
+      ],
+      "reference_chunks": [
+        "55f39a09-ed7c-50b8-94cb-59c9e1f88d03"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "2c9a56c2-c58e-5ed6-9566-4b0815896be0",
+          "chunk_id": "55f39a09-ed7c-50b8-94cb-59c9e1f88d03",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/0"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk > Top drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-006",
+      "question": "uid card kidhar hai",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Aadhaar identity card number 0000 1111 2222.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "2c9a56c2-c58e-5ed6-9566-4b0815896be0"
+      ],
+      "reference_chunks": [
+        "55f39a09-ed7c-50b8-94cb-59c9e1f88d03"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "2c9a56c2-c58e-5ed6-9566-4b0815896be0",
+          "chunk_id": "55f39a09-ed7c-50b8-94cb-59c9e1f88d03",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/0"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk > Top drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-007",
+      "question": "pna card",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Permanent account number TESTP0001A.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "638673df-f0e3-5876-b7c9-2f6718c3d8d0"
+      ],
+      "reference_chunks": [
+        "d5ecac91-e2d4-5487-9b92-1a31cab94bc4"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "638673df-f0e3-5876-b7c9-2f6718c3d8d0",
+          "chunk_id": "d5ecac91-e2d4-5487-9b92-1a31cab94bc4",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/1"
+        }
+      ],
+      "location_paths": [
+        "Living room > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-008",
+      "question": "permanet account number",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Permanent account number TESTP0001A.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "638673df-f0e3-5876-b7c9-2f6718c3d8d0"
+      ],
+      "reference_chunks": [
+        "d5ecac91-e2d4-5487-9b92-1a31cab94bc4"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "638673df-f0e3-5876-b7c9-2f6718c3d8d0",
+          "chunk_id": "d5ecac91-e2d4-5487-9b92-1a31cab94bc4",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/1"
+        }
+      ],
+      "location_paths": [
+        "Living room > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-009",
+      "question": "where is pann card",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Permanent account number TESTP0001A.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "638673df-f0e3-5876-b7c9-2f6718c3d8d0"
+      ],
+      "reference_chunks": [
+        "d5ecac91-e2d4-5487-9b92-1a31cab94bc4"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "638673df-f0e3-5876-b7c9-2f6718c3d8d0",
+          "chunk_id": "d5ecac91-e2d4-5487-9b92-1a31cab94bc4",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/1"
+        }
+      ],
+      "location_paths": [
+        "Living room > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-010",
+      "question": "PAN kahan hai",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Permanent account number TESTP0001A.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "638673df-f0e3-5876-b7c9-2f6718c3d8d0"
+      ],
+      "reference_chunks": [
+        "d5ecac91-e2d4-5487-9b92-1a31cab94bc4"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "638673df-f0e3-5876-b7c9-2f6718c3d8d0",
+          "chunk_id": "d5ecac91-e2d4-5487-9b92-1a31cab94bc4",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/1"
+        }
+      ],
+      "location_paths": [
+        "Living room > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-011",
+      "question": "paspsort",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Passport number DEMO12345. Expires June 2030.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "25fcf9c9-059f-5441-a863-b9ba82e07355"
+      ],
+      "reference_chunks": [
+        "1274cecf-5f82-5815-9099-f859375a0af5"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "25fcf9c9-059f-5441-a863-b9ba82e07355",
+          "chunk_id": "1274cecf-5f82-5815-9099-f859375a0af5",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/2"
+        }
+      ],
+      "location_paths": [
+        "Bedroom > Wardrobe"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-012",
+      "question": "passprt kahan hai",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Passport number DEMO12345. Expires June 2030.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "25fcf9c9-059f-5441-a863-b9ba82e07355"
+      ],
+      "reference_chunks": [
+        "1274cecf-5f82-5815-9099-f859375a0af5"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "25fcf9c9-059f-5441-a863-b9ba82e07355",
+          "chunk_id": "1274cecf-5f82-5815-9099-f859375a0af5",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/2"
+        }
+      ],
+      "location_paths": [
+        "Bedroom > Wardrobe"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-013",
+      "question": "passsport",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Passport number DEMO12345. Expires June 2030.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "25fcf9c9-059f-5441-a863-b9ba82e07355"
+      ],
+      "reference_chunks": [
+        "1274cecf-5f82-5815-9099-f859375a0af5"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "25fcf9c9-059f-5441-a863-b9ba82e07355",
+          "chunk_id": "1274cecf-5f82-5815-9099-f859375a0af5",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/2"
+        }
+      ],
+      "location_paths": [
+        "Bedroom > Wardrobe"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-014",
+      "question": "where is pasport",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Passport number DEMO12345. Expires June 2030.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "25fcf9c9-059f-5441-a863-b9ba82e07355"
+      ],
+      "reference_chunks": [
+        "1274cecf-5f82-5815-9099-f859375a0af5"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "25fcf9c9-059f-5441-a863-b9ba82e07355",
+          "chunk_id": "1274cecf-5f82-5815-9099-f859375a0af5",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/2"
+        }
+      ],
+      "location_paths": [
+        "Bedroom > Wardrobe"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-015",
+      "question": "drivng licence",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Driving licence DL-DEMO-7654.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "19ded8ec-d686-508b-a340-75bd21fa04fc"
+      ],
+      "reference_chunks": [
+        "637a83ad-1faa-5687-b5e2-e6be94a9b1b6"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "19ded8ec-d686-508b-a340-75bd21fa04fc",
+          "chunk_id": "637a83ad-1faa-5687-b5e2-e6be94a9b1b6",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/4"
+        }
+      ],
+      "location_paths": [
+        "Living room > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-016",
+      "question": "dirving license",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Driving licence DL-DEMO-7654.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "19ded8ec-d686-508b-a340-75bd21fa04fc"
+      ],
+      "reference_chunks": [
+        "637a83ad-1faa-5687-b5e2-e6be94a9b1b6"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "19ded8ec-d686-508b-a340-75bd21fa04fc",
+          "chunk_id": "637a83ad-1faa-5687-b5e2-e6be94a9b1b6",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/4"
+        }
+      ],
+      "location_paths": [
+        "Living room > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-017",
+      "question": "DL kahan hai",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Driving licence DL-DEMO-7654.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "19ded8ec-d686-508b-a340-75bd21fa04fc"
+      ],
+      "reference_chunks": [
+        "637a83ad-1faa-5687-b5e2-e6be94a9b1b6"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "19ded8ec-d686-508b-a340-75bd21fa04fc",
+          "chunk_id": "637a83ad-1faa-5687-b5e2-e6be94a9b1b6",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/4"
+        }
+      ],
+      "location_paths": [
+        "Living room > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-018",
+      "question": "driving licnce",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Driving licence DL-DEMO-7654.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "19ded8ec-d686-508b-a340-75bd21fa04fc"
+      ],
+      "reference_chunks": [
+        "637a83ad-1faa-5687-b5e2-e6be94a9b1b6"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "19ded8ec-d686-508b-a340-75bd21fa04fc",
+          "chunk_id": "637a83ad-1faa-5687-b5e2-e6be94a9b1b6",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/4"
+        }
+      ],
+      "location_paths": [
+        "Living room > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-019",
+      "question": "frdge waranty",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Refrigerator FR-900 warranty expires May 2028.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "89fb854f-0c64-5776-b03e-dd867df75701"
+      ],
+      "reference_chunks": [
+        "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "89fb854f-0c64-5776-b03e-dd867df75701",
+          "chunk_id": "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/5"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-020",
+      "question": "refrigrator guarantee",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Refrigerator FR-900 warranty expires May 2028.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "89fb854f-0c64-5776-b03e-dd867df75701"
+      ],
+      "reference_chunks": [
+        "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "89fb854f-0c64-5776-b03e-dd867df75701",
+          "chunk_id": "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/5"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-021",
+      "question": "fridge warrannty",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Refrigerator FR-900 warranty expires May 2028.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "89fb854f-0c64-5776-b03e-dd867df75701"
+      ],
+      "reference_chunks": [
+        "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "89fb854f-0c64-5776-b03e-dd867df75701",
+          "chunk_id": "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/5"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-022",
+      "question": "fridge ki warranty",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Refrigerator FR-900 warranty expires May 2028.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "89fb854f-0c64-5776-b03e-dd867df75701"
+      ],
+      "reference_chunks": [
+        "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "89fb854f-0c64-5776-b03e-dd867df75701",
+          "chunk_id": "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/5"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-023",
+      "question": "washing machien waranty",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Washing machine WM-800 warranty expires July 2029.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "5636ed71-2d42-5033-b9d3-3bd831ff7eb8"
+      ],
+      "reference_chunks": [
+        "84737b1d-29cb-5b92-a79a-42e5fde5abf0"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "5636ed71-2d42-5033-b9d3-3bd831ff7eb8",
+          "chunk_id": "84737b1d-29cb-5b92-a79a-42e5fde5abf0",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/6"
+        }
+      ],
+      "location_paths": [
+        "Laundry > Shelf"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-024",
+      "question": "washng machine guarantee",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Washing machine WM-800 warranty expires July 2029.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "5636ed71-2d42-5033-b9d3-3bd831ff7eb8"
+      ],
+      "reference_chunks": [
+        "84737b1d-29cb-5b92-a79a-42e5fde5abf0"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "5636ed71-2d42-5033-b9d3-3bd831ff7eb8",
+          "chunk_id": "84737b1d-29cb-5b92-a79a-42e5fde5abf0",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/6"
+        }
+      ],
+      "location_paths": [
+        "Laundry > Shelf"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-025",
+      "question": "washer warrnty",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Washing machine WM-800 warranty expires July 2029.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "5636ed71-2d42-5033-b9d3-3bd831ff7eb8"
+      ],
+      "reference_chunks": [
+        "84737b1d-29cb-5b92-a79a-42e5fde5abf0"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "5636ed71-2d42-5033-b9d3-3bd831ff7eb8",
+          "chunk_id": "84737b1d-29cb-5b92-a79a-42e5fde5abf0",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/6"
+        }
+      ],
+      "location_paths": [
+        "Laundry > Shelf"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-026",
+      "question": "washer ki warranty",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Washing machine WM-800 warranty expires July 2029.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "5636ed71-2d42-5033-b9d3-3bd831ff7eb8"
+      ],
+      "reference_chunks": [
+        "84737b1d-29cb-5b92-a79a-42e5fde5abf0"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "5636ed71-2d42-5033-b9d3-3bd831ff7eb8",
+          "chunk_id": "84737b1d-29cb-5b92-a79a-42e5fde5abf0",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/6"
+        }
+      ],
+      "location_paths": [
+        "Laundry > Shelf"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-027",
+      "question": "laptpo reciept",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Laptop LT-600 bill paid 50000 rupees.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "c17d337b-eeba-5707-88db-e57f840fb9f2"
+      ],
+      "reference_chunks": [
+        "e5e8b746-3331-5445-aad2-66cc7d62afb6"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "c17d337b-eeba-5707-88db-e57f840fb9f2",
+          "chunk_id": "e5e8b746-3331-5445-aad2-66cc7d62afb6",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/8"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-028",
+      "question": "laptop invoce",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Laptop LT-600 bill paid 50000 rupees.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "c17d337b-eeba-5707-88db-e57f840fb9f2"
+      ],
+      "reference_chunks": [
+        "e5e8b746-3331-5445-aad2-66cc7d62afb6"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "c17d337b-eeba-5707-88db-e57f840fb9f2",
+          "chunk_id": "e5e8b746-3331-5445-aad2-66cc7d62afb6",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/8"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-029",
+      "question": "laptoop bill",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Laptop LT-600 bill paid 50000 rupees.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "c17d337b-eeba-5707-88db-e57f840fb9f2"
+      ],
+      "reference_chunks": [
+        "e5e8b746-3331-5445-aad2-66cc7d62afb6"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "c17d337b-eeba-5707-88db-e57f840fb9f2",
+          "chunk_id": "e5e8b746-3331-5445-aad2-66cc7d62afb6",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/8"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-030",
+      "question": "laptop ki receipt",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Laptop LT-600 bill paid 50000 rupees.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "c17d337b-eeba-5707-88db-e57f840fb9f2"
+      ],
+      "reference_chunks": [
+        "e5e8b746-3331-5445-aad2-66cc7d62afb6"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "c17d337b-eeba-5707-88db-e57f840fb9f2",
+          "chunk_id": "e5e8b746-3331-5445-aad2-66cc7d62afb6",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/8"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-031",
+      "question": "micorwave receipt",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Microwave MW-700 invoice paid 8000 rupees.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "fa3a8845-ce40-5da8-88bf-852d8989ee05"
+      ],
+      "reference_chunks": [
+        "3b5f8855-a176-5320-b6db-169e7e1f1033"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "fa3a8845-ce40-5da8-88bf-852d8989ee05",
+          "chunk_id": "3b5f8855-a176-5320-b6db-169e7e1f1033",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/7"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-032",
+      "question": "microwave recipt",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Microwave MW-700 invoice paid 8000 rupees.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "fa3a8845-ce40-5da8-88bf-852d8989ee05"
+      ],
+      "reference_chunks": [
+        "3b5f8855-a176-5320-b6db-169e7e1f1033"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "fa3a8845-ce40-5da8-88bf-852d8989ee05",
+          "chunk_id": "3b5f8855-a176-5320-b6db-169e7e1f1033",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/7"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-033",
+      "question": "microwve invoice",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Microwave MW-700 invoice paid 8000 rupees.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "fa3a8845-ce40-5da8-88bf-852d8989ee05"
+      ],
+      "reference_chunks": [
+        "3b5f8855-a176-5320-b6db-169e7e1f1033"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "fa3a8845-ce40-5da8-88bf-852d8989ee05",
+          "chunk_id": "3b5f8855-a176-5320-b6db-169e7e1f1033",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/7"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-034",
+      "question": "microwave ka bill",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Microwave MW-700 invoice paid 8000 rupees.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "fa3a8845-ce40-5da8-88bf-852d8989ee05"
+      ],
+      "reference_chunks": [
+        "3b5f8855-a176-5320-b6db-169e7e1f1033"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "fa3a8845-ce40-5da8-88bf-852d8989ee05",
+          "chunk_id": "3b5f8855-a176-5320-b6db-169e7e1f1033",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/7"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-035",
+      "question": "home insurnace policy",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Home insurance policy DEMO-HOME-44 renewal in September.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "d678b00f-0a15-58c4-8869-b331f6e7d24d"
+      ],
+      "reference_chunks": [
+        "1746830e-4571-5fb3-9856-8ccc51ccf050"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "d678b00f-0a15-58c4-8869-b331f6e7d24d",
+          "chunk_id": "1746830e-4571-5fb3-9856-8ccc51ccf050",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/10"
+        }
+      ],
+      "location_paths": [
+        "Study > Storage"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-036",
+      "question": "home insurence",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Home insurance policy DEMO-HOME-44 renewal in September.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "d678b00f-0a15-58c4-8869-b331f6e7d24d"
+      ],
+      "reference_chunks": [
+        "1746830e-4571-5fb3-9856-8ccc51ccf050"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "d678b00f-0a15-58c4-8869-b331f6e7d24d",
+          "chunk_id": "1746830e-4571-5fb3-9856-8ccc51ccf050",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/10"
+        }
+      ],
+      "location_paths": [
+        "Study > Storage"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-037",
+      "question": "home insurrance policy",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Home insurance policy DEMO-HOME-44 renewal in September.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "d678b00f-0a15-58c4-8869-b331f6e7d24d"
+      ],
+      "reference_chunks": [
+        "1746830e-4571-5fb3-9856-8ccc51ccf050"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "d678b00f-0a15-58c4-8869-b331f6e7d24d",
+          "chunk_id": "1746830e-4571-5fb3-9856-8ccc51ccf050",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/10"
+        }
+      ],
+      "location_paths": [
+        "Study > Storage"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-038",
+      "question": "insurance ki policy",
+      "subset": "typo",
+      "type": "typo",
+      "modality": "text",
+      "reference_answer": "Home insurance policy DEMO-HOME-44 renewal in September.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "d678b00f-0a15-58c4-8869-b331f6e7d24d"
+      ],
+      "reference_chunks": [
+        "1746830e-4571-5fb3-9856-8ccc51ccf050"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "d678b00f-0a15-58c4-8869-b331f6e7d24d",
+          "chunk_id": "1746830e-4571-5fb3-9856-8ccc51ccf050",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/10"
+        }
+      ],
+      "location_paths": [
+        "Study > Storage"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-039",
+      "question": "Aadhaar card",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Aadhaar identity card number 0000 1111 2222.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "2c9a56c2-c58e-5ed6-9566-4b0815896be0"
+      ],
+      "reference_chunks": [
+        "55f39a09-ed7c-50b8-94cb-59c9e1f88d03"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "2c9a56c2-c58e-5ed6-9566-4b0815896be0",
+          "chunk_id": "55f39a09-ed7c-50b8-94cb-59c9e1f88d03",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/0"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk > Top drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-040",
+      "question": "PAN card",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Permanent account number TESTP0001A.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "638673df-f0e3-5876-b7c9-2f6718c3d8d0"
+      ],
+      "reference_chunks": [
+        "d5ecac91-e2d4-5487-9b92-1a31cab94bc4"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "638673df-f0e3-5876-b7c9-2f6718c3d8d0",
+          "chunk_id": "d5ecac91-e2d4-5487-9b92-1a31cab94bc4",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/1"
+        }
+      ],
+      "location_paths": [
+        "Living room > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-041",
+      "question": "Passport",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Passport number DEMO12345. Expires June 2030.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "25fcf9c9-059f-5441-a863-b9ba82e07355"
+      ],
+      "reference_chunks": [
+        "1274cecf-5f82-5815-9099-f859375a0af5"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "25fcf9c9-059f-5441-a863-b9ba82e07355",
+          "chunk_id": "1274cecf-5f82-5815-9099-f859375a0af5",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/2"
+        }
+      ],
+      "location_paths": [
+        "Bedroom > Wardrobe"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-042",
+      "question": "Passport photograph",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Two passport photographs for visa application.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "bc6dd15b-da30-51ec-9eb3-13e9cb38e55c"
+      ],
+      "reference_chunks": [
+        "deb13a42-5b22-56c7-82de-514faca5b7f1"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "bc6dd15b-da30-51ec-9eb3-13e9cb38e55c",
+          "chunk_id": "deb13a42-5b22-56c7-82de-514faca5b7f1",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/3"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-043",
+      "question": "Driving licence",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Driving licence DL-DEMO-7654.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "19ded8ec-d686-508b-a340-75bd21fa04fc"
+      ],
+      "reference_chunks": [
+        "637a83ad-1faa-5687-b5e2-e6be94a9b1b6"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "19ded8ec-d686-508b-a340-75bd21fa04fc",
+          "chunk_id": "637a83ad-1faa-5687-b5e2-e6be94a9b1b6",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/4"
+        }
+      ],
+      "location_paths": [
+        "Living room > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-044",
+      "question": "Fridge warranty",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Refrigerator FR-900 warranty expires May 2028.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "89fb854f-0c64-5776-b03e-dd867df75701"
+      ],
+      "reference_chunks": [
+        "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "89fb854f-0c64-5776-b03e-dd867df75701",
+          "chunk_id": "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/5"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-045",
+      "question": "Washing machine warranty",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Washing machine WM-800 warranty expires July 2029.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "5636ed71-2d42-5033-b9d3-3bd831ff7eb8"
+      ],
+      "reference_chunks": [
+        "84737b1d-29cb-5b92-a79a-42e5fde5abf0"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "5636ed71-2d42-5033-b9d3-3bd831ff7eb8",
+          "chunk_id": "84737b1d-29cb-5b92-a79a-42e5fde5abf0",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/6"
+        }
+      ],
+      "location_paths": [
+        "Laundry > Shelf"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-046",
+      "question": "Microwave receipt",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Microwave MW-700 invoice paid 8000 rupees.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "fa3a8845-ce40-5da8-88bf-852d8989ee05"
+      ],
+      "reference_chunks": [
+        "3b5f8855-a176-5320-b6db-169e7e1f1033"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "fa3a8845-ce40-5da8-88bf-852d8989ee05",
+          "chunk_id": "3b5f8855-a176-5320-b6db-169e7e1f1033",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/7"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-047",
+      "question": "Laptop receipt",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Laptop LT-600 bill paid 50000 rupees.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "c17d337b-eeba-5707-88db-e57f840fb9f2"
+      ],
+      "reference_chunks": [
+        "e5e8b746-3331-5445-aad2-66cc7d62afb6"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "c17d337b-eeba-5707-88db-e57f840fb9f2",
+          "chunk_id": "e5e8b746-3331-5445-aad2-66cc7d62afb6",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/8"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-048",
+      "question": "Television manual",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Television TV-500 model supports HDMI input.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "269fd9d6-077e-5fff-a727-0530d3afab63"
+      ],
+      "reference_chunks": [
+        "0d8662b9-0d7b-53e3-b012-5aedb908194f"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "269fd9d6-077e-5fff-a727-0530d3afab63",
+          "chunk_id": "0d8662b9-0d7b-53e3-b012-5aedb908194f",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/9"
+        }
+      ],
+      "location_paths": [
+        "Living room > TV unit"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-049",
+      "question": "Home insurance policy",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Home insurance policy DEMO-HOME-44 renewal in September.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "d678b00f-0a15-58c4-8869-b331f6e7d24d"
+      ],
+      "reference_chunks": [
+        "1746830e-4571-5fb3-9856-8ccc51ccf050"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "d678b00f-0a15-58c4-8869-b331f6e7d24d",
+          "chunk_id": "1746830e-4571-5fb3-9856-8ccc51ccf050",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/10"
+        }
+      ],
+      "location_paths": [
+        "Study > Storage"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-050",
+      "question": "Spare keys",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Spare house keys kept inside the blue entry box.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "69ebe561-6ce0-5c6b-9af5-30b159b90256"
+      ],
+      "reference_chunks": [
+        "a1d45f29-7969-5c6c-bb35-ca921bc53391"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "69ebe561-6ce0-5c6b-9af5-30b159b90256",
+          "chunk_id": "a1d45f29-7969-5c6c-bb35-ca921bc53391",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/11"
+        }
+      ],
+      "location_paths": [
+        "Living room > Entry box"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-051",
+      "question": "Medicine prescription",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Prescription for fictional medicine TESTMED.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "efd15dc1-d315-528d-93e7-9d79efbeaf2e"
+      ],
+      "reference_chunks": [
+        "dd87a670-2065-5d49-bab7-453e2d823f1f"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "efd15dc1-d315-528d-93e7-9d79efbeaf2e",
+          "chunk_id": "dd87a670-2065-5d49-bab7-453e2d823f1f",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/12"
+        }
+      ],
+      "location_paths": [
+        "Bedroom > Bedside drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-052",
+      "question": "Electricity bill",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Electricity bill meter EM-2222 paid 1500 rupees.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "e21df2d3-911b-5add-9312-6087e6820888"
+      ],
+      "reference_chunks": [
+        "9cc56f49-9831-5262-86c2-fcdf28239ea9"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "e21df2d3-911b-5add-9312-6087e6820888",
+          "chunk_id": "9cc56f49-9831-5262-86c2-fcdf28239ea9",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/13"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-053",
+      "question": "Birth certificate",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Birth certificate fictional registration BC-5555.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "e1fe5b60-6e71-54fb-ab94-f5c8a95e2703"
+      ],
+      "reference_chunks": [
+        "de1e56b6-c45a-55c6-99a1-d027f085c68e"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "e1fe5b60-6e71-54fb-ab94-f5c8a95e2703",
+          "chunk_id": "de1e56b6-c45a-55c6-99a1-d027f085c68e",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/14"
+        }
+      ],
+      "location_paths": [
+        "Bedroom > Wardrobe"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-054",
+      "question": "Purifier filter manual",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Air purifier replacement filter HA-200. Replace every six months.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "6640859d-c8ea-585a-8820-4bf276b27c7e"
+      ],
+      "reference_chunks": [
+        "afe349ed-0ba0-5243-9d68-d177939ebed6"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "6640859d-c8ea-585a-8820-4bf276b27c7e",
+          "chunk_id": "afe349ed-0ba0-5243-9d68-d177939ebed6",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/15"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Shelf"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-055",
+      "question": "Router manual",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Router model RT-400 reset takes ten seconds.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "82378a29-27e9-5327-bafa-6797b38d632d"
+      ],
+      "reference_chunks": [
+        "908aa429-20d4-52d4-abc6-b553921685f3"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "82378a29-27e9-5327-bafa-6797b38d632d",
+          "chunk_id": "908aa429-20d4-52d4-abc6-b553921685f3",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/16"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-056",
+      "question": "Air conditioner warranty",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Air conditioner AC-300 warranty ends November 2027.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "b9877946-0559-5cd6-9c33-a7dda0cd7c06"
+      ],
+      "reference_chunks": [
+        "2f6318ab-9def-5fd4-a289-4b1f1720e6a4"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "b9877946-0559-5cd6-9c33-a7dda0cd7c06",
+          "chunk_id": "2f6318ab-9def-5fd4-a289-4b1f1720e6a4",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/17"
+        }
+      ],
+      "location_paths": [
+        "Bedroom > Wardrobe"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-057",
+      "question": "Bank statement",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "Fictional bank statement account DEMO-7788.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "dc2f9a3d-0933-5ebb-a8af-23af9abcd815"
+      ],
+      "reference_chunks": [
+        "098ecd6e-a267-59fb-a87b-585f1049c913"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "dc2f9a3d-0933-5ebb-a8af-23af9abcd815",
+          "chunk_id": "098ecd6e-a267-59fb-a87b-585f1049c913",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/18"
+        }
+      ],
+      "location_paths": [
+        "Study > Storage"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-058",
+      "question": "School certificate",
+      "subset": "clean",
+      "type": "clean",
+      "modality": "text",
+      "reference_answer": "School leaving certificate number SC-9999.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "30e302a1-cd0a-5f63-9ee1-6020b02daddc"
+      ],
+      "reference_chunks": [
+        "9a1bde18-ba73-505a-9ab7-ffc4552d3bdc"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "30e302a1-cd0a-5f63-9ee1-6020b02daddc",
+          "chunk_id": "9a1bde18-ba73-505a-9ab7-ffc4552d3bdc",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/19"
+        }
+      ],
+      "location_paths": [
+        "Bedroom > Storage"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-059",
+      "question": "TESTP0001A",
+      "subset": "identifier",
+      "type": "identifier",
+      "modality": "text",
+      "reference_answer": "Permanent account number TESTP0001A.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "638673df-f0e3-5876-b7c9-2f6718c3d8d0"
+      ],
+      "reference_chunks": [
+        "d5ecac91-e2d4-5487-9b92-1a31cab94bc4"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "638673df-f0e3-5876-b7c9-2f6718c3d8d0",
+          "chunk_id": "d5ecac91-e2d4-5487-9b92-1a31cab94bc4",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/1"
+        }
+      ],
+      "location_paths": [
+        "Living room > Cabinet"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-060",
+      "question": "0000 1111 2222",
+      "subset": "identifier",
+      "type": "identifier",
+      "modality": "text",
+      "reference_answer": "Aadhaar identity card number 0000 1111 2222.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "2c9a56c2-c58e-5ed6-9566-4b0815896be0"
+      ],
+      "reference_chunks": [
+        "55f39a09-ed7c-50b8-94cb-59c9e1f88d03"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "2c9a56c2-c58e-5ed6-9566-4b0815896be0",
+          "chunk_id": "55f39a09-ed7c-50b8-94cb-59c9e1f88d03",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/0"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk > Top drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-061",
+      "question": "WM-800",
+      "subset": "identifier",
+      "type": "identifier",
+      "modality": "text",
+      "reference_answer": "Washing machine WM-800 warranty expires July 2029.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "5636ed71-2d42-5033-b9d3-3bd831ff7eb8"
+      ],
+      "reference_chunks": [
+        "84737b1d-29cb-5b92-a79a-42e5fde5abf0"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "5636ed71-2d42-5033-b9d3-3bd831ff7eb8",
+          "chunk_id": "84737b1d-29cb-5b92-a79a-42e5fde5abf0",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/6"
+        }
+      ],
+      "location_paths": [
+        "Laundry > Shelf"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-062",
+      "question": "HA-200",
+      "subset": "identifier",
+      "type": "identifier",
+      "modality": "text",
+      "reference_answer": "Air purifier replacement filter HA-200. Replace every six months.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "6640859d-c8ea-585a-8820-4bf276b27c7e"
+      ],
+      "reference_chunks": [
+        "afe349ed-0ba0-5243-9d68-d177939ebed6"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "6640859d-c8ea-585a-8820-4bf276b27c7e",
+          "chunk_id": "afe349ed-0ba0-5243-9d68-d177939ebed6",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/15"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Shelf"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-063",
+      "question": "RT-400",
+      "subset": "identifier",
+      "type": "identifier",
+      "modality": "text",
+      "reference_answer": "Router model RT-400 reset takes ten seconds.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "82378a29-27e9-5327-bafa-6797b38d632d"
+      ],
+      "reference_chunks": [
+        "908aa429-20d4-52d4-abc6-b553921685f3"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "82378a29-27e9-5327-bafa-6797b38d632d",
+          "chunk_id": "908aa429-20d4-52d4-abc6-b553921685f3",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/16"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-064",
+      "question": "quantum unicorn plutonium",
+      "subset": "no-match",
+      "type": "no-match",
+      "modality": "text",
+      "reference_answer": "I couldn't find that in the synthetic records.",
+      "unanswerable": true,
+      "relevant_document_ids": [],
+      "reference_chunks": [],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [],
+      "location_paths": [],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-065",
+      "question": "spaceship ZX-9876",
+      "subset": "no-match",
+      "type": "no-match",
+      "modality": "text",
+      "reference_answer": "I couldn't find that in the synthetic records.",
+      "unanswerable": true,
+      "relevant_document_ids": [],
+      "reference_chunks": [],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [],
+      "location_paths": [],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-066",
+      "question": "dinosaur DNA certificate",
+      "subset": "no-match",
+      "type": "no-match",
+      "modality": "text",
+      "reference_answer": "I couldn't find that in the synthetic records.",
+      "unanswerable": true,
+      "relevant_document_ids": [],
+      "reference_chunks": [],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [],
+      "location_paths": [],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-067",
+      "question": "TESTP9999Z",
+      "subset": "no-match",
+      "type": "no-match",
+      "modality": "text",
+      "reference_answer": "I couldn't find that in the synthetic records.",
+      "unanswerable": true,
+      "relevant_document_ids": [],
+      "reference_chunks": [],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [],
+      "location_paths": [],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "household-068",
+      "question": "WM-999",
+      "subset": "no-match",
+      "type": "no-match",
+      "modality": "text",
+      "reference_answer": "I couldn't find that in the synthetic records.",
+      "unanswerable": true,
+      "relevant_document_ids": [],
+      "reference_chunks": [],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [],
+      "location_paths": [],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "aggregate-001",
+      "question": "Which appliance warranties expire in 2027?",
+      "subset": "scenario",
+      "type": "aggregate",
+      "modality": "text",
+      "reference_answer": "Air conditioner AC-300 warranty ends November 2027. It is recorded in Bedroom > Wardrobe.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "b9877946-0559-5cd6-9c33-a7dda0cd7c06"
+      ],
+      "reference_chunks": [
+        "2f6318ab-9def-5fd4-a289-4b1f1720e6a4"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "b9877946-0559-5cd6-9c33-a7dda0cd7c06",
+          "chunk_id": "2f6318ab-9def-5fd4-a289-4b1f1720e6a4",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/17"
+        }
+      ],
+      "location_paths": [
+        "Bedroom > Wardrobe"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "aggregate-002",
+      "question": "What is the total paid for the microwave and laptop receipts?",
+      "subset": "scenario",
+      "type": "aggregate",
+      "modality": "text",
+      "reference_answer": "58000 rupees: microwave 8000 rupees plus laptop 50000 rupees.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "fa3a8845-ce40-5da8-88bf-852d8989ee05",
+        "c17d337b-eeba-5707-88db-e57f840fb9f2"
+      ],
+      "reference_chunks": [
+        "3b5f8855-a176-5320-b6db-169e7e1f1033",
+        "e5e8b746-3331-5445-aad2-66cc7d62afb6"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "fa3a8845-ce40-5da8-88bf-852d8989ee05",
+          "chunk_id": "3b5f8855-a176-5320-b6db-169e7e1f1033",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/7"
+        },
+        {
+          "source_id": "c17d337b-eeba-5707-88db-e57f840fb9f2",
+          "chunk_id": "e5e8b746-3331-5445-aad2-66cc7d62afb6",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/8"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Drawer",
+        "Study > Desk"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "aggregate-003",
+      "question": "List the expiry dates for the fridge and washing machine warranties.",
+      "subset": "scenario",
+      "type": "aggregate",
+      "modality": "text",
+      "reference_answer": "Fridge FR-900: May 2028. Washing machine WM-800: July 2029.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "89fb854f-0c64-5776-b03e-dd867df75701",
+        "5636ed71-2d42-5033-b9d3-3bd831ff7eb8"
+      ],
+      "reference_chunks": [
+        "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e",
+        "84737b1d-29cb-5b92-a79a-42e5fde5abf0"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "89fb854f-0c64-5776-b03e-dd867df75701",
+          "chunk_id": "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/5"
+        },
+        {
+          "source_id": "5636ed71-2d42-5033-b9d3-3bd831ff7eb8",
+          "chunk_id": "84737b1d-29cb-5b92-a79a-42e5fde5abf0",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/6"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Cabinet",
+        "Laundry > Shelf"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "follow-up-001",
+      "question": "When does its warranty expire?",
+      "subset": "scenario",
+      "type": "follow-up",
+      "modality": "text",
+      "reference_answer": "The fridge FR-900 warranty expires May 2028.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "89fb854f-0c64-5776-b03e-dd867df75701"
+      ],
+      "reference_chunks": [
+        "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "89fb854f-0c64-5776-b03e-dd867df75701",
+          "chunk_id": "7758d85f-a7ae-5c4b-8128-d3fb0a2c3f8e",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/5"
+        }
+      ],
+      "location_paths": [
+        "Kitchen > Cabinet"
+      ],
+      "history": [
+        {
+          "role": "user",
+          "content": "Where is the fridge warranty?"
+        },
+        {
+          "role": "assistant",
+          "content": "The fridge warranty is in Kitchen > Cabinet."
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "id": "follow-up-002",
+      "question": "What about its model number?",
+      "subset": "scenario",
+      "type": "follow-up",
+      "modality": "text",
+      "reference_answer": "The washing machine model is WM-800.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "5636ed71-2d42-5033-b9d3-3bd831ff7eb8"
+      ],
+      "reference_chunks": [
+        "84737b1d-29cb-5b92-a79a-42e5fde5abf0"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "5636ed71-2d42-5033-b9d3-3bd831ff7eb8",
+          "chunk_id": "84737b1d-29cb-5b92-a79a-42e5fde5abf0",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/6"
+        }
+      ],
+      "location_paths": [
+        "Laundry > Shelf"
+      ],
+      "history": [
+        {
+          "role": "user",
+          "content": "When does the washing machine warranty expire?"
+        },
+        {
+          "role": "assistant",
+          "content": "July 2029."
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "id": "follow-up-003",
+      "question": "And where is that stored?",
+      "subset": "scenario",
+      "type": "follow-up",
+      "modality": "text",
+      "reference_answer": "The PAN card is recorded in Living room > Cabinet.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "638673df-f0e3-5876-b7c9-2f6718c3d8d0"
+      ],
+      "reference_chunks": [
+        "d5ecac91-e2d4-5487-9b92-1a31cab94bc4"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "638673df-f0e3-5876-b7c9-2f6718c3d8d0",
+          "chunk_id": "d5ecac91-e2d4-5487-9b92-1a31cab94bc4",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/1"
+        }
+      ],
+      "location_paths": [
+        "Living room > Cabinet"
+      ],
+      "history": [
+        {
+          "role": "user",
+          "content": "What is the fictional PAN identifier?"
+        },
+        {
+          "role": "assistant",
+          "content": "TESTP0001A."
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "id": "location-001",
+      "question": "Where is the Aadhaar card?",
+      "subset": "scenario",
+      "type": "location",
+      "modality": "text",
+      "reference_answer": "The Aadhaar card is in Study > Desk > Top drawer.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "2c9a56c2-c58e-5ed6-9566-4b0815896be0"
+      ],
+      "reference_chunks": [
+        "55f39a09-ed7c-50b8-94cb-59c9e1f88d03"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "2c9a56c2-c58e-5ed6-9566-4b0815896be0",
+          "chunk_id": "55f39a09-ed7c-50b8-94cb-59c9e1f88d03",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/0"
+        }
+      ],
+      "location_paths": [
+        "Study > Desk > Top drawer"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "location-002",
+      "question": "Where are the spare keys?",
+      "subset": "scenario",
+      "type": "location",
+      "modality": "text",
+      "reference_answer": "The spare keys are in Living room > Entry box.",
+      "unanswerable": false,
+      "relevant_document_ids": [
+        "69ebe561-6ce0-5c6b-9af5-30b159b90256"
+      ],
+      "reference_chunks": [
+        "a1d45f29-7969-5c6c-bb35-ca921bc53391"
+      ],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [
+        {
+          "source_id": "69ebe561-6ce0-5c6b-9af5-30b159b90256",
+          "chunk_id": "a1d45f29-7969-5c6c-bb35-ca921bc53391",
+          "page": null,
+          "source_kind": "authored-json-record",
+          "fixture": "scenarios.json#/documents/11"
+        }
+      ],
+      "location_paths": [
+        "Living room > Entry box"
+      ],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "unanswerable-001",
+      "question": "What is the passport number of the second household member?",
+      "subset": "scenario",
+      "type": "unanswerable",
+      "modality": "text",
+      "reference_answer": "I couldn't find that in the synthetic records.",
+      "unanswerable": true,
+      "relevant_document_ids": [],
+      "reference_chunks": [],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [],
+      "location_paths": [],
+      "history": [],
+      "synthetic": true
+    },
+    {
+      "id": "unanswerable-002",
+      "question": "Which warranties expire in 2040?",
+      "subset": "scenario",
+      "type": "unanswerable",
+      "modality": "text",
+      "reference_answer": "I couldn't find any recorded warranty expiring in 2040.",
+      "unanswerable": true,
+      "relevant_document_ids": [],
+      "reference_chunks": [],
+      "source_pages": [],
+      "source_regions": [],
+      "source_mappings": [],
+      "location_paths": [],
+      "history": [],
+      "synthetic": true
+    }
+  ]
+}

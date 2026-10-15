@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "frozen_at_utc": "2026-10-15T07:04:41.105606+00:00",
+  "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
+  "files": {
+    "testset.json": "e74cd9dafb47194bbd4d9f8569275917cfe9532507c24182c0ebf50827144f01",
+    "question_annotations.json": "9b54bc8508d469e2f5387cfe331766db6a473f70529d1ac64fab16fcb0ac4c0e",
+    "scenarios.json": "86c4bc92a65b31459f9cfc0f2583946b568cf84c1d21a22bb22bf794ee3e4a00",
+    "fixtures/manifest.json": "4db736859f551381aac305de84c33c6090e998e1ba032a187b4882c19e9fc545",
+    "fixtures/text.pdf": "63187fa83b2ba9978ffe46e0422e914b894e309d1ca3697c95c03d8a5c1b793a",
+    "fixtures/table.pdf": "f16c42a18ea172f013f55ca8251f9dfc7884a744188d39219594b6086a094971",
+    "fixtures/image.pdf": "2d3aade25a7a6879ff18fd365981ec315bf6053b52faaf7efc4a384423d2c40e",
+    "fixtures/chart.pdf": "d5c72243d1561792a0dfe17f8315de8ae0501345d44ccf3026d245aa0f6b963f",
+    "fixtures/scanned.pdf": "821bd29ff485ff4a0566816ec4746709f58789cb6e7664bdf7b48ef1aa844dbe"
+  },
+  "original_question_count": 60,
+  "supplemental_question_count": 78,
+  "total_question_count": 138,
+  "pdf_count": 5,
+  "page_count": 20,
+  "seed": 741,
+  "chunk_gold_policy": "PDF gold is source+page selectors, resolved against each actual ingestion output. Existing testset reference_chunks are historical hints. JSON source chunks use deterministic UUID5 IDs. No metric may treat an unanswerable question as having an arbitrary source or location.",
+  "synthetic_audit": {
+    "builder": "evaluation/build_testset.py",
+    "pdfs_license": [
+      "CC0; original evaluation fixture",
+      "CC0; original evaluation fixture",
+      "CC0; original evaluation fixture",
+      "CC0; original evaluation fixture",
+      "CC0; original evaluation fixture"
+    ],
+    "pdfs_original_authored": true,
+    "structured_corpus_origin": "evaluation/hybrid_testset.py",
+    "customer_data_accessed": false,
+    "government_identifiers": "Only explicitly fictional fixture strings copied from committed synthetic corpus. Never validate as real identity documents."
+  }
+}
