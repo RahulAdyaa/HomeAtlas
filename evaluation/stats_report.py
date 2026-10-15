@@ -115,7 +115,10 @@ def write_outputs(evaluation: Path, payload: dict):
         insertion = lines.index('## Frozen scope and provenance')
         lines[insertion:insertion] = intro
     lines += ['', 'Evaluation-only commits can differ between specialists; the application source hash is authoritative. '
-              'The input audit runs once because it checks immutable files rather than performing model inference.', '',
+              'The input audit runs once because it checks immutable files rather than performing model inference. '
+              'Superseded candidate runs remain preserved under `candidate_history` where present in raw '
+              'specialist files. They are excluded from the primary baseline/final comparison; the definitive '
+              'final cycle reruns the unchanged full suites against one application source hash.', '',
               '## Statistical method', '',
               f'Point estimates are equal means of the two independent per-run scorecards. The 95% percentile bootstrap '
               f'uses {current["bootstrap_samples"]} resamples and seed {current["seed"]}. '
@@ -253,7 +256,13 @@ def write_outputs(evaluation: Path, payload: dict):
          'standard English BERTScore benchmark. Gold citation scores check authored chunk/page gold and '
          'exact canonical quotation; they are not independent per-claim faithfulness scores. Literal term '
          'coverage and answer/reference length ratio are diagnostics, not semantic correctness/completeness. '
-         'Three-run consistency is a predeclared five-question sample, distinct from the two full 60-question passes.'),
+         'Three-run consistency is a predeclared five-question sample, distinct from the two full 60-question passes. '
+         'The frozen `generation_model_calls` and `verification_model_calls` values count uncached '
+         'generation/verification wrapper invocations, not actual LLM HTTP requests. A numeric guard '
+         'can return before the verification HTTP call. The wrapper counters are preserved and must '
+         'not be summed or presented as actual HTTP request totals. Captured usage records establish '
+         'completed HTTP responses; absent usage does not prove no request was attempted. The separate '
+         'H cache/bypass experiment instruments actual `urlopen` attempts and retains that narrower scope.'),
         ('E/H/I: household locations, freshness, cache and calibration', 'homeatlas-agent',
          'Uploaded-document Q/A fact presence is distinct from automatic structured entity extraction. '
          'Cache hit rate and cached-answer correctness are separate measurements. Generated-answer call '
@@ -300,11 +309,18 @@ def write_outputs(evaluation: Path, payload: dict):
               'case was removed to raise scores.', '',
               '## Reproduce and audit', '',
               'See [evaluation setup](README.md). The default command dispatches actual specialist '
-              'runs twice; aggregation alone reads results and does not replay inference.', '',
-              '```sh', 'python evaluation/run_eval.py',
+              'runs twice; aggregation alone reads results and does not replay inference. Always specify '
+              '`--phase final` on the fixed application because the frozen CLI defaults to baseline. '
+              'Run from the repository root and keep an exported `EVAL_APP_ROOT` consistent with any '
+              'explicit `--app-root` option.', '',
+              '```sh', 'export EVAL_APP_ROOT="$PWD"',
               'python evaluation/run_eval.py --phase final',
               'python evaluation/run_eval.py --group retrieval --phase final',
               'python evaluation/run_eval.py --aggregate-only --phase final', '```', '',
+              'Historical baseline reproduction requires the recorded baseline application source, '
+              'the same frozen evaluator/models/gold, and a separate disposable database, runtime, '
+              'raw-results directory and artifact copy. Never dispatch baseline evaluation into the '
+              'published result directory or overwrite the sealed original baseline.', '',
               '[Complete metric scorecard](stats-metric-scorecard.csv) · '
               '[Frozen input contract](CONTRACT.md) · [Specialist raw results](results/) · '
               '[Fix log](CHANGELOG.md)', '']
