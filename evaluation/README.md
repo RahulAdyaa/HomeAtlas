@@ -1,64 +1,42 @@
-# HomeAtlas RAG evaluation
+# Reproduce the HomeAtlas evaluation
 
-Run from the HomeAtlas app root:
+The default command executes the frozen synthetic suite twice using separate run namespaces. It dispatches actual ingestion, retrieval, generation, household/cache and security evaluators sequentially, then computes confidence intervals and assembles the report. It can take several hours on a 16 GB development computer. Completed work resumes only within the same phase/run; a second run cannot reuse the first run's model answer.
 
-```sh
-python evaluation/run_eval.py
-python evaluation/run_eval.py --modality chart
-```
-
-The launcher re-executes the isolated `evaluation/.venv` interpreter. A cached rerun prints the scorecard and regenerates JSON, CSV and Markdown without repeating completed inference. Supported slices: text, table, image, chart, scanned. Slice runs merge completed question results and preserve completed robustness results. All 60 questions are part of the default run.
-
-## Fresh setup
-
-Use Python 3.12 and the existing app's downloaded, revision-pinned model snapshots plus its loopback Ollama model (`qwen3-vl:4b-instruct`). Tesseract must be on PATH. The existing environment is already configured. To recreate a standalone evaluation environment, run these commands from the app root (only evaluation is written):
+Run from the repository root with Python 3.12, PostgreSQL and the app/worker running as described in the main README. The database must have the repository migrations applied. The runners create and delete disposable `example.invalid` accounts and fictional documents; use a development database. Existing household documents are never the evaluation corpus.
 
 ```sh
 python3.12 -m venv evaluation/.venv
-PIP_CACHE_DIR="$PWD/evaluation/cache/pip" evaluation/.venv/bin/python -m pip install -r evaluation/requirements.lock.txt
+evaluation/.venv/bin/python -m pip install -r evaluation/requirements.lock.txt
+evaluation/.venv/bin/python -m pip install -r evaluation/requirements-metrics.txt
+export MODEL_DIR="$PWD/data/models"
+export EVAL_SHARED_RUNTIME="$PWD/evaluation/runtime"
+export EVAL_PYTHON="$PWD/evaluation/.venv/bin/python"
+python evaluation/run_eval.py --dry-run
 python evaluation/run_eval.py
 ```
 
-The delivered environment uses a read-only `.pth` reference to the app worker's installed packages; new RAGAS packages are installed only under evaluation. `requirements.lock.txt` contains all runtime versions so a fresh venv can instead install them independently. Application model snapshots are read, never downloaded or modified by the runner. The runtime versions are recorded in runtime_versions.json. Original fixture creation requires Arial.ttf at the macOS system path used by this machine; supplied fixture PDFs/testset are portable and need no font regeneration.
-
-## Complete the missing free-tier judge metrics
-
-No supported free-tier judge credential was configured during this run. Therefore seven RAGAS judge metrics and external vision judging are **unavailable**, not estimated. Answer similarity is actual RAGAS with the app BGE embedding model.
-
-Create `evaluation/.env` privately (never commit it):
-
-```dotenv
-OPENROUTER_API_KEY=your-key
-EVAL_JUDGE_MODEL=openrouter/free
-```
-
-Only `openrouter/free` or model IDs ending `:free` are accepted. Use an explicitly selected free vision-capable model to make provider behavior reproducible; the free router may select different providers and the returned model is retained in the raw cache. The adapter submits original fictional evaluation data only. Never insert real household documents into this public/free provider benchmark without reviewing their privacy requirements.
-
-Then rerun the default command or each `--modality` slice. Missing judge metrics resume; completed model answers and successful individual metrics remain cached. Requests retry 429/5xx/network failures up to five times with exponential backoff and Retry-After handling. Failed requests are not cached as success. Successful raw judge responses, model IDs and usage are cached in `evaluation/cache/judge/`; metric scores are cached separately. There is no paid-model fallback. The live external adapter is unverified because no credential is present.
-
-## Output
-
-- `RAG_EVALUATION_REPORT.md`: all 12 requested component groups, scorecard, modality/K tables, limitations and recommendations.
-- `testset.json`: 60 questions with authored references, exact source pages/regions and mapped app chunk IDs.
-- `fixtures/*.pdf`: five four-page original CC0 PDFs, manifest, and visually reviewed contact sheet.
-- `results.json`: complete question-level outputs, ranking and generation metrics, citations, tokens and timing.
-- `results.csv`: flat question-level scores.
-- `cache/`: resumable extraction, embeddings, reranking, generation and judge results. Generated model calls use seed-fixed fixture ordering and temperature zero; the unchanged app does not send an inference seed to Ollama.
-- `runtime/robustness/`: low-resolution, rotated, noisy/blurred and mixed-language scan variants.
-- `run.log`: full initial run and terminal scorecard; `rerun.log` and `slice.log`: repeatability evidence.
-
-Application source, database, customer uploads, household state, configuration and existing tests remain read-only. Evaluation calls the actual extraction, embedding, ranker/reranker and answer functions on an isolated in-memory corpus. It **does not test the app's HTTP upload/queue/DB or browser viewer**. Numeric trust scores, structured table extraction, dedicated figure detection and image captions do not exist in the current app; this limitation is distinct from missing judge credentials.
-
-The report's operational diagnostic index has a disclosed four-metric denominator. It is not an overall semantic quality score. Missing scores remain `null`/N/A. Raw token-matching diagnostics never replace RAGAS correctness or faithfulness.
-
-To invalidate a run after evaluation logic changes, increment the explicit `evaluation-schema-v2` cache version in run_eval.py. App source and fixture-builder changes automatically invalidate cache keys. Failed local model calls returning no result are not cached as success; extractive fallback questions are retried on the next run. To explicitly repeat a completed question, remove only its evaluation generation/question cache entries; no app data needs deletion.
-
-Formula checks:
+Use the app's revision-pinned downloaded models and local Ollama `qwen3-vl:4b-instruct`. Tesseract must be installed with `eng` and `hin` languages. The runner does not silently download a substitute model. The app/worker configuration remains in ignored local environment files; never commit credentials. Node.js and installed app dependencies are required for authenticated HTTP probes.
 
 ```sh
-evaluation/.venv/bin/python evaluation/test_metrics.py
+python evaluation/run_eval.py --group retrieval
+python evaluation/run_eval.py --group A --group G
+python evaluation/run_eval.py --phase final
+python evaluation/run_eval.py --aggregate-only --phase final
+python evaluation/run_eval.py --check --phase final
 ```
 
-## Hybrid and semantic-cache regression benchmark
+`--group` accepts `ingestion`, `retrieval`, `generation`, `homeatlas`, `security`, `stats`, or A–L, and can be repeated/comma-separated. `--run 1` or `--run 2` runs a single pass, but a frozen baseline/final snapshot still requires both complete passes from every specialist. Group L/stats aggregates existing observations. `--aggregate-only` does not perform a new evaluation. A partial suite returns exit code 2 and writes only an ignored completeness diagnostic, never `baseline_results.json` or `final_results.json`. Missing measurements are null with `NOT MEASURED` and a reason.
 
-Run `worker/.venv/bin/python evaluation/hybrid_eval.py` from the repository root after applying migrations and installing the pinned multilingual model. This reuses the ranking metrics extracted from the original harness into `retrieval_metrics.py`, and exercises the production PostgreSQL channel modules. It produces `HYBRID_EVALUATION_REPORT.md` and `hybrid-results.json` from the independently labeled fictional corpus in `hybrid_testset.py`. No user documents are read. See the report for limitations and unmet targets; do not combine these numbers with the older PDF end-to-end evaluation.
+`--app-root`, `--results-dir`, `--result AGENT=PATH` and `--python` support isolated evaluation worktrees. They are optional for an ordinary checkout. Published provenance uses repository-relative paths. Do not expose private paths, settings dumps or actual user content in results.
+
+No free-tier external judge key was configured for the recorded evaluation. Judge-dependent RAGAS, claim faithfulness, semantic correctness and image hallucination metrics remain **NOT MEASURED**. Local embeddings, custom token alignment, exact facts and canonical citations are separately named diagnostics. No paid fallback or invented scores are used. The historical pre-orchestration runner is retained in Git history. It predates the frozen input contract and must not regenerate this suite.
+
+The frozen 138-question corpus, raw specialist results, all metric definitions, and the actual observation sources are described in [CONTRACT.md](CONTRACT.md) and [RAG_EVALUATION_REPORT.md](RAG_EVALUATION_REPORT.md). [stats-metric-scorecard.csv](stats-metric-scorecard.csv) includes every specialist metric, both raw run values, sample sizes, variance, confidence interval or its explicit unavailability reason. The report shows the main tables; it does not hide the full configuration grid.
+
+Statistical formula and completeness checks:
+
+```sh
+evaluation/.venv/bin/python -m unittest discover -s evaluation -p 'stats_test_*.py'
+```
+
+A snapshot is frozen only after source/data hashes, full question/probe coverage and metric status/denominator checks pass. It records raw run digests. Attempts to overwrite that snapshot with different observations fail closed. Application fixes occur only after the complete baseline is frozen. Final measurements use the same gold and metric code, with two new independent passes.
