@@ -18,3 +18,7 @@ def test_single_identifier_stays_exact_and_multi_part_number_requires_all_parts(
     for retrieve_fn in [retrieve, rank_candidates]:
         assert [d['id'] for d in retrieve_fn('T1 power', RECORDS, Engine())] == ['first']
         assert retrieve_fn('serial 1234 5678', [dict(id='partial', text='serial 1234 7777')], Engine()) == []
+
+def test_multiple_named_units_do_not_need_the_word_compare():
+    for retrieve_fn in [retrieve, rank_candidates]:
+        assert {d['id'] for d in retrieve_fn('Give the warranty durations for units T1 and T4', RECORDS, Engine())} == {'first','second'}

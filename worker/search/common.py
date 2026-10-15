@@ -63,7 +63,9 @@ def index_tokens(doc):
 def numeric_filter(question):
     """Preserve exact identifiers, but allow a union for explicit comparisons."""
     required = {w for w in tokens(question) if any(c.isdigit() for c in w)}
-    union = len(required) > 1 and bool(re.search(r'\b(compare|comparison|versus|vs|between|both)\b', normalize(question)))
+    explicit_comparison = re.search(r'\b(compare|comparison|versus|vs|between|both)\b', normalize(question))
+    named_records = all(any(c.isalpha() for c in w) for w in required) and re.search(r'\b(and|or)\b', normalize(question))
+    union = len(required) > 1 and bool(explicit_comparison or named_records)
     return required, union
 
 

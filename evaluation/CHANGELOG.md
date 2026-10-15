@@ -25,3 +25,8 @@ Baseline is frozen in `evaluation/baseline_results.json` before these changes. R
 - Before: the new native-text test attached an unnecessary image; visual query-aware selection was unsupported (two failed, one passed).
 - After: `pytest tests/test_evidence_images.py tests/test_image_pipeline.py -q` — **12 passed**. Tests cover charts, diagrams, scanned/mixed pages, short headings, explicit plotted-trend requests, and recorded graphics.
 - Full latency/token/quality impact: pending unchanged specialist final runs. No timing improvement is claimed from unit tests.
+
+### Numeric intent follow-through
+
+- Multiple named alphanumeric units joined by `and/or` also use the exact-token union, even when a user does not say `compare`. Bare multipart numeric identifiers still require all parts.
+- `pytest tests/test_numeric_retrieval.py -q` — **3 passed**, including the natural multi-unit phrasing reported by the retrieval specialist.
