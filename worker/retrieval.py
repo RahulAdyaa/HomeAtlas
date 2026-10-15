@@ -134,11 +134,20 @@ def answer_from_evidence(question: str, candidates: list[dict], engine: LocalMod
                 continue
             sections.append({'heading': heading[:160], 'text': text,
                              'evidence': sorted(set(quote_map[i] for i in references))})
+        referenced = {index for section in sections for index in section['evidence']}
         verified = engine.verify_sections(question, sections, [
             {'index': i, 'text': quote, 'image_path': row.get('image_path'), 'page': row.get('page'), 'bbox': row.get('bbox'), 'metadata': row.get('metadata',{})}
-            for i, (row, quote) in enumerate(quotes)]) if sections else []
+            for i, (row, quote) in enumerate(quotes) if i in referenced]) if sections else []
         accepted = [sections[i] for i in sorted(set(verified)) if type(i) is int and 0 <= i < len(sections)]
         if accepted:
+            # A citation represents evidence actually used by an accepted
+            # section. Keep immutable provenance and remap only its display
+            # number after removing unused or rejected quotes.
+            used = sorted({index for section in accepted for index in section['evidence']})
+            display_index = {old: new for new, old in enumerate(used)}
+            quotes = [quotes[index] for index in used]
+            accepted = [dict(section, evidence=[display_index[index] for index in section['evidence']])
+                        for section in accepted]
             answer = ('These records may conflict; confirm the applicable version before relying on them.\n\n' if conflict else '')
             answer += '\n\n'.join((f'### {s["heading"]}\n\n' if s['heading'] else '') + s['text'] + '\n\n' +
                                     ' '.join(f'[{i + 1}]' for i in s['evidence']) for s in accepted)

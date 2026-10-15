@@ -209,6 +209,12 @@ class LocalModels:
 
     def verify_sections(self, question: str, sections: list[dict], evidence: list[dict]) -> list[int]:
         """A separate evidence review gates synthesized prose; quote checks still run independently."""
+        # Review only cited evidence. Extra generated quotes may be from an
+        # unrelated scanned page; their images are not evidence for these
+        # sections and can distract a multimodal support check. Preserve the
+        # original quote indices referenced by the sections.
+        referenced = {index for section in sections for index in section.get('evidence', []) if type(index) is int}
+        evidence = [row for row in evidence if row.get('index') in referenced]
         schema = {'type': 'object', 'properties': {'supported': {'type': 'array', 'items': {'type': 'integer'}}}, 'required': ['supported']}
         payload = {'model': self.cfg.generation_model, 'stream': False, 'think': False, 'format': schema,
                    'messages': [{'role': 'system', 'content':
