@@ -326,7 +326,8 @@ def extract_pdf(path: Path, artifact_dir: Path, cfg: Settings = settings) -> lis
                     bounds = [min(b[0] for b in boxes), min(b[1] for b in boxes), max(b[2] for b in boxes), max(b[3] for b in boxes)]
                     chunks.append(ExtractedChunk('\n'.join(texts), page=index + 1, bbox=[float(v) for v in bounds], image_path=str(image_path) if image_path else None,
                                                  metadata={'coordinates': 'pdf-points', 'width': page.rect.width,
-                                                           'height': page.rect.height, 'extractor': 'pymupdf'}))
+                                                           'height': page.rect.height, 'extractor': 'pymupdf',
+                                                           'requires_visual_evidence': bool(page.get_images() or page.get_drawings())}))
                 for info in sorted(page.get_image_info(),key=lambda i:fitz.Rect(i['bbox']).get_area(),reverse=True)[:8]:
                     rect=fitz.Rect(info['bbox']) & page.rect
                     if rect.is_empty or rect.width*rect.height<2500:continue

@@ -1,6 +1,7 @@
 """Shared, bounded source images for generation and independent evidence review."""
 import base64
 import io
+import re
 from PIL import Image
 from .pictures import oriented_rgb
 
@@ -12,13 +13,33 @@ def encoded(picture,limit=2048):
     return base64.b64encode(stream.getvalue()).decode()
 
 
-def attachments(evidence,cfg):
+VISUAL_TERMS = re.compile(r'\b(chart|diagram|figure|graph|plot\w*|trend\w*|illustration|photo\w*|picture|image|table)\b', re.I)
+
+
+def needs_image(related, question=''):
+    """Keep visual/OCR evidence; native prose previews add no independent facts."""
+    if VISUAL_TERMS.search(question):
+        return True
+    for row in related:
+        meta = row.get('metadata') or {}
+        if (meta.get('extractor') != 'pymupdf' or meta.get('requires_visual_evidence') or
+                meta.get('visual_anchor') or meta.get('ocr') or VISUAL_TERMS.search(row.get('text', ''))):
+            return True
+        # Older indexes lack the page's graphics marker. Short native blocks may
+        # be headings above an unparsed image, so retain those previews.
+        if 'requires_visual_evidence' not in meta and len(row.get('text', '')) < 200:
+            return True
+    return False
+
+
+def attachments(evidence,cfg,question=''):
     images=[];labels=[];seen=set();crops=0
     for row in evidence:
         path=row.get('image_path')
         if not path or path in seen or len(seen)>=4:continue
-        seen.add(path)
         related=[e for e in evidence if e.get('image_path')==path]
+        if not needs_image(related,question):continue
+        seen.add(path)
         indices=[e['index'] for e in related]
         with Image.open(cfg.private_path(path)) as source:
             original=oriented_rgb(source)

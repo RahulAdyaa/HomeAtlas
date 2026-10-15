@@ -17,3 +17,11 @@ Baseline is frozen in `evaluation/baseline_results.json` before these changes. R
 - Before: comparison regression failed; exact-identifier/partial-number rejection passed.
 - After: `pytest tests/test_numeric_retrieval.py tests/test_hybrid_search.py -q` — **26 passed**.
 - Full metric impact: pending final specialist runs; this is not a relaxation of similarity thresholds.
+
+## Native-text preview overhead
+
+- Problem: generation and verification attached page previews even when reliable native prose already supplied the evidence; each duplicated text as expensive visual tokens.
+- Change: omit long native-prose previews unless question/evidence mentions visual content, the page has recorded graphics, or related evidence includes OCR. Keep scanned/mixed/image anchors and short native headings. New PDF extraction records raster/vector graphics presence. Existing indexes without that flag retain conservative heading/visual-label checks; reprocessing records provides the stronger marker.
+- Before: the new native-text test attached an unnecessary image; visual query-aware selection was unsupported (two failed, one passed).
+- After: `pytest tests/test_evidence_images.py tests/test_image_pipeline.py -q` — **12 passed**. Tests cover charts, diagrams, scanned/mixed pages, short headings, explicit plotted-trend requests, and recorded graphics.
+- Full latency/token/quality impact: pending unchanged specialist final runs. No timing improvement is claimed from unit tests.

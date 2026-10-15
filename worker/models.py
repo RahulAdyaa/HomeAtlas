@@ -171,7 +171,7 @@ class LocalModels:
             {'index': i, 'text': source_text(e['text']), 'anchor': source_text(e['text'])[:240], 'has_source_image': bool(e.get('image_path'))} for i, e in enumerate(evidence)]})}
         from .vision_assets import attachments,encoded
         rows=[dict(row,index=i) for i,row in enumerate(evidence)]
-        images,labels=attachments(rows,self.cfg)
+        images,labels=attachments(rows,self.cfg,question)
         if image:
             from PIL import Image
             with Image.open(self.cfg.private_path(str(image))) as query_picture:
@@ -225,7 +225,7 @@ class LocalModels:
                    'options': {'temperature': 0, 'num_ctx': 12288, 'num_predict': 250}}
         try:
             from .vision_assets import attachments
-            images,labels=attachments(evidence,self.cfg)
+            images,labels=attachments(evidence,self.cfg,question)
             if images:
                 payload['messages'][1]['images']=images
                 payload['messages'][1]['content']+='\n'+labels
