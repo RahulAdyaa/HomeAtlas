@@ -37,3 +37,13 @@ Main README final-phase commands and explicit clean-environment limitations are 
 The central unequal-source guard and generation import/result/cache root handling have been repaired since the initial preflight. The household specialist’s direct fallback remains developer-specific; the documented central runner supplies the correct environment. Sampled Ollama artifact metadata must retain its historical timing qualification. The scorecard now exists in the main checkout, resolving the earlier pending-link artifact there.
 
 Final measurements/statistics and README reconciliation are still pending. No final publication pass, fresh dependency installation, or full clean-machine inference claim is made. The generated `next-env.d.ts` working-tree difference was reported to the orchestrator and left untouched.
+
+## Cycle 2: cited evidence and numeric guard
+
+Static review confirms citation filtering/remapping preserves original quote indices for support review, retains referenced visual evidence, and emits only accepted references with consecutive display numbers and unchanged source/version/page/box provenance. The existing numeric/alignment/responsiveness regression suite independently passes **19 tests** using fake engines or stub HTTP transport; no RAG inference or quality metrics were produced.
+
+**Concrete remaining gap reported to the orchestrator:** `supported_literals` checks the section body only, while rendered answers also include the generated heading. With source/body “The warranty lasts 18 months.” and heading “Warranty: 99 months”, the deterministic guard returns true. The unsupported heading can therefore reach the fallible model review. This was reproduced through the pure function only, without model/network calls. The verifier made no source/test changes; sole-fixer disposition remains pending. Do not describe all heading numeric claims as deterministically guarded until this is addressed or explicitly qualified.
+
+The README’s existing qualifications about derived numbers, arbitrary formats, spelled-out values, semantic relationships and referenced images remain necessary. They do not remove the concrete heading omission.
+
+The evaluation README now uses explicit final-phase commands and consistent root variables, and documents the frozen runner’s conflicting-environment workaround. A fresh archive of the current main revision passes help/final-phase dry-run/group-alias CLI checks. Full dependency installation plus clean-machine inference remains unverified. Definitive final results and README reconciliation remain pending; superseded candidate measurements must stay historical.

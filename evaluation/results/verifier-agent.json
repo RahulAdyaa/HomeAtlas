@@ -2,7 +2,7 @@
   "schema_version": 1,
   "agent": "verifier-agent",
   "stage": "preflight",
-  "status": "FINAL VERIFICATION PENDING",
+  "status": "FINAL VERIFICATION PENDING; NUMERIC HEADING GAP REPORTED",
   "audited_commit": "41a8a813276c8b26d0ef3011c2b609a1446843fa",
   "timestamp_utc": "2026-10-15T12:07:52.266233+00:00",
   "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
@@ -169,7 +169,53 @@
           "evidence": "Final generation/household observations, system-performance imports, frozen final aggregation and final README/CI comparisons are not yet complete. No final all-metrics or full clean-environment reproduction verdict is issued."
         }
       ]
+    },
+    {
+      "stage": "cycle-2 cited evidence and numeric guard preflight",
+      "timestamp_utc": "2026-10-15T17:55:43.406276+00:00",
+      "audited_commit": "3915d1186c3625c2acffefc835bbc3199c4c9c68",
+      "app_source_fingerprint": "7748ac952e9b3d48d2eac191ac042c685111bab9838374a091640b9a7d535830",
+      "produced_evaluation_metrics": false,
+      "performed_inference": false,
+      "status": "CONCRETE GUARD GAP REPORTED; FINAL VERIFICATION PENDING",
+      "checks": [
+        {
+          "id": "cited-evidence-alignment",
+          "status": "PASS WITH LIMITS",
+          "evidence": "Static review confirms proposed sections retain original quote indices during review; accepted sections retain/remap only used quotations for consecutive display citations with immutable source/version/page/box provenance. Referenced visual evidence remains eligible. This does not establish semantic correctness."
+        },
+        {
+          "id": "numeric-guard-existing-tests",
+          "status": "PASS",
+          "evidence": "Independently ran tests/test_numeric_evidence.py, tests/test_cited_evidence.py and tests/test_answer_responsiveness.py: 19 passed with existing PyMuPDF/SWIG warnings. Stubs/fake model transport only, no actual model or database calls."
+        },
+        {
+          "id": "numeric-heading-coverage",
+          "status": "FAIL; ROUTED TO ORCHESTRATOR",
+          "evidence": "Confirmed with a deterministic supported_literals unit invocation: source/body The warranty lasts 18 months. and proposed heading Warranty: 99 months returns True. The guard checks section.text only, while answer_from_evidence also renders section.heading. Unsupported numeric headings can therefore reach the fallible model review. No actual inference was run. Sole fixer decision pending; verifier changed no app or tests."
+        },
+        {
+          "id": "numeric-guard-qualified-scope",
+          "status": "PASS WITH LIMITS",
+          "evidence": "Body literals are checked per referenced section evidence; unsupported new literals are filtered before HTTP, except referenced images requiring visual review. README correctly warns about derived values, arbitrary formats, spelled-out numbers, units/date semantics and object/value pairing. Heading gap is additional and must not be hidden by those general limitations."
+        },
+        {
+          "id": "current-phase-commands",
+          "status": "PASS WITH WORKAROUND",
+          "evidence": "Current main/evaluation README examples use explicit --phase final and consistent EVAL_APP_ROOT. Conflicting --app-root/exported environment precedence is documented as a workaround; frozen runner code was not changed."
+        },
+        {
+          "id": "clean-archive-cli-cycle-2",
+          "status": "PASS",
+          "evidence": "Fresh git archive of audited main revision passed --help, --dry-run --phase final and A/G group alias final dry-run. No dependencies installed, specialist dispatched, private database read, or model inference performed."
+        },
+        {
+          "id": "final-measurement-parity",
+          "status": "PENDING",
+          "evidence": "Definitive full independent final generation and other observations/statistics/docs remain in progress. Superseded candidate data must not be presented as definitive final. No README numerical-parity verdict issued."
+        }
+      ]
     }
   ],
-  "latest_audited_commit": "4986b6cd0409bcb13af4398a7f83fd2988fcd809"
+  "latest_audited_commit": "3915d1186c3625c2acffefc835bbc3199c4c9c68"
 }
