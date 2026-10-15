@@ -159,3 +159,19 @@ def test_sample_records_are_excluded_before_inference_unless_explicitly_requeste
     demo = ObservedModels(database.cfg)
     reply = query_records(str(database.households[0]), database.users[0], 'Where is the sample PAN card?', cfg=database.cfg, engine=demo)
     assert reply['citations'] and 'Study' in reply['answer']
+
+
+def test_text_to_visual_channel_remains_household_scoped(database):
+    from worker.search.postgres import retrieve
+    own=create_source(database,0,'Visual source image. Inspect the attached original for evidence.')
+    other=create_source(database,1,'Private foreign visual source image.')
+    with psycopg.connect(database.cfg.database_url) as c:
+        c.execute("UPDATE chunks SET image_embedding=ARRAY[1.,0.]::real[],image_embedding_model='test-vision' WHERE id=ANY(%s)",([own,other],))
+    class Vision(ObservedModels):
+        image_identity='test-vision'
+        def __init__(self,cfg):
+            super().__init__(cfg);self.image_identity='test-vision'
+        def embed_image_space(self,**kwargs):return [1.,0.]
+    rows,_=retrieve('a blue storage box',str(database.households[0]),database.users[0],None,None,database.cfg,Vision(database.cfg))
+    assert [r['id'] for r in rows]==[own]
+    assert rows[0]['visual_match']

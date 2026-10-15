@@ -1,0 +1,14 @@
+{
+  "aadhaar": ["aadhar", "adhaar", "adhar", "aadhaar card", "aadhar card", "adhar card", "uid card", "unique identification", "आधार"],
+  "pan": ["pan card", "permanent account number"],
+  "passport": ["पासपोर्ट"],
+  "driving licence": ["dl", "driving license", "driver licence", "drivers license"],
+  "warranty": ["guarantee", "garantee", "वारंटी"],
+  "receipt": ["bill", "invoice", "रसीद"],
+  "fridge": ["refrigerator", "फ्रिज"],
+  "washing machine": ["washer"],
+  "where": ["kahan", "kahaan", "kidhar", "कहाँ", "कहां"],
+  "number": ["numbr", "nambar", "नंबर"],
+  "photo": ["photograph", "picture"],
+  "living room": ["lounge", "drawing room"]
+}

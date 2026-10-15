@@ -5,9 +5,10 @@ export type LocationMatch={kind:'item'|'source';id:string;name:string;locationId
 
 export function locationTarget(question:string):string|null{
  const text=question.trim().replace(/[?!.]+$/,'');
- const match=text.match(/^(?:where\s+(?:is|are|can\s+i\s+find|did\s+i\s+(?:put|keep|store)|have\s+i\s+(?:put|kept|stored))|(?:please\s+)?(?:find|locate))\s+(.+)$/i);
+ const match=text.match(/^(?:where\s+(?:is|are|can\s+i\s+find|did\s+i\s+(?:put|keep|store)|have\s+i\s+(?:put|kept|stored))|(?:please\s+)?(?:find|locate))\s+(.+)$/i)
+  ??text.match(/^(.*?)\s+(?:kahan|kahaan|kaha|kidhar)\s+(?:hai|hain)$/i);
  if(!match)return null;
- const target=match[1].replace(/^(?:(?:my|our|the|a|an)\s+)+/i,'').replace(/\s+(?:located|stored|kept)$/i,'').trim();
+ const target=match[1].replace(/^(?:(?:my|our|the|a|an|mera|meri|mere)\s+)+/i,'').replace(/\s+(?:located|stored|kept)$/i,'').trim();
  return target?target:null;
 }
 export function includeDemo(question:string){return /\b(sample|demo|demonstration|example)\b/i.test(question)}

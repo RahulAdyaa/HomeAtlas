@@ -1,0 +1,29 @@
+{
+  "rrf_k": 60,
+  "channel_top_k": 30,
+  "top_n": 5,
+  "weights": {
+    "dense": 1.0,
+    "word": 1.0,
+    "fuzzy": 1.0,
+    "visual": 1.0
+  },
+  "dense_min": 0.78,
+  "fuzzy_min": 0.32,
+  "location_boost": 0.15,
+  "reranker_enabled": false,
+  "reranker_top_k": 10,
+  "suggestion_below": 0.025,
+  "cache": {
+    "enabled": true,
+    "similarity": 0.93,
+    "ttl_seconds": 604800,
+    "negative_ttl_seconds": 300,
+    "max_entries_per_user": 500
+  },
+  "visual": {
+    "enabled": true,
+    "text_min": 0.12,
+    "image_min": 0.65
+  }
+}

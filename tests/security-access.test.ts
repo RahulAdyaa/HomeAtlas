@@ -42,6 +42,7 @@ const adversarialWorker = createServer(async (req, res) => {
   const parts: Buffer[] = [];
   for await (const part of req) parts.push(Buffer.from(part));
   lastWorkerRequest = JSON.parse(Buffer.concat(parts).toString());
+  if(req.url?.startsWith('/cache/')){res.setHeader('content-type','application/json');res.end(JSON.stringify({hit:false}));return;}
   workerCalls++;
   if (req.headers['x-worker-key'] !== process.env.WORKER_KEY) { res.writeHead(403); res.end(); return; }
   if (workerMode === 'failure') { res.writeHead(500); res.end(); return; }

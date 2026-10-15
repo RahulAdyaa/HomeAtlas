@@ -103,7 +103,7 @@ def process_job(job: dict, cfg: Settings = settings, engine: LocalModels = model
                 chunk_id = uuid.uuid5(uuid.UUID(str(job['version_id'])), fingerprint)
                 image_vector = image_vectors.get(chunk.image_path)
                 metadata = dict(chunk.metadata, source_sha256=source['sha256'], source_version=source['version'],
-                                location_id=str(source['location_id']), location_path=source['location_path'], permissions='household-members', extractor_version='homeatlas-1', active=True)
+                                location_id=str(source['location_id']), location_path=source['location_path'], permissions='household-members', extractor_version='homeatlas-2-image-evidence', active=True)
                 conn.execute('''INSERT INTO chunks(id,household_id,source_id,version_id,item_id,room_id,text,page,bbox,
                     start_seconds,end_seconds,modality,embedding,embedding_model,model_revision,image_path,metadata,image_embedding,image_embedding_model)
                     VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT(id) DO UPDATE SET
@@ -139,7 +139,7 @@ def process_job(job: dict, cfg: Settings = settings, engine: LocalModels = model
 def refresh_location_embeddings(cfg: Settings, engine: LocalModels = models):
     # Compare-and-swap prevents a rename during inference publishing an outdated vector.
     with connect(cfg) as conn:
-        rows = conn.execute("SELECT id,text FROM chunks WHERE metadata->>'location_embedding_pending'='true' LIMIT 32").fetchall()
+        rows = conn.execute("SELECT id,text FROM chunks WHERE metadata->>'location_embedding_pending'='true' OR embedding_model IS DISTINCT FROM %s LIMIT 32", (engine.text_identity,)).fetchall()
     if not rows:
         return
     vectors = engine.embed_text([r['text'] for r in rows])

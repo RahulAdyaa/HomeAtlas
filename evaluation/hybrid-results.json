@@ -1,0 +1,4471 @@
+{
+  "model": "intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "config": {
+    "rrf_k": 60,
+    "channel_top_k": 30,
+    "top_n": 5,
+    "weights": {
+      "dense": 1.0,
+      "word": 1.0,
+      "fuzzy": 1.0,
+      "visual": 1.0
+    },
+    "dense_min": 0.78,
+    "fuzzy_min": 0.32,
+    "location_boost": 0.15,
+    "reranker_enabled": false,
+    "reranker_top_k": 10,
+    "suggestion_below": 0.025,
+    "cache": {
+      "enabled": true,
+      "similarity": 0.93,
+      "ttl_seconds": 604800,
+      "negative_ttl_seconds": 300,
+      "max_entries_per_user": 500
+    },
+    "visual": {
+      "enabled": true,
+      "text_min": 0.12,
+      "image_min": 0.65
+    }
+  },
+  "queries": [
+    {
+      "question": "where is Adhaar",
+      "relevant": [
+        "aadhaar"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "aadhaar"
+        ],
+        "word": [
+          "aadhaar"
+        ],
+        "fuzzy": [
+          "aadhaar"
+        ],
+        "hybrid": [
+          "aadhaar"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04950329099665396
+    },
+    {
+      "question": "Aadhar kahan hai",
+      "relevant": [
+        "aadhaar"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "aadhaar",
+          "pan",
+          "licence",
+          "laptop",
+          "birth"
+        ],
+        "word": [
+          "aadhaar"
+        ],
+        "fuzzy": [
+          "aadhaar"
+        ],
+        "hybrid": [
+          "aadhaar",
+          "pan",
+          "licence",
+          "laptop",
+          "birth"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.033139375009341165
+    },
+    {
+      "question": "find AAADHAAAR",
+      "relevant": [
+        "aadhaar"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "aadhaar",
+          "birth",
+          "pan",
+          "school",
+          "licence"
+        ],
+        "word": [
+          "aadhaar"
+        ],
+        "fuzzy": [
+          "aadhaar"
+        ],
+        "hybrid": [
+          "aadhaar",
+          "birth",
+          "pan",
+          "school",
+          "licence"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.030239041981985793
+    },
+    {
+      "question": "adhar card",
+      "relevant": [
+        "aadhaar"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "aadhaar",
+          "laptop",
+          "pan",
+          "licence",
+          "microwave"
+        ],
+        "word": [
+          "aadhaar"
+        ],
+        "fuzzy": [
+          "aadhaar"
+        ],
+        "hybrid": [
+          "aadhaar",
+          "laptop",
+          "pan",
+          "licence",
+          "microwave"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04908262498793192
+    },
+    {
+      "question": "aadhr serial number",
+      "relevant": [
+        "aadhaar"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "aadhaar",
+          "school",
+          "passport",
+          "pan",
+          "router"
+        ],
+        "word": [
+          "passport",
+          "school",
+          "aadhaar",
+          "pan"
+        ],
+        "fuzzy": [
+          "aadhaar",
+          "passport",
+          "school",
+          "pan"
+        ],
+        "hybrid": [
+          "aadhaar",
+          "passport",
+          "school",
+          "pan",
+          "router"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5,
+          "ap": 0.3333333333333333
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.12958733300911263
+    },
+    {
+      "question": "uid card kidhar hai",
+      "relevant": [
+        "aadhaar"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "aadhaar",
+          "pan",
+          "licence",
+          "laptop",
+          "birth"
+        ],
+        "word": [
+          "aadhaar"
+        ],
+        "fuzzy": [
+          "aadhaar"
+        ],
+        "hybrid": [
+          "aadhaar",
+          "pan",
+          "licence",
+          "laptop",
+          "birth"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.1162838330201339
+    },
+    {
+      "question": "pna card",
+      "relevant": [
+        "pan"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "pan",
+          "aadhaar",
+          "medicine",
+          "birth",
+          "bank"
+        ],
+        "word": [
+          "aadhaar",
+          "pan"
+        ],
+        "fuzzy": [
+          "pan",
+          "aadhaar"
+        ],
+        "hybrid": [
+          "pan",
+          "aadhaar",
+          "medicine",
+          "birth",
+          "bank"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575,
+          "ap": 0.5
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.06715499999700114
+    },
+    {
+      "question": "permanet account number",
+      "relevant": [
+        "pan"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "pan",
+          "bank",
+          "passport",
+          "school"
+        ],
+        "word": [
+          "pan",
+          "bank",
+          "passport",
+          "school",
+          "aadhaar"
+        ],
+        "fuzzy": [
+          "pan",
+          "aadhaar",
+          "passport",
+          "school",
+          "bank"
+        ],
+        "hybrid": [
+          "pan",
+          "bank",
+          "passport",
+          "school",
+          "aadhaar"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04542495898203924
+    },
+    {
+      "question": "where is pann card",
+      "relevant": [
+        "pan"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "pan",
+          "aadhaar"
+        ],
+        "word": [
+          "aadhaar",
+          "pan"
+        ],
+        "fuzzy": [
+          "pan",
+          "aadhaar"
+        ],
+        "hybrid": [
+          "pan",
+          "aadhaar"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575,
+          "ap": 0.5
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.043368374987039715
+    },
+    {
+      "question": "PAN kahan hai",
+      "relevant": [
+        "pan"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "pan"
+        ],
+        "word": [
+          "pan"
+        ],
+        "fuzzy": [
+          "pan"
+        ],
+        "hybrid": [
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04551058399374597
+    },
+    {
+      "question": "paspsort",
+      "relevant": [
+        "passport"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "passport",
+          "passport-photo"
+        ],
+        "word": [],
+        "fuzzy": [
+          "passport",
+          "passport-photo"
+        ],
+        "hybrid": [
+          "passport",
+          "passport-photo"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "hit": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0,
+          "ap": 0.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.05033237498719245
+    },
+    {
+      "question": "passprt kahan hai",
+      "relevant": [
+        "passport"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "passport",
+          "passport-photo",
+          "pan"
+        ],
+        "word": [],
+        "fuzzy": [
+          "passport",
+          "passport-photo"
+        ],
+        "hybrid": [
+          "passport",
+          "passport-photo",
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "hit": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0,
+          "ap": 0.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04475504200672731
+    },
+    {
+      "question": "passsport",
+      "relevant": [
+        "passport"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "passport-photo",
+          "passport",
+          "birth",
+          "licence",
+          "pan"
+        ],
+        "word": [
+          "passport",
+          "passport-photo"
+        ],
+        "fuzzy": [
+          "passport",
+          "passport-photo"
+        ],
+        "hybrid": [
+          "passport",
+          "passport-photo",
+          "birth",
+          "licence",
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575,
+          "ap": 0.5
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04157637499156408
+    },
+    {
+      "question": "where is pasport",
+      "relevant": [
+        "passport"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "passport",
+          "passport-photo",
+          "licence",
+          "pan"
+        ],
+        "word": [],
+        "fuzzy": [
+          "passport",
+          "passport-photo"
+        ],
+        "hybrid": [
+          "passport",
+          "passport-photo",
+          "licence",
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "hit": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0,
+          "ap": 0.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.03690483400714584
+    },
+    {
+      "question": "drivng licence",
+      "relevant": [
+        "licence"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "licence"
+        ],
+        "word": [
+          "licence"
+        ],
+        "fuzzy": [
+          "licence"
+        ],
+        "hybrid": [
+          "licence"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.05473816700396128
+    },
+    {
+      "question": "dirving license",
+      "relevant": [
+        "licence"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "licence"
+        ],
+        "word": [],
+        "fuzzy": [
+          "licence"
+        ],
+        "hybrid": [
+          "licence"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "hit": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0,
+          "ap": 0.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.06316829100251198
+    },
+    {
+      "question": "DL kahan hai",
+      "relevant": [
+        "licence"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "licence",
+          "pan",
+          "aadhaar"
+        ],
+        "word": [
+          "licence"
+        ],
+        "fuzzy": [
+          "licence"
+        ],
+        "hybrid": [
+          "licence",
+          "pan",
+          "aadhaar"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.049888582987478
+    },
+    {
+      "question": "driving licnce",
+      "relevant": [
+        "licence"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "licence"
+        ],
+        "word": [
+          "licence"
+        ],
+        "fuzzy": [
+          "licence"
+        ],
+        "hybrid": [
+          "licence"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.05026266700588167
+    },
+    {
+      "question": "frdge waranty",
+      "relevant": [
+        "fridge"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "fridge",
+          "washer",
+          "ac"
+        ],
+        "word": [],
+        "fuzzy": [
+          "fridge",
+          "ac",
+          "washer"
+        ],
+        "hybrid": [
+          "fridge",
+          "ac",
+          "washer"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "hit": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0,
+          "ap": 0.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04524179099826142
+    },
+    {
+      "question": "refrigrator guarantee",
+      "relevant": [
+        "fridge"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "fridge",
+          "washer",
+          "ac"
+        ],
+        "word": [
+          "fridge",
+          "washer",
+          "ac"
+        ],
+        "fuzzy": [
+          "fridge",
+          "ac",
+          "washer"
+        ],
+        "hybrid": [
+          "fridge",
+          "washer",
+          "ac"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.03836574999149889
+    },
+    {
+      "question": "fridge warrannty",
+      "relevant": [
+        "fridge"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "fridge",
+          "washer",
+          "ac",
+          "birth",
+          "medicine"
+        ],
+        "word": [
+          "fridge"
+        ],
+        "fuzzy": [
+          "fridge",
+          "ac",
+          "washer"
+        ],
+        "hybrid": [
+          "fridge",
+          "ac",
+          "washer",
+          "birth",
+          "medicine"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04003050000756048
+    },
+    {
+      "question": "fridge ki warranty",
+      "relevant": [
+        "fridge"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "fridge",
+          "washer",
+          "microwave",
+          "ac",
+          "birth"
+        ],
+        "word": [
+          "fridge",
+          "washer",
+          "ac"
+        ],
+        "fuzzy": [
+          "fridge",
+          "ac",
+          "washer"
+        ],
+        "hybrid": [
+          "fridge",
+          "washer",
+          "ac",
+          "microwave",
+          "birth"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.03368620798573829
+    },
+    {
+      "question": "washing machien waranty",
+      "relevant": [
+        "washer"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "washer",
+          "ac",
+          "fridge",
+          "microwave",
+          "filter"
+        ],
+        "word": [
+          "washer"
+        ],
+        "fuzzy": [
+          "washer"
+        ],
+        "hybrid": [
+          "washer",
+          "ac",
+          "fridge",
+          "microwave",
+          "filter"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04355641599977389
+    },
+    {
+      "question": "washng machine guarantee",
+      "relevant": [
+        "washer"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "washer",
+          "ac",
+          "fridge",
+          "microwave",
+          "filter"
+        ],
+        "word": [
+          "washer",
+          "fridge",
+          "ac"
+        ],
+        "fuzzy": [
+          "washer",
+          "fridge",
+          "ac"
+        ],
+        "hybrid": [
+          "washer",
+          "fridge",
+          "ac",
+          "microwave",
+          "filter"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04636445801588707
+    },
+    {
+      "question": "washer warrnty",
+      "relevant": [
+        "washer"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "washer",
+          "ac",
+          "fridge",
+          "microwave"
+        ],
+        "word": [
+          "washer"
+        ],
+        "fuzzy": [
+          "washer"
+        ],
+        "hybrid": [
+          "washer",
+          "ac",
+          "fridge",
+          "microwave"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.03882391701336019
+    },
+    {
+      "question": "washer ki warranty",
+      "relevant": [
+        "washer"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "washer",
+          "fridge",
+          "microwave",
+          "ac",
+          "filter"
+        ],
+        "word": [
+          "washer",
+          "fridge",
+          "ac"
+        ],
+        "fuzzy": [
+          "washer",
+          "fridge",
+          "ac"
+        ],
+        "hybrid": [
+          "washer",
+          "fridge",
+          "ac",
+          "microwave",
+          "filter"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.07278737498563714
+    },
+    {
+      "question": "laptpo reciept",
+      "relevant": [
+        "laptop"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "laptop",
+          "microwave",
+          "router",
+          "pan",
+          "passport"
+        ],
+        "word": [],
+        "fuzzy": [
+          "laptop",
+          "electricity",
+          "microwave"
+        ],
+        "hybrid": [
+          "laptop",
+          "microwave",
+          "electricity",
+          "router",
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "hit": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0,
+          "ap": 0.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.0449822079972364
+    },
+    {
+      "question": "laptop invoce",
+      "relevant": [
+        "laptop"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "laptop",
+          "microwave",
+          "pan"
+        ],
+        "word": [
+          "laptop"
+        ],
+        "fuzzy": [
+          "laptop",
+          "microwave"
+        ],
+        "hybrid": [
+          "laptop",
+          "microwave",
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.03907900000922382
+    },
+    {
+      "question": "laptoop bill",
+      "relevant": [
+        "laptop"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "laptop",
+          "microwave",
+          "pan",
+          "router",
+          "passport"
+        ],
+        "word": [
+          "laptop",
+          "microwave",
+          "electricity"
+        ],
+        "fuzzy": [
+          "laptop",
+          "electricity",
+          "microwave"
+        ],
+        "hybrid": [
+          "laptop",
+          "microwave",
+          "electricity",
+          "pan",
+          "router"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04188712500035763
+    },
+    {
+      "question": "laptop ki receipt",
+      "relevant": [
+        "laptop"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "laptop",
+          "microwave",
+          "router",
+          "pan",
+          "electricity"
+        ],
+        "word": [
+          "laptop",
+          "microwave",
+          "electricity"
+        ],
+        "fuzzy": [
+          "laptop",
+          "microwave",
+          "electricity"
+        ],
+        "hybrid": [
+          "laptop",
+          "microwave",
+          "electricity",
+          "router",
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.03916058299364522
+    },
+    {
+      "question": "micorwave receipt",
+      "relevant": [
+        "microwave"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "microwave",
+          "laptop"
+        ],
+        "word": [
+          "laptop",
+          "microwave",
+          "electricity"
+        ],
+        "fuzzy": [
+          "microwave",
+          "laptop",
+          "electricity"
+        ],
+        "hybrid": [
+          "microwave",
+          "laptop",
+          "electricity"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575,
+          "ap": 0.5
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04624687499017455
+    },
+    {
+      "question": "microwave recipt",
+      "relevant": [
+        "microwave"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "microwave",
+          "laptop",
+          "router",
+          "filter",
+          "pan"
+        ],
+        "word": [
+          "microwave"
+        ],
+        "fuzzy": [
+          "microwave",
+          "laptop",
+          "electricity"
+        ],
+        "hybrid": [
+          "microwave",
+          "laptop",
+          "electricity",
+          "router",
+          "filter"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04809045800357126
+    },
+    {
+      "question": "microwve invoice",
+      "relevant": [
+        "microwave"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "microwave",
+          "laptop",
+          "router",
+          "pan",
+          "fridge"
+        ],
+        "word": [
+          "laptop",
+          "microwave",
+          "electricity"
+        ],
+        "fuzzy": [
+          "microwave",
+          "laptop",
+          "electricity"
+        ],
+        "hybrid": [
+          "microwave",
+          "laptop",
+          "electricity",
+          "router",
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575,
+          "ap": 0.5
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.03684816701570526
+    },
+    {
+      "question": "microwave ka bill",
+      "relevant": [
+        "microwave"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "microwave",
+          "laptop",
+          "pan",
+          "electricity",
+          "fridge"
+        ],
+        "word": [
+          "microwave",
+          "laptop",
+          "electricity"
+        ],
+        "fuzzy": [
+          "microwave",
+          "laptop",
+          "electricity"
+        ],
+        "hybrid": [
+          "microwave",
+          "laptop",
+          "electricity",
+          "pan",
+          "fridge"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04119162500137463
+    },
+    {
+      "question": "home insurnace policy",
+      "relevant": [
+        "insurance"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "insurance",
+          "keys",
+          "passport",
+          "bank",
+          "washer"
+        ],
+        "word": [
+          "insurance"
+        ],
+        "fuzzy": [
+          "insurance"
+        ],
+        "hybrid": [
+          "insurance",
+          "keys",
+          "passport",
+          "bank",
+          "washer"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.046834666980430484
+    },
+    {
+      "question": "home insurence",
+      "relevant": [
+        "insurance"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "insurance",
+          "keys",
+          "licence",
+          "passport",
+          "bank"
+        ],
+        "word": [
+          "insurance"
+        ],
+        "fuzzy": [
+          "insurance"
+        ],
+        "hybrid": [
+          "insurance",
+          "keys",
+          "licence",
+          "passport",
+          "bank"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04100895801093429
+    },
+    {
+      "question": "home insurrance policy",
+      "relevant": [
+        "insurance"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "insurance",
+          "keys",
+          "passport",
+          "television",
+          "bank"
+        ],
+        "word": [
+          "insurance"
+        ],
+        "fuzzy": [
+          "insurance"
+        ],
+        "hybrid": [
+          "insurance",
+          "keys",
+          "passport",
+          "television",
+          "bank"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04591433401219547
+    },
+    {
+      "question": "insurance ki policy",
+      "relevant": [
+        "insurance"
+      ],
+      "subset": "typo",
+      "outputs": {
+        "dense": [
+          "insurance"
+        ],
+        "word": [
+          "insurance"
+        ],
+        "fuzzy": [
+          "insurance"
+        ],
+        "hybrid": [
+          "insurance"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04830891601159237
+    },
+    {
+      "question": "Aadhaar card",
+      "relevant": [
+        "aadhaar"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "aadhaar",
+          "laptop",
+          "pan",
+          "licence",
+          "microwave"
+        ],
+        "word": [
+          "aadhaar"
+        ],
+        "fuzzy": [
+          "aadhaar"
+        ],
+        "hybrid": [
+          "aadhaar",
+          "laptop",
+          "pan",
+          "licence",
+          "microwave"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.03758812497835606
+    },
+    {
+      "question": "PAN card",
+      "relevant": [
+        "pan"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "pan"
+        ],
+        "word": [
+          "pan"
+        ],
+        "fuzzy": [
+          "pan"
+        ],
+        "hybrid": [
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04197008299524896
+    },
+    {
+      "question": "Passport",
+      "relevant": [
+        "passport"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "passport-photo",
+          "passport",
+          "birth",
+          "licence",
+          "pan"
+        ],
+        "word": [
+          "passport",
+          "passport-photo"
+        ],
+        "fuzzy": [
+          "passport",
+          "passport-photo"
+        ],
+        "hybrid": [
+          "passport",
+          "passport-photo",
+          "birth",
+          "licence",
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575,
+          "ap": 0.5
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.035287874983623624
+    },
+    {
+      "question": "Passport photograph",
+      "relevant": [
+        "passport-photo"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "passport-photo",
+          "passport",
+          "birth",
+          "licence",
+          "pan"
+        ],
+        "word": [
+          "passport-photo",
+          "passport"
+        ],
+        "fuzzy": [
+          "passport-photo",
+          "passport"
+        ],
+        "hybrid": [
+          "passport-photo",
+          "passport",
+          "birth",
+          "licence",
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.039876208000350744
+    },
+    {
+      "question": "Driving licence",
+      "relevant": [
+        "licence"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "licence",
+          "school",
+          "aadhaar"
+        ],
+        "word": [
+          "licence"
+        ],
+        "fuzzy": [
+          "licence"
+        ],
+        "hybrid": [
+          "licence",
+          "school",
+          "aadhaar"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.05158437500358559
+    },
+    {
+      "question": "Fridge warranty",
+      "relevant": [
+        "fridge"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "fridge",
+          "washer",
+          "ac",
+          "microwave",
+          "birth"
+        ],
+        "word": [
+          "fridge",
+          "washer",
+          "ac"
+        ],
+        "fuzzy": [
+          "fridge",
+          "ac",
+          "washer"
+        ],
+        "hybrid": [
+          "fridge",
+          "washer",
+          "ac",
+          "microwave",
+          "birth"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04467295799986459
+    },
+    {
+      "question": "Washing machine warranty",
+      "relevant": [
+        "washer"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "washer",
+          "ac",
+          "fridge",
+          "microwave",
+          "filter"
+        ],
+        "word": [
+          "washer",
+          "fridge",
+          "ac"
+        ],
+        "fuzzy": [
+          "washer",
+          "fridge",
+          "ac"
+        ],
+        "hybrid": [
+          "washer",
+          "fridge",
+          "ac",
+          "microwave",
+          "filter"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.0404119580052793
+    },
+    {
+      "question": "Microwave receipt",
+      "relevant": [
+        "microwave"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "microwave",
+          "laptop",
+          "pan",
+          "router",
+          "fridge"
+        ],
+        "word": [
+          "microwave",
+          "laptop",
+          "electricity"
+        ],
+        "fuzzy": [
+          "microwave",
+          "laptop",
+          "electricity"
+        ],
+        "hybrid": [
+          "microwave",
+          "laptop",
+          "electricity",
+          "pan",
+          "router"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.03574770799605176
+    },
+    {
+      "question": "Laptop receipt",
+      "relevant": [
+        "laptop"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "laptop",
+          "microwave",
+          "router",
+          "pan",
+          "electricity"
+        ],
+        "word": [
+          "laptop",
+          "microwave",
+          "electricity"
+        ],
+        "fuzzy": [
+          "laptop",
+          "microwave",
+          "electricity"
+        ],
+        "hybrid": [
+          "laptop",
+          "microwave",
+          "electricity",
+          "router",
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.037122792011359707
+    },
+    {
+      "question": "Television manual",
+      "relevant": [
+        "television"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "television",
+          "pan",
+          "router",
+          "licence",
+          "medicine"
+        ],
+        "word": [
+          "television",
+          "router",
+          "filter"
+        ],
+        "fuzzy": [
+          "television",
+          "router",
+          "filter"
+        ],
+        "hybrid": [
+          "television",
+          "router",
+          "filter",
+          "pan",
+          "licence"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.038260959001490846
+    },
+    {
+      "question": "Home insurance policy",
+      "relevant": [
+        "insurance"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "insurance",
+          "keys",
+          "passport",
+          "television",
+          "licence"
+        ],
+        "word": [
+          "insurance"
+        ],
+        "fuzzy": [
+          "insurance"
+        ],
+        "hybrid": [
+          "insurance",
+          "keys",
+          "passport",
+          "television",
+          "licence"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.03782370898989029
+    },
+    {
+      "question": "Spare keys",
+      "relevant": [
+        "keys"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "keys",
+          "passport",
+          "school"
+        ],
+        "word": [
+          "keys"
+        ],
+        "fuzzy": [
+          "keys"
+        ],
+        "hybrid": [
+          "keys",
+          "passport",
+          "school"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.03415508399484679
+    },
+    {
+      "question": "Medicine prescription",
+      "relevant": [
+        "medicine"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "medicine",
+          "birth",
+          "pan",
+          "licence",
+          "microwave"
+        ],
+        "word": [
+          "medicine"
+        ],
+        "fuzzy": [
+          "medicine"
+        ],
+        "hybrid": [
+          "medicine",
+          "birth",
+          "pan",
+          "licence",
+          "microwave"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.052348208002513275
+    },
+    {
+      "question": "Electricity bill",
+      "relevant": [
+        "electricity"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "electricity",
+          "microwave",
+          "laptop",
+          "pan",
+          "router"
+        ],
+        "word": [
+          "electricity",
+          "laptop",
+          "microwave"
+        ],
+        "fuzzy": [
+          "electricity",
+          "laptop",
+          "microwave"
+        ],
+        "hybrid": [
+          "electricity",
+          "laptop",
+          "microwave",
+          "pan",
+          "router"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.043369082995923236
+    },
+    {
+      "question": "Birth certificate",
+      "relevant": [
+        "birth"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "birth",
+          "school",
+          "pan",
+          "passport",
+          "aadhaar"
+        ],
+        "word": [
+          "birth",
+          "school"
+        ],
+        "fuzzy": [
+          "birth",
+          "school"
+        ],
+        "hybrid": [
+          "birth",
+          "school",
+          "pan",
+          "passport",
+          "aadhaar"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.0382480830012355
+    },
+    {
+      "question": "Purifier filter manual",
+      "relevant": [
+        "filter"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "filter",
+          "washer",
+          "router"
+        ],
+        "word": [
+          "filter",
+          "television",
+          "router"
+        ],
+        "fuzzy": [
+          "filter",
+          "router",
+          "television"
+        ],
+        "hybrid": [
+          "filter",
+          "router",
+          "television",
+          "washer"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04883212500135414
+    },
+    {
+      "question": "Router manual",
+      "relevant": [
+        "router"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "router",
+          "washer",
+          "passport",
+          "television",
+          "pan"
+        ],
+        "word": [
+          "router",
+          "television",
+          "filter"
+        ],
+        "fuzzy": [
+          "router",
+          "television",
+          "filter"
+        ],
+        "hybrid": [
+          "router",
+          "television",
+          "filter",
+          "washer",
+          "passport"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04619379201903939
+    },
+    {
+      "question": "Air conditioner warranty",
+      "relevant": [
+        "ac"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "ac",
+          "washer",
+          "fridge",
+          "filter",
+          "microwave"
+        ],
+        "word": [
+          "ac",
+          "filter",
+          "fridge",
+          "washer"
+        ],
+        "fuzzy": [
+          "ac",
+          "fridge",
+          "washer",
+          "filter"
+        ],
+        "hybrid": [
+          "ac",
+          "fridge",
+          "washer",
+          "filter",
+          "microwave"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04372166600660421
+    },
+    {
+      "question": "Bank statement",
+      "relevant": [
+        "bank"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "bank",
+          "pan",
+          "school",
+          "laptop",
+          "passport"
+        ],
+        "word": [
+          "bank"
+        ],
+        "fuzzy": [
+          "bank"
+        ],
+        "hybrid": [
+          "bank",
+          "pan",
+          "school",
+          "laptop",
+          "passport"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.04133337500388734
+    },
+    {
+      "question": "School certificate",
+      "relevant": [
+        "school"
+      ],
+      "subset": "clean",
+      "outputs": {
+        "dense": [
+          "school",
+          "birth",
+          "bank",
+          "pan",
+          "passport"
+        ],
+        "word": [
+          "school",
+          "birth"
+        ],
+        "fuzzy": [
+          "school",
+          "birth"
+        ],
+        "hybrid": [
+          "school",
+          "birth",
+          "bank",
+          "pan",
+          "passport"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.03278366700396873
+    },
+    {
+      "question": "TESTP0001A",
+      "relevant": [
+        "pan"
+      ],
+      "subset": "identifier",
+      "outputs": {
+        "dense": [
+          "pan"
+        ],
+        "word": [
+          "pan"
+        ],
+        "fuzzy": [
+          "pan"
+        ],
+        "hybrid": [
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.025431457994272932
+    },
+    {
+      "question": "0000 1111 2222",
+      "relevant": [
+        "aadhaar"
+      ],
+      "subset": "identifier",
+      "outputs": {
+        "dense": [
+          "aadhaar"
+        ],
+        "word": [
+          "aadhaar"
+        ],
+        "fuzzy": [
+          "aadhaar"
+        ],
+        "hybrid": [
+          "aadhaar"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.030159582995111123
+    },
+    {
+      "question": "WM-800",
+      "relevant": [
+        "washer"
+      ],
+      "subset": "identifier",
+      "outputs": {
+        "dense": [
+          "washer"
+        ],
+        "word": [
+          "washer"
+        ],
+        "fuzzy": [
+          "washer"
+        ],
+        "hybrid": [
+          "washer"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.032636415999149904
+    },
+    {
+      "question": "HA-200",
+      "relevant": [
+        "filter"
+      ],
+      "subset": "identifier",
+      "outputs": {
+        "dense": [
+          "filter"
+        ],
+        "word": [
+          "filter"
+        ],
+        "fuzzy": [
+          "filter"
+        ],
+        "hybrid": [
+          "filter"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.025418208999326453
+    },
+    {
+      "question": "RT-400",
+      "relevant": [
+        "router"
+      ],
+      "subset": "identifier",
+      "outputs": {
+        "dense": [
+          "router"
+        ],
+        "word": [
+          "router"
+        ],
+        "fuzzy": [
+          "router"
+        ],
+        "hybrid": [
+          "router"
+        ]
+      },
+      "metrics": {
+        "dense": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "word": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "fuzzy": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        },
+        "hybrid": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      "seconds": 0.0310485840018373
+    },
+    {
+      "question": "quantum unicorn plutonium",
+      "relevant": [],
+      "subset": "no-match",
+      "outputs": {
+        "dense": [],
+        "word": [],
+        "fuzzy": [],
+        "hybrid": []
+      },
+      "metrics": {
+        "dense": null,
+        "word": null,
+        "fuzzy": null,
+        "hybrid": null
+      },
+      "seconds": 0.0322527080134023
+    },
+    {
+      "question": "spaceship ZX-9876",
+      "relevant": [],
+      "subset": "no-match",
+      "outputs": {
+        "dense": [],
+        "word": [],
+        "fuzzy": [],
+        "hybrid": []
+      },
+      "metrics": {
+        "dense": null,
+        "word": null,
+        "fuzzy": null,
+        "hybrid": null
+      },
+      "seconds": 0.024624208017485216
+    },
+    {
+      "question": "dinosaur DNA certificate",
+      "relevant": [],
+      "subset": "no-match",
+      "outputs": {
+        "dense": [
+          "birth",
+          "school",
+          "bank",
+          "passport",
+          "pan"
+        ],
+        "word": [
+          "birth",
+          "school"
+        ],
+        "fuzzy": [
+          "school",
+          "birth"
+        ],
+        "hybrid": [
+          "birth",
+          "school",
+          "bank",
+          "passport",
+          "pan"
+        ]
+      },
+      "metrics": {
+        "dense": null,
+        "word": null,
+        "fuzzy": null,
+        "hybrid": null
+      },
+      "seconds": 0.03992441701120697
+    },
+    {
+      "question": "TESTP9999Z",
+      "relevant": [],
+      "subset": "no-match",
+      "outputs": {
+        "dense": [],
+        "word": [],
+        "fuzzy": [],
+        "hybrid": []
+      },
+      "metrics": {
+        "dense": null,
+        "word": null,
+        "fuzzy": null,
+        "hybrid": null
+      },
+      "seconds": 0.030529875017236918
+    },
+    {
+      "question": "WM-999",
+      "relevant": [],
+      "subset": "no-match",
+      "outputs": {
+        "dense": [],
+        "word": [],
+        "fuzzy": [],
+        "hybrid": []
+      },
+      "metrics": {
+        "dense": null,
+        "word": null,
+        "fuzzy": null,
+        "hybrid": null
+      },
+      "seconds": 0.03195020798011683
+    }
+  ],
+  "cache": {
+    "variants": [
+      {
+        "question": "where is my Aadhaar",
+        "hit": true,
+        "kind": "exact",
+        "correct": true,
+        "ms": 9.170583012746647
+      },
+      {
+        "question": "please locate Aadhaar",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 27.07595899119042
+      },
+      {
+        "question": "please show Aadhaar",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 22.741542023140937
+      },
+      {
+        "question": "where is our Aadhaar",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 22.254000010434538
+      },
+      {
+        "question": "where is my Aadhaar please",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 20.483207976212725
+      },
+      {
+        "question": "where is my passport",
+        "hit": true,
+        "kind": "exact",
+        "correct": true,
+        "ms": 9.793375007575378
+      },
+      {
+        "question": "please locate passport",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 20.751959003973752
+      },
+      {
+        "question": "please show passport",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 19.405083992751315
+      },
+      {
+        "question": "where is our passport",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 21.50179198361002
+      },
+      {
+        "question": "where is my passport please",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 21.7453750083223
+      },
+      {
+        "question": "fridge warranty",
+        "hit": true,
+        "kind": "exact",
+        "correct": true,
+        "ms": 6.338292005239055
+      },
+      {
+        "question": "please locate fridge warranty",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 18.25591697706841
+      },
+      {
+        "question": "please show fridge warranty",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 20.971499994629994
+      },
+      {
+        "question": "fridge warranty",
+        "hit": true,
+        "kind": "exact",
+        "correct": true,
+        "ms": 7.273833005456254
+      },
+      {
+        "question": "fridge warranty please",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 17.411290988093242
+      },
+      {
+        "question": "washing machine warranty",
+        "hit": true,
+        "kind": "exact",
+        "correct": true,
+        "ms": 7.8722499893046916
+      },
+      {
+        "question": "please locate washing machine warranty",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 18.43995798844844
+      },
+      {
+        "question": "please show washing machine warranty",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 21.98395799496211
+      },
+      {
+        "question": "washing machine warranty",
+        "hit": true,
+        "kind": "exact",
+        "correct": true,
+        "ms": 10.283292009262368
+      },
+      {
+        "question": "washing machine warranty please",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 22.493791999295354
+      },
+      {
+        "question": "where is pan",
+        "hit": true,
+        "kind": "exact",
+        "correct": true,
+        "ms": 6.736999988788739
+      },
+      {
+        "question": "please locate pan",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 18.442625005263835
+      },
+      {
+        "question": "please show pan",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 20.216916978824884
+      },
+      {
+        "question": "where is pan",
+        "hit": true,
+        "kind": "exact",
+        "correct": true,
+        "ms": 8.335833001183346
+      },
+      {
+        "question": "where is pan please",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 18.452999996952713
+      },
+      {
+        "question": "aadhar kahan hai",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 18.616874993313104
+      },
+      {
+        "question": "find AAADHAAAR",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 20.166249974863604
+      },
+      {
+        "question": "adhar card",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 23.557125008665025
+      },
+      {
+        "question": "find my paspsort",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 19.850042008329183
+      },
+      {
+        "question": "passprt kahan hai",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 19.64079198660329
+      },
+      {
+        "question": "refrigerator guarantee",
+        "hit": true,
+        "kind": "exact",
+        "correct": true,
+        "ms": 8.916708000469953
+      },
+      {
+        "question": "frdge warranty",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 19.6060000162106
+      },
+      {
+        "question": "washer guarantee",
+        "hit": true,
+        "kind": "exact",
+        "correct": true,
+        "ms": 7.138374989153817
+      },
+      {
+        "question": "washing machien warranty",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 24.105791992042214
+      },
+      {
+        "question": "pan card kahan hai",
+        "hit": true,
+        "kind": "semantic",
+        "correct": true,
+        "ms": 31.768292014021426
+      }
+    ],
+    "near_misses": [
+      {
+        "question": "passport photo",
+        "hit": false
+      },
+      {
+        "question": "passport number",
+        "hit": false
+      },
+      {
+        "question": "passport in bedroom",
+        "hit": false
+      },
+      {
+        "question": "passport in study",
+        "hit": false
+      },
+      {
+        "question": "aadhaar number",
+        "hit": false
+      },
+      {
+        "question": "pan number",
+        "hit": false
+      },
+      {
+        "question": "fridge model",
+        "hit": false
+      },
+      {
+        "question": "washing machine model",
+        "hit": false
+      },
+      {
+        "question": "fridge warranty kitchen",
+        "hit": false
+      },
+      {
+        "question": "washing machine warranty laundry",
+        "hit": false
+      },
+      {
+        "question": "pan card sample",
+        "hit": false
+      },
+      {
+        "question": "passport sample",
+        "hit": false
+      },
+      {
+        "question": "passport 123",
+        "hit": false
+      },
+      {
+        "question": "passport 124",
+        "hit": false
+      },
+      {
+        "question": "fridge serial number",
+        "hit": false
+      },
+      {
+        "question": "passport expiry date",
+        "hit": false
+      },
+      {
+        "question": "fridge receipt",
+        "hit": false
+      },
+      {
+        "question": "washing machine receipt",
+        "hit": false
+      },
+      {
+        "question": "pan study",
+        "hit": false
+      },
+      {
+        "question": "aadhaar living room",
+        "hit": false
+      }
+    ],
+    "hit_rate": 1.0,
+    "false_hit_rate": 0.0,
+    "timing": {
+      "off_mean_ms": 11814.26183351141,
+      "on_mean_ms": 10.736187017755583,
+      "off_generation_calls": 4,
+      "on_generation_calls": 0,
+      "modes": [
+        "local-model-explained",
+        "local-model-explained"
+      ],
+      "scope": "Off measures parallel retrieval + generation/verification; on measures cache lookup. Two repeats with loaded models; cache priming excluded. HTTP/auth/credit accounting excluded."
+    }
+  }
+}

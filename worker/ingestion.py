@@ -17,6 +17,7 @@ import fitz
 from PIL import Image, ImageOps
 
 from .config import Settings, settings
+from .pictures import oriented_rgb
 
 
 @dataclass
@@ -84,7 +85,7 @@ def validate_file(path: Path, mime: str, cfg: Settings = settings) -> None:
 
 
 def ocr_image(picture: Image.Image, cfg: Settings = settings) -> list[ExtractedChunk]:
-    picture = ImageOps.exif_transpose(picture).convert('RGB')
+    picture = oriented_rgb(picture)
     if cfg.ocr_backend == 'paddleocr':
         try:
             from paddleocr import PaddleOCR
@@ -103,21 +104,26 @@ def ocr_image(picture: Image.Image, cfg: Settings = settings) -> list[ExtractedC
             raise ValueError('PaddleOCR is not installed; install the production OCR extra or select tesseract') from exc
     if not shutil.which('tesseract'):
         raise ValueError('Tesseract OCR is not installed')
-    import pytesseract
-    data = pytesseract.image_to_data(picture, config='--psm 6', output_type=pytesseract.Output.DICT, timeout=90)
-    lines: dict[tuple[int, int, int], list[int]] = {}
-    for i, text in enumerate(data['text']):
-        if str(text).strip() and float(data['conf'][i]) >= 20:
-            lines.setdefault((data['block_num'][i], data['par_num'][i], data['line_num'][i]), []).append(i)
-    result = []
-    for indices in lines.values():
-        x0 = min(data['left'][i] for i in indices)
-        y0 = min(data['top'][i] for i in indices)
-        x1 = max(data['left'][i] + data['width'][i] for i in indices)
-        y1 = max(data['top'][i] + data['height'][i] for i in indices)
-        result.append(ExtractedChunk(' '.join(data['text'][i] for i in indices), 'ocr', bbox=[x0, y0, x1, y1],
-                                    metadata={'ocr': 'tesseract', 'width': picture.width, 'height': picture.height}))
-    return result
+    from .ocr import read
+    return [ExtractedChunk(row['text'],'ocr',bbox=row['bbox'],metadata=row['metadata'])
+            for row in read(picture,cfg.ocr_languages)]
+
+
+def image_context(chunks: list[ExtractedChunk], width: float, height: float) -> list[ExtractedChunk]:
+    """Keep adjacent labels/values together, while retaining line-level source boxes."""
+    if not chunks:
+        return [ExtractedChunk('Visual source image. Inspect the attached original for evidence.', 'image',
+                bbox=[0,0,width,height],metadata={'visual_anchor':True,'width':width,'height':height})]
+    if len(chunks)==1:return chunks
+    contexts=[]
+    for offset in range(0,len(chunks),12):
+        group=chunks[offset:offset+12]
+        meta=dict(group[0].metadata,ocr_context=True,
+                  confidence=min(c.metadata.get('confidence',100) for c in group))
+        contexts.append(ExtractedChunk('\n'.join(c.text for c in group),'ocr',
+            bbox=[min(c.bbox[0] for c in group),min(c.bbox[1] for c in group),
+                  max(c.bbox[2] for c in group),max(c.bbox[3] for c in group)],metadata=meta))
+    return contexts+chunks
 
 
 def split_text(text: str, limit: int = 1200) -> list[str]:
@@ -302,7 +308,7 @@ def extract_pdf(path: Path, artifact_dir: Path, cfg: Settings = settings) -> lis
             if sum(len(block[4]) for block in text_blocks) > 20:
                 image_path = artifact_dir / f'page-{index + 1}.png'
                 # Evidence previews must work even in the profile without image embeddings.
-                page.get_pixmap(matrix=fitz.Matrix(1.5, 1.5), alpha=False).save(image_path)
+                page.get_pixmap(matrix=fitz.Matrix(2, 2), alpha=False).save(image_path)
                 # PDF layout engines often split a heading and each following line into separate blocks.
                 # Group adjacent blocks within the same page so model numbers stay with their heading.
                 groups = []
@@ -321,13 +327,28 @@ def extract_pdf(path: Path, artifact_dir: Path, cfg: Settings = settings) -> lis
                     chunks.append(ExtractedChunk('\n'.join(texts), page=index + 1, bbox=[float(v) for v in bounds], image_path=str(image_path) if image_path else None,
                                                  metadata={'coordinates': 'pdf-points', 'width': page.rect.width,
                                                            'height': page.rect.height, 'extractor': 'pymupdf'}))
+                for info in sorted(page.get_image_info(),key=lambda i:fitz.Rect(i['bbox']).get_area(),reverse=True)[:8]:
+                    rect=fitz.Rect(info['bbox']) & page.rect
+                    if rect.is_empty or rect.width*rect.height<2500:continue
+                    pix=page.get_pixmap(matrix=fitz.Matrix(2,2),clip=rect,alpha=False)
+                    with Image.open(io.BytesIO(pix.tobytes('png'))) as embedded:
+                        extra=image_context(ocr_image(embedded,cfg),pix.width,pix.height)
+                    for chunk in extra:
+                        # Deduplicate native text, preserve raster-only labels and numeric values.
+                        if chunk.text.strip() in ' '.join(b[4] for b in text_blocks):continue
+                        chunk.page=index+1
+                        chunk.image_path=str(image_path)
+                        chunk.bbox=[chunk.bbox[0]/2+rect.x0,chunk.bbox[1]/2+rect.y0,
+                                    chunk.bbox[2]/2+rect.x0,chunk.bbox[3]/2+rect.y0]
+                        chunk.metadata.update(coordinates='pdf-points',width=page.rect.width,height=page.rect.height,extractor='mixed-pdf-ocr')
+                        chunks.append(chunk)
             else:
                 pixmap = page.get_pixmap(matrix=fitz.Matrix(2, 2), alpha=False)
                 image_path = artifact_dir / f'page-{index + 1}.png'
                 pixmap.save(image_path)
-                image_chunks = ocr_image(Image.open(io.BytesIO(pixmap.tobytes('png'))), cfg)
+                image_chunks = image_context(ocr_image(Image.open(io.BytesIO(pixmap.tobytes('png'))),cfg),pixmap.width,pixmap.height)
                 if not image_chunks:
-                    image_chunks = [ExtractedChunk('', 'image')]
+                    image_chunks = image_context([],pixmap.width,pixmap.height)
                 for chunk in image_chunks:
                     chunk.page = index + 1
                     chunk.image_path = str(image_path)
@@ -380,7 +401,8 @@ def extract(path: Path, mime: str, artifact_dir: Path, cfg: Settings = settings)
         chunks = extract_pdf(path, artifact_dir, cfg)
     elif mime.startswith('image/'):
         with Image.open(path) as picture:
-            chunks = ocr_image(picture, cfg) or [ExtractedChunk('', 'image')]
+            oriented=ImageOps.exif_transpose(picture)
+            chunks = image_context(ocr_image(picture,cfg),oriented.width,oriented.height)
         for chunk in chunks:
             chunk.image_path = str(path)
     elif mime.startswith(('audio/', 'video/')):

@@ -1,0 +1,17 @@
+{
+  "fictionalOnly": true,
+  "checks": [
+    {
+      "case": "rotated-card.png",
+      "exactField": true,
+      "canonicalCitations": true,
+      "mode": "local-model-explained"
+    },
+    {
+      "case": "mixed.pdf",
+      "exactField": true,
+      "canonicalCitations": true,
+      "mode": "local-model-explained"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "fictional_only": true,
+  "cases": [
+    {
+      "case": "card.png",
+      "old_exact_identifier": true,
+      "new_exact_identifier": true,
+      "old_ms": 131.5602079848759,
+      "new_ms": 254.24591699265875,
+      "label_and_value_same_chunk": true
+    },
+    {
+      "case": "rotated-card.png",
+      "old_exact_identifier": false,
+      "new_exact_identifier": true,
+      "old_ms": 138.29699999769218,
+      "new_ms": 978.0980419891421,
+      "label_and_value_same_chunk": true
+    },
+    {
+      "case": "small-card.png",
+      "old_exact_identifier": true,
+      "new_exact_identifier": true,
+      "old_ms": 67.93183297850192,
+      "new_ms": 185.42608301504515,
+      "label_and_value_same_chunk": true
+    },
+    {
+      "case": "mixed.pdf",
+      "old_exact_identifier": false,
+      "new_exact_identifier": true,
+      "old_ms": 3.546042018570006,
+      "new_ms": 268.62537499982864,
+      "label_and_value_same_chunk": true
+    }
+  ]
+}

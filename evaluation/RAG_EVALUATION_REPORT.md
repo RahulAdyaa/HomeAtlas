@@ -1,3 +1,5 @@
+> Historical baseline: image extraction and source-image generation have since changed. Current image regression results are in [IMAGE_PIPELINE_REPORT.md](IMAGE_PIPELINE_REPORT.md); the original measurements below are preserved.
+
 # HomeAtlas multimodal RAG evaluation
 
 **Status: partial evaluation, 60/60 questions executed. Overall semantic-quality score: unavailable.** Seven required RAGAS judge metrics and free-tier visual judging could not run because no credential is configured. Missing scores are null, never imputed as passing or zero. No application logic or household data was changed.

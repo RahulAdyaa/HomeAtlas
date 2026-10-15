@@ -37,40 +37,19 @@ def lexical_scores(question: str, documents: list[dict]) -> list[float]:
 
 
 def rank_candidates(question: str, documents: list[dict], engine: LocalModels = models, image: Path | None = None) -> list[dict]:
-    if not documents:
-        return []
-    lexical = lexical_scores(question, documents)
-    rankings = [sorted(range(len(documents)), key=lambda i: lexical[i], reverse=True)]
-    vector = engine.embed_text([question], query=True)
-    dense = [0.0] * len(documents)
-    if vector:
-        q = np.asarray(vector[0])
-        for i, doc in enumerate(documents):
-            if doc.get('embedding_model') == engine.text_identity and len(doc.get('embedding') or []) == len(q):
-                dense[i] = float(np.dot(q, np.asarray(doc['embedding'])))
-        rankings.append(sorted(range(len(documents)), key=lambda i: dense[i], reverse=True))
-    vision = engine.embed_image_space(image=image) if image else engine.embed_image_space(text=question)
-    image_scores = [0.0] * len(documents)
-    if vision:
-        for i, doc in enumerate(documents):
-            if doc.get('image_embedding_model') == engine.image_identity and len(doc.get('image_embedding') or []) == len(vision):
-                image_scores[i] = float(np.dot(vision, doc['image_embedding']))
-        rankings.append(sorted(range(len(documents)), key=lambda i: image_scores[i], reverse=True))
-    fusion = [0.0] * len(documents)
-    for ranking in rankings:
-        for rank, index in enumerate(ranking[:60]):
-            fusion[index] += 1 / (60 + rank + 1)
-    selected = sorted(range(len(documents)), key=lambda i: fusion[i], reverse=True)[:16]
-    reranked = engine.rerank(question, [documents[i]['text'] for i in selected])
-    candidates = []
-    for rank, i in enumerate(selected):
-        candidate = dict(documents[i])
-        candidate.update({'lexical_score': lexical[i], 'dense_score': dense[i], 'image_score': image_scores[i],
-                          'relevance': reranked[rank] if reranked else fusion[i]})
-        # Dense similarity alone is not sufficient proof; require lexical support or strong cross-encoder relevance.
-        if lexical[i] > 0 or (reranked and reranked[rank] >= .55) or (image and image_scores[i] >= .65):
-            candidates.append(candidate)
-    return sorted(candidates, key=lambda c: c['relevance'], reverse=True)[:5]
+    from concurrent.futures import ThreadPoolExecutor
+    from .search.fusion import CHANNELS, assemble
+    from .search.common import CONFIG, tokens as search_tokens, index_text
+    from .search.visual import search
+    channels=dict(CHANNELS)
+    if CONFIG.get('visual',{}).get('enabled',False):
+        channels['visual']=lambda q,docs,eng,limit:search(q,docs,eng,limit,image)
+    numeric={w for w in search_tokens(question) if any(c.isdigit() for c in w)}
+    text_documents=[d for d in documents if numeric.issubset(set(search_tokens(index_text(d))))]
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        futures={name:executor.submit(fn,question,documents if name=='visual' else text_documents,engine,CONFIG['channel_top_k']) for name,fn in channels.items()}
+        rankings={name:f.result() for name,f in futures.items()}
+    return assemble(question,documents,rankings,engine)
 
 
 def citation(row: dict, index: int, quote: str) -> dict:
@@ -123,6 +102,7 @@ def answer_from_evidence(question: str, candidates: list[dict], engine: LocalMod
     intro = 'These records may conflict; confirm the applicable version before relying on them.' if conflict else 'Your records say:'
     answer = intro + '\n\n' + '\n\n'.join(f'“{quote}” [{i + 1}]' for i, (_, quote) in enumerate(quotes))
     sections = []
+    accepted = []
     if generated and quotes and hasattr(engine, 'verify_sections'):
         for section in generated.get('sections', [])[:8]:
             if not isinstance(section, dict):
@@ -156,7 +136,7 @@ def answer_from_evidence(question: str, candidates: list[dict], engine: LocalMod
             sections.append({'heading': heading[:160], 'text': text,
                              'evidence': sorted(set(quote_map[i] for i in references))})
         verified = engine.verify_sections(question, sections, [
-            {'index': i, 'text': quote, 'image_path': row.get('image_path'), 'page': row.get('page')}
+            {'index': i, 'text': quote, 'image_path': row.get('image_path'), 'page': row.get('page'), 'bbox': row.get('bbox'), 'metadata': row.get('metadata',{})}
             for i, (row, quote) in enumerate(quotes)]) if sections else []
         accepted = [sections[i] for i in sorted(set(verified)) if type(i) is int and 0 <= i < len(sections)]
         if accepted:
@@ -166,12 +146,32 @@ def answer_from_evidence(question: str, candidates: list[dict], engine: LocalMod
             if len(accepted) < len(generated.get('sections', [])):
                 answer += '\n\nSome proposed details could not be verified against these records and have been omitted.'
             mode = 'local-model-explained'
+    if not accepted and any((row.get('metadata') or {}).get('visual_anchor') for row,_ in quotes):
+        return {'answer': 'I found a matching image, but could not verify an answer from it. Try a clearer image or add a description.',
+                'confidence':'insufficient','mode':'abstention','citations':[]}
+    if not accepted and re.search(r'\b(serial|aadhaar|aadhar|pan|card number|identifier)\b',question,re.I) and any(
+        (row.get('metadata') or {}).get('confidence',100)<70 and row.get('image_path') for row,_ in quotes):
+        return {'answer':'The identifier is not clear enough in the image to verify. Please upload a sharper close-up.',
+                'confidence':'insufficient','mode':'abstention','citations':[]}
     if image and (not engine.cfg.image_model or engine.status.get('image', '').startswith('unavailable')):
         answer += '\n\nThe photo helped identify text. Visual part matching is unavailable in this profile; these quotes do not establish compatibility.'
     if re.search(r'\b(gas|electrical|wiring|structural|breaker|mains)\b', question, re.I):
         answer += '\n\nFor hazardous electrical, gas, or structural work, use a qualified professional.'
     return {'answer': answer, 'citations': [citation(row, i + 1, quote) for i, (row, quote) in enumerate(quotes)],
             'confidence': 'conflicting' if conflict else 'supported', 'mode': mode}
+
+
+def unrelated_query(question: str, candidates: list[dict]) -> bool:
+    """Reject an apparent hit when most distinct subject terms have no record support."""
+    from .search.common import tokens, index_text, edit_distance
+    requested = set(tokens(question))
+    if len(requested) < 3 or not candidates:
+        return False
+    found = set().union(*(set(tokens(index_text(row))) for row in candidates))
+    matches = sum(term in found or (len(term) >= 5 and not any(c.isdigit() for c in term) and
+                  any(abs(len(term) - len(word)) <= 2 and edit_distance(term, word) <= 1 for word in found))
+                  for term in requested)
+    return matches / len(requested) < .5
 
 
 def query_records(household_id: str, actor_id: str, question: str, item_id: str | None = None,
@@ -182,19 +182,6 @@ def query_records(household_id: str, actor_id: str, question: str, item_id: str 
         member = conn.execute('SELECT role FROM memberships WHERE household_id=%s AND user_id=%s', (household_id, actor_id)).fetchone()
         if not member:
             raise PermissionError('Household membership is required')
-        # This is the only candidate read. Household, actor membership, current version and optional scope
-        # predicates apply inside PostgreSQL BEFORE any chunk enters Python, embeddings, reranker, or model.
-        documents = conn.execute('''
-            SELECT c.*, s.title FROM chunks c
-            JOIN sources s ON s.id=c.source_id AND s.household_id=c.household_id AND s.current_version_id=c.version_id
-            JOIN memberships m ON m.household_id=c.household_id AND m.user_id=%s
-            WHERE c.household_id=%s AND s.status='ready'
-            AND COALESCE(c.metadata->>'active','true')='true'
-            AND (%s::boolean OR (COALESCE(c.metadata->>'sample','false')<>'true' AND s.title !~* '^SAMPLE[[:space:]—:-]'))
-            AND (%s::uuid IS NULL OR c.item_id=%s::uuid)
-            AND (%s::uuid IS NULL OR c.room_id=%s::uuid)
-            ORDER BY c.created_at DESC LIMIT 10000
-        ''', (actor_id, household_id, bool(re.search(r'\b(sample|demo|demonstration|example)\b', question, re.I)), item_id, item_id, room_id, room_id)).fetchall()
     image = cfg.private_path(image_path) if image_path else None
     retrieval_question = question
     if image:
@@ -203,9 +190,19 @@ def query_records(household_id: str, actor_id: str, question: str, item_id: str 
         with Image.open(image) as picture:
             image_text = ' '.join(chunk.text for chunk in ocr_image(picture, cfg))
         retrieval_question += ' ' + image_text[:1500]
-    candidates = rank_candidates(retrieval_question, documents, engine=engine, image=image)
+    from .search.postgres import retrieve, BASE, params
+    candidates, documents = retrieve(retrieval_question,household_id,actor_id,item_id,room_id,cfg,engine)
+    with psycopg.connect(cfg.database_url,row_factory=dict_row) as conn:
+        if image:
+            documents=conn.execute(BASE,params(household_id,actor_id,question,item_id,room_id)).fetchall()
+            candidates=rank_candidates(retrieval_question,documents,engine,image)
+        elif candidates:
+            sources=list({c['source_id'] for c in candidates})
+            documents=conn.execute(BASE+' AND c.source_id=ANY(%s)',(*params(household_id,actor_id,question,item_id,room_id),sources)).fetchall()
     # Include adjacent pages from the same authorized current source: definitions often refer
     # to a diagram/table on the preceding page. Never expand outside the SQL tenant/scope filter.
+    from .search.suggestions import suggest
+    suggestion = suggest(question,documents,candidates)
     selected_ids = {str(c['id']) for c in candidates}
     neighbors = []
     for seed in candidates:
@@ -217,7 +214,11 @@ def query_records(household_id: str, actor_id: str, question: str, item_id: str 
                 selected_ids.add(str(row['id']))
                 neighbors.append(row)
     candidates = (candidates + neighbors)[:12]
-    result = answer_from_evidence(question, candidates, engine=engine, image=image)
+    result = ({'answer': "I couldn't find that in your household records.",
+               'citations': [], 'confidence': 'insufficient', 'mode': 'abstention'}
+              if not image and not any(c.get('visual_match') and c.get('image_path') for c in candidates) and unrelated_query(question, candidates)
+              else answer_from_evidence(question, candidates, engine=engine, image=image))
+    if suggestion: result['suggestion']=suggestion
     # Reauthorize after a potentially long model call; revoked members receive no source content.
     with psycopg.connect(cfg.database_url) as conn:
         if not conn.execute('SELECT 1 FROM memberships WHERE household_id=%s AND user_id=%s', (household_id, actor_id)).fetchone():
@@ -225,5 +226,5 @@ def query_records(household_id: str, actor_id: str, question: str, item_id: str 
     if member['role'] == 'owner':
         result['diagnostics'] = {'candidateCount': len(candidates), 'scopedChunkCount': len(documents),
                                  'models': dict(engine.status), 'latencyMs': round((time.monotonic() - started) * 1000),
-                                 'retrieval': 'BM25 + compatible local vectors + reciprocal rank fusion + local reranker'}
+                                 'retrieval': 'multilingual pgvector + word BM25 + character TF-IDF/edit distance + weighted RRF'}
     return result

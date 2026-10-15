@@ -13,6 +13,7 @@ from urllib.request import Request, urlopen
 import numpy as np
 
 from .config import Settings, settings
+from .pictures import oriented_rgb
 
 log = logging.getLogger('homeatlas.models')
 
@@ -47,7 +48,8 @@ class LocalModels:
                 # Resolve a pinned cache snapshot to a path. Some tokenizer versions otherwise probe
                 # remote chat templates even with local_files_only=True.
                 cached = Path(os.getenv('HF_HOME', str(Path.home() / '.cache' / 'huggingface'))) / 'hub' / ('models--' + identifier.replace('/', '--')) / 'snapshots' / revision
-                local_name = str(cached) if cached.exists() else identifier
+                bundled = self.cfg.model_dir / 'multilingual-e5-small'
+                local_name = str(bundled) if identifier == 'intfloat/multilingual-e5-small' and bundled.exists() else str(cached) if cached.exists() else identifier
                 kwargs = {'revision': revision, 'local_files_only': True, 'trust_remote_code': False}
                 if kind == 'image':
                     processor = AutoProcessor.from_pretrained(local_name, **kwargs)
@@ -85,9 +87,16 @@ class LocalModels:
                 batch = texts[offset:offset + 16]
                 if query and 'bge-small' in self.cfg.text_model:
                     batch = ['Represent this sentence for searching relevant passages: ' + t for t in batch]
+                if 'multilingual-e5' in self.cfg.text_model:
+                    batch = [('query: ' if query else 'passage: ') + t for t in batch]
                 encoded = tokenizer(batch, padding=True, truncation=True, max_length=512, return_tensors='pt')
                 # BGE uses CLS dense vectors. These are never mixed with SigLIP vectors.
-                vectors = model(**encoded).last_hidden_state[:, 0]
+                hidden = model(**encoded).last_hidden_state
+                if 'multilingual-e5' in self.cfg.text_model:
+                    mask = encoded['attention_mask'].unsqueeze(-1)
+                    vectors = (hidden * mask).sum(dim=1) / mask.sum(dim=1).clamp(min=1)
+                else:
+                    vectors = hidden[:, 0]
                 outputs.extend(torch.nn.functional.normalize(vectors, p=2, dim=1).cpu().tolist())
         return outputs
 
@@ -110,12 +119,12 @@ class LocalModels:
         if not pair:
             return None
         import torch
-        from PIL import Image
+        from PIL import Image, ImageOps
         processor, model = pair
         with self.lock, torch.inference_mode():
             if image:
                 with Image.open(image) as source:
-                    encoded = processor(images=source.convert('RGB'), return_tensors='pt')
+                    encoded = processor(images=oriented_rgb(source), return_tensors='pt')
                 features = model.get_image_features(**encoded)
             else:
                 encoded = processor(text=[text], padding='max_length', max_length=64, return_tensors='pt')
@@ -160,31 +169,17 @@ class LocalModels:
             return re.split(r'\b(?:ignore\s+(?:(?:all|the|any|previous)\s+)*(?:system|previous|above|instructions|prompt)|system\s+prompt\s*:)', text, maxsplit=1, flags=re.I)[0].strip()
         message = {'role': 'user', 'content': json.dumps({'question': question, 'evidence': [
             {'index': i, 'text': source_text(e['text']), 'anchor': source_text(e['text'])[:240], 'has_source_image': bool(e.get('image_path'))} for i, e in enumerate(evidence)]})}
-        images = []
+        from .vision_assets import attachments,encoded
+        rows=[dict(row,index=i) for i,row in enumerate(evidence)]
+        images,labels=attachments(rows,self.cfg)
         if image:
-            images.append(image)
-            message['content'] += '\nAttached image 1 is the user query image, not source evidence. '
-        seen = set()
-        for i, row in enumerate(evidence):
-            path = row.get('image_path')
-            if path and path not in seen and len(images) < 4:
-                # DB provenance, never a model-selected path. Bound image resolution and count.
-                source = self.cfg.private_path(path)
-                if source.is_file():
-                    seen.add(path)
-                    images.append(source)
-                    indices = [j for j, e in enumerate(evidence) if e.get('image_path') == path]
-                    message['content'] += f'\nAttached source image {len(images)} belongs to evidence indices {indices}, page {row.get("page")}. '
-        if images:
             from PIL import Image
-            message['images'] = []
-            for path in images:
-                with Image.open(path) as picture:
-                    picture = picture.convert('RGB')
-                    picture.thumbnail((1400, 1400))
-                    buffer = io.BytesIO()
-                    picture.save(buffer, format='JPEG', quality=85)
-                    message['images'].append(base64.b64encode(buffer.getvalue()).decode())
+            with Image.open(self.cfg.private_path(str(image))) as query_picture:
+                images.append(encoded(query_picture))
+            labels+=f'\nAttached image {len(images)} is the user query image, not source evidence.'
+        if images:
+            message['images']=images
+            message['content']+='\n'+labels
         schema = {'type':'object','properties':{'quotes':{'type':'array','maxItems':2,'items':{'type':'object','properties':{'index':{'type':'integer','minimum':0},'quote':{'type':'string','minLength':8,'maxLength':240}},'required':['index','quote']}},'conflict':{'type':'boolean'},'insufficient':{'type':'boolean'}},'required':['quotes','conflict','insufficient']}
         schema['properties']['quotes']['maxItems'] = 8
         schema['properties']['quotes']['items']['properties']['quote']['maxLength'] = 1200
@@ -222,28 +217,18 @@ class LocalModels:
                      'Readable chart values do not need to occur in the quoted title. '
                      'Return the sectionIndex of each section whose EVERY factual claim, number, equation and table cell is supported by its cited text or image. '
                      'Return SECTION indices, not quote indices. Multiple sections may cite the same quote and still all pass. '
+                     'For OCR text, compare identifiers and numbers against the actual image; OCR text may be wrong and is not independent confirmation. '
                      'Reject unreadable values, unsupported interpretations, invented comparisons and outside knowledge. '
                      'Do not accept a claim merely because it sounds plausible. Return {"supported":[]} if none pass.'},
                      {'role': 'user', 'content': json.dumps({'question': question, 'sections': [dict(s, sectionIndex=i) for i, s in enumerate(sections)], 'quotes': [
                          {'index': e['index'], 'text': e['text'], 'page': e.get('page')} for e in evidence]})}],
                    'options': {'temperature': 0, 'num_ctx': 12288, 'num_predict': 250}}
         try:
-            from PIL import Image
-            seen = set()
-            message = payload['messages'][1]
-            for quote in evidence:
-                path = quote.get('image_path')
-                if not path or path in seen or len(seen) >= 4:
-                    continue
-                seen.add(path)
-                with Image.open(self.cfg.private_path(path)) as picture:
-                    picture = picture.convert('RGB')
-                    picture.thumbnail((1400, 1400))
-                    buffer = io.BytesIO()
-                    picture.save(buffer, format='JPEG', quality=85)
-                message.setdefault('images', []).append(base64.b64encode(buffer.getvalue()).decode())
-                indices = [e['index'] for e in evidence if e.get('image_path') == path]
-                message['content'] += f'\nAttached source image {len(seen)} supports quote indices {indices}. '
+            from .vision_assets import attachments
+            images,labels=attachments(evidence,self.cfg)
+            if images:
+                payload['messages'][1]['images']=images
+                payload['messages'][1]['content']+='\n'+labels
             request = Request(self.cfg.ollama_url.rstrip('/') + '/api/chat', data=json.dumps(payload).encode(), headers={'Content-Type': 'application/json'})
             with urlopen(request, timeout=90) as response:
                 result = json.loads(json.loads(response.read())['message']['content'])

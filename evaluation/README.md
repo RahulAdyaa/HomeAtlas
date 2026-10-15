@@ -58,3 +58,7 @@ Formula checks:
 ```sh
 evaluation/.venv/bin/python evaluation/test_metrics.py
 ```
+
+## Hybrid and semantic-cache regression benchmark
+
+Run `worker/.venv/bin/python evaluation/hybrid_eval.py` from the repository root after applying migrations and installing the pinned multilingual model. This reuses the ranking metrics extracted from the original harness into `retrieval_metrics.py`, and exercises the production PostgreSQL channel modules. It produces `HYBRID_EVALUATION_REPORT.md` and `hybrid-results.json` from the independently labeled fictional corpus in `hybrid_testset.py`. No user documents are read. See the report for limitations and unmet targets; do not combine these numbers with the older PDF end-to-end evaluation.

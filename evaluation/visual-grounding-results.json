@@ -1,0 +1,17 @@
+{
+  "fictionalOnly": true,
+  "checks": [
+    {
+      "case": "image",
+      "mode": "local-model-grounded",
+      "expectedTermsPresent": true,
+      "canonicalQuotes": true
+    },
+    {
+      "case": "chart",
+      "mode": "local-model-grounded",
+      "expectedTermsPresent": true,
+      "canonicalQuotes": true
+    }
+  ]
+}

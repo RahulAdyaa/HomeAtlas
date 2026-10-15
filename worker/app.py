@@ -91,3 +91,42 @@ def transcribe_question(body: AudioQuery):
             {'text': chunk.text, 'start': chunk.start_seconds, 'end': chunk.end_seconds} for chunk in chunks]}
     except ValueError as exc:
         raise HTTPException(422, str(exc))
+
+class CacheQuery(Query):
+    scopeKey: str = Field(default='', max_length=500)
+    bypass: bool = False
+
+class CacheStore(CacheQuery):
+    dataVersion: str
+    answer: dict
+    latencyMs: float = Field(ge=0)
+
+@app.post('/cache/lookup', dependencies=[Depends(authorize)])
+def cache_lookup(body: CacheQuery):
+    from .search.cache import lookup
+    try:
+        return lookup(str(body.householdId),body.actorId,body.question,body.scopeKey,settings,models,body.bypass)
+    except PermissionError as exc: raise HTTPException(403,str(exc))
+
+@app.post('/cache/store', dependencies=[Depends(authorize)])
+def cache_store(body: CacheStore):
+    from .search.cache import store
+    try:
+        return {'stored':store(str(body.householdId),body.actorId,body.question,body.scopeKey,body.dataVersion,body.answer,body.latencyMs,settings,models)}
+    except PermissionError as exc: raise HTTPException(403,str(exc))
+
+class CacheAdmin(BaseModel):
+    householdId: UUID
+    actorId: str
+
+@app.post('/cache/clear', dependencies=[Depends(authorize)])
+def cache_clear(body: CacheAdmin):
+    from .search.cache import clear
+    try:return clear(str(body.householdId),body.actorId,settings)
+    except PermissionError as exc:raise HTTPException(403,str(exc))
+
+@app.post('/cache/metrics', dependencies=[Depends(authorize)])
+def cache_metrics(body: CacheAdmin):
+    from .search.cache import metrics
+    try:return metrics(str(body.householdId),body.actorId,settings)
+    except PermissionError as exc:raise HTTPException(403,str(exc))
