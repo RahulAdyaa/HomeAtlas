@@ -179,3 +179,48 @@ def shared_generation_slot():
             yield
         finally:
             fcntl.flock(handle, fcntl.LOCK_UN)
+
+
+def canonical_chunks(chunks: list, source_key: str, title: str,
+                     location_path: str, tags: list[str] | None = None) -> list[dict]:
+    """Mirror ingestion location prefixes BEFORE embedding; preserve visual evidence.
+
+    Pass actual extracted chunks. Returned rows are unembedded; callers embed row.text
+    and attach the app engine's observed embedding identities. Source/page selector
+    resolution uses fixture_source_id, while production-like UUIDs remain stable.
+    """
+    from dataclasses import asdict, is_dataclass
+    from uuid import NAMESPACE_URL, uuid5
+    def ident(name: str) -> str:
+        return str(uuid5(NAMESPACE_URL, 'https://homeatlas.invalid/evaluation/' + name))
+    rows = []
+    for index, chunk in enumerate(chunks):
+        row = asdict(chunk) if is_dataclass(chunk) else dict(chunk)
+        metadata = dict(row.get('metadata') or {})
+        original = metadata.get('content_text', row.get('text', ''))
+        # Exactly one prefix; callers must not pass already prefixed text without metadata.
+        row['text'] = f'Location: {location_path}\n\n{original}'
+        row['metadata'] = {**metadata, 'content_text': original, 'location_path': location_path,
+                           'tags': list(tags or []), 'synthetic': True}
+        row.update(id=ident(f'chunk/{source_key}/page-{row.get("page")}/index-{index}'),
+                   source_id=ident('source/' + source_key),
+                   version_id=ident('version/' + source_key + '/v1'),
+                   fixture_source_id=source_key, source_modality=source_key,
+                   title=title, location_path=location_path, tags=list(tags or []))
+        rows.append(row)
+    return rows
+
+
+def relevant_chunk_ids(question: dict, corpus: list[dict]) -> list[str]:
+    """Map authored gold source/page selectors after actual ingestion, without text judging."""
+    if question.get('unanswerable'):
+        return []
+    mapping = question.get('ground_truth_mapping') or {}
+    source = mapping.get('source_id', question.get('modality'))
+    pages = mapping.get('pages', question.get('source_pages', []))
+    if question.get('suite') == 'household' or question.get('relevant_document_ids'):
+        ids = set(question.get('reference_chunks', []))
+        sources = set(question.get('relevant_document_ids', []))
+        return [c['id'] for c in corpus if c['id'] in ids or c.get('source_id') in sources]
+    return [c['id'] for c in corpus
+            if c.get('fixture_source_id', c.get('source_id')) == source and c.get('page') in pages]
