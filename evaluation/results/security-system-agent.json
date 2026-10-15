@@ -8,10 +8,10 @@
       "phase": "baseline",
       "run": 1,
       "run_id": "baseline-run-01",
-      "timestamp_utc": "2026-10-15T12:00:37.990552+00:00",
+      "timestamp_utc": "2026-10-15T12:22:50.760551+00:00",
       "seed": 741,
       "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
-      "app_commit": "17bc806955e1610997fe05dfdd9879a689e8c83b",
+      "app_commit": "9ebfb0a3c29d3b39b5bb8d8ed13bc5198f72e43f",
       "app_source_fingerprint": "e89dd896bea27ebdf4ac879f91549f28c82c4004f7ffbb7b9b8c41fa68b08b25",
       "app_files": {
         "app/api/admin/route.ts": "b67bacea62dca51879db89c49c49f0fd0d13bd04442a0efd8d50570091db6b31",
@@ -87,7 +87,14 @@
         "model_generation_gate_wait_seconds": 7.491701398976147e-05,
         "timing_note": "Live request latency excludes outer gate acquisition wait. PDF total/retrieval/generation wall times are observed evaluator wall, including shared-lock wait and any same-run resume response replay; they are not isolated cold or warm production latency. Model-stage seconds and token usage retain original actual call observations even when a same-run evaluator resume reuses that response. Historical model_calls count original generation/verification attempts; actual_new_model_calls counts nonreplayed attempts during the saved execution. Evaluator response replay is distinct from application semantic caching. Shared 16 GB development host; small samples; no capacity or SLA claim.",
         "quantile_definition": "Linear interpolation, numpy-compatible method=linear. Small n retained beside each metric.",
-        "sensitive_cache_policy": "Cache intentionally stores authorized query text, answer JSON and citations; scoped per household AND user. Synthetic canary confirms this persistence, so zero-PII-in-cache is not asserted. Cache is not a general secrets vault.",
+        "sensitive_cache_policy": "Cache stores authorized query text, answer JSON and citations, scoped per household AND user. Both measured runs persisted the synthetic identifier answer canary. The strict requirement of zero sensitive-answer persistence is NOT MET in this fixture; isolation passing does not satisfy it. Password and worker-secret canaries were absent in inspected fixture cache rows. No real personal data or private logs were read.",
+        "strict_privacy_requirement": {
+          "status": "NOT_MET",
+          "requirement": "No sensitive answer content in cache",
+          "evidence_probe": "cache-stored-content-policy",
+          "evidence_field": "authorized_answer_canary_persisted",
+          "recommendation": "Consider sensitive-query/identifier cache bypass or opt-in sensitive retention. Encryption and retention controls mitigate storage exposure but do not establish zero persistence. Actual private-log leakage remains NOT MEASURED."
+        },
         "request_timeout_seconds": 300,
         "live_probe_count": 27,
         "expected_live_probe_count": 27,
@@ -173,6 +180,16 @@
           "n": 3,
           "status": "MEASURED",
           "reason": null
+        },
+        {
+          "metric": "sensitive_answer_cache_persistence_rate",
+          "value": 1.0,
+          "n": 1,
+          "status": "MEASURED",
+          "reason": null,
+          "target": 0,
+          "direction": "lower_is_better",
+          "interpretation": "Strict zero-sensitive-answer persistence is NOT MET when the synthetic identifier canary is present. Household/user isolation is a separate property. No real personal data read."
         },
         {
           "metric": "live_recorded_fact_sequential_p50_ms",
@@ -1054,7 +1071,7 @@
         {
           "metric": "publication_sensitive_value_leak_files",
           "value": 0,
-          "n": 145,
+          "n": 177,
           "status": "MEASURED",
           "reason": null
         }
@@ -4591,7 +4608,7 @@
         },
         {
           "id": "publication-sensitive-value-scan",
-          "files_scanned": 145,
+          "files_scanned": 177,
           "matching_files": [],
           "unsafe_settings_dump_patterns": [],
           "passed": true,
@@ -4693,6 +4710,16 @@
             },
             {
               "id": "source-injection-indirect",
+              "value": 1.0
+            }
+          ]
+        },
+        "sensitive_answer_cache_persistence_rate": {
+          "aggregation": "mean",
+          "quantile": null,
+          "samples": [
+            {
+              "id": "cache-stored-content-policy",
               "value": 1.0
             }
           ]
@@ -12477,10 +12504,10 @@
       "phase": "baseline",
       "run": 2,
       "run_id": "baseline-run-02",
-      "timestamp_utc": "2026-10-15T12:00:39.146291+00:00",
+      "timestamp_utc": "2026-10-15T12:22:52.833496+00:00",
       "seed": 741,
       "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
-      "app_commit": "17bc806955e1610997fe05dfdd9879a689e8c83b",
+      "app_commit": "9ebfb0a3c29d3b39b5bb8d8ed13bc5198f72e43f",
       "app_source_fingerprint": "e89dd896bea27ebdf4ac879f91549f28c82c4004f7ffbb7b9b8c41fa68b08b25",
       "app_files": {
         "app/api/admin/route.ts": "b67bacea62dca51879db89c49c49f0fd0d13bd04442a0efd8d50570091db6b31",
@@ -12556,7 +12583,14 @@
         "model_generation_gate_wait_seconds": 18.650373207987286,
         "timing_note": "Live request latency excludes outer gate acquisition wait. PDF total/retrieval/generation wall times are observed evaluator wall, including shared-lock wait and any same-run resume response replay; they are not isolated cold or warm production latency. Model-stage seconds and token usage retain original actual call observations even when a same-run evaluator resume reuses that response. Historical model_calls count original generation/verification attempts; actual_new_model_calls counts nonreplayed attempts during the saved execution. Evaluator response replay is distinct from application semantic caching. Shared 16 GB development host; small samples; no capacity or SLA claim.",
         "quantile_definition": "Linear interpolation, numpy-compatible method=linear. Small n retained beside each metric.",
-        "sensitive_cache_policy": "Cache intentionally stores authorized query text, answer JSON and citations; scoped per household AND user. Synthetic canary confirms this persistence, so zero-PII-in-cache is not asserted. Cache is not a general secrets vault.",
+        "sensitive_cache_policy": "Cache stores authorized query text, answer JSON and citations, scoped per household AND user. Both measured runs persisted the synthetic identifier answer canary. The strict requirement of zero sensitive-answer persistence is NOT MET in this fixture; isolation passing does not satisfy it. Password and worker-secret canaries were absent in inspected fixture cache rows. No real personal data or private logs were read.",
+        "strict_privacy_requirement": {
+          "status": "NOT_MET",
+          "requirement": "No sensitive answer content in cache",
+          "evidence_probe": "cache-stored-content-policy",
+          "evidence_field": "authorized_answer_canary_persisted",
+          "recommendation": "Consider sensitive-query/identifier cache bypass or opt-in sensitive retention. Encryption and retention controls mitigate storage exposure but do not establish zero persistence. Actual private-log leakage remains NOT MEASURED."
+        },
         "request_timeout_seconds": 300,
         "live_probe_count": 27,
         "expected_live_probe_count": 27,
@@ -12590,11 +12624,11 @@
           "health"
         ],
         "missing_live_probe_ids": [],
-        "complete": false,
+        "complete": true,
         "requested_pdf_questions": 60,
-        "generation_result_hash": "b845e91de0fa49076b97bfaa381023b8291b1cfea31ce0ceb0931e82abd5a488",
-        "generation_rows": 44,
-        "generation_partial": true,
+        "generation_result_hash": "90923ea4f3bf6909d67b72d67f1b3bf13782f3bfa1b16b5f1cc262fb7c052820",
+        "generation_rows": 60,
+        "generation_partial": false,
         "generation_app_source_fingerprint": "e89dd896bea27ebdf4ac879f91549f28c82c4004f7ffbb7b9b8c41fa68b08b25",
         "generation_observed_models": {
           "text": "intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3",
@@ -12644,6 +12678,16 @@
           "n": 3,
           "status": "MEASURED",
           "reason": null
+        },
+        {
+          "metric": "sensitive_answer_cache_persistence_rate",
+          "value": 1.0,
+          "n": 1,
+          "status": "MEASURED",
+          "reason": null,
+          "target": 0,
+          "direction": "lower_is_better",
+          "interpretation": "Strict zero-sensitive-answer persistence is NOT MET when the synthetic identifier canary is present. Household/user isolation is a separate property. No real personal data read."
         },
         {
           "metric": "live_recorded_fact_sequential_p50_ms",
@@ -12726,57 +12770,57 @@
         },
         {
           "metric": "pdf_all_retrieval_seconds_p50",
-          "value": 1.4217546254949411,
-          "n": 44,
+          "value": 1.3723621670069406,
+          "n": 60,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_retrieval_seconds_p95",
-          "value": 2.3204413474100876,
-          "n": 44,
+          "value": 2.367872601465204,
+          "n": 60,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_generation_seconds_p50",
-          "value": 69.65717887500068,
-          "n": 44,
+          "value": 72.47474481300742,
+          "n": 60,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_generation_seconds_p95",
-          "value": 161.28938261070726,
-          "n": 44,
+          "value": 163.52189235655385,
+          "n": 60,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_total_seconds_p50",
-          "value": 70.37434181247954,
-          "n": 44,
+          "value": 73.13779487498687,
+          "n": 60,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_total_seconds_p95",
-          "value": 162.5734983204893,
-          "n": 44,
+          "value": 164.7880257350887,
+          "n": 60,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_model_embedding_seconds_p50",
-          "value": 0.3562956034875242,
-          "n": 44,
+          "value": 0.3491781250049826,
+          "n": 60,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_model_embedding_seconds_p95",
-          "value": 0.8779871733058828,
-          "n": 44,
+          "value": 0.7854232069003043,
+          "n": 60,
           "status": "MEASURED",
           "reason": null
         },
@@ -12796,57 +12840,57 @@
         },
         {
           "metric": "pdf_all_model_generation_seconds_p50",
-          "value": 65.91779164600302,
-          "n": 42,
+          "value": 71.35351145849563,
+          "n": 56,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_model_generation_seconds_p95",
-          "value": 102.4287862187586,
-          "n": 42,
+          "value": 105.96999956299987,
+          "n": 56,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_model_verification_seconds_p50",
-          "value": 20.89214666650514,
-          "n": 26,
+          "value": 26.406905791984173,
+          "n": 31,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_model_verification_seconds_p95",
-          "value": 66.25538891675387,
-          "n": 26,
+          "value": 66.91319097951055,
+          "n": 31,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_mean_prompt_tokens",
-          "value": 12902.121951219513,
-          "n": 41,
+          "value": 12497.272727272728,
+          "n": 55,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_mean_completion_tokens",
-          "value": 340.609756097561,
-          "n": 41,
+          "value": 363.05454545454546,
+          "n": 55,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_mean_model_calls",
-          "value": 1.5454545454545454,
-          "n": 44,
+          "value": 1.45,
+          "n": 60,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_all_mean_actual_new_model_calls",
-          "value": 1.5454545454545454,
-          "n": 44,
+          "value": 1.45,
+          "n": 60,
           "status": "MEASURED",
           "reason": null
         },
@@ -13230,57 +13274,57 @@
         },
         {
           "metric": "pdf_chart_retrieval_seconds_p50",
-          "value": 1.3061601874942426,
-          "n": 8,
+          "value": 1.3269772505009314,
+          "n": 12,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_retrieval_seconds_p95",
-          "value": 4.32455278529669,
-          "n": 8,
+          "value": 3.612601376901145,
+          "n": 12,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_generation_seconds_p50",
-          "value": 120.17404218751471,
-          "n": 8,
+          "value": 83.48368218750693,
+          "n": 12,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_generation_seconds_p95",
-          "value": 177.54516098924069,
-          "n": 8,
+          "value": 176.66782236424478,
+          "n": 12,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_total_seconds_p50",
-          "value": 121.61969899998803,
-          "n": 8,
+          "value": 84.78989883349277,
+          "n": 12,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_total_seconds_p95",
-          "value": 181.8697706147941,
-          "n": 8,
+          "value": 180.280483156399,
+          "n": 12,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_model_embedding_seconds_p50",
-          "value": 0.3463603534910362,
-          "n": 8,
+          "value": 0.36021841650654096,
+          "n": 12,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_model_embedding_seconds_p95",
-          "value": 2.387448714704077,
-          "n": 8,
+          "value": 1.877770677462102,
+          "n": 12,
           "status": "MEASURED",
           "reason": null
         },
@@ -13300,115 +13344,115 @@
         },
         {
           "metric": "pdf_chart_model_generation_seconds_p50",
-          "value": 78.24397866650543,
-          "n": 8,
+          "value": 77.93604062500526,
+          "n": 11,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_model_generation_seconds_p95",
-          "value": 104.94992802500201,
-          "n": 8,
+          "value": 104.3869523750036,
+          "n": 11,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_model_verification_seconds_p50",
-          "value": 61.721100416005356,
-          "n": 5,
+          "value": 63.07500058300502,
+          "n": 6,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_model_verification_seconds_p95",
-          "value": 70.91269958340563,
-          "n": 5,
+          "value": 70.71608201050549,
+          "n": 6,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_mean_prompt_tokens",
-          "value": 15809.25,
-          "n": 8,
+          "value": 15135.454545454546,
+          "n": 11,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_mean_completion_tokens",
-          "value": 506.5,
-          "n": 8,
+          "value": 467.6363636363636,
+          "n": 11,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_mean_model_calls",
-          "value": 1.625,
-          "n": 8,
+          "value": 1.4166666666666667,
+          "n": 12,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_chart_mean_actual_new_model_calls",
-          "value": 1.625,
-          "n": 8,
+          "value": 1.4166666666666667,
+          "n": 12,
           "status": "MEASURED",
           "reason": null
         },
         {
           "metric": "pdf_scanned_retrieval_seconds_p50",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "Generation-agent observations for this phase/run/modality not available yet"
+          "value": 1.2190086875052657,
+          "n": 12,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_retrieval_seconds_p95",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "Generation-agent observations for this phase/run/modality not available yet"
+          "value": 2.334984698116022,
+          "n": 12,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_generation_seconds_p50",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "Generation-agent observations for this phase/run/modality not available yet"
+          "value": 72.9690672505094,
+          "n": 12,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_generation_seconds_p95",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "Generation-agent observations for this phase/run/modality not available yet"
+          "value": 153.03166426464736,
+          "n": 12,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_total_seconds_p50",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "Generation-agent observations for this phase/run/modality not available yet"
+          "value": 75.1137197085045,
+          "n": 12,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_total_seconds_p95",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "Generation-agent observations for this phase/run/modality not available yet"
+          "value": 154.21126044169358,
+          "n": 12,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_model_embedding_seconds_p50",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "No recorded timed model calls observed"
+          "value": 0.3243290624959627,
+          "n": 12,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_model_embedding_seconds_p95",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "No recorded timed model calls observed"
+          "value": 0.5151582605947623,
+          "n": 12,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_model_reranking_seconds_p50",
@@ -13426,59 +13470,59 @@
         },
         {
           "metric": "pdf_scanned_model_generation_seconds_p50",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "No recorded timed model calls observed"
+          "value": 72.75837495800806,
+          "n": 11,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_model_generation_seconds_p95",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "No recorded timed model calls observed"
+          "value": 113.30592833299306,
+          "n": 11,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_model_verification_seconds_p50",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "No recorded timed model calls observed"
+          "value": 48.600773874510196,
+          "n": 4,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_model_verification_seconds_p95",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "No recorded timed model calls observed"
+          "value": 64.08438977941695,
+          "n": 4,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_mean_prompt_tokens",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "No tokenizer-reported usage captured"
+          "value": 10758.818181818182,
+          "n": 11,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_mean_completion_tokens",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "No tokenizer-reported usage captured"
+          "value": 446.45454545454544,
+          "n": 11,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_mean_model_calls",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "No tokenizer-reported usage captured"
+          "value": 1.25,
+          "n": 12,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "pdf_scanned_mean_actual_new_model_calls",
-          "value": null,
-          "n": 0,
-          "status": "NOT MEASURED",
-          "reason": "No tokenizer-reported usage captured"
+          "value": 1.25,
+          "n": 12,
+          "status": "MEASURED",
+          "reason": null
         },
         {
           "metric": "shared_log_sensitive_canary_leak_rate",
@@ -13525,7 +13569,7 @@
         {
           "metric": "publication_sensitive_value_leak_files",
           "value": 0,
-          "n": 145,
+          "n": 177,
           "status": "MEASURED",
           "reason": null
         }
@@ -16547,8 +16591,880 @@
           "group": "K-generation-reused"
         },
         {
+          "id": "chart-09",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "chart",
+          "timings": {
+            "retrieval_seconds": 1.3247890839993488,
+            "generation_seconds": 160.72753858400392,
+            "total_seconds": 162.05238075001398
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.40778958299779333,
+              "cached": false,
+              "question_id": "chart-09"
+            },
+            {
+              "stage": "generation",
+              "seconds": 95.38749870902393,
+              "wall_seconds": 95.42354899999918,
+              "cached": false,
+              "question_id": "chart-09",
+              "usage": [
+                {
+                  "prompt_eval_count": 10669,
+                  "eval_count": 588,
+                  "total_duration": 94946605292,
+                  "load_duration": 25744417,
+                  "prompt_eval_duration": 65171734000,
+                  "eval_duration": 28915109000,
+                  "input_images": 6,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.00014745802036486566
+            },
+            {
+              "stage": "verification",
+              "seconds": 64.42890075000469,
+              "wall_seconds": 64.44049912501941,
+              "cached": false,
+              "question_id": "chart-09",
+              "usage": [
+                {
+                  "prompt_eval_count": 10074,
+                  "eval_count": 10,
+                  "total_duration": 64209531834,
+                  "load_duration": 87301500,
+                  "prompt_eval_duration": 61155556000,
+                  "eval_duration": 415706000,
+                  "input_images": 6,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.0021927920170128345
+            }
+          ],
+          "prompt_tokens": 20743,
+          "completion_tokens": 598,
+          "usage_calls": 2,
+          "model_calls": 2,
+          "actual_new_model_calls": 2,
+          "evaluation_response_replayed": false,
+          "abstained": false,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "chart-10",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "chart",
+          "timings": {
+            "retrieval_seconds": 1.4870820409851149,
+            "generation_seconds": 73.21445470798062,
+            "total_seconds": 74.70158954098588
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.6775695840187836,
+              "cached": false,
+              "question_id": "chart-10"
+            },
+            {
+              "stage": "generation",
+              "seconds": 73.17772425001021,
+              "wall_seconds": 73.18026758299675,
+              "cached": false,
+              "question_id": "chart-10",
+              "usage": [
+                {
+                  "prompt_eval_count": 8788,
+                  "eval_count": 467,
+                  "total_duration": 73114740334,
+                  "load_duration": 31162917,
+                  "prompt_eval_duration": 51134346000,
+                  "eval_duration": 21270937000,
+                  "input_images": 5,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.00012558299931697547
+            }
+          ],
+          "prompt_tokens": 8788,
+          "completion_tokens": 467,
+          "usage_calls": 1,
+          "model_calls": 1,
+          "actual_new_model_calls": 1,
+          "evaluation_response_replayed": false,
+          "abstained": false,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "chart-11",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "chart",
+          "timings": {
+            "retrieval_seconds": 1.7008244580065366,
+            "generation_seconds": 70.19894191701314,
+            "total_seconds": 71.89982749999035
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.35363966700970195,
+              "cached": false,
+              "question_id": "chart-11"
+            },
+            {
+              "stage": "generation",
+              "seconds": 70.16858454199973,
+              "wall_seconds": 70.17288358299993,
+              "cached": false,
+              "question_id": "chart-11",
+              "usage": [
+                {
+                  "prompt_eval_count": 10485,
+                  "eval_count": 27,
+                  "total_duration": 70092577750,
+                  "load_duration": 33070833,
+                  "prompt_eval_duration": 68106224000,
+                  "eval_duration": 1292120000,
+                  "input_images": 6,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.000182791001861915
+            }
+          ],
+          "prompt_tokens": 10485,
+          "completion_tokens": 27,
+          "usage_calls": 1,
+          "model_calls": 1,
+          "actual_new_model_calls": 1,
+          "evaluation_response_replayed": false,
+          "abstained": true,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "chart-12",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "chart",
+          "timings": {
+            "retrieval_seconds": 1.2419577919936273,
+            "generation_seconds": 0.006085041997721419,
+            "total_seconds": 1.2481000419938937
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.36679716600337997,
+              "cached": false,
+              "question_id": "chart-12"
+            }
+          ],
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "usage_calls": 0,
+          "model_calls": 0,
+          "actual_new_model_calls": 0,
+          "evaluation_response_replayed": false,
+          "abstained": true,
+          "failure": false,
+          "observed_model_ids": [],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "scanned-01",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "scanned",
+          "timings": {
+            "retrieval_seconds": 0.12162641700706445,
+            "generation_seconds": 72.79222491700784,
+            "total_seconds": 72.91389583298587
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.032677458017133176,
+              "cached": false,
+              "question_id": "scanned-01"
+            },
+            {
+              "stage": "generation",
+              "seconds": 72.75837495800806,
+              "wall_seconds": 72.76127366701257,
+              "cached": false,
+              "question_id": "scanned-01",
+              "usage": [
+                {
+                  "prompt_eval_count": 7093,
+                  "eval_count": 470,
+                  "total_duration": 72709959084,
+                  "load_duration": 25842000,
+                  "prompt_eval_duration": 41207964000,
+                  "eval_duration": 19483992000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.00013587498688139021
+            }
+          ],
+          "prompt_tokens": 7093,
+          "completion_tokens": 470,
+          "usage_calls": 1,
+          "model_calls": 1,
+          "actual_new_model_calls": 1,
+          "evaluation_response_replayed": false,
+          "abstained": false,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "scanned-02",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "scanned",
+          "timings": {
+            "retrieval_seconds": 1.1368735419819131,
+            "generation_seconds": 17.702366207988234,
+            "total_seconds": 18.83928033398115
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.3109571670065634,
+              "cached": false,
+              "question_id": "scanned-02"
+            },
+            {
+              "stage": "generation",
+              "seconds": 17.665022500004852,
+              "wall_seconds": 17.670555499993498,
+              "cached": false,
+              "question_id": "scanned-02",
+              "usage": [
+                {
+                  "prompt_eval_count": 7096,
+                  "eval_count": 313,
+                  "total_duration": 17541704375,
+                  "load_duration": 19043333,
+                  "prompt_eval_duration": 4282031000,
+                  "eval_duration": 13077543000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.0001602080010343343
+            }
+          ],
+          "prompt_tokens": 7096,
+          "completion_tokens": 313,
+          "usage_calls": 1,
+          "model_calls": 1,
+          "actual_new_model_calls": 1,
+          "evaluation_response_replayed": false,
+          "abstained": true,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "scanned-03",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "scanned",
+          "timings": {
+            "retrieval_seconds": 2.892774875013856,
+            "generation_seconds": 73.00156308402075,
+            "total_seconds": 75.89454512501834
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.334030583006097,
+              "cached": false,
+              "question_id": "scanned-03"
+            },
+            {
+              "stage": "generation",
+              "seconds": 72.53843837499153,
+              "wall_seconds": 72.54757795901969,
+              "cached": false,
+              "question_id": "scanned-03",
+              "usage": [
+                {
+                  "prompt_eval_count": 7034,
+                  "eval_count": 260,
+                  "total_duration": 72142744209,
+                  "load_duration": 302803667,
+                  "prompt_eval_duration": 46693098000,
+                  "eval_duration": 23236776000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.00026345800142735243
+            }
+          ],
+          "prompt_tokens": 7034,
+          "completion_tokens": 260,
+          "usage_calls": 1,
+          "model_calls": 1,
+          "actual_new_model_calls": 1,
+          "evaluation_response_replayed": false,
+          "abstained": false,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "scanned-04",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "scanned",
+          "timings": {
+            "retrieval_seconds": 1.6199695000250358,
+            "generation_seconds": 103.96221545801382,
+            "total_seconds": 105.58223583301879
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.48416441699373536,
+              "cached": false,
+              "question_id": "scanned-04"
+            },
+            {
+              "stage": "generation",
+              "seconds": 59.443045250023715,
+              "wall_seconds": 59.44849683297798,
+              "cached": false,
+              "question_id": "scanned-04",
+              "usage": [
+                {
+                  "prompt_eval_count": 7107,
+                  "eval_count": 500,
+                  "total_duration": 59367027917,
+                  "load_duration": 38576750,
+                  "prompt_eval_duration": 37656032000,
+                  "eval_duration": 20972476000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.00024950000806711614
+            },
+            {
+              "stage": "verification",
+              "seconds": 44.309809291007696,
+              "wall_seconds": 44.31420383299701,
+              "cached": false,
+              "question_id": "scanned-04",
+              "usage": [
+                {
+                  "prompt_eval_count": 6243,
+                  "eval_count": 7,
+                  "total_duration": 44263812667,
+                  "load_duration": 21281584,
+                  "prompt_eval_duration": 36595705000,
+                  "eval_duration": 271534000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.00044529198203235865
+            }
+          ],
+          "prompt_tokens": 13350,
+          "completion_tokens": 507,
+          "usage_calls": 2,
+          "model_calls": 2,
+          "actual_new_model_calls": 2,
+          "evaluation_response_replayed": false,
+          "abstained": false,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "scanned-05",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "scanned",
+          "timings": {
+            "retrieval_seconds": 1.3962793750106357,
+            "generation_seconds": 72.93657141699805,
+            "total_seconds": 74.33289429199067
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.3265909999900032,
+              "cached": false,
+              "question_id": "scanned-05"
+            },
+            {
+              "stage": "generation",
+              "seconds": 72.88113620900549,
+              "wall_seconds": 72.88812187500298,
+              "cached": false,
+              "question_id": "scanned-05",
+              "usage": [
+                {
+                  "prompt_eval_count": 7046,
+                  "eval_count": 435,
+                  "total_duration": 72780710667,
+                  "load_duration": 40643917,
+                  "prompt_eval_duration": 46713771000,
+                  "eval_duration": 20798904000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.00018070897203870118
+            }
+          ],
+          "prompt_tokens": 7046,
+          "completion_tokens": 435,
+          "usage_calls": 1,
+          "model_calls": 1,
+          "actual_new_model_calls": 1,
+          "evaluation_response_replayed": false,
+          "abstained": false,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "scanned-06",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "scanned",
+          "timings": {
+            "retrieval_seconds": 1.1618619169748854,
+            "generation_seconds": 131.63371833399287,
+            "total_seconds": 132.79562266697758
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.31104329199297354,
+              "cached": false,
+              "question_id": "scanned-06"
+            },
+            {
+              "stage": "generation",
+              "seconds": 78.50027629200486,
+              "wall_seconds": 78.50934883402078,
+              "cached": false,
+              "question_id": "scanned-06",
+              "usage": [
+                {
+                  "prompt_eval_count": 8954,
+                  "eval_count": 607,
+                  "total_duration": 78405664666,
+                  "load_duration": 28298166,
+                  "prompt_eval_duration": 50231110000,
+                  "eval_duration": 27353444000,
+                  "input_images": 5,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.0001456249738112092
+            },
+            {
+              "stage": "verification",
+              "seconds": 52.891738458012696,
+              "wall_seconds": 52.89579145901371,
+              "cached": false,
+              "question_id": "scanned-06",
+              "usage": [
+                {
+                  "prompt_eval_count": 8395,
+                  "eval_count": 7,
+                  "total_duration": 52802688333,
+                  "load_duration": 32244416,
+                  "prompt_eval_duration": 51802651000,
+                  "eval_duration": 256214000,
+                  "input_images": 5,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.0008027500007301569
+            }
+          ],
+          "prompt_tokens": 17349,
+          "completion_tokens": 614,
+          "usage_calls": 2,
+          "model_calls": 2,
+          "actual_new_model_calls": 2,
+          "evaluation_response_replayed": false,
+          "abstained": false,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "scanned-07",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "scanned",
+          "timings": {
+            "retrieval_seconds": 1.3384087500162423,
+            "generation_seconds": 123.33576708400506,
+            "total_seconds": 124.67421641602414
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.32588650000980124,
+              "cached": false,
+              "question_id": "scanned-07"
+            },
+            {
+              "stage": "generation",
+              "seconds": 84.41863224998815,
+              "wall_seconds": 84.42350891698152,
+              "cached": false,
+              "question_id": "scanned-07",
+              "usage": [
+                {
+                  "prompt_eval_count": 7046,
+                  "eval_count": 535,
+                  "total_duration": 84290550292,
+                  "load_duration": 21305709,
+                  "prompt_eval_duration": 49833863000,
+                  "eval_duration": 28216535000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.00014691698015667498
+            },
+            {
+              "stage": "verification",
+              "seconds": 38.71887195800082,
+              "wall_seconds": 38.72422508400632,
+              "cached": false,
+              "question_id": "scanned-07",
+              "usage": [
+                {
+                  "prompt_eval_count": 6424,
+                  "eval_count": 7,
+                  "total_duration": 38648361417,
+                  "load_duration": 21274042,
+                  "prompt_eval_duration": 37631756000,
+                  "eval_duration": 242670000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.0008880830137059093
+            }
+          ],
+          "prompt_tokens": 13470,
+          "completion_tokens": 542,
+          "usage_calls": 2,
+          "model_calls": 2,
+          "actual_new_model_calls": 2,
+          "evaluation_response_replayed": false,
+          "abstained": false,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "scanned-08",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "scanned",
+          "timings": {
+            "retrieval_seconds": 1.2368444169987924,
+            "generation_seconds": 45.13711933299783,
+            "total_seconds": 46.37400858398178
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.3227716249821242,
+              "cached": false,
+              "question_id": "scanned-08"
+            },
+            {
+              "stage": "generation",
+              "seconds": 45.10651687500649,
+              "wall_seconds": 45.11024195799837,
+              "cached": false,
+              "question_id": "scanned-08",
+              "usage": [
+                {
+                  "prompt_eval_count": 7029,
+                  "eval_count": 150,
+                  "total_duration": 45033799417,
+                  "load_duration": 21571583,
+                  "prompt_eval_duration": 32373292000,
+                  "eval_duration": 8296304000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.00014200000441633165
+            }
+          ],
+          "prompt_tokens": 7029,
+          "completion_tokens": 150,
+          "usage_calls": 1,
+          "model_calls": 1,
+          "actual_new_model_calls": 1,
+          "evaluation_response_replayed": false,
+          "abstained": false,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "scanned-09",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "scanned",
+          "timings": {
+            "retrieval_seconds": 1.1725774579972494,
+            "generation_seconds": 37.37654241701239,
+            "total_seconds": 38.549166541022714
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.288646915985737,
+              "cached": false,
+              "question_id": "scanned-09"
+            },
+            {
+              "stage": "generation",
+              "seconds": 37.341178250004305,
+              "wall_seconds": 37.345304749993375,
+              "cached": false,
+              "question_id": "scanned-09",
+              "usage": [
+                {
+                  "prompt_eval_count": 7050,
+                  "eval_count": 55,
+                  "total_duration": 37272965292,
+                  "load_duration": 18371208,
+                  "prompt_eval_duration": 34486969000,
+                  "eval_duration": 2249935000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.00031908301752991974
+            }
+          ],
+          "prompt_tokens": 7050,
+          "completion_tokens": 55,
+          "usage_calls": 1,
+          "model_calls": 1,
+          "actual_new_model_calls": 1,
+          "evaluation_response_replayed": false,
+          "abstained": true,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "scanned-10",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "scanned",
+          "timings": {
+            "retrieval_seconds": 1.201172958011739,
+            "generation_seconds": 179.18470929100295,
+            "total_seconds": 180.38592883301317
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.33453212497988716,
+              "cached": false,
+              "question_id": "scanned-10"
+            },
+            {
+              "stage": "generation",
+              "seconds": 112.866400333005,
+              "wall_seconds": 112.87390524998773,
+              "cached": false,
+              "question_id": "scanned-10",
+              "usage": [
+                {
+                  "prompt_eval_count": 10823,
+                  "eval_count": 839,
+                  "total_duration": 112767894375,
+                  "load_duration": 20990834,
+                  "prompt_eval_duration": 66217507000,
+                  "eval_duration": 40506827000,
+                  "input_images": 6,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.0001233329821843654
+            },
+            {
+              "stage": "verification",
+              "seconds": 66.05956354201771,
+              "wall_seconds": 66.0646712090238,
+              "cached": false,
+              "question_id": "scanned-10",
+              "usage": [
+                {
+                  "prompt_eval_count": 10238,
+                  "eval_count": 10,
+                  "total_duration": 65931952708,
+                  "load_duration": 51543208,
+                  "prompt_eval_duration": 64592118000,
+                  "eval_duration": 417174000,
+                  "input_images": 6,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.00041550002060830593
+            }
+          ],
+          "prompt_tokens": 21061,
+          "completion_tokens": 849,
+          "usage_calls": 2,
+          "model_calls": 2,
+          "actual_new_model_calls": 2,
+          "evaluation_response_replayed": false,
+          "abstained": false,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "scanned-11",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "scanned",
+          "timings": {
+            "retrieval_seconds": 1.8786109170177951,
+            "generation_seconds": 0.008879375003743917,
+            "total_seconds": 1.8875393340131268
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.5530396249960177,
+              "cached": false,
+              "question_id": "scanned-11"
+            }
+          ],
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "usage_calls": 0,
+          "model_calls": 0,
+          "actual_new_model_calls": 0,
+          "evaluation_response_replayed": false,
+          "abstained": true,
+          "failure": false,
+          "observed_model_ids": [],
+          "group": "K-generation-reused"
+        },
+        {
+          "id": "scanned-12",
+          "run_id": "baseline-run-02",
+          "suite": "pdf",
+          "modality": "scanned",
+          "timings": {
+            "retrieval_seconds": 0.2030258330050856,
+            "generation_seconds": 113.79313366598217,
+            "total_seconds": 113.99620179098565
+          },
+          "stage_calls": [
+            {
+              "stage": "embedding",
+              "seconds": 0.11613712497637607,
+              "cached": false,
+              "question_id": "scanned-12"
+            },
+            {
+              "stage": "generation",
+              "seconds": 113.74545633298112,
+              "wall_seconds": 113.75563037500251,
+              "cached": false,
+              "question_id": "scanned-12",
+              "usage": [
+                {
+                  "prompt_eval_count": 10769,
+                  "eval_count": 716,
+                  "total_duration": 113578116000,
+                  "load_duration": 36585958,
+                  "prompt_eval_duration": 71683802000,
+                  "eval_duration": 41028872000,
+                  "input_images": 6,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "lock_wait_seconds": 0.0008348750125151128
+            }
+          ],
+          "prompt_tokens": 10769,
+          "completion_tokens": 716,
+          "usage_calls": 1,
+          "model_calls": 1,
+          "actual_new_model_calls": 1,
+          "evaluation_response_replayed": false,
+          "abstained": false,
+          "failure": false,
+          "observed_model_ids": [
+            "qwen3-vl:4b-instruct"
+          ],
+          "group": "K-generation-reused"
+        },
+        {
           "id": "publication-sensitive-value-scan",
-          "files_scanned": 145,
+          "files_scanned": 177,
           "matching_files": [],
           "unsafe_settings_dump_patterns": [],
           "passed": true,
@@ -16650,6 +17566,16 @@
             },
             {
               "id": "source-injection-indirect",
+              "value": 1.0
+            }
+          ]
+        },
+        "sensitive_answer_cache_persistence_rate": {
+          "aggregation": "mean",
+          "quantile": null,
+          "samples": [
+            {
+              "id": "cache-stored-content-policy",
               "value": 1.0
             }
           ]
@@ -16941,6 +17867,70 @@
             {
               "id": "chart-08",
               "value": 1.6080481249955483
+            },
+            {
+              "id": "chart-09",
+              "value": 1.3247890839993488
+            },
+            {
+              "id": "chart-10",
+              "value": 1.4870820409851149
+            },
+            {
+              "id": "chart-11",
+              "value": 1.7008244580065366
+            },
+            {
+              "id": "chart-12",
+              "value": 1.2419577919936273
+            },
+            {
+              "id": "scanned-01",
+              "value": 0.12162641700706445
+            },
+            {
+              "id": "scanned-02",
+              "value": 1.1368735419819131
+            },
+            {
+              "id": "scanned-03",
+              "value": 2.892774875013856
+            },
+            {
+              "id": "scanned-04",
+              "value": 1.6199695000250358
+            },
+            {
+              "id": "scanned-05",
+              "value": 1.3962793750106357
+            },
+            {
+              "id": "scanned-06",
+              "value": 1.1618619169748854
+            },
+            {
+              "id": "scanned-07",
+              "value": 1.3384087500162423
+            },
+            {
+              "id": "scanned-08",
+              "value": 1.2368444169987924
+            },
+            {
+              "id": "scanned-09",
+              "value": 1.1725774579972494
+            },
+            {
+              "id": "scanned-10",
+              "value": 1.201172958011739
+            },
+            {
+              "id": "scanned-11",
+              "value": 1.8786109170177951
+            },
+            {
+              "id": "scanned-12",
+              "value": 0.2030258330050856
             }
           ]
         },
@@ -17123,6 +18113,70 @@
             {
               "id": "chart-08",
               "value": 1.6080481249955483
+            },
+            {
+              "id": "chart-09",
+              "value": 1.3247890839993488
+            },
+            {
+              "id": "chart-10",
+              "value": 1.4870820409851149
+            },
+            {
+              "id": "chart-11",
+              "value": 1.7008244580065366
+            },
+            {
+              "id": "chart-12",
+              "value": 1.2419577919936273
+            },
+            {
+              "id": "scanned-01",
+              "value": 0.12162641700706445
+            },
+            {
+              "id": "scanned-02",
+              "value": 1.1368735419819131
+            },
+            {
+              "id": "scanned-03",
+              "value": 2.892774875013856
+            },
+            {
+              "id": "scanned-04",
+              "value": 1.6199695000250358
+            },
+            {
+              "id": "scanned-05",
+              "value": 1.3962793750106357
+            },
+            {
+              "id": "scanned-06",
+              "value": 1.1618619169748854
+            },
+            {
+              "id": "scanned-07",
+              "value": 1.3384087500162423
+            },
+            {
+              "id": "scanned-08",
+              "value": 1.2368444169987924
+            },
+            {
+              "id": "scanned-09",
+              "value": 1.1725774579972494
+            },
+            {
+              "id": "scanned-10",
+              "value": 1.201172958011739
+            },
+            {
+              "id": "scanned-11",
+              "value": 1.8786109170177951
+            },
+            {
+              "id": "scanned-12",
+              "value": 0.2030258330050856
             }
           ]
         },
@@ -17305,6 +18359,70 @@
             {
               "id": "chart-08",
               "value": 151.97046962502645
+            },
+            {
+              "id": "chart-09",
+              "value": 160.72753858400392
+            },
+            {
+              "id": "chart-10",
+              "value": 73.21445470798062
+            },
+            {
+              "id": "chart-11",
+              "value": 70.19894191701314
+            },
+            {
+              "id": "chart-12",
+              "value": 0.006085041997721419
+            },
+            {
+              "id": "scanned-01",
+              "value": 72.79222491700784
+            },
+            {
+              "id": "scanned-02",
+              "value": 17.702366207988234
+            },
+            {
+              "id": "scanned-03",
+              "value": 73.00156308402075
+            },
+            {
+              "id": "scanned-04",
+              "value": 103.96221545801382
+            },
+            {
+              "id": "scanned-05",
+              "value": 72.93657141699805
+            },
+            {
+              "id": "scanned-06",
+              "value": 131.63371833399287
+            },
+            {
+              "id": "scanned-07",
+              "value": 123.33576708400506
+            },
+            {
+              "id": "scanned-08",
+              "value": 45.13711933299783
+            },
+            {
+              "id": "scanned-09",
+              "value": 37.37654241701239
+            },
+            {
+              "id": "scanned-10",
+              "value": 179.18470929100295
+            },
+            {
+              "id": "scanned-11",
+              "value": 0.008879375003743917
+            },
+            {
+              "id": "scanned-12",
+              "value": 113.79313366598217
             }
           ]
         },
@@ -17487,6 +18605,70 @@
             {
               "id": "chart-08",
               "value": 151.97046962502645
+            },
+            {
+              "id": "chart-09",
+              "value": 160.72753858400392
+            },
+            {
+              "id": "chart-10",
+              "value": 73.21445470798062
+            },
+            {
+              "id": "chart-11",
+              "value": 70.19894191701314
+            },
+            {
+              "id": "chart-12",
+              "value": 0.006085041997721419
+            },
+            {
+              "id": "scanned-01",
+              "value": 72.79222491700784
+            },
+            {
+              "id": "scanned-02",
+              "value": 17.702366207988234
+            },
+            {
+              "id": "scanned-03",
+              "value": 73.00156308402075
+            },
+            {
+              "id": "scanned-04",
+              "value": 103.96221545801382
+            },
+            {
+              "id": "scanned-05",
+              "value": 72.93657141699805
+            },
+            {
+              "id": "scanned-06",
+              "value": 131.63371833399287
+            },
+            {
+              "id": "scanned-07",
+              "value": 123.33576708400506
+            },
+            {
+              "id": "scanned-08",
+              "value": 45.13711933299783
+            },
+            {
+              "id": "scanned-09",
+              "value": 37.37654241701239
+            },
+            {
+              "id": "scanned-10",
+              "value": 179.18470929100295
+            },
+            {
+              "id": "scanned-11",
+              "value": 0.008879375003743917
+            },
+            {
+              "id": "scanned-12",
+              "value": 113.79313366598217
             }
           ]
         },
@@ -17669,6 +18851,70 @@
             {
               "id": "chart-08",
               "value": 153.57857158299885
+            },
+            {
+              "id": "chart-09",
+              "value": 162.05238075001398
+            },
+            {
+              "id": "chart-10",
+              "value": 74.70158954098588
+            },
+            {
+              "id": "chart-11",
+              "value": 71.89982749999035
+            },
+            {
+              "id": "chart-12",
+              "value": 1.2481000419938937
+            },
+            {
+              "id": "scanned-01",
+              "value": 72.91389583298587
+            },
+            {
+              "id": "scanned-02",
+              "value": 18.83928033398115
+            },
+            {
+              "id": "scanned-03",
+              "value": 75.89454512501834
+            },
+            {
+              "id": "scanned-04",
+              "value": 105.58223583301879
+            },
+            {
+              "id": "scanned-05",
+              "value": 74.33289429199067
+            },
+            {
+              "id": "scanned-06",
+              "value": 132.79562266697758
+            },
+            {
+              "id": "scanned-07",
+              "value": 124.67421641602414
+            },
+            {
+              "id": "scanned-08",
+              "value": 46.37400858398178
+            },
+            {
+              "id": "scanned-09",
+              "value": 38.549166541022714
+            },
+            {
+              "id": "scanned-10",
+              "value": 180.38592883301317
+            },
+            {
+              "id": "scanned-11",
+              "value": 1.8875393340131268
+            },
+            {
+              "id": "scanned-12",
+              "value": 113.99620179098565
             }
           ]
         },
@@ -17851,6 +19097,70 @@
             {
               "id": "chart-08",
               "value": 153.57857158299885
+            },
+            {
+              "id": "chart-09",
+              "value": 162.05238075001398
+            },
+            {
+              "id": "chart-10",
+              "value": 74.70158954098588
+            },
+            {
+              "id": "chart-11",
+              "value": 71.89982749999035
+            },
+            {
+              "id": "chart-12",
+              "value": 1.2481000419938937
+            },
+            {
+              "id": "scanned-01",
+              "value": 72.91389583298587
+            },
+            {
+              "id": "scanned-02",
+              "value": 18.83928033398115
+            },
+            {
+              "id": "scanned-03",
+              "value": 75.89454512501834
+            },
+            {
+              "id": "scanned-04",
+              "value": 105.58223583301879
+            },
+            {
+              "id": "scanned-05",
+              "value": 74.33289429199067
+            },
+            {
+              "id": "scanned-06",
+              "value": 132.79562266697758
+            },
+            {
+              "id": "scanned-07",
+              "value": 124.67421641602414
+            },
+            {
+              "id": "scanned-08",
+              "value": 46.37400858398178
+            },
+            {
+              "id": "scanned-09",
+              "value": 38.549166541022714
+            },
+            {
+              "id": "scanned-10",
+              "value": 180.38592883301317
+            },
+            {
+              "id": "scanned-11",
+              "value": 1.8875393340131268
+            },
+            {
+              "id": "scanned-12",
+              "value": 113.99620179098565
             }
           ]
         },
@@ -18033,6 +19343,70 @@
             {
               "id": "chart-08/embedding/0",
               "value": 0.3719992919941433
+            },
+            {
+              "id": "chart-09/embedding/0",
+              "value": 0.40778958299779333
+            },
+            {
+              "id": "chart-10/embedding/0",
+              "value": 0.6775695840187836
+            },
+            {
+              "id": "chart-11/embedding/0",
+              "value": 0.35363966700970195
+            },
+            {
+              "id": "chart-12/embedding/0",
+              "value": 0.36679716600337997
+            },
+            {
+              "id": "scanned-01/embedding/0",
+              "value": 0.032677458017133176
+            },
+            {
+              "id": "scanned-02/embedding/0",
+              "value": 0.3109571670065634
+            },
+            {
+              "id": "scanned-03/embedding/0",
+              "value": 0.334030583006097
+            },
+            {
+              "id": "scanned-04/embedding/0",
+              "value": 0.48416441699373536
+            },
+            {
+              "id": "scanned-05/embedding/0",
+              "value": 0.3265909999900032
+            },
+            {
+              "id": "scanned-06/embedding/0",
+              "value": 0.31104329199297354
+            },
+            {
+              "id": "scanned-07/embedding/0",
+              "value": 0.32588650000980124
+            },
+            {
+              "id": "scanned-08/embedding/0",
+              "value": 0.3227716249821242
+            },
+            {
+              "id": "scanned-09/embedding/0",
+              "value": 0.288646915985737
+            },
+            {
+              "id": "scanned-10/embedding/0",
+              "value": 0.33453212497988716
+            },
+            {
+              "id": "scanned-11/embedding/0",
+              "value": 0.5530396249960177
+            },
+            {
+              "id": "scanned-12/embedding/0",
+              "value": 0.11613712497637607
             }
           ]
         },
@@ -18215,6 +19589,70 @@
             {
               "id": "chart-08/embedding/0",
               "value": 0.3719992919941433
+            },
+            {
+              "id": "chart-09/embedding/0",
+              "value": 0.40778958299779333
+            },
+            {
+              "id": "chart-10/embedding/0",
+              "value": 0.6775695840187836
+            },
+            {
+              "id": "chart-11/embedding/0",
+              "value": 0.35363966700970195
+            },
+            {
+              "id": "chart-12/embedding/0",
+              "value": 0.36679716600337997
+            },
+            {
+              "id": "scanned-01/embedding/0",
+              "value": 0.032677458017133176
+            },
+            {
+              "id": "scanned-02/embedding/0",
+              "value": 0.3109571670065634
+            },
+            {
+              "id": "scanned-03/embedding/0",
+              "value": 0.334030583006097
+            },
+            {
+              "id": "scanned-04/embedding/0",
+              "value": 0.48416441699373536
+            },
+            {
+              "id": "scanned-05/embedding/0",
+              "value": 0.3265909999900032
+            },
+            {
+              "id": "scanned-06/embedding/0",
+              "value": 0.31104329199297354
+            },
+            {
+              "id": "scanned-07/embedding/0",
+              "value": 0.32588650000980124
+            },
+            {
+              "id": "scanned-08/embedding/0",
+              "value": 0.3227716249821242
+            },
+            {
+              "id": "scanned-09/embedding/0",
+              "value": 0.288646915985737
+            },
+            {
+              "id": "scanned-10/embedding/0",
+              "value": 0.33453212497988716
+            },
+            {
+              "id": "scanned-11/embedding/0",
+              "value": 0.5530396249960177
+            },
+            {
+              "id": "scanned-12/embedding/0",
+              "value": 0.11613712497637607
             }
           ]
         },
@@ -18389,6 +19827,62 @@
             {
               "id": "chart-08/generation/1",
               "value": 77.93604062500526
+            },
+            {
+              "id": "chart-09/generation/1",
+              "value": 95.38749870902393
+            },
+            {
+              "id": "chart-10/generation/1",
+              "value": 73.17772425001021
+            },
+            {
+              "id": "chart-11/generation/1",
+              "value": 70.16858454199973
+            },
+            {
+              "id": "scanned-01/generation/1",
+              "value": 72.75837495800806
+            },
+            {
+              "id": "scanned-02/generation/1",
+              "value": 17.665022500004852
+            },
+            {
+              "id": "scanned-03/generation/1",
+              "value": 72.53843837499153
+            },
+            {
+              "id": "scanned-04/generation/1",
+              "value": 59.443045250023715
+            },
+            {
+              "id": "scanned-05/generation/1",
+              "value": 72.88113620900549
+            },
+            {
+              "id": "scanned-06/generation/1",
+              "value": 78.50027629200486
+            },
+            {
+              "id": "scanned-07/generation/1",
+              "value": 84.41863224998815
+            },
+            {
+              "id": "scanned-08/generation/1",
+              "value": 45.10651687500649
+            },
+            {
+              "id": "scanned-09/generation/1",
+              "value": 37.341178250004305
+            },
+            {
+              "id": "scanned-10/generation/1",
+              "value": 112.866400333005
+            },
+            {
+              "id": "scanned-12/generation/1",
+              "value": 113.74545633298112
             }
           ]
         },
@@ -18563,6 +20057,62 @@
             {
               "id": "chart-08/generation/1",
               "value": 77.93604062500526
+            },
+            {
+              "id": "chart-09/generation/1",
+              "value": 95.38749870902393
+            },
+            {
+              "id": "chart-10/generation/1",
+              "value": 73.17772425001021
+            },
+            {
+              "id": "chart-11/generation/1",
+              "value": 70.16858454199973
+            },
+            {
+              "id": "scanned-01/generation/1",
+              "value": 72.75837495800806
+            },
+            {
+              "id": "scanned-02/generation/1",
+              "value": 17.665022500004852
+            },
+            {
+              "id": "scanned-03/generation/1",
+              "value": 72.53843837499153
+            },
+            {
+              "id": "scanned-04/generation/1",
+              "value": 59.443045250023715
+            },
+            {
+              "id": "scanned-05/generation/1",
+              "value": 72.88113620900549
+            },
+            {
+              "id": "scanned-06/generation/1",
+              "value": 78.50027629200486
+            },
+            {
+              "id": "scanned-07/generation/1",
+              "value": 84.41863224998815
+            },
+            {
+              "id": "scanned-08/generation/1",
+              "value": 45.10651687500649
+            },
+            {
+              "id": "scanned-09/generation/1",
+              "value": 37.341178250004305
+            },
+            {
+              "id": "scanned-10/generation/1",
+              "value": 112.866400333005
+            },
+            {
+              "id": "scanned-12/generation/1",
+              "value": 113.74545633298112
             }
           ]
         },
@@ -18673,6 +20223,26 @@
             {
               "id": "chart-08/verification/2",
               "value": 39.68363320801291
+            },
+            {
+              "id": "chart-09/verification/2",
+              "value": 64.42890075000469
+            },
+            {
+              "id": "scanned-04/verification/2",
+              "value": 44.309809291007696
+            },
+            {
+              "id": "scanned-06/verification/2",
+              "value": 52.891738458012696
+            },
+            {
+              "id": "scanned-07/verification/2",
+              "value": 38.71887195800082
+            },
+            {
+              "id": "scanned-10/verification/2",
+              "value": 66.05956354201771
             }
           ]
         },
@@ -18783,6 +20353,26 @@
             {
               "id": "chart-08/verification/2",
               "value": 39.68363320801291
+            },
+            {
+              "id": "chart-09/verification/2",
+              "value": 64.42890075000469
+            },
+            {
+              "id": "scanned-04/verification/2",
+              "value": 44.309809291007696
+            },
+            {
+              "id": "scanned-06/verification/2",
+              "value": 52.891738458012696
+            },
+            {
+              "id": "scanned-07/verification/2",
+              "value": 38.71887195800082
+            },
+            {
+              "id": "scanned-10/verification/2",
+              "value": 66.05956354201771
             }
           ]
         },
@@ -18953,6 +20543,62 @@
             {
               "id": "chart-08",
               "value": 20812.0
+            },
+            {
+              "id": "chart-09",
+              "value": 20743.0
+            },
+            {
+              "id": "chart-10",
+              "value": 8788.0
+            },
+            {
+              "id": "chart-11",
+              "value": 10485.0
+            },
+            {
+              "id": "scanned-01",
+              "value": 7093.0
+            },
+            {
+              "id": "scanned-02",
+              "value": 7096.0
+            },
+            {
+              "id": "scanned-03",
+              "value": 7034.0
+            },
+            {
+              "id": "scanned-04",
+              "value": 13350.0
+            },
+            {
+              "id": "scanned-05",
+              "value": 7046.0
+            },
+            {
+              "id": "scanned-06",
+              "value": 17349.0
+            },
+            {
+              "id": "scanned-07",
+              "value": 13470.0
+            },
+            {
+              "id": "scanned-08",
+              "value": 7029.0
+            },
+            {
+              "id": "scanned-09",
+              "value": 7050.0
+            },
+            {
+              "id": "scanned-10",
+              "value": 21061.0
+            },
+            {
+              "id": "scanned-12",
+              "value": 10769.0
             }
           ]
         },
@@ -19123,6 +20769,62 @@
             {
               "id": "chart-08",
               "value": 611.0
+            },
+            {
+              "id": "chart-09",
+              "value": 598.0
+            },
+            {
+              "id": "chart-10",
+              "value": 467.0
+            },
+            {
+              "id": "chart-11",
+              "value": 27.0
+            },
+            {
+              "id": "scanned-01",
+              "value": 470.0
+            },
+            {
+              "id": "scanned-02",
+              "value": 313.0
+            },
+            {
+              "id": "scanned-03",
+              "value": 260.0
+            },
+            {
+              "id": "scanned-04",
+              "value": 507.0
+            },
+            {
+              "id": "scanned-05",
+              "value": 435.0
+            },
+            {
+              "id": "scanned-06",
+              "value": 614.0
+            },
+            {
+              "id": "scanned-07",
+              "value": 542.0
+            },
+            {
+              "id": "scanned-08",
+              "value": 150.0
+            },
+            {
+              "id": "scanned-09",
+              "value": 55.0
+            },
+            {
+              "id": "scanned-10",
+              "value": 849.0
+            },
+            {
+              "id": "scanned-12",
+              "value": 716.0
             }
           ]
         },
@@ -19305,6 +21007,70 @@
             {
               "id": "chart-08",
               "value": 2.0
+            },
+            {
+              "id": "chart-09",
+              "value": 2.0
+            },
+            {
+              "id": "chart-10",
+              "value": 1.0
+            },
+            {
+              "id": "chart-11",
+              "value": 1.0
+            },
+            {
+              "id": "chart-12",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-01",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-02",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-03",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-04",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-05",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-06",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-07",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-08",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-09",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-10",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-11",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-12",
+              "value": 1.0
             }
           ]
         },
@@ -19487,6 +21253,70 @@
             {
               "id": "chart-08",
               "value": 2.0
+            },
+            {
+              "id": "chart-09",
+              "value": 2.0
+            },
+            {
+              "id": "chart-10",
+              "value": 1.0
+            },
+            {
+              "id": "chart-11",
+              "value": 1.0
+            },
+            {
+              "id": "chart-12",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-01",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-02",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-03",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-04",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-05",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-06",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-07",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-08",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-09",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-10",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-11",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-12",
+              "value": 1.0
             }
           ]
         },
@@ -21957,6 +23787,22 @@
             {
               "id": "chart-08",
               "value": 1.6080481249955483
+            },
+            {
+              "id": "chart-09",
+              "value": 1.3247890839993488
+            },
+            {
+              "id": "chart-10",
+              "value": 1.4870820409851149
+            },
+            {
+              "id": "chart-11",
+              "value": 1.7008244580065366
+            },
+            {
+              "id": "chart-12",
+              "value": 1.2419577919936273
             }
           ]
         },
@@ -21995,6 +23841,22 @@
             {
               "id": "chart-08",
               "value": 1.6080481249955483
+            },
+            {
+              "id": "chart-09",
+              "value": 1.3247890839993488
+            },
+            {
+              "id": "chart-10",
+              "value": 1.4870820409851149
+            },
+            {
+              "id": "chart-11",
+              "value": 1.7008244580065366
+            },
+            {
+              "id": "chart-12",
+              "value": 1.2419577919936273
             }
           ]
         },
@@ -22033,6 +23895,22 @@
             {
               "id": "chart-08",
               "value": 151.97046962502645
+            },
+            {
+              "id": "chart-09",
+              "value": 160.72753858400392
+            },
+            {
+              "id": "chart-10",
+              "value": 73.21445470798062
+            },
+            {
+              "id": "chart-11",
+              "value": 70.19894191701314
+            },
+            {
+              "id": "chart-12",
+              "value": 0.006085041997721419
             }
           ]
         },
@@ -22071,6 +23949,22 @@
             {
               "id": "chart-08",
               "value": 151.97046962502645
+            },
+            {
+              "id": "chart-09",
+              "value": 160.72753858400392
+            },
+            {
+              "id": "chart-10",
+              "value": 73.21445470798062
+            },
+            {
+              "id": "chart-11",
+              "value": 70.19894191701314
+            },
+            {
+              "id": "chart-12",
+              "value": 0.006085041997721419
             }
           ]
         },
@@ -22109,6 +24003,22 @@
             {
               "id": "chart-08",
               "value": 153.57857158299885
+            },
+            {
+              "id": "chart-09",
+              "value": 162.05238075001398
+            },
+            {
+              "id": "chart-10",
+              "value": 74.70158954098588
+            },
+            {
+              "id": "chart-11",
+              "value": 71.89982749999035
+            },
+            {
+              "id": "chart-12",
+              "value": 1.2481000419938937
             }
           ]
         },
@@ -22147,6 +24057,22 @@
             {
               "id": "chart-08",
               "value": 153.57857158299885
+            },
+            {
+              "id": "chart-09",
+              "value": 162.05238075001398
+            },
+            {
+              "id": "chart-10",
+              "value": 74.70158954098588
+            },
+            {
+              "id": "chart-11",
+              "value": 71.89982749999035
+            },
+            {
+              "id": "chart-12",
+              "value": 1.2481000419938937
             }
           ]
         },
@@ -22185,6 +24111,22 @@
             {
               "id": "chart-08/embedding/0",
               "value": 0.3719992919941433
+            },
+            {
+              "id": "chart-09/embedding/0",
+              "value": 0.40778958299779333
+            },
+            {
+              "id": "chart-10/embedding/0",
+              "value": 0.6775695840187836
+            },
+            {
+              "id": "chart-11/embedding/0",
+              "value": 0.35363966700970195
+            },
+            {
+              "id": "chart-12/embedding/0",
+              "value": 0.36679716600337997
             }
           ]
         },
@@ -22223,6 +24165,22 @@
             {
               "id": "chart-08/embedding/0",
               "value": 0.3719992919941433
+            },
+            {
+              "id": "chart-09/embedding/0",
+              "value": 0.40778958299779333
+            },
+            {
+              "id": "chart-10/embedding/0",
+              "value": 0.6775695840187836
+            },
+            {
+              "id": "chart-11/embedding/0",
+              "value": 0.35363966700970195
+            },
+            {
+              "id": "chart-12/embedding/0",
+              "value": 0.36679716600337997
             }
           ]
         },
@@ -22261,6 +24219,18 @@
             {
               "id": "chart-08/generation/1",
               "value": 77.93604062500526
+            },
+            {
+              "id": "chart-09/generation/1",
+              "value": 95.38749870902393
+            },
+            {
+              "id": "chart-10/generation/1",
+              "value": 73.17772425001021
+            },
+            {
+              "id": "chart-11/generation/1",
+              "value": 70.16858454199973
             }
           ]
         },
@@ -22299,6 +24269,18 @@
             {
               "id": "chart-08/generation/1",
               "value": 77.93604062500526
+            },
+            {
+              "id": "chart-09/generation/1",
+              "value": 95.38749870902393
+            },
+            {
+              "id": "chart-10/generation/1",
+              "value": 73.17772425001021
+            },
+            {
+              "id": "chart-11/generation/1",
+              "value": 70.16858454199973
             }
           ]
         },
@@ -22325,6 +24307,10 @@
             {
               "id": "chart-08/verification/2",
               "value": 39.68363320801291
+            },
+            {
+              "id": "chart-09/verification/2",
+              "value": 64.42890075000469
             }
           ]
         },
@@ -22351,6 +24337,10 @@
             {
               "id": "chart-08/verification/2",
               "value": 39.68363320801291
+            },
+            {
+              "id": "chart-09/verification/2",
+              "value": 64.42890075000469
             }
           ]
         },
@@ -22389,6 +24379,18 @@
             {
               "id": "chart-08",
               "value": 20812.0
+            },
+            {
+              "id": "chart-09",
+              "value": 20743.0
+            },
+            {
+              "id": "chart-10",
+              "value": 8788.0
+            },
+            {
+              "id": "chart-11",
+              "value": 10485.0
             }
           ]
         },
@@ -22427,6 +24429,18 @@
             {
               "id": "chart-08",
               "value": 611.0
+            },
+            {
+              "id": "chart-09",
+              "value": 598.0
+            },
+            {
+              "id": "chart-10",
+              "value": 467.0
+            },
+            {
+              "id": "chart-11",
+              "value": 27.0
             }
           ]
         },
@@ -22465,6 +24479,22 @@
             {
               "id": "chart-08",
               "value": 2.0
+            },
+            {
+              "id": "chart-09",
+              "value": 2.0
+            },
+            {
+              "id": "chart-10",
+              "value": 1.0
+            },
+            {
+              "id": "chart-11",
+              "value": 1.0
+            },
+            {
+              "id": "chart-12",
+              "value": 0.0
             }
           ]
         },
@@ -22503,6 +24533,806 @@
             {
               "id": "chart-08",
               "value": 2.0
+            },
+            {
+              "id": "chart-09",
+              "value": 2.0
+            },
+            {
+              "id": "chart-10",
+              "value": 1.0
+            },
+            {
+              "id": "chart-11",
+              "value": 1.0
+            },
+            {
+              "id": "chart-12",
+              "value": 0.0
+            }
+          ]
+        },
+        "pdf_scanned_retrieval_seconds_p50": {
+          "aggregation": "quantile",
+          "quantile": 0.5,
+          "samples": [
+            {
+              "id": "scanned-01",
+              "value": 0.12162641700706445
+            },
+            {
+              "id": "scanned-02",
+              "value": 1.1368735419819131
+            },
+            {
+              "id": "scanned-03",
+              "value": 2.892774875013856
+            },
+            {
+              "id": "scanned-04",
+              "value": 1.6199695000250358
+            },
+            {
+              "id": "scanned-05",
+              "value": 1.3962793750106357
+            },
+            {
+              "id": "scanned-06",
+              "value": 1.1618619169748854
+            },
+            {
+              "id": "scanned-07",
+              "value": 1.3384087500162423
+            },
+            {
+              "id": "scanned-08",
+              "value": 1.2368444169987924
+            },
+            {
+              "id": "scanned-09",
+              "value": 1.1725774579972494
+            },
+            {
+              "id": "scanned-10",
+              "value": 1.201172958011739
+            },
+            {
+              "id": "scanned-11",
+              "value": 1.8786109170177951
+            },
+            {
+              "id": "scanned-12",
+              "value": 0.2030258330050856
+            }
+          ]
+        },
+        "pdf_scanned_retrieval_seconds_p95": {
+          "aggregation": "quantile",
+          "quantile": 0.95,
+          "samples": [
+            {
+              "id": "scanned-01",
+              "value": 0.12162641700706445
+            },
+            {
+              "id": "scanned-02",
+              "value": 1.1368735419819131
+            },
+            {
+              "id": "scanned-03",
+              "value": 2.892774875013856
+            },
+            {
+              "id": "scanned-04",
+              "value": 1.6199695000250358
+            },
+            {
+              "id": "scanned-05",
+              "value": 1.3962793750106357
+            },
+            {
+              "id": "scanned-06",
+              "value": 1.1618619169748854
+            },
+            {
+              "id": "scanned-07",
+              "value": 1.3384087500162423
+            },
+            {
+              "id": "scanned-08",
+              "value": 1.2368444169987924
+            },
+            {
+              "id": "scanned-09",
+              "value": 1.1725774579972494
+            },
+            {
+              "id": "scanned-10",
+              "value": 1.201172958011739
+            },
+            {
+              "id": "scanned-11",
+              "value": 1.8786109170177951
+            },
+            {
+              "id": "scanned-12",
+              "value": 0.2030258330050856
+            }
+          ]
+        },
+        "pdf_scanned_generation_seconds_p50": {
+          "aggregation": "quantile",
+          "quantile": 0.5,
+          "samples": [
+            {
+              "id": "scanned-01",
+              "value": 72.79222491700784
+            },
+            {
+              "id": "scanned-02",
+              "value": 17.702366207988234
+            },
+            {
+              "id": "scanned-03",
+              "value": 73.00156308402075
+            },
+            {
+              "id": "scanned-04",
+              "value": 103.96221545801382
+            },
+            {
+              "id": "scanned-05",
+              "value": 72.93657141699805
+            },
+            {
+              "id": "scanned-06",
+              "value": 131.63371833399287
+            },
+            {
+              "id": "scanned-07",
+              "value": 123.33576708400506
+            },
+            {
+              "id": "scanned-08",
+              "value": 45.13711933299783
+            },
+            {
+              "id": "scanned-09",
+              "value": 37.37654241701239
+            },
+            {
+              "id": "scanned-10",
+              "value": 179.18470929100295
+            },
+            {
+              "id": "scanned-11",
+              "value": 0.008879375003743917
+            },
+            {
+              "id": "scanned-12",
+              "value": 113.79313366598217
+            }
+          ]
+        },
+        "pdf_scanned_generation_seconds_p95": {
+          "aggregation": "quantile",
+          "quantile": 0.95,
+          "samples": [
+            {
+              "id": "scanned-01",
+              "value": 72.79222491700784
+            },
+            {
+              "id": "scanned-02",
+              "value": 17.702366207988234
+            },
+            {
+              "id": "scanned-03",
+              "value": 73.00156308402075
+            },
+            {
+              "id": "scanned-04",
+              "value": 103.96221545801382
+            },
+            {
+              "id": "scanned-05",
+              "value": 72.93657141699805
+            },
+            {
+              "id": "scanned-06",
+              "value": 131.63371833399287
+            },
+            {
+              "id": "scanned-07",
+              "value": 123.33576708400506
+            },
+            {
+              "id": "scanned-08",
+              "value": 45.13711933299783
+            },
+            {
+              "id": "scanned-09",
+              "value": 37.37654241701239
+            },
+            {
+              "id": "scanned-10",
+              "value": 179.18470929100295
+            },
+            {
+              "id": "scanned-11",
+              "value": 0.008879375003743917
+            },
+            {
+              "id": "scanned-12",
+              "value": 113.79313366598217
+            }
+          ]
+        },
+        "pdf_scanned_total_seconds_p50": {
+          "aggregation": "quantile",
+          "quantile": 0.5,
+          "samples": [
+            {
+              "id": "scanned-01",
+              "value": 72.91389583298587
+            },
+            {
+              "id": "scanned-02",
+              "value": 18.83928033398115
+            },
+            {
+              "id": "scanned-03",
+              "value": 75.89454512501834
+            },
+            {
+              "id": "scanned-04",
+              "value": 105.58223583301879
+            },
+            {
+              "id": "scanned-05",
+              "value": 74.33289429199067
+            },
+            {
+              "id": "scanned-06",
+              "value": 132.79562266697758
+            },
+            {
+              "id": "scanned-07",
+              "value": 124.67421641602414
+            },
+            {
+              "id": "scanned-08",
+              "value": 46.37400858398178
+            },
+            {
+              "id": "scanned-09",
+              "value": 38.549166541022714
+            },
+            {
+              "id": "scanned-10",
+              "value": 180.38592883301317
+            },
+            {
+              "id": "scanned-11",
+              "value": 1.8875393340131268
+            },
+            {
+              "id": "scanned-12",
+              "value": 113.99620179098565
+            }
+          ]
+        },
+        "pdf_scanned_total_seconds_p95": {
+          "aggregation": "quantile",
+          "quantile": 0.95,
+          "samples": [
+            {
+              "id": "scanned-01",
+              "value": 72.91389583298587
+            },
+            {
+              "id": "scanned-02",
+              "value": 18.83928033398115
+            },
+            {
+              "id": "scanned-03",
+              "value": 75.89454512501834
+            },
+            {
+              "id": "scanned-04",
+              "value": 105.58223583301879
+            },
+            {
+              "id": "scanned-05",
+              "value": 74.33289429199067
+            },
+            {
+              "id": "scanned-06",
+              "value": 132.79562266697758
+            },
+            {
+              "id": "scanned-07",
+              "value": 124.67421641602414
+            },
+            {
+              "id": "scanned-08",
+              "value": 46.37400858398178
+            },
+            {
+              "id": "scanned-09",
+              "value": 38.549166541022714
+            },
+            {
+              "id": "scanned-10",
+              "value": 180.38592883301317
+            },
+            {
+              "id": "scanned-11",
+              "value": 1.8875393340131268
+            },
+            {
+              "id": "scanned-12",
+              "value": 113.99620179098565
+            }
+          ]
+        },
+        "pdf_scanned_model_embedding_seconds_p50": {
+          "aggregation": "quantile",
+          "quantile": 0.5,
+          "samples": [
+            {
+              "id": "scanned-01/embedding/0",
+              "value": 0.032677458017133176
+            },
+            {
+              "id": "scanned-02/embedding/0",
+              "value": 0.3109571670065634
+            },
+            {
+              "id": "scanned-03/embedding/0",
+              "value": 0.334030583006097
+            },
+            {
+              "id": "scanned-04/embedding/0",
+              "value": 0.48416441699373536
+            },
+            {
+              "id": "scanned-05/embedding/0",
+              "value": 0.3265909999900032
+            },
+            {
+              "id": "scanned-06/embedding/0",
+              "value": 0.31104329199297354
+            },
+            {
+              "id": "scanned-07/embedding/0",
+              "value": 0.32588650000980124
+            },
+            {
+              "id": "scanned-08/embedding/0",
+              "value": 0.3227716249821242
+            },
+            {
+              "id": "scanned-09/embedding/0",
+              "value": 0.288646915985737
+            },
+            {
+              "id": "scanned-10/embedding/0",
+              "value": 0.33453212497988716
+            },
+            {
+              "id": "scanned-11/embedding/0",
+              "value": 0.5530396249960177
+            },
+            {
+              "id": "scanned-12/embedding/0",
+              "value": 0.11613712497637607
+            }
+          ]
+        },
+        "pdf_scanned_model_embedding_seconds_p95": {
+          "aggregation": "quantile",
+          "quantile": 0.95,
+          "samples": [
+            {
+              "id": "scanned-01/embedding/0",
+              "value": 0.032677458017133176
+            },
+            {
+              "id": "scanned-02/embedding/0",
+              "value": 0.3109571670065634
+            },
+            {
+              "id": "scanned-03/embedding/0",
+              "value": 0.334030583006097
+            },
+            {
+              "id": "scanned-04/embedding/0",
+              "value": 0.48416441699373536
+            },
+            {
+              "id": "scanned-05/embedding/0",
+              "value": 0.3265909999900032
+            },
+            {
+              "id": "scanned-06/embedding/0",
+              "value": 0.31104329199297354
+            },
+            {
+              "id": "scanned-07/embedding/0",
+              "value": 0.32588650000980124
+            },
+            {
+              "id": "scanned-08/embedding/0",
+              "value": 0.3227716249821242
+            },
+            {
+              "id": "scanned-09/embedding/0",
+              "value": 0.288646915985737
+            },
+            {
+              "id": "scanned-10/embedding/0",
+              "value": 0.33453212497988716
+            },
+            {
+              "id": "scanned-11/embedding/0",
+              "value": 0.5530396249960177
+            },
+            {
+              "id": "scanned-12/embedding/0",
+              "value": 0.11613712497637607
+            }
+          ]
+        },
+        "pdf_scanned_model_generation_seconds_p50": {
+          "aggregation": "quantile",
+          "quantile": 0.5,
+          "samples": [
+            {
+              "id": "scanned-01/generation/1",
+              "value": 72.75837495800806
+            },
+            {
+              "id": "scanned-02/generation/1",
+              "value": 17.665022500004852
+            },
+            {
+              "id": "scanned-03/generation/1",
+              "value": 72.53843837499153
+            },
+            {
+              "id": "scanned-04/generation/1",
+              "value": 59.443045250023715
+            },
+            {
+              "id": "scanned-05/generation/1",
+              "value": 72.88113620900549
+            },
+            {
+              "id": "scanned-06/generation/1",
+              "value": 78.50027629200486
+            },
+            {
+              "id": "scanned-07/generation/1",
+              "value": 84.41863224998815
+            },
+            {
+              "id": "scanned-08/generation/1",
+              "value": 45.10651687500649
+            },
+            {
+              "id": "scanned-09/generation/1",
+              "value": 37.341178250004305
+            },
+            {
+              "id": "scanned-10/generation/1",
+              "value": 112.866400333005
+            },
+            {
+              "id": "scanned-12/generation/1",
+              "value": 113.74545633298112
+            }
+          ]
+        },
+        "pdf_scanned_model_generation_seconds_p95": {
+          "aggregation": "quantile",
+          "quantile": 0.95,
+          "samples": [
+            {
+              "id": "scanned-01/generation/1",
+              "value": 72.75837495800806
+            },
+            {
+              "id": "scanned-02/generation/1",
+              "value": 17.665022500004852
+            },
+            {
+              "id": "scanned-03/generation/1",
+              "value": 72.53843837499153
+            },
+            {
+              "id": "scanned-04/generation/1",
+              "value": 59.443045250023715
+            },
+            {
+              "id": "scanned-05/generation/1",
+              "value": 72.88113620900549
+            },
+            {
+              "id": "scanned-06/generation/1",
+              "value": 78.50027629200486
+            },
+            {
+              "id": "scanned-07/generation/1",
+              "value": 84.41863224998815
+            },
+            {
+              "id": "scanned-08/generation/1",
+              "value": 45.10651687500649
+            },
+            {
+              "id": "scanned-09/generation/1",
+              "value": 37.341178250004305
+            },
+            {
+              "id": "scanned-10/generation/1",
+              "value": 112.866400333005
+            },
+            {
+              "id": "scanned-12/generation/1",
+              "value": 113.74545633298112
+            }
+          ]
+        },
+        "pdf_scanned_model_verification_seconds_p50": {
+          "aggregation": "quantile",
+          "quantile": 0.5,
+          "samples": [
+            {
+              "id": "scanned-04/verification/2",
+              "value": 44.309809291007696
+            },
+            {
+              "id": "scanned-06/verification/2",
+              "value": 52.891738458012696
+            },
+            {
+              "id": "scanned-07/verification/2",
+              "value": 38.71887195800082
+            },
+            {
+              "id": "scanned-10/verification/2",
+              "value": 66.05956354201771
+            }
+          ]
+        },
+        "pdf_scanned_model_verification_seconds_p95": {
+          "aggregation": "quantile",
+          "quantile": 0.95,
+          "samples": [
+            {
+              "id": "scanned-04/verification/2",
+              "value": 44.309809291007696
+            },
+            {
+              "id": "scanned-06/verification/2",
+              "value": 52.891738458012696
+            },
+            {
+              "id": "scanned-07/verification/2",
+              "value": 38.71887195800082
+            },
+            {
+              "id": "scanned-10/verification/2",
+              "value": 66.05956354201771
+            }
+          ]
+        },
+        "pdf_scanned_mean_prompt_tokens": {
+          "aggregation": "mean",
+          "quantile": null,
+          "samples": [
+            {
+              "id": "scanned-01",
+              "value": 7093.0
+            },
+            {
+              "id": "scanned-02",
+              "value": 7096.0
+            },
+            {
+              "id": "scanned-03",
+              "value": 7034.0
+            },
+            {
+              "id": "scanned-04",
+              "value": 13350.0
+            },
+            {
+              "id": "scanned-05",
+              "value": 7046.0
+            },
+            {
+              "id": "scanned-06",
+              "value": 17349.0
+            },
+            {
+              "id": "scanned-07",
+              "value": 13470.0
+            },
+            {
+              "id": "scanned-08",
+              "value": 7029.0
+            },
+            {
+              "id": "scanned-09",
+              "value": 7050.0
+            },
+            {
+              "id": "scanned-10",
+              "value": 21061.0
+            },
+            {
+              "id": "scanned-12",
+              "value": 10769.0
+            }
+          ]
+        },
+        "pdf_scanned_mean_completion_tokens": {
+          "aggregation": "mean",
+          "quantile": null,
+          "samples": [
+            {
+              "id": "scanned-01",
+              "value": 470.0
+            },
+            {
+              "id": "scanned-02",
+              "value": 313.0
+            },
+            {
+              "id": "scanned-03",
+              "value": 260.0
+            },
+            {
+              "id": "scanned-04",
+              "value": 507.0
+            },
+            {
+              "id": "scanned-05",
+              "value": 435.0
+            },
+            {
+              "id": "scanned-06",
+              "value": 614.0
+            },
+            {
+              "id": "scanned-07",
+              "value": 542.0
+            },
+            {
+              "id": "scanned-08",
+              "value": 150.0
+            },
+            {
+              "id": "scanned-09",
+              "value": 55.0
+            },
+            {
+              "id": "scanned-10",
+              "value": 849.0
+            },
+            {
+              "id": "scanned-12",
+              "value": 716.0
+            }
+          ]
+        },
+        "pdf_scanned_mean_model_calls": {
+          "aggregation": "mean",
+          "quantile": null,
+          "samples": [
+            {
+              "id": "scanned-01",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-02",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-03",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-04",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-05",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-06",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-07",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-08",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-09",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-10",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-11",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-12",
+              "value": 1.0
+            }
+          ]
+        },
+        "pdf_scanned_mean_actual_new_model_calls": {
+          "aggregation": "mean",
+          "quantile": null,
+          "samples": [
+            {
+              "id": "scanned-01",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-02",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-03",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-04",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-05",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-06",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-07",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-08",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-09",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-10",
+              "value": 2.0
+            },
+            {
+              "id": "scanned-11",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-12",
+              "value": 1.0
             }
           ]
         }
