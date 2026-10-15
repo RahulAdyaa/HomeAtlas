@@ -22,3 +22,18 @@ The audited revision is `41a8a813276c8b26d0ef3011c2b609a1446843fa`. Frozen input
 - The full documented evaluation command requires a running app/worker, migrated disposable development database, installed system/Python/Node dependencies and local model artifacts. The independent verifier has **not** installed these from a fresh environment or run inference. CLI success must not be described as full clean-checkout reproduction.
 
 The final pass must reconcile every README measurement and denominator with frozen results, validate confidence intervals and before/after claims, recheck links/screenshots, and scan the final proposed tracked/staged files for private data. Findings and evidence are also recorded in [verifier-agent.json](results/verifier-agent.json). No GitHub write action was performed.
+
+## Post-fix source and documentation preflight
+
+Reviewed the sole-fixer application diff after the immutable baseline. No concrete application regression was identified in this limited static review. Tenant/scope predicates and current-source/version checks remain in the retrieval/cache paths; owner authorization remains on cache clearing. Native prose image skipping retains explicit visual/OCR evidence markers. The answer review is another call to the same configured local model, not an independent external judge. Conservative identifier bypass does not establish universal zero-PII retention.
+
+Independent targeted regressions passed: **25 Python tests** and **3 client transport tests**. These are unit/regression outcomes using fake engines or transport stubs, not RAG quality scores. No inference, live private cache payloads, uploaded user documents, or private query logs were accessed. Installed Next.js route-handler guidance was reviewed; the DELETE cache route returns JSON and preserves owner scope.
+
+Main README final-phase commands and explicit clean-environment limitations are correct. Two reproducibility issues were routed to the statistics/document owner without changing frozen evaluator code:
+
+- `evaluation/README.md` still gives bare baseline-default commands on the post-fix checkout. Use explicit `--phase final` here and separate historical baseline reproduction; otherwise specialist raw baseline rows can be replaced before immutable snapshot aggregation refuses the changed source.
+- The runner computes `--app-root` from the parsed argument but exports it with `setdefault`. A conflicting preexisting `EVAL_APP_ROOT` can select a different child import root than the guard/interpreter validated. Existing final launches use consistent explicit environment, so these recorded runs are unaffected.
+
+The central unequal-source guard and generation import/result/cache root handling have been repaired since the initial preflight. The household specialist’s direct fallback remains developer-specific; the documented central runner supplies the correct environment. Sampled Ollama artifact metadata must retain its historical timing qualification. The scorecard now exists in the main checkout, resolving the earlier pending-link artifact there.
+
+Final measurements/statistics and README reconciliation are still pending. No final publication pass, fresh dependency installation, or full clean-machine inference claim is made. The generated `next-env.d.ts` working-tree difference was reported to the orchestrator and left untouched.

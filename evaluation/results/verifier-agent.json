@@ -107,5 +107,69 @@
     "Final local links and real screenshot provenance",
     "Final staged/tracked privacy scan and effective repository ignores",
     "Explicit clean-environment scope/limitations; never claim fresh installation or full evaluation without actual evidence"
-  ]
+  ],
+  "reviews": [
+    {
+      "stage": "post-fix source/document preflight",
+      "timestamp_utc": "2026-10-15T13:06:55.178142+00:00",
+      "audited_commit": "4986b6cd0409bcb13af4398a7f83fd2988fcd809",
+      "app_source_fingerprint": "434af1474f3308073290faf17401460e8fe537bbe37b9441c212b089e6f263ca",
+      "produced_evaluation_metrics": false,
+      "performed_inference": false,
+      "status": "FINAL METRIC RECONCILIATION PENDING",
+      "checks": [
+        {
+          "id": "static-app-fix-review",
+          "status": "PASS WITH LIMITS",
+          "evidence": "Reviewed application diff from frozen baseline through sole-fixer changes: tenant-scoped visual page diversity, exact numeric unions, source-image selection, quote-only responsiveness review, aggregate morphology, DELETE transport, streaming hashes and scoped conservative identifier-cache bypass. No concrete application regression found in this review; not a proof of all behavior."
+        },
+        {
+          "id": "independent-regression-checks",
+          "status": "PASS",
+          "evidence": "Executed targeted tests for visual diversity, numeric retrieval, evidence images, quote responsiveness, aggregate intent, identifier policy and file hashing: 25 Python passed, with existing PyMuPDF/SWIG deprecation warnings. Client transport: 3 Vitest passed. Fake engines/stubs only; no model inference, quality metrics, real-user data or live cache/document reads."
+        },
+        {
+          "id": "next-version-guidance",
+          "status": "PASS",
+          "evidence": "Read installed Next.js route-handler guidance before reviewing transport/cache route compatibility. DELETE route returns JSON and retains owner authorization and request scope."
+        },
+        {
+          "id": "cache-policy-claims",
+          "status": "PASS WITH LIMITS",
+          "evidence": "README explicitly describes recognized personal-card identifier bypass, intended private source retention, ordinary eligible cached content, same-model verification, no universal PII detection and legacy ephemeral-cache purge. Static implementation retains household/user predicates and version/reference checks. Existing authorized private cache payloads were not inspected."
+        },
+        {
+          "id": "main-readme-final-command",
+          "status": "PASS",
+          "evidence": "Main README uses --phase final and warns baseline reproduction needs original application source. It explicitly distinguishes clean-archive CLI checks from full fresh-machine inference."
+        },
+        {
+          "id": "evaluation-readme-default-phase",
+          "status": "PENDING OWNER REPAIR",
+          "evidence": "evaluation/README.md still presents bare baseline-default dispatch commands on the post-fix checkout. Routed to root/statistics owner for explicit final-phase examples and historical baseline instructions. Immutable snapshot protection does not prevent a mistaken dispatch from replacing raw specialist baseline rows first."
+        },
+        {
+          "id": "app-root-source-hash-guard",
+          "status": "PARTIALLY RESOLVED",
+          "evidence": "Central dispatch now rejects unequal evaluator/app source hashes before inference; generation honors selected import/result/cache root and verifies imported module origin. Current final launches use consistent explicit environment. Direct household specialist fallback remains developer-specific; central documented runner supplies its root."
+        },
+        {
+          "id": "app-root-environment-precedence",
+          "status": "PENDING OWNER REPAIR",
+          "evidence": "Explicit --app-root can differ from existing EVAL_APP_ROOT because runner uses setdefault when exporting the selected root. Guard/interpreter use parsed argument while children can inherit prior root. Routed to root/statistics owner; current consistent final environment is unaffected. No frozen measurement code changed by verifier."
+        },
+        {
+          "id": "model-artifact-provenance",
+          "status": "QUALIFIED",
+          "evidence": "Generation owner reports sampled Ollama artifact metadata after baseline run 1/during run 2 and after completion. Documentation must retain that this cannot prove an unrecorded historical immutable tag. No new inference by verifier."
+        },
+        {
+          "id": "remaining-final-gates",
+          "status": "PENDING",
+          "evidence": "Final generation/household observations, system-performance imports, frozen final aggregation and final README/CI comparisons are not yet complete. No final all-metrics or full clean-environment reproduction verdict is issued."
+        }
+      ]
+    }
+  ],
+  "latest_audited_commit": "4986b6cd0409bcb13af4398a7f83fd2988fcd809"
 }
