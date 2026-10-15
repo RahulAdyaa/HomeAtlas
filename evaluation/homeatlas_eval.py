@@ -23,6 +23,8 @@ def write_result(path,result):
         try:
             validate_field_facts(result)
             validate_cache_answers(result)
+            attest_coverage(result)
+            add_statistic_samples(result)
             protocol_write_result(path,result)
         finally:fcntl.flock(h,fcntl.LOCK_UN)
 os.environ.setdefault('EVAL_SHARED_RUNTIME',str(MAIN/'evaluation/runtime'))
@@ -166,6 +168,83 @@ def validate_cache_answers(result):
                           metric('H.'+name+'_correct_answer_hit_rate',sum(r['correct_answer_hit'] for r in rows)/len(rows),len(rows))])
     replace={m['metric'] for m in added};result['metrics']=[m for m in result['metrics'] if m['metric'] not in replace]+added
     cfg['cache_correctness_method']='Hit rate and answer correctness are separate. Correct answer requires stored fixture item ID, exact serial value, and expected location in both recordFacts and locationMatches.'
+
+def expected_probe_ids():
+    """Independent coverage contract from frozen records + declared runner probes."""
+    dataset=json.loads((HERE/'scenarios.json').read_text())
+    ids=['upload-'+d['key'] for d in dataset['documents']]+['location-'+d['key'] for d in dataset['documents']]
+    ids+=['identifier-pan','identifier-aadhaar','identifier-router','date-fridge','date-washer','amount-microwave','amount-laptop']
+    ids+=[q['id'] for q in dataset['questions'] if q['type']in ['aggregate','follow-up']]
+    ids+=['cache-generated-prime','cache-generated-exact','freshness-before-move','freshness-after-move','freshness-after-delete','duplicate-pan','cache-warmup']
+    ids+=[f'cache-exact-{i}' for i in range(1,6)]
+    ids+=[f'cache-variant-{i}' for i in range(1,11)]
+    ids+=[f'cache-near-miss-{i}' for i in range(1,11)]
+    ids+=[f'cache-bypass-{i}' for i in range(1,6)]
+    ids+=['cache-item-after-move','cache-item-after-delete','cache-generated-counter-prime','cache-generated-counter-exact','cache-generated-counter-bypass']
+    if len(ids)!=95 or len(set(ids))!=95:raise ValueError('Declared HomeAtlas coverage contract changed')
+    return sorted(ids)
+
+def attest_coverage(result):
+    expected=expected_probe_ids();actual=[r['id'] for r in result['per_question']]
+    missing=sorted(set(expected)-set(actual));unexpected=sorted(set(actual)-set(expected))
+    duplicates=sorted({x for x in actual if actual.count(x)>1})
+    result['config'].update(complete=not missing and not unexpected and not duplicates and len(actual)==95,
+        expected_probe_ids=expected,expected_probe_count=95,observed_probe_count=len(actual),
+        coverage_missing_probe_ids=missing,coverage_unexpected_probe_ids=unexpected,coverage_duplicate_probe_ids=duplicates,
+        completion_definition='All 95 predeclared probes attempted exactly once, including failures. Does not mean all probes passed.')
+
+def add_statistic_samples(result):
+    """Expose original observation units for stats; never infer arrays from rates."""
+    import math
+    rows=result['per_question'];by_id={r['id']:r for r in rows};samples={}
+    def group(metric_name,selected,key):
+        samples[metric_name]=[{'id':r['id'],'value':float(r[key])} for r in selected]
+    def singleton(metric_name,id,key):
+        if id in by_id:group(metric_name,[by_id[id]],key)
+    loc=[r for r in rows if r['id'].startswith('location-')]
+    for level in ['room','zone','container','full_path','location_link']:
+        group('E.'+level+'_accuracy',[r for r in loc if level+'_correct'in r],level+'_correct')
+    uploads=[r for r in rows if r['id'].startswith('upload-')]
+    group('E.upload_response_to_ready_mean_ms',uploads,'upload_to_ready_ms')
+    samples['E.upload_index_ready_rate']=[{'id':r['id'],'value':1.0} for r in uploads]
+    for field in ['identifier','date','amount']:group('E.document_'+field+'_fact_presence',[r for r in rows if r.get('field')==field],'correct')
+    for typ in ['aggregate','follow-up']:group('E.'+typ+'_fact_presence',[r for r in rows if r.get('type')==typ],'correct')
+    group('E.follow_up_history_support',[r for r in rows if r.get('type')=='follow-up'],'history_supported')
+    singleton('E.move_freshness','freshness-after-move','correct');singleton('E.delete_freshness','freshness-after-delete','correct')
+    group('H.move_delete_invalidation',[r for r in rows if r['id']in ['freshness-after-move','freshness-after-delete']],'cache_invalidated')
+    singleton('E.duplicate_location_handling','duplicate-pan','correct')
+    for name in ['exact','variant']:
+        selected=[r for r in rows if r['id'].startswith('cache-'+name+'-')]
+        for suffix,key in [('hit_rate','cache_hit'),('answer_accuracy','answer_correct'),('correct_answer_hit_rate','correct_answer_hit')]:group('H.'+name+'_'+suffix,selected,key)
+    variants=[r for r in rows if r['id'].startswith('cache-variant-')]
+    group('H.semantic_hit_rate',variants,'semantic_hit');group('H.semantic_http_mean_ms',variants,'latency_ms')
+    group('H.near_miss_false_hit_rate',[r for r in rows if r['id'].startswith('cache-near-miss-')],'false_hit')
+    group('H.item_move_delete_freshness',[r for r in rows if r['id']in ['cache-item-after-move','cache-item-after-delete']],'correct')
+    singleton('H.warmup_http_ms','cache-warmup','latency_ms')
+    group('H.exact_http_mean_ms',[r for r in rows if r['id'].startswith('cache-exact-')],'latency_ms')
+    group('H.bypass_http_mean_ms',[r for r in rows if r['id'].startswith('cache-bypass-')],'latency_ms')
+    singleton('H.generated_prime_http_ms','cache-generated-prime','latency_ms');singleton('H.generated_cache_http_ms','cache-generated-exact','latency_ms')
+    if 'cache-generated-exact'in by_id:
+        samples['H.generated_cache_exact_hit']=[{'id':'cache-generated-exact','value':float(by_id['cache-generated-exact']['body'].get('cache',{}).get('kind')=='exact')}]
+    pairs=[('H.generated_observed_latency_saved_ms','cache-generated-prime','cache-generated-exact','latency_ms'),
+           ('H.llm_http_calls_saved','cache-generated-counter-bypass','cache-generated-counter-exact','ollama_http_attempts'),
+           ('H.generated_inprocess_latency_saved_ms','cache-generated-counter-bypass','cache-generated-counter-exact','latency_ms')]
+    for metric_name,left,right,key in pairs:
+        if left in by_id and right in by_id:samples[metric_name]=[{'id':left+'--'+right,'value':float(by_id[left][key]-by_id[right][key]),'source_ids':[left,right]}]
+    singleton('H.generated_inprocess_cache_hit','cache-generated-counter-exact','cache_hit')
+    singleton('H.generated_inprocess_bypass_llm_calls','cache-generated-counter-bypass','ollama_http_attempts')
+    singleton('H.generated_inprocess_cached_llm_calls','cache-generated-counter-exact','ollama_http_attempts')
+    group('H.generated_inprocess_fact_presence',[r for r in rows if r['id'].startswith('cache-generated-counter-')],'correct')
+    measured={m['metric']:m for m in result['metrics'] if m['value']is not None}
+    samples={name:values for name,values in samples.items() if name in measured}
+    for name,values in samples.items():
+        m=measured[name]
+        if len(values)!=m['n'] or not values or not math.isclose(statistics.mean(v['value'] for v in values),m['value'],rel_tol=1e-9,abs_tol=1e-9):
+            raise ValueError('Observation sample mismatch for '+name)
+    result['statistic_samples']=samples
+    result['statistic_sample_notes']={'H.exact_latency_saved_ms':'Difference of two 5-request cohort means. Use observations under H.exact_http_mean_ms and H.bypass_http_mean_ms; no arbitrary ordinal pairing is assumed.',
+        'n1_experiments':'Generated-answer cache/call experiments have one observed pair per run. Do not present a single-pair CI as broad performance certainty.',
+        'upload_ready_success':'Each upload row is appended only after real source.status=ready; upload failures prevent that observation being appended.'}
 
 def evaluate(args):
     frozen_dataset();dataset=json.loads((HERE/'scenarios.json').read_text());api=API();metrics=[];config={

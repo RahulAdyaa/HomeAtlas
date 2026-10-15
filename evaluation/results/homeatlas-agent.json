@@ -162,7 +162,111 @@
           "numeric_trust": "Only categorical confidence is emitted; calibration metrics are NOT MEASURED.",
           "application_changes_by_this_agent": false,
           "scope": "Household scenarios and additional declared disposable cache fixtures; no PDF or customer data is read by this evaluator."
-        }
+        },
+        "complete": true,
+        "expected_probe_ids": [
+          "aggregate-001",
+          "aggregate-002",
+          "aggregate-003",
+          "amount-laptop",
+          "amount-microwave",
+          "cache-bypass-1",
+          "cache-bypass-2",
+          "cache-bypass-3",
+          "cache-bypass-4",
+          "cache-bypass-5",
+          "cache-exact-1",
+          "cache-exact-2",
+          "cache-exact-3",
+          "cache-exact-4",
+          "cache-exact-5",
+          "cache-generated-counter-bypass",
+          "cache-generated-counter-exact",
+          "cache-generated-counter-prime",
+          "cache-generated-exact",
+          "cache-generated-prime",
+          "cache-item-after-delete",
+          "cache-item-after-move",
+          "cache-near-miss-1",
+          "cache-near-miss-10",
+          "cache-near-miss-2",
+          "cache-near-miss-3",
+          "cache-near-miss-4",
+          "cache-near-miss-5",
+          "cache-near-miss-6",
+          "cache-near-miss-7",
+          "cache-near-miss-8",
+          "cache-near-miss-9",
+          "cache-variant-1",
+          "cache-variant-10",
+          "cache-variant-2",
+          "cache-variant-3",
+          "cache-variant-4",
+          "cache-variant-5",
+          "cache-variant-6",
+          "cache-variant-7",
+          "cache-variant-8",
+          "cache-variant-9",
+          "cache-warmup",
+          "date-fridge",
+          "date-washer",
+          "duplicate-pan",
+          "follow-up-001",
+          "follow-up-002",
+          "follow-up-003",
+          "freshness-after-delete",
+          "freshness-after-move",
+          "freshness-before-move",
+          "identifier-aadhaar",
+          "identifier-pan",
+          "identifier-router",
+          "location-aadhaar",
+          "location-ac",
+          "location-bank",
+          "location-birth",
+          "location-electricity",
+          "location-filter",
+          "location-fridge",
+          "location-insurance",
+          "location-keys",
+          "location-laptop",
+          "location-licence",
+          "location-medicine",
+          "location-microwave",
+          "location-pan",
+          "location-passport",
+          "location-passport-photo",
+          "location-router",
+          "location-school",
+          "location-television",
+          "location-washer",
+          "upload-aadhaar",
+          "upload-ac",
+          "upload-bank",
+          "upload-birth",
+          "upload-electricity",
+          "upload-filter",
+          "upload-fridge",
+          "upload-insurance",
+          "upload-keys",
+          "upload-laptop",
+          "upload-licence",
+          "upload-medicine",
+          "upload-microwave",
+          "upload-pan",
+          "upload-passport",
+          "upload-passport-photo",
+          "upload-router",
+          "upload-school",
+          "upload-television",
+          "upload-washer"
+        ],
+        "expected_probe_count": 95,
+        "observed_probe_count": 95,
+        "coverage_missing_probe_ids": [],
+        "coverage_unexpected_probe_ids": [],
+        "coverage_duplicate_probe_ids": [],
+        "completion_definition": "All 95 predeclared probes attempted exactly once, including failures. Does not mean all probes passed."
       },
       "models": {
         "published_defaults": {
@@ -4829,7 +4933,1074 @@
           "source_id": "aff1b7bc-67bd-4abd-90a3-2250d604401f",
           "numeric_confidence": null
         }
-      ]
+      ],
+      "statistic_samples": {
+        "E.room_accuracy": [
+          {
+            "id": "location-aadhaar",
+            "value": 1.0
+          },
+          {
+            "id": "location-pan",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport-photo",
+            "value": 1.0
+          },
+          {
+            "id": "location-licence",
+            "value": 1.0
+          },
+          {
+            "id": "location-fridge",
+            "value": 1.0
+          },
+          {
+            "id": "location-washer",
+            "value": 1.0
+          },
+          {
+            "id": "location-microwave",
+            "value": 1.0
+          },
+          {
+            "id": "location-laptop",
+            "value": 1.0
+          },
+          {
+            "id": "location-television",
+            "value": 1.0
+          },
+          {
+            "id": "location-insurance",
+            "value": 1.0
+          },
+          {
+            "id": "location-keys",
+            "value": 1.0
+          },
+          {
+            "id": "location-medicine",
+            "value": 1.0
+          },
+          {
+            "id": "location-electricity",
+            "value": 1.0
+          },
+          {
+            "id": "location-birth",
+            "value": 1.0
+          },
+          {
+            "id": "location-filter",
+            "value": 1.0
+          },
+          {
+            "id": "location-router",
+            "value": 1.0
+          },
+          {
+            "id": "location-ac",
+            "value": 1.0
+          },
+          {
+            "id": "location-bank",
+            "value": 1.0
+          },
+          {
+            "id": "location-school",
+            "value": 1.0
+          }
+        ],
+        "E.zone_accuracy": [
+          {
+            "id": "location-aadhaar",
+            "value": 1.0
+          },
+          {
+            "id": "location-pan",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport-photo",
+            "value": 1.0
+          },
+          {
+            "id": "location-licence",
+            "value": 1.0
+          },
+          {
+            "id": "location-fridge",
+            "value": 1.0
+          },
+          {
+            "id": "location-washer",
+            "value": 1.0
+          },
+          {
+            "id": "location-microwave",
+            "value": 1.0
+          },
+          {
+            "id": "location-laptop",
+            "value": 1.0
+          },
+          {
+            "id": "location-television",
+            "value": 1.0
+          },
+          {
+            "id": "location-insurance",
+            "value": 1.0
+          },
+          {
+            "id": "location-keys",
+            "value": 1.0
+          },
+          {
+            "id": "location-medicine",
+            "value": 1.0
+          },
+          {
+            "id": "location-electricity",
+            "value": 1.0
+          },
+          {
+            "id": "location-birth",
+            "value": 1.0
+          },
+          {
+            "id": "location-filter",
+            "value": 1.0
+          },
+          {
+            "id": "location-router",
+            "value": 1.0
+          },
+          {
+            "id": "location-ac",
+            "value": 1.0
+          },
+          {
+            "id": "location-bank",
+            "value": 1.0
+          },
+          {
+            "id": "location-school",
+            "value": 1.0
+          }
+        ],
+        "E.container_accuracy": [
+          {
+            "id": "location-aadhaar",
+            "value": 1.0
+          }
+        ],
+        "E.full_path_accuracy": [
+          {
+            "id": "location-aadhaar",
+            "value": 1.0
+          },
+          {
+            "id": "location-pan",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport-photo",
+            "value": 1.0
+          },
+          {
+            "id": "location-licence",
+            "value": 1.0
+          },
+          {
+            "id": "location-fridge",
+            "value": 1.0
+          },
+          {
+            "id": "location-washer",
+            "value": 1.0
+          },
+          {
+            "id": "location-microwave",
+            "value": 1.0
+          },
+          {
+            "id": "location-laptop",
+            "value": 1.0
+          },
+          {
+            "id": "location-television",
+            "value": 1.0
+          },
+          {
+            "id": "location-insurance",
+            "value": 1.0
+          },
+          {
+            "id": "location-keys",
+            "value": 1.0
+          },
+          {
+            "id": "location-medicine",
+            "value": 1.0
+          },
+          {
+            "id": "location-electricity",
+            "value": 1.0
+          },
+          {
+            "id": "location-birth",
+            "value": 1.0
+          },
+          {
+            "id": "location-filter",
+            "value": 1.0
+          },
+          {
+            "id": "location-router",
+            "value": 1.0
+          },
+          {
+            "id": "location-ac",
+            "value": 1.0
+          },
+          {
+            "id": "location-bank",
+            "value": 1.0
+          },
+          {
+            "id": "location-school",
+            "value": 1.0
+          }
+        ],
+        "E.location_link_accuracy": [
+          {
+            "id": "location-aadhaar",
+            "value": 1.0
+          },
+          {
+            "id": "location-pan",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport-photo",
+            "value": 1.0
+          },
+          {
+            "id": "location-licence",
+            "value": 1.0
+          },
+          {
+            "id": "location-fridge",
+            "value": 1.0
+          },
+          {
+            "id": "location-washer",
+            "value": 1.0
+          },
+          {
+            "id": "location-microwave",
+            "value": 1.0
+          },
+          {
+            "id": "location-laptop",
+            "value": 1.0
+          },
+          {
+            "id": "location-television",
+            "value": 1.0
+          },
+          {
+            "id": "location-insurance",
+            "value": 1.0
+          },
+          {
+            "id": "location-keys",
+            "value": 1.0
+          },
+          {
+            "id": "location-medicine",
+            "value": 1.0
+          },
+          {
+            "id": "location-electricity",
+            "value": 1.0
+          },
+          {
+            "id": "location-birth",
+            "value": 1.0
+          },
+          {
+            "id": "location-filter",
+            "value": 1.0
+          },
+          {
+            "id": "location-router",
+            "value": 1.0
+          },
+          {
+            "id": "location-ac",
+            "value": 1.0
+          },
+          {
+            "id": "location-bank",
+            "value": 1.0
+          },
+          {
+            "id": "location-school",
+            "value": 1.0
+          }
+        ],
+        "E.upload_response_to_ready_mean_ms": [
+          {
+            "id": "upload-aadhaar",
+            "value": 11039.003625017358
+          },
+          {
+            "id": "upload-pan",
+            "value": 1784.0195829921868
+          },
+          {
+            "id": "upload-passport",
+            "value": 4070.6234159879386
+          },
+          {
+            "id": "upload-passport-photo",
+            "value": 2026.8204169988167
+          },
+          {
+            "id": "upload-licence",
+            "value": 2036.5543340158183
+          },
+          {
+            "id": "upload-fridge",
+            "value": 2543.321916979039
+          },
+          {
+            "id": "upload-washer",
+            "value": 1024.0753749967553
+          },
+          {
+            "id": "upload-microwave",
+            "value": 2537.149292009417
+          },
+          {
+            "id": "upload-laptop",
+            "value": 1272.5570830225479
+          },
+          {
+            "id": "upload-television",
+            "value": 3547.7792090096045
+          },
+          {
+            "id": "upload-insurance",
+            "value": 2030.2604580065235
+          },
+          {
+            "id": "upload-keys",
+            "value": 2279.1534999851137
+          },
+          {
+            "id": "upload-medicine",
+            "value": 2541.5327500086278
+          },
+          {
+            "id": "upload-electricity",
+            "value": 762.0297909888905
+          },
+          {
+            "id": "upload-birth",
+            "value": 1522.6279170019552
+          },
+          {
+            "id": "upload-filter",
+            "value": 2575.7005419873167
+          },
+          {
+            "id": "upload-router",
+            "value": 1526.7189169826452
+          },
+          {
+            "id": "upload-ac",
+            "value": 1519.5191250240896
+          },
+          {
+            "id": "upload-bank",
+            "value": 1517.7398329833522
+          },
+          {
+            "id": "upload-school",
+            "value": 1781.8190840189345
+          }
+        ],
+        "E.upload_index_ready_rate": [
+          {
+            "id": "upload-aadhaar",
+            "value": 1.0
+          },
+          {
+            "id": "upload-pan",
+            "value": 1.0
+          },
+          {
+            "id": "upload-passport",
+            "value": 1.0
+          },
+          {
+            "id": "upload-passport-photo",
+            "value": 1.0
+          },
+          {
+            "id": "upload-licence",
+            "value": 1.0
+          },
+          {
+            "id": "upload-fridge",
+            "value": 1.0
+          },
+          {
+            "id": "upload-washer",
+            "value": 1.0
+          },
+          {
+            "id": "upload-microwave",
+            "value": 1.0
+          },
+          {
+            "id": "upload-laptop",
+            "value": 1.0
+          },
+          {
+            "id": "upload-television",
+            "value": 1.0
+          },
+          {
+            "id": "upload-insurance",
+            "value": 1.0
+          },
+          {
+            "id": "upload-keys",
+            "value": 1.0
+          },
+          {
+            "id": "upload-medicine",
+            "value": 1.0
+          },
+          {
+            "id": "upload-electricity",
+            "value": 1.0
+          },
+          {
+            "id": "upload-birth",
+            "value": 1.0
+          },
+          {
+            "id": "upload-filter",
+            "value": 1.0
+          },
+          {
+            "id": "upload-router",
+            "value": 1.0
+          },
+          {
+            "id": "upload-ac",
+            "value": 1.0
+          },
+          {
+            "id": "upload-bank",
+            "value": 1.0
+          },
+          {
+            "id": "upload-school",
+            "value": 1.0
+          }
+        ],
+        "E.document_identifier_fact_presence": [
+          {
+            "id": "identifier-pan",
+            "value": 1.0
+          },
+          {
+            "id": "identifier-aadhaar",
+            "value": 1.0
+          },
+          {
+            "id": "identifier-router",
+            "value": 1.0
+          }
+        ],
+        "E.document_date_fact_presence": [
+          {
+            "id": "date-fridge",
+            "value": 1.0
+          },
+          {
+            "id": "date-washer",
+            "value": 1.0
+          }
+        ],
+        "E.document_amount_fact_presence": [
+          {
+            "id": "amount-microwave",
+            "value": 1.0
+          },
+          {
+            "id": "amount-laptop",
+            "value": 1.0
+          }
+        ],
+        "E.aggregate_fact_presence": [
+          {
+            "id": "aggregate-001",
+            "value": 0.0
+          },
+          {
+            "id": "aggregate-002",
+            "value": 1.0
+          },
+          {
+            "id": "aggregate-003",
+            "value": 0.0
+          }
+        ],
+        "E.follow-up_fact_presence": [
+          {
+            "id": "follow-up-001",
+            "value": 1.0
+          },
+          {
+            "id": "follow-up-002",
+            "value": 0.0
+          },
+          {
+            "id": "follow-up-003",
+            "value": 0.0
+          }
+        ],
+        "E.follow_up_history_support": [
+          {
+            "id": "follow-up-001",
+            "value": 0.0
+          },
+          {
+            "id": "follow-up-002",
+            "value": 0.0
+          },
+          {
+            "id": "follow-up-003",
+            "value": 0.0
+          }
+        ],
+        "E.move_freshness": [
+          {
+            "id": "freshness-after-move",
+            "value": 1.0
+          }
+        ],
+        "E.delete_freshness": [
+          {
+            "id": "freshness-after-delete",
+            "value": 1.0
+          }
+        ],
+        "H.move_delete_invalidation": [
+          {
+            "id": "freshness-after-move",
+            "value": 1.0
+          },
+          {
+            "id": "freshness-after-delete",
+            "value": 1.0
+          }
+        ],
+        "E.duplicate_location_handling": [
+          {
+            "id": "duplicate-pan",
+            "value": 1.0
+          }
+        ],
+        "H.exact_hit_rate": [
+          {
+            "id": "cache-exact-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-5",
+            "value": 1.0
+          }
+        ],
+        "H.exact_answer_accuracy": [
+          {
+            "id": "cache-exact-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-5",
+            "value": 1.0
+          }
+        ],
+        "H.exact_correct_answer_hit_rate": [
+          {
+            "id": "cache-exact-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-5",
+            "value": 1.0
+          }
+        ],
+        "H.variant_hit_rate": [
+          {
+            "id": "cache-variant-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-5",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-6",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-7",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-8",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-9",
+            "value": 0.0
+          },
+          {
+            "id": "cache-variant-10",
+            "value": 0.0
+          }
+        ],
+        "H.variant_answer_accuracy": [
+          {
+            "id": "cache-variant-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-5",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-6",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-7",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-8",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-9",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-10",
+            "value": 1.0
+          }
+        ],
+        "H.variant_correct_answer_hit_rate": [
+          {
+            "id": "cache-variant-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-5",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-6",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-7",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-8",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-9",
+            "value": 0.0
+          },
+          {
+            "id": "cache-variant-10",
+            "value": 0.0
+          }
+        ],
+        "H.semantic_hit_rate": [
+          {
+            "id": "cache-variant-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-5",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-6",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-7",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-8",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-9",
+            "value": 0.0
+          },
+          {
+            "id": "cache-variant-10",
+            "value": 0.0
+          }
+        ],
+        "H.semantic_http_mean_ms": [
+          {
+            "id": "cache-variant-1",
+            "value": 521.0070409812033
+          },
+          {
+            "id": "cache-variant-2",
+            "value": 428.69070800952613
+          },
+          {
+            "id": "cache-variant-3",
+            "value": 465.1414580002893
+          },
+          {
+            "id": "cache-variant-4",
+            "value": 209.3586669943761
+          },
+          {
+            "id": "cache-variant-5",
+            "value": 129.76591600454412
+          },
+          {
+            "id": "cache-variant-6",
+            "value": 315.1520410028752
+          },
+          {
+            "id": "cache-variant-7",
+            "value": 58.55987500399351
+          },
+          {
+            "id": "cache-variant-8",
+            "value": 77.0542079990264
+          },
+          {
+            "id": "cache-variant-9",
+            "value": 525.2537080086768
+          },
+          {
+            "id": "cache-variant-10",
+            "value": 449.3802500073798
+          }
+        ],
+        "H.near_miss_false_hit_rate": [
+          {
+            "id": "cache-near-miss-1",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-2",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-3",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-4",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-5",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-6",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-7",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-8",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-9",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-10",
+            "value": 0.0
+          }
+        ],
+        "H.item_move_delete_freshness": [
+          {
+            "id": "cache-item-after-move",
+            "value": 1.0
+          },
+          {
+            "id": "cache-item-after-delete",
+            "value": 1.0
+          }
+        ],
+        "H.warmup_http_ms": [
+          {
+            "id": "cache-warmup",
+            "value": 169.1983339842409
+          }
+        ],
+        "H.exact_http_mean_ms": [
+          {
+            "id": "cache-exact-1",
+            "value": 61.3250829919707
+          },
+          {
+            "id": "cache-exact-2",
+            "value": 50.483291008276865
+          },
+          {
+            "id": "cache-exact-3",
+            "value": 45.755499973893166
+          },
+          {
+            "id": "cache-exact-4",
+            "value": 38.97720901295543
+          },
+          {
+            "id": "cache-exact-5",
+            "value": 46.83241600287147
+          }
+        ],
+        "H.bypass_http_mean_ms": [
+          {
+            "id": "cache-bypass-1",
+            "value": 45.52837501978502
+          },
+          {
+            "id": "cache-bypass-2",
+            "value": 50.845791993197054
+          },
+          {
+            "id": "cache-bypass-3",
+            "value": 63.521375006530434
+          },
+          {
+            "id": "cache-bypass-4",
+            "value": 345.98904199083336
+          },
+          {
+            "id": "cache-bypass-5",
+            "value": 231.70279202167876
+          }
+        ],
+        "H.generated_prime_http_ms": [
+          {
+            "id": "cache-generated-prime",
+            "value": 8704.760541993892
+          }
+        ],
+        "H.generated_cache_http_ms": [
+          {
+            "id": "cache-generated-exact",
+            "value": 289.76641700137407
+          }
+        ],
+        "H.generated_cache_exact_hit": [
+          {
+            "id": "cache-generated-exact",
+            "value": 1.0
+          }
+        ],
+        "H.generated_observed_latency_saved_ms": [
+          {
+            "id": "cache-generated-prime--cache-generated-exact",
+            "value": 8414.994124992518,
+            "source_ids": [
+              "cache-generated-prime",
+              "cache-generated-exact"
+            ]
+          }
+        ],
+        "H.llm_http_calls_saved": [
+          {
+            "id": "cache-generated-counter-bypass--cache-generated-counter-exact",
+            "value": 2.0,
+            "source_ids": [
+              "cache-generated-counter-bypass",
+              "cache-generated-counter-exact"
+            ]
+          }
+        ],
+        "H.generated_inprocess_latency_saved_ms": [
+          {
+            "id": "cache-generated-counter-bypass--cache-generated-counter-exact",
+            "value": 8248.043874977157,
+            "source_ids": [
+              "cache-generated-counter-bypass",
+              "cache-generated-counter-exact"
+            ]
+          }
+        ],
+        "H.generated_inprocess_cache_hit": [
+          {
+            "id": "cache-generated-counter-exact",
+            "value": 1.0
+          }
+        ],
+        "H.generated_inprocess_bypass_llm_calls": [
+          {
+            "id": "cache-generated-counter-bypass",
+            "value": 2.0
+          }
+        ],
+        "H.generated_inprocess_cached_llm_calls": [
+          {
+            "id": "cache-generated-counter-exact",
+            "value": 0.0
+          }
+        ],
+        "H.generated_inprocess_fact_presence": [
+          {
+            "id": "cache-generated-counter-prime",
+            "value": 1.0
+          },
+          {
+            "id": "cache-generated-counter-exact",
+            "value": 1.0
+          },
+          {
+            "id": "cache-generated-counter-bypass",
+            "value": 1.0
+          }
+        ]
+      },
+      "statistic_sample_notes": {
+        "H.exact_latency_saved_ms": "Difference of two 5-request cohort means. Use observations under H.exact_http_mean_ms and H.bypass_http_mean_ms; no arbitrary ordinal pairing is assumed.",
+        "n1_experiments": "Generated-answer cache/call experiments have one observed pair per run. Do not present a single-pair CI as broad performance certainty.",
+        "upload_ready_success": "Each upload row is appended only after real source.status=ready; upload failures prevent that observation being appended."
+      }
     },
     {
       "schema_version": 1,
@@ -4991,7 +6162,111 @@
           "numeric_trust": "Only categorical confidence is emitted; calibration metrics are NOT MEASURED.",
           "application_changes_by_this_agent": false,
           "scope": "Household scenarios and additional declared disposable cache fixtures; no PDF or customer data is read by this evaluator."
-        }
+        },
+        "complete": true,
+        "expected_probe_ids": [
+          "aggregate-001",
+          "aggregate-002",
+          "aggregate-003",
+          "amount-laptop",
+          "amount-microwave",
+          "cache-bypass-1",
+          "cache-bypass-2",
+          "cache-bypass-3",
+          "cache-bypass-4",
+          "cache-bypass-5",
+          "cache-exact-1",
+          "cache-exact-2",
+          "cache-exact-3",
+          "cache-exact-4",
+          "cache-exact-5",
+          "cache-generated-counter-bypass",
+          "cache-generated-counter-exact",
+          "cache-generated-counter-prime",
+          "cache-generated-exact",
+          "cache-generated-prime",
+          "cache-item-after-delete",
+          "cache-item-after-move",
+          "cache-near-miss-1",
+          "cache-near-miss-10",
+          "cache-near-miss-2",
+          "cache-near-miss-3",
+          "cache-near-miss-4",
+          "cache-near-miss-5",
+          "cache-near-miss-6",
+          "cache-near-miss-7",
+          "cache-near-miss-8",
+          "cache-near-miss-9",
+          "cache-variant-1",
+          "cache-variant-10",
+          "cache-variant-2",
+          "cache-variant-3",
+          "cache-variant-4",
+          "cache-variant-5",
+          "cache-variant-6",
+          "cache-variant-7",
+          "cache-variant-8",
+          "cache-variant-9",
+          "cache-warmup",
+          "date-fridge",
+          "date-washer",
+          "duplicate-pan",
+          "follow-up-001",
+          "follow-up-002",
+          "follow-up-003",
+          "freshness-after-delete",
+          "freshness-after-move",
+          "freshness-before-move",
+          "identifier-aadhaar",
+          "identifier-pan",
+          "identifier-router",
+          "location-aadhaar",
+          "location-ac",
+          "location-bank",
+          "location-birth",
+          "location-electricity",
+          "location-filter",
+          "location-fridge",
+          "location-insurance",
+          "location-keys",
+          "location-laptop",
+          "location-licence",
+          "location-medicine",
+          "location-microwave",
+          "location-pan",
+          "location-passport",
+          "location-passport-photo",
+          "location-router",
+          "location-school",
+          "location-television",
+          "location-washer",
+          "upload-aadhaar",
+          "upload-ac",
+          "upload-bank",
+          "upload-birth",
+          "upload-electricity",
+          "upload-filter",
+          "upload-fridge",
+          "upload-insurance",
+          "upload-keys",
+          "upload-laptop",
+          "upload-licence",
+          "upload-medicine",
+          "upload-microwave",
+          "upload-pan",
+          "upload-passport",
+          "upload-passport-photo",
+          "upload-router",
+          "upload-school",
+          "upload-television",
+          "upload-washer"
+        ],
+        "expected_probe_count": 95,
+        "observed_probe_count": 95,
+        "coverage_missing_probe_ids": [],
+        "coverage_unexpected_probe_ids": [],
+        "coverage_duplicate_probe_ids": [],
+        "completion_definition": "All 95 predeclared probes attempted exactly once, including failures. Does not mean all probes passed."
       },
       "models": {
         "published_defaults": {
@@ -9742,7 +11017,1074 @@
           "source_id": "fc0c95ab-444e-469f-9ff5-e6165ac9c8bd",
           "numeric_confidence": null
         }
-      ]
+      ],
+      "statistic_samples": {
+        "E.room_accuracy": [
+          {
+            "id": "location-aadhaar",
+            "value": 1.0
+          },
+          {
+            "id": "location-pan",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport-photo",
+            "value": 1.0
+          },
+          {
+            "id": "location-licence",
+            "value": 1.0
+          },
+          {
+            "id": "location-fridge",
+            "value": 1.0
+          },
+          {
+            "id": "location-washer",
+            "value": 1.0
+          },
+          {
+            "id": "location-microwave",
+            "value": 1.0
+          },
+          {
+            "id": "location-laptop",
+            "value": 1.0
+          },
+          {
+            "id": "location-television",
+            "value": 1.0
+          },
+          {
+            "id": "location-insurance",
+            "value": 1.0
+          },
+          {
+            "id": "location-keys",
+            "value": 1.0
+          },
+          {
+            "id": "location-medicine",
+            "value": 1.0
+          },
+          {
+            "id": "location-electricity",
+            "value": 1.0
+          },
+          {
+            "id": "location-birth",
+            "value": 1.0
+          },
+          {
+            "id": "location-filter",
+            "value": 1.0
+          },
+          {
+            "id": "location-router",
+            "value": 1.0
+          },
+          {
+            "id": "location-ac",
+            "value": 1.0
+          },
+          {
+            "id": "location-bank",
+            "value": 1.0
+          },
+          {
+            "id": "location-school",
+            "value": 1.0
+          }
+        ],
+        "E.zone_accuracy": [
+          {
+            "id": "location-aadhaar",
+            "value": 1.0
+          },
+          {
+            "id": "location-pan",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport-photo",
+            "value": 1.0
+          },
+          {
+            "id": "location-licence",
+            "value": 1.0
+          },
+          {
+            "id": "location-fridge",
+            "value": 1.0
+          },
+          {
+            "id": "location-washer",
+            "value": 1.0
+          },
+          {
+            "id": "location-microwave",
+            "value": 1.0
+          },
+          {
+            "id": "location-laptop",
+            "value": 1.0
+          },
+          {
+            "id": "location-television",
+            "value": 1.0
+          },
+          {
+            "id": "location-insurance",
+            "value": 1.0
+          },
+          {
+            "id": "location-keys",
+            "value": 1.0
+          },
+          {
+            "id": "location-medicine",
+            "value": 1.0
+          },
+          {
+            "id": "location-electricity",
+            "value": 1.0
+          },
+          {
+            "id": "location-birth",
+            "value": 1.0
+          },
+          {
+            "id": "location-filter",
+            "value": 1.0
+          },
+          {
+            "id": "location-router",
+            "value": 1.0
+          },
+          {
+            "id": "location-ac",
+            "value": 1.0
+          },
+          {
+            "id": "location-bank",
+            "value": 1.0
+          },
+          {
+            "id": "location-school",
+            "value": 1.0
+          }
+        ],
+        "E.container_accuracy": [
+          {
+            "id": "location-aadhaar",
+            "value": 1.0
+          }
+        ],
+        "E.full_path_accuracy": [
+          {
+            "id": "location-aadhaar",
+            "value": 1.0
+          },
+          {
+            "id": "location-pan",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport-photo",
+            "value": 1.0
+          },
+          {
+            "id": "location-licence",
+            "value": 1.0
+          },
+          {
+            "id": "location-fridge",
+            "value": 1.0
+          },
+          {
+            "id": "location-washer",
+            "value": 1.0
+          },
+          {
+            "id": "location-microwave",
+            "value": 1.0
+          },
+          {
+            "id": "location-laptop",
+            "value": 1.0
+          },
+          {
+            "id": "location-television",
+            "value": 1.0
+          },
+          {
+            "id": "location-insurance",
+            "value": 1.0
+          },
+          {
+            "id": "location-keys",
+            "value": 1.0
+          },
+          {
+            "id": "location-medicine",
+            "value": 1.0
+          },
+          {
+            "id": "location-electricity",
+            "value": 1.0
+          },
+          {
+            "id": "location-birth",
+            "value": 1.0
+          },
+          {
+            "id": "location-filter",
+            "value": 1.0
+          },
+          {
+            "id": "location-router",
+            "value": 1.0
+          },
+          {
+            "id": "location-ac",
+            "value": 1.0
+          },
+          {
+            "id": "location-bank",
+            "value": 1.0
+          },
+          {
+            "id": "location-school",
+            "value": 1.0
+          }
+        ],
+        "E.location_link_accuracy": [
+          {
+            "id": "location-aadhaar",
+            "value": 1.0
+          },
+          {
+            "id": "location-pan",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport",
+            "value": 1.0
+          },
+          {
+            "id": "location-passport-photo",
+            "value": 1.0
+          },
+          {
+            "id": "location-licence",
+            "value": 1.0
+          },
+          {
+            "id": "location-fridge",
+            "value": 1.0
+          },
+          {
+            "id": "location-washer",
+            "value": 1.0
+          },
+          {
+            "id": "location-microwave",
+            "value": 1.0
+          },
+          {
+            "id": "location-laptop",
+            "value": 1.0
+          },
+          {
+            "id": "location-television",
+            "value": 1.0
+          },
+          {
+            "id": "location-insurance",
+            "value": 1.0
+          },
+          {
+            "id": "location-keys",
+            "value": 1.0
+          },
+          {
+            "id": "location-medicine",
+            "value": 1.0
+          },
+          {
+            "id": "location-electricity",
+            "value": 1.0
+          },
+          {
+            "id": "location-birth",
+            "value": 1.0
+          },
+          {
+            "id": "location-filter",
+            "value": 1.0
+          },
+          {
+            "id": "location-router",
+            "value": 1.0
+          },
+          {
+            "id": "location-ac",
+            "value": 1.0
+          },
+          {
+            "id": "location-bank",
+            "value": 1.0
+          },
+          {
+            "id": "location-school",
+            "value": 1.0
+          }
+        ],
+        "E.upload_response_to_ready_mean_ms": [
+          {
+            "id": "upload-aadhaar",
+            "value": 2041.843749990221
+          },
+          {
+            "id": "upload-pan",
+            "value": 2353.0220829998143
+          },
+          {
+            "id": "upload-passport",
+            "value": 4829.046625003684
+          },
+          {
+            "id": "upload-passport-photo",
+            "value": 4932.281041983515
+          },
+          {
+            "id": "upload-licence",
+            "value": 4210.740042006364
+          },
+          {
+            "id": "upload-fridge",
+            "value": 1785.7403749949299
+          },
+          {
+            "id": "upload-washer",
+            "value": 3046.4302499894984
+          },
+          {
+            "id": "upload-microwave",
+            "value": 2031.3360420113895
+          },
+          {
+            "id": "upload-laptop",
+            "value": 4315.4546250007115
+          },
+          {
+            "id": "upload-television",
+            "value": 2541.8776249862276
+          },
+          {
+            "id": "upload-insurance",
+            "value": 760.2495830215048
+          },
+          {
+            "id": "upload-keys",
+            "value": 2290.6882080133073
+          },
+          {
+            "id": "upload-medicine",
+            "value": 2546.267625002656
+          },
+          {
+            "id": "upload-electricity",
+            "value": 2555.229874997167
+          },
+          {
+            "id": "upload-birth",
+            "value": 1018.7582919897977
+          },
+          {
+            "id": "upload-filter",
+            "value": 1523.339749983279
+          },
+          {
+            "id": "upload-router",
+            "value": 3310.1305829768535
+          },
+          {
+            "id": "upload-ac",
+            "value": 2030.616166011896
+          },
+          {
+            "id": "upload-bank",
+            "value": 2309.633833996486
+          },
+          {
+            "id": "upload-school",
+            "value": 1018.1886250211392
+          }
+        ],
+        "E.upload_index_ready_rate": [
+          {
+            "id": "upload-aadhaar",
+            "value": 1.0
+          },
+          {
+            "id": "upload-pan",
+            "value": 1.0
+          },
+          {
+            "id": "upload-passport",
+            "value": 1.0
+          },
+          {
+            "id": "upload-passport-photo",
+            "value": 1.0
+          },
+          {
+            "id": "upload-licence",
+            "value": 1.0
+          },
+          {
+            "id": "upload-fridge",
+            "value": 1.0
+          },
+          {
+            "id": "upload-washer",
+            "value": 1.0
+          },
+          {
+            "id": "upload-microwave",
+            "value": 1.0
+          },
+          {
+            "id": "upload-laptop",
+            "value": 1.0
+          },
+          {
+            "id": "upload-television",
+            "value": 1.0
+          },
+          {
+            "id": "upload-insurance",
+            "value": 1.0
+          },
+          {
+            "id": "upload-keys",
+            "value": 1.0
+          },
+          {
+            "id": "upload-medicine",
+            "value": 1.0
+          },
+          {
+            "id": "upload-electricity",
+            "value": 1.0
+          },
+          {
+            "id": "upload-birth",
+            "value": 1.0
+          },
+          {
+            "id": "upload-filter",
+            "value": 1.0
+          },
+          {
+            "id": "upload-router",
+            "value": 1.0
+          },
+          {
+            "id": "upload-ac",
+            "value": 1.0
+          },
+          {
+            "id": "upload-bank",
+            "value": 1.0
+          },
+          {
+            "id": "upload-school",
+            "value": 1.0
+          }
+        ],
+        "E.document_identifier_fact_presence": [
+          {
+            "id": "identifier-pan",
+            "value": 1.0
+          },
+          {
+            "id": "identifier-aadhaar",
+            "value": 1.0
+          },
+          {
+            "id": "identifier-router",
+            "value": 1.0
+          }
+        ],
+        "E.document_date_fact_presence": [
+          {
+            "id": "date-fridge",
+            "value": 1.0
+          },
+          {
+            "id": "date-washer",
+            "value": 1.0
+          }
+        ],
+        "E.document_amount_fact_presence": [
+          {
+            "id": "amount-microwave",
+            "value": 1.0
+          },
+          {
+            "id": "amount-laptop",
+            "value": 1.0
+          }
+        ],
+        "E.aggregate_fact_presence": [
+          {
+            "id": "aggregate-001",
+            "value": 0.0
+          },
+          {
+            "id": "aggregate-002",
+            "value": 1.0
+          },
+          {
+            "id": "aggregate-003",
+            "value": 0.0
+          }
+        ],
+        "E.follow-up_fact_presence": [
+          {
+            "id": "follow-up-001",
+            "value": 1.0
+          },
+          {
+            "id": "follow-up-002",
+            "value": 0.0
+          },
+          {
+            "id": "follow-up-003",
+            "value": 0.0
+          }
+        ],
+        "E.follow_up_history_support": [
+          {
+            "id": "follow-up-001",
+            "value": 0.0
+          },
+          {
+            "id": "follow-up-002",
+            "value": 0.0
+          },
+          {
+            "id": "follow-up-003",
+            "value": 0.0
+          }
+        ],
+        "E.move_freshness": [
+          {
+            "id": "freshness-after-move",
+            "value": 1.0
+          }
+        ],
+        "E.delete_freshness": [
+          {
+            "id": "freshness-after-delete",
+            "value": 1.0
+          }
+        ],
+        "H.move_delete_invalidation": [
+          {
+            "id": "freshness-after-move",
+            "value": 1.0
+          },
+          {
+            "id": "freshness-after-delete",
+            "value": 1.0
+          }
+        ],
+        "E.duplicate_location_handling": [
+          {
+            "id": "duplicate-pan",
+            "value": 1.0
+          }
+        ],
+        "H.exact_hit_rate": [
+          {
+            "id": "cache-exact-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-5",
+            "value": 1.0
+          }
+        ],
+        "H.exact_answer_accuracy": [
+          {
+            "id": "cache-exact-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-5",
+            "value": 1.0
+          }
+        ],
+        "H.exact_correct_answer_hit_rate": [
+          {
+            "id": "cache-exact-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-exact-5",
+            "value": 1.0
+          }
+        ],
+        "H.variant_hit_rate": [
+          {
+            "id": "cache-variant-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-5",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-6",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-7",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-8",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-9",
+            "value": 0.0
+          },
+          {
+            "id": "cache-variant-10",
+            "value": 0.0
+          }
+        ],
+        "H.variant_answer_accuracy": [
+          {
+            "id": "cache-variant-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-5",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-6",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-7",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-8",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-9",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-10",
+            "value": 1.0
+          }
+        ],
+        "H.variant_correct_answer_hit_rate": [
+          {
+            "id": "cache-variant-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-5",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-6",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-7",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-8",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-9",
+            "value": 0.0
+          },
+          {
+            "id": "cache-variant-10",
+            "value": 0.0
+          }
+        ],
+        "H.semantic_hit_rate": [
+          {
+            "id": "cache-variant-1",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-2",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-3",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-4",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-5",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-6",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-7",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-8",
+            "value": 1.0
+          },
+          {
+            "id": "cache-variant-9",
+            "value": 0.0
+          },
+          {
+            "id": "cache-variant-10",
+            "value": 0.0
+          }
+        ],
+        "H.semantic_http_mean_ms": [
+          {
+            "id": "cache-variant-1",
+            "value": 588.2400829868857
+          },
+          {
+            "id": "cache-variant-2",
+            "value": 925.2603749919217
+          },
+          {
+            "id": "cache-variant-3",
+            "value": 158.9659579913132
+          },
+          {
+            "id": "cache-variant-4",
+            "value": 158.74912499566562
+          },
+          {
+            "id": "cache-variant-5",
+            "value": 835.2805000031367
+          },
+          {
+            "id": "cache-variant-6",
+            "value": 305.76216700137593
+          },
+          {
+            "id": "cache-variant-7",
+            "value": 148.2260829943698
+          },
+          {
+            "id": "cache-variant-8",
+            "value": 891.7612920049578
+          },
+          {
+            "id": "cache-variant-9",
+            "value": 929.3082499934826
+          },
+          {
+            "id": "cache-variant-10",
+            "value": 668.979957990814
+          }
+        ],
+        "H.near_miss_false_hit_rate": [
+          {
+            "id": "cache-near-miss-1",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-2",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-3",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-4",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-5",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-6",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-7",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-8",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-9",
+            "value": 0.0
+          },
+          {
+            "id": "cache-near-miss-10",
+            "value": 0.0
+          }
+        ],
+        "H.item_move_delete_freshness": [
+          {
+            "id": "cache-item-after-move",
+            "value": 1.0
+          },
+          {
+            "id": "cache-item-after-delete",
+            "value": 1.0
+          }
+        ],
+        "H.warmup_http_ms": [
+          {
+            "id": "cache-warmup",
+            "value": 143.21020801435225
+          }
+        ],
+        "H.exact_http_mean_ms": [
+          {
+            "id": "cache-exact-1",
+            "value": 133.09520902112126
+          },
+          {
+            "id": "cache-exact-2",
+            "value": 103.3833340043202
+          },
+          {
+            "id": "cache-exact-3",
+            "value": 89.80904199415818
+          },
+          {
+            "id": "cache-exact-4",
+            "value": 50.57125000166707
+          },
+          {
+            "id": "cache-exact-5",
+            "value": 49.408917024265975
+          }
+        ],
+        "H.bypass_http_mean_ms": [
+          {
+            "id": "cache-bypass-1",
+            "value": 170.6812079937663
+          },
+          {
+            "id": "cache-bypass-2",
+            "value": 61.44479100476019
+          },
+          {
+            "id": "cache-bypass-3",
+            "value": 168.06250001536682
+          },
+          {
+            "id": "cache-bypass-4",
+            "value": 96.96829199674539
+          },
+          {
+            "id": "cache-bypass-5",
+            "value": 168.66475000279024
+          }
+        ],
+        "H.generated_prime_http_ms": [
+          {
+            "id": "cache-generated-prime",
+            "value": 10636.9153749838
+          }
+        ],
+        "H.generated_cache_http_ms": [
+          {
+            "id": "cache-generated-exact",
+            "value": 205.13175000087358
+          }
+        ],
+        "H.generated_cache_exact_hit": [
+          {
+            "id": "cache-generated-exact",
+            "value": 1.0
+          }
+        ],
+        "H.generated_observed_latency_saved_ms": [
+          {
+            "id": "cache-generated-prime--cache-generated-exact",
+            "value": 10431.783624982927,
+            "source_ids": [
+              "cache-generated-prime",
+              "cache-generated-exact"
+            ]
+          }
+        ],
+        "H.llm_http_calls_saved": [
+          {
+            "id": "cache-generated-counter-bypass--cache-generated-counter-exact",
+            "value": 2.0,
+            "source_ids": [
+              "cache-generated-counter-bypass",
+              "cache-generated-counter-exact"
+            ]
+          }
+        ],
+        "H.generated_inprocess_latency_saved_ms": [
+          {
+            "id": "cache-generated-counter-bypass--cache-generated-counter-exact",
+            "value": 10679.69424900366,
+            "source_ids": [
+              "cache-generated-counter-bypass",
+              "cache-generated-counter-exact"
+            ]
+          }
+        ],
+        "H.generated_inprocess_cache_hit": [
+          {
+            "id": "cache-generated-counter-exact",
+            "value": 1.0
+          }
+        ],
+        "H.generated_inprocess_bypass_llm_calls": [
+          {
+            "id": "cache-generated-counter-bypass",
+            "value": 2.0
+          }
+        ],
+        "H.generated_inprocess_cached_llm_calls": [
+          {
+            "id": "cache-generated-counter-exact",
+            "value": 0.0
+          }
+        ],
+        "H.generated_inprocess_fact_presence": [
+          {
+            "id": "cache-generated-counter-prime",
+            "value": 1.0
+          },
+          {
+            "id": "cache-generated-counter-exact",
+            "value": 1.0
+          },
+          {
+            "id": "cache-generated-counter-bypass",
+            "value": 1.0
+          }
+        ]
+      },
+      "statistic_sample_notes": {
+        "H.exact_latency_saved_ms": "Difference of two 5-request cohort means. Use observations under H.exact_http_mean_ms and H.bypass_http_mean_ms; no arbitrary ordinal pairing is assumed.",
+        "n1_experiments": "Generated-answer cache/call experiments have one observed pair per run. Do not present a single-pair CI as broad performance certainty.",
+        "upload_ready_success": "Each upload row is appended only after real source.status=ready; upload failures prevent that observation being appended."
+      }
     }
   ]
 }
