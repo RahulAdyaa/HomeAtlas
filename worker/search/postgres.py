@@ -3,7 +3,7 @@ import re
 from concurrent.futures import ThreadPoolExecutor
 import psycopg
 from psycopg.rows import dict_row
-from .common import CONFIG, Hit, tokens, normalize
+from .common import CONFIG, Hit, tokens, normalize, numeric_filter
 from . import word, fuzzy
 from .fusion import assemble
 
@@ -19,8 +19,10 @@ def params(household,actor,question,item,room):
 
 def channel(name, question, scope, cfg, engine, config=CONFIG):
     terms=tokens(question)
-    numeric=[w for w in terms if any(c.isdigit() for c in w)]
-    base=BASE+" AND regexp_split_to_array(c.search_text,' ') @> %s::text[]"
+    required, union = numeric_filter(question)
+    numeric=sorted(required)
+    operator='&&' if union else '@>'
+    base=BASE+" AND regexp_split_to_array(c.search_text,' ') "+operator+" %s::text[]"
     scope=(*scope,numeric)
     if not terms: return [],[]
     with psycopg.connect(cfg.database_url,row_factory=dict_row) as conn:

@@ -39,13 +39,12 @@ def lexical_scores(question: str, documents: list[dict]) -> list[float]:
 def rank_candidates(question: str, documents: list[dict], engine: LocalModels = models, image: Path | None = None) -> list[dict]:
     from concurrent.futures import ThreadPoolExecutor
     from .search.fusion import CHANNELS, assemble
-    from .search.common import CONFIG, tokens as search_tokens, index_text
+    from .search.common import CONFIG, numeric_matches
     from .search.visual import search
     channels=dict(CHANNELS)
     if CONFIG.get('visual',{}).get('enabled',False):
         channels['visual']=lambda q,docs,eng,limit:search(q,docs,eng,limit,image)
-    numeric={w for w in search_tokens(question) if any(c.isdigit() for c in w)}
-    text_documents=[d for d in documents if numeric.issubset(set(search_tokens(index_text(d))))]
+    text_documents=[d for d in documents if numeric_matches(question,d)]
     with ThreadPoolExecutor(max_workers=4) as executor:
         futures={name:executor.submit(fn,question,documents if name=='visual' else text_documents,engine,CONFIG['channel_top_k']) for name,fn in channels.items()}
         rankings={name:f.result() for name,f in futures.items()}

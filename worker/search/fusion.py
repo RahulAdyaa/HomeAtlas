@@ -15,9 +15,8 @@ def fuse(rankings, config=CONFIG):
     return scores
 
 def retrieve(question, documents, engine, config=CONFIG, channels=None):
-    numeric={w for w in tokens(question) if any(c.isdigit() for c in w)}
-    from .common import index_text
-    documents=[d for d in documents if numeric.issubset(set(tokens(index_text(d))))]
+    from .common import numeric_matches
+    documents=[d for d in documents if numeric_matches(question,d)]
     channels = channels or CHANNELS
     with ThreadPoolExecutor(max_workers=3) as executor:
         futures = {name: executor.submit(fn, question, documents, engine, config['channel_top_k']) for name, fn in channels.items()}

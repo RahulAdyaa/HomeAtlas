@@ -58,3 +58,16 @@ def ranked(scores, limit):
 
 def index_tokens(doc):
     return [w for w in basic(index_text(doc)).split() if w not in STOP]
+
+
+def numeric_filter(question):
+    """Preserve exact identifiers, but allow a union for explicit comparisons."""
+    required = {w for w in tokens(question) if any(c.isdigit() for c in w)}
+    union = len(required) > 1 and bool(re.search(r'\b(compare|comparison|versus|vs|between|both)\b', normalize(question)))
+    return required, union
+
+
+def numeric_matches(question, document):
+    required, union = numeric_filter(question)
+    present = set(tokens(index_text(document)))
+    return bool(required & present) if union else required.issubset(present)
