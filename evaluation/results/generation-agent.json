@@ -26511,5 +26511,1958 @@
         }
       ]
     }
+  ],
+  "candidate_history": [
+    {
+      "candidate_id": "cycle-1-app-434af147",
+      "status": "SUPERSEDED_PARTIAL_CANDIDATE",
+      "stopped_at_utc": "2026-10-15T17:32:20.843410+00:00",
+      "app_source_fingerprint": "434af1474f3308073290faf17401460e8fe537bbe37b9441c212b089e6f263ca",
+      "planned_main_questions_per_run": 60,
+      "planned_independent_runs": 2,
+      "completed_main_questions": 5,
+      "completed_main_run_count": 0,
+      "completed_third_pass_questions": 0,
+      "stop_reason": "The orchestrator stopped the candidate after observed false refusals and unused citation output. A new app source snapshot must be evaluated from scratch. No completed rows or failures were discarded.",
+      "run_records": [
+        {
+          "schema_version": 1,
+          "agent": "generation-agent",
+          "phase": "final",
+          "run": 1,
+          "run_id": "final-run-01",
+          "timestamp_utc": "2026-10-15T13:09:02.829337+00:00",
+          "seed": 741,
+          "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
+          "app_commit": "8a273e0500315aea470687e7c77cf78325be102f",
+          "app_source_fingerprint": "434af1474f3308073290faf17401460e8fe537bbe37b9441c212b089e6f263ca",
+          "app_files": {
+            "app/api/admin/route.ts": "b67bacea62dca51879db89c49c49f0fd0d13bd04442a0efd8d50570091db6b31",
+            "app/api/ask/route.ts": "2b98b3bcc7c1735f47c8215e4eb34af829b7780584166c8819b44579c9411397",
+            "app/api/atlas/route.ts": "728b2e1fd35c1ca0d18579fb28be1a36df61359700d0c2a18b3604ba81a55404",
+            "app/api/auth/[...all]/route.ts": "ebd5b4369a25eac1933db4b2451ef9a332cdb0f9e9665159b6913751d58207d3",
+            "app/api/cache/route.ts": "393bfc56bf98086c587197e08bcf40645116a5d574f291ec9cd0f01712d7d9af",
+            "app/api/citations/[id]/route.ts": "5f886196d238a3669c5a18ddde4f3d76df65a87db96811bfda893684651a0ac7",
+            "app/api/credits/export/route.ts": "ad1d017fa4cf226048b8b37170f5c183df4ae74401a3e9ecdae4baac7241d47c",
+            "app/api/development/verification/route.ts": "246c9cdb6491bc39548204a94cd548b6091467de6d44698f97fae3532217ad3d",
+            "app/api/export/route.ts": "ef42be7531e65662b187ed76e9c5add2a5c295ac364c7295c789a4d5c49b82ed",
+            "app/api/health/route.ts": "4ee0eafa21e8cb64551462aba3c2c2c858feb45aca84fc7b40cc82b8501dba39",
+            "app/api/locations/route.ts": "9ea949b5d735dbc6a9c1c200c44624fbc0ed62b81bf49081447e7adbd8159596",
+            "app/api/sources/[id]/retry/route.ts": "b7f5ac015e8696a3b544e6ce501de63a679dfb06c331acacacf2a4888e360a79",
+            "app/api/sources/[id]/route.ts": "97422d916b6e67ec171da7f934c5a7521cab8d2ed58c76a9d73c88a0e6126fba",
+            "app/api/sources/route.ts": "595377817498dd3ff5c396f5d2c0159dea20ca9d6c38a473ac87c535845743c2",
+            "config/retrieval.json": "9688ec33eee34cd8ea7cac80cea85e5f7e0db1baf310b49b73dd94d0d7bd1c2d",
+            "config/search-aliases.json": "7aeb5d0a2c876fab211f2b47b0347eb7440017e44624ad94b30c18819bb35a8f",
+            "db/001_core.sql": "2eeb3fd9ba1dc17f8de296e42160cc7f4746148dc0d1855551f058f85bb64726",
+            "db/002_locations.sql": "bd829d17422246734783edcec8bc13a615b965730d207c4c827f5a191f88d442",
+            "db/003_location_photos.sql": "76a00c3151bae0d87befd6d00e63ce16e2699801513ee412eb02e20517914217",
+            "db/004_bookmark_locations.sql": "bf278e2f801688fcea54a7cf9e38101f8a694f8c7d8472471d58e10c527134a7",
+            "db/005_hybrid_cache.sql": "41affc7b18ed5a3a2e0bffe097c44c6cc566a9a3907fd77707a266a2d0b5bf14",
+            "lib/auth.ts": "b218df4d5c246a9e2fffaf502e543adef85007f61dffad3f9f940385a06fad12",
+            "lib/client-api.ts": "138821c88a8921c355190f000f0d2010c6c8a8531b211d956abbf191fb9c64cd",
+            "lib/credits.ts": "3c830a2f6d270cbe931cf5e47777c1e134b2a0bab94d453aae1dc88655d8b7bc",
+            "lib/db.ts": "9ee18dec6b1c1da29f26322e42806d80648db05c966e01c51834d713a5ed4a57",
+            "lib/demo-home.ts": "1df30b11d7f24b0d1332968b72581ac16682ddf634e0db1f0782db59e07f64f9",
+            "lib/development-email.ts": "f804b1a3beae2ab6d51a4391f0306c6b3b7967f9ef75dec0b1bba5d5d8882f5b",
+            "lib/email.ts": "daa21219aaeb0071c8baf690852df012708ef092adf5e20083382b993a2dee4b",
+            "lib/home-layout.ts": "29948ff756f28c719f0ba03b296fb5efbebbb28cb3df2bf37e9f262f517d21f8",
+            "lib/item-facts.ts": "29e77859fc1733070495b20fa04036cade29b65d6c538e69a05f6788703f444f",
+            "lib/location-lookup.ts": "51b091316946ef249ed4186f2fc797124dd3ef7ae6b537c616aacb9849008d84",
+            "lib/locations.ts": "5143f84916b700c7162b3da9062f084e2228e8c40f21c277729231c110c1d4bd",
+            "lib/media.ts": "3e5fd8ce7502a51e71b7818184a4003f06129ef654c0cd8e1b42256fecefd09f",
+            "lib/pg-types.ts": "f4e948f2918aff8f7dcec72555f30dadaf8d9f9a2868975b9307ddf9edb1a9c2",
+            "lib/record-names.ts": "4dbea74929c7c45a46f7ddf685b391142f050d6764797f34699f2ce5ea45b722",
+            "lib/saved-locations.ts": "1392327a6a0a52f28455e37d86c39ae37b595e6dabc20ba8a630721d2f5b8694",
+            "lib/server.ts": "54925d1111ea145db4055847691440cfe3d29f28e5ef72f9920f26b39eb5d9b7",
+            "lib/storage.ts": "f4ebd25aea8bfc5e61268a6ce71a164160c529efc29877a654510e2cdcf73986",
+            "lib/worker.ts": "034f9a59cf7f2e478a52805a80591bc4a3d29e3eb6533f4f67635c1a190010ad",
+            "package-lock.json": "b939354d248d7343fcb0229a3d9377c4fa6bf13ce883335b047cda1c4b176e09",
+            "package.json": "57b3dd7bf8eaf4a0f3ad418b25c0e277b9350046355708843a6919a980c89d99",
+            "worker/__init__.py": "f312d6cf7091412d802a0551fc1c5aea8fc3866ef154ce5b0d889eca89888cd5",
+            "worker/app.py": "0f6207c8e2d23b6f4a9d3dde9300f3e4c0252025388670a7072d37e68dce1790",
+            "worker/config.py": "ee87f131ba16ce223191cce59821ebe48c4a6a03b76064f1a4858964070191cd",
+            "worker/download_models.py": "76d3cd13b2a5107bed4a32037caf43c6baac1aa8ef13b2b0819fd6200ba38fb0",
+            "worker/ingestion.py": "3e2070f466bdc6a03cc2ee5634be020d331410c689428c6cd6ac75ff82706e29",
+            "worker/jobs.py": "03575377c17bdb417d5f01d53fde2f1dccfbcd1d55ede4b4906bd56587cea6d0",
+            "worker/models.py": "4f2e31d1fa5fe8f8b01113b8f690a2e3ac9255f2fae1a8bd3cff47062a49d19b",
+            "worker/ocr.py": "8277b1b79f59ca755e266c6640966dfd0a1b5a99fa669c5591525cb219ad2e30",
+            "worker/pictures.py": "e2ba2caf1ec0a0b5f37d30d555446626faf29a9359e89e02b72f340c4ff1cdc2",
+            "worker/requirements.lock.txt": "3907433bfd5c1fbc716e5e61a1a4ff4013d25d61ba322fa1324e2f99cddeb80c",
+            "worker/requirements.txt": "501bc6f681d27f5bf120b951925dd10b9dd3888635c811b1f18f9117fd63dfa3",
+            "worker/retrieval.py": "a08d1edf5cb07505887127e14fd626266e86ce97117ff140a82074d3fc06e1a0",
+            "worker/search/__init__.py": "edcb3ca6c0c31d21cfb1fa7cfa320dd24cfb7950185ef8eebd62cd3373829e7c",
+            "worker/search/cache.py": "0ad560e9d0681e69e50ccccf381b824be7e77a6c4c46db828c5bb249465c7bf3",
+            "worker/search/common.py": "ba5dbd667192ddf30177cb44ce9b46144231d354b3b1596c1911050a44a54a13",
+            "worker/search/dense.py": "ee1f2173d523f43fc0dcef95a2590ef792949fd35ea5d4435e776ca0ad44e3e2",
+            "worker/search/fusion.py": "e9cbf8c5071141c4c4d0204742b609b9c5469d2b1f68a22326e48a0c74515141",
+            "worker/search/fuzzy.py": "61c5ef0a74544addd05d1b2d094b2d2c86c35c83864d9f912c5b73d353360847",
+            "worker/search/postgres.py": "8ca8217dadd52c8fa6b9e92a890cb6943d0b2b1a15d6555992d82624ac43a974",
+            "worker/search/suggestions.py": "2a723784e5f8cf294c517fdf947de71e4d94322bab76bf3bcfedc2bbf35952c4",
+            "worker/search/visual.py": "51b16476633d5c688f11e8b3958a1b2079f2edc329c6eb66380c6b4100447e91",
+            "worker/search/word.py": "20bce792d8792d9c6efc73b8923c2eb4f2f5e8bb3872a5c87ddd43410fbfb13b",
+            "worker/vision_assets.py": "99ed1bd02778659c4e5372729c3d31cbeb3137555cd0128408cc92f5864a536e"
+          },
+          "config": {
+            "application_root_selection": "EVAL_APP_ROOT",
+            "call_count_definition": "generation_model_calls and verification_model_calls count new requests represented in final per-question stage records; resumed model-response cache hits retain historical usage/durations and are not new calls. Interrupted predecessor invocations are not reconstructed as new calls.",
+            "resource_scheduling": "The shared lock serializes local model requests; other evaluator CPU/embedding work can overlap. Stage wall latency includes lock waiting; model-call seconds exclude it. Development host timings do not establish isolated production capacity.",
+            "scope": "Actual worker extraction, canonical prefixed chunks, rank_candidates with visual channel, production adjacency and unrelated-query gate, answer_from_evidence. In-memory corpus; HTTP authorization excluded.",
+            "citation_metric_definition": "Gold chunk/page metrics check independently authored source/page annotation and exact canonical quotation; not semantic per-claim support. Claim-level precision/recall/groundedness require a judge and remain unmeasured.",
+            "model_artifact_before": {
+              "captured_at_utc": "2026-10-15T12:55:02.418743+00:00",
+              "capture_timing": "before this runner invocation, which may resume same-run cached answers",
+              "requested_model": "qwen3-vl:4b-instruct",
+              "endpoint": "configured self-hosted Ollama /api/tags",
+              "historical_pin_verified": false,
+              "artifacts": [
+                {
+                  "name": "qwen3-vl:4b-instruct",
+                  "model": "qwen3-vl:4b-instruct",
+                  "digest": "ee4b975b58c17ce268cd19d40db35d5edc64603035d2ffc1fee1968eb0947f7b",
+                  "modified_at": "2026-10-13T17:13:07.808182588+05:30"
+                }
+              ],
+              "status": "MEASURED"
+            },
+            "generation_model_requested": "qwen3-vl:4b-instruct",
+            "served_generation_models_observed": [
+              "qwen3-vl:4b-instruct"
+            ],
+            "generation_identity_note": "The historical baseline run 1 observer omitted served-model names. They are not inferred from requested tags. Each run lists only HTTP names actually captured.",
+            "metric_library_versions": {
+              "ragas": "0.2.15",
+              "bert-score": "0.3.13",
+              "rouge-score": "0.1.2",
+              "numpy": "1.26.4",
+              "torch": "2.7.0",
+              "transformers": "4.57.3"
+            },
+            "suite": "pdf",
+            "requested_n": 60,
+            "partial": true,
+            "main_queries_complete": false,
+            "judge_model": null,
+            "judge_reason": "No free-tier judge credential configured",
+            "cache_scope": "generation and verification keyed by phase/run/app fingerprint; resumable only within run",
+            "observed_models": {
+              "text": "intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3",
+              "image": "google/siglip2-base-patch16-224@75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+              "generation": "qwen3-vl:4b-instruct"
+            }
+          },
+          "models": {
+            "published_defaults": {
+              "TEXT_EMBEDDING_MODEL": "intfloat/multilingual-e5-small",
+              "TEXT_EMBEDDING_REVISION": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+              "RERANKER_MODEL": "BAAI/bge-reranker-base",
+              "RERANKER_REVISION": "2cfc18c9415c912f9d8155881c133215df768a70",
+              "IMAGE_EMBEDDING_MODEL": "google/siglip2-base-patch16-224",
+              "IMAGE_EMBEDDING_REVISION": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+              "GENERATION_MODEL": "qwen3-vl:4b-instruct",
+              "OCR_BACKEND": "tesseract",
+              "OCR_LANGUAGES": "eng+hin"
+            },
+            "requirement": "Each actual runner must also record observed engine identities and overrides."
+          },
+          "metrics": [
+            {
+              "metric": "exact_match",
+              "value": 0.0,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "token_f1",
+              "value": 0.08496240601503759,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "rouge_l",
+              "value": 0.08496240601503759,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "embedding_semantic_similarity",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable observed values"
+            },
+            {
+              "metric": "ragas_answer_similarity",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable observed values"
+            },
+            {
+              "metric": "custom_e5_bertscore_precision",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable observed values"
+            },
+            {
+              "metric": "custom_e5_bertscore_recall",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable observed values"
+            },
+            {
+              "metric": "custom_e5_bertscore_f1",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable observed values"
+            },
+            {
+              "metric": "reference_term_coverage_diagnostic",
+              "value": 0.4,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_gold_precision",
+              "value": 0.1,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_gold_recall",
+              "value": 0.4,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_gold_f1",
+              "value": 0.16,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_gold_page_recall",
+              "value": 0.4,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_exact_quote_rate",
+              "value": 1.0,
+              "n": 2,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_canonical_page_rate",
+              "value": 1.0,
+              "n": 2,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_authored_region_overlap_rate",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable observed values"
+            },
+            {
+              "metric": "answer_reference_length_ratio",
+              "value": 3.2583333333333333,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "exact_match__text",
+              "value": 0.0,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "token_f1__text",
+              "value": 0.08496240601503759,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "rouge_l__text",
+              "value": 0.08496240601503759,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "embedding_semantic_similarity__text",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable observed values"
+            },
+            {
+              "metric": "ragas_answer_similarity__text",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable observed values"
+            },
+            {
+              "metric": "custom_e5_bertscore_precision__text",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable observed values"
+            },
+            {
+              "metric": "custom_e5_bertscore_recall__text",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable observed values"
+            },
+            {
+              "metric": "custom_e5_bertscore_f1__text",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable observed values"
+            },
+            {
+              "metric": "reference_term_coverage_diagnostic__text",
+              "value": 0.4,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_gold_precision__text",
+              "value": 0.1,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_gold_recall__text",
+              "value": 0.4,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_gold_f1__text",
+              "value": 0.16,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_gold_page_recall__text",
+              "value": 0.4,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_exact_quote_rate__text",
+              "value": 1.0,
+              "n": 2,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_canonical_page_rate__text",
+              "value": 1.0,
+              "n": 2,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "citation_authored_region_overlap_rate__text",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable observed values"
+            },
+            {
+              "metric": "answer_reference_length_ratio__text",
+              "value": 3.2583333333333333,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "abstention_precision",
+              "value": 0.0,
+              "n": 3,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "abstention_recall",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable questions"
+            },
+            {
+              "metric": "false_refusal_rate",
+              "value": 0.6,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "negative_answer_rate",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "No applicable questions"
+            },
+            {
+              "metric": "ragas_faithfulness",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "ragas_answer_relevancy",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "ragas_context_precision",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "ragas_context_recall",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "ragas_context_entity_recall",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "ragas_noise_sensitivity",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "ragas_answer_correctness",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "ragas_factual_correctness",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "ragas_multimodal_faithfulness",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "ragas_multimodal_relevance",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "answer_completeness_judged",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "answer_conciseness_judged",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "claim_groundedness",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "citation_claim_precision",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "citation_claim_recall",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "citation_claim_f1",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "hallucination_rate",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "No free-tier judge credential configured; lexical/reference overlap is not a substitute for independent semantic judgment."
+            },
+            {
+              "metric": "citation_browser_clickthrough_correct_page_region",
+              "value": null,
+              "n": 5,
+              "status": "NOT MEASURED",
+              "reason": "This runner validates canonical citation metadata and exact quotes; no supported browser page/region click-through was executed."
+            },
+            {
+              "metric": "consistency_over_three_runs",
+              "value": null,
+              "n": 0,
+              "status": "NOT MEASURED",
+              "reason": "Third real generation sample is executed after mandatory run2; none observed for this result."
+            },
+            {
+              "metric": "generation_model_calls",
+              "value": 5,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            },
+            {
+              "metric": "verification_model_calls",
+              "value": 8,
+              "n": 5,
+              "status": "MEASURED",
+              "reason": null
+            }
+          ],
+          "per_question": [
+            {
+              "id": "text-01",
+              "run_id": "final-run-01",
+              "inference_pass": "main",
+              "suite": "pdf",
+              "modality": "text",
+              "question": "How long is the warranty for unit T1?",
+              "reference_answer": "Unit T1 has a warranty of 18 months.",
+              "unanswerable": false,
+              "type": "factual",
+              "result": {
+                "answer": "### Warranty Duration for Unit T1\n\nThe warranty for unit T1 is explicitly stated as 18 months in the HomeAtlas evaluation record. This information is sourced from a text record labeled 'text record 1' under the location 'Study > Desk > Top drawer'.\n\n| Unit | Warranty Duration |\n| --- | --- |\n| Unit T1 | 18 months |\n\n[1]",
+                "citations": [
+                  {
+                    "id": "fff0fd2b-37e9-51e3-929a-2b0ba50ea499",
+                    "sourceId": "087a4e15-9da8-5ffd-b6ba-5528f1a13616",
+                    "versionId": "cc2eb8d7-f61e-5e58-ba87-fb34f4b1c690",
+                    "title": "text.pdf",
+                    "page": 1,
+                    "bbox": [
+                      45.0,
+                      44.99998474121094,
+                      494.7498474121094,
+                      229.66561889648438
+                    ],
+                    "text": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 1\nUnit T1 has a warranty of 18 months.\nUnit T1 requires a service inspection every 3 months.\nThe service provider for unit T1 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                    "start": null,
+                    "end": null,
+                    "modality": "text",
+                    "metadata": {
+                      "coordinates": "pdf-points",
+                      "width": 600.0,
+                      "height": 750.0,
+                      "extractor": "pymupdf",
+                      "requires_visual_evidence": false,
+                      "content_text": "HomeAtlas evaluation: text record 1\nUnit T1 has a warranty of 18 months.\nUnit T1 requires a service inspection every 3 months.\nThe service provider for unit T1 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                      "location_path": "Study > Desk > Top drawer",
+                      "tags": [],
+                      "synthetic": true
+                    },
+                    "number": 1
+                  },
+                  {
+                    "id": "3dca5261-9e14-5813-87e9-c571f66107a7",
+                    "sourceId": "087a4e15-9da8-5ffd-b6ba-5528f1a13616",
+                    "versionId": "cc2eb8d7-f61e-5e58-ba87-fb34f4b1c690",
+                    "title": "text.pdf",
+                    "page": 3,
+                    "bbox": [
+                      45.0,
+                      44.99998474121094,
+                      494.7498474121094,
+                      229.66561889648438
+                    ],
+                    "text": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 3\nUnit T3 has a warranty of 30 months.\nUnit T3 requires a service inspection every 5 months.\nThe service provider for unit T3 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                    "start": null,
+                    "end": null,
+                    "modality": "text",
+                    "metadata": {
+                      "coordinates": "pdf-points",
+                      "width": 600.0,
+                      "height": 750.0,
+                      "extractor": "pymupdf",
+                      "requires_visual_evidence": false,
+                      "content_text": "HomeAtlas evaluation: text record 3\nUnit T3 has a warranty of 30 months.\nUnit T3 requires a service inspection every 5 months.\nThe service provider for unit T3 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                      "location_path": "Study > Desk > Top drawer",
+                      "tags": [],
+                      "synthetic": true
+                    },
+                    "number": 2
+                  },
+                  {
+                    "id": "ff153b72-c6c9-5903-85d2-16ae04875892",
+                    "sourceId": "087a4e15-9da8-5ffd-b6ba-5528f1a13616",
+                    "versionId": "cc2eb8d7-f61e-5e58-ba87-fb34f4b1c690",
+                    "title": "text.pdf",
+                    "page": 2,
+                    "bbox": [
+                      45.0,
+                      44.99998474121094,
+                      494.7498474121094,
+                      229.66561889648438
+                    ],
+                    "text": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 2\nUnit T2 has a warranty of 24 months.\nUnit T2 requires a service inspection every 4 months.\nThe service provider for unit T2 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                    "start": null,
+                    "end": null,
+                    "modality": "text",
+                    "metadata": {
+                      "coordinates": "pdf-points",
+                      "width": 600.0,
+                      "height": 750.0,
+                      "extractor": "pymupdf",
+                      "requires_visual_evidence": false,
+                      "content_text": "HomeAtlas evaluation: text record 2\nUnit T2 has a warranty of 24 months.\nUnit T2 requires a service inspection every 4 months.\nThe service provider for unit T2 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                      "location_path": "Study > Desk > Top drawer",
+                      "tags": [],
+                      "synthetic": true
+                    },
+                    "number": 3
+                  },
+                  {
+                    "id": "58046e0a-f2a4-5359-aeac-0bd4034a1d05",
+                    "sourceId": "087a4e15-9da8-5ffd-b6ba-5528f1a13616",
+                    "versionId": "cc2eb8d7-f61e-5e58-ba87-fb34f4b1c690",
+                    "title": "text.pdf",
+                    "page": 4,
+                    "bbox": [
+                      45.0,
+                      44.99998474121094,
+                      494.7498474121094,
+                      229.66561889648438
+                    ],
+                    "text": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 4\nUnit T4 has a warranty of 36 months.\nUnit T4 requires a service inspection every 6 months.\nThe service provider for unit T4 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                    "start": null,
+                    "end": null,
+                    "modality": "text",
+                    "metadata": {
+                      "coordinates": "pdf-points",
+                      "width": 600.0,
+                      "height": 750.0,
+                      "extractor": "pymupdf",
+                      "requires_visual_evidence": false,
+                      "content_text": "HomeAtlas evaluation: text record 4\nUnit T4 has a warranty of 36 months.\nUnit T4 requires a service inspection every 6 months.\nThe service provider for unit T4 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                      "location_path": "Study > Desk > Top drawer",
+                      "tags": [],
+                      "synthetic": true
+                    },
+                    "number": 4
+                  }
+                ],
+                "confidence": "supported",
+                "mode": "local-model-explained"
+              },
+              "retrieved_ids": [
+                "fff0fd2b-37e9-51e3-929a-2b0ba50ea499",
+                "3dca5261-9e14-5813-87e9-c571f66107a7",
+                "ff153b72-c6c9-5903-85d2-16ae04875892",
+                "58046e0a-f2a4-5359-aeac-0bd4034a1d05",
+                "6eafa82b-c3f4-522a-b17d-836568f190f0",
+                "d340104b-0faf-5b74-8079-d1112a25d110",
+                "7cc7ca0b-c183-503f-9500-721f567439f4",
+                "f94688c5-731a-5dc6-94dd-57186e9abc05",
+                "6678360d-35b9-5123-b184-f69eaeaf45da",
+                "290f604a-2482-50e4-98a2-d3f30a33fbb6",
+                "e6295a27-6e17-59ca-a7e6-aaf361e8b504",
+                "2bf8893f-73bb-567c-9f27-1b8c02f74ef9"
+              ],
+              "relevant_ids": [
+                "fff0fd2b-37e9-51e3-929a-2b0ba50ea499"
+              ],
+              "metrics": {
+                "exact_match": 0.0,
+                "token_f1": 0.21428571428571427,
+                "rouge_l": 0.21428571428571427,
+                "reference_term_coverage_diagnostic": 1.0,
+                "citation_gold_precision": 0.25,
+                "citation_gold_recall": 1.0,
+                "citation_gold_f1": 0.4,
+                "citation_exact_quote_rate": 1.0,
+                "citation_canonical_page_rate": 1.0,
+                "citation_authored_region_overlap_rate": null,
+                "citation_count": 4,
+                "gold_chunk_count": 1,
+                "citation_gold_page_recall": 1.0,
+                "answer_tokens": 48,
+                "reference_tokens": 8,
+                "abstained": false,
+                "answer_reference_length_ratio": 6.0
+              },
+              "timings": {
+                "retrieval_seconds": 1.1054824159946293,
+                "generation_seconds": 111.8296495420218,
+                "total_seconds": 112.93517541600158
+              },
+              "stage_calls": [
+                {
+                  "stage": "embedding",
+                  "seconds": 0.05502858399995603,
+                  "cached": false,
+                  "question_id": "text-01"
+                },
+                {
+                  "stage": "generation",
+                  "seconds": 67.77310312501504,
+                  "wall_seconds": 77.56313270900864,
+                  "cached": false,
+                  "question_id": "text-01",
+                  "usage": [
+                    {
+                      "prompt_eval_count": 7408,
+                      "eval_count": 508,
+                      "total_duration": 67653291250,
+                      "load_duration": 12282709,
+                      "prompt_eval_duration": 43266338000,
+                      "eval_duration": 24251819000,
+                      "input_images": 4,
+                      "served_model": "qwen3-vl:4b-instruct"
+                    }
+                  ],
+                  "lock_wait_seconds": 9.778089291998185
+                },
+                {
+                  "stage": "verification",
+                  "seconds": 1.628855916991597,
+                  "wall_seconds": 30.11163004199625,
+                  "cached": false,
+                  "question_id": "text-01",
+                  "usage": [
+                    {
+                      "prompt_eval_count": 716,
+                      "eval_count": 7,
+                      "total_duration": 1607784125,
+                      "load_duration": 576916,
+                      "prompt_eval_duration": 1387249000,
+                      "eval_duration": 207388000,
+                      "input_images": 0,
+                      "served_model": "qwen3-vl:4b-instruct"
+                    }
+                  ],
+                  "lock_wait_seconds": 28.479550375021063
+                }
+              ]
+            },
+            {
+              "id": "text-02",
+              "run_id": "final-run-01",
+              "inference_pass": "main",
+              "suite": "pdf",
+              "modality": "text",
+              "question": "How often does unit T1 need a service inspection?",
+              "reference_answer": "Unit T1 requires a service inspection every 3 months.",
+              "unanswerable": false,
+              "type": "factual",
+              "result": {
+                "answer": "The available records do not contain enough direct evidence to answer confidently.",
+                "citations": [],
+                "confidence": "insufficient",
+                "mode": "abstention"
+              },
+              "retrieved_ids": [
+                "fff0fd2b-37e9-51e3-929a-2b0ba50ea499",
+                "58046e0a-f2a4-5359-aeac-0bd4034a1d05",
+                "ff153b72-c6c9-5903-85d2-16ae04875892",
+                "3dca5261-9e14-5813-87e9-c571f66107a7",
+                "6eafa82b-c3f4-522a-b17d-836568f190f0",
+                "d340104b-0faf-5b74-8079-d1112a25d110",
+                "7cc7ca0b-c183-503f-9500-721f567439f4",
+                "f94688c5-731a-5dc6-94dd-57186e9abc05",
+                "6678360d-35b9-5123-b184-f69eaeaf45da",
+                "290f604a-2482-50e4-98a2-d3f30a33fbb6",
+                "e6295a27-6e17-59ca-a7e6-aaf361e8b504",
+                "2bf8893f-73bb-567c-9f27-1b8c02f74ef9"
+              ],
+              "relevant_ids": [
+                "fff0fd2b-37e9-51e3-929a-2b0ba50ea499"
+              ],
+              "metrics": {
+                "exact_match": 0.0,
+                "token_f1": 0.0,
+                "rouge_l": 0.0,
+                "reference_term_coverage_diagnostic": 0.0,
+                "citation_gold_precision": 0.0,
+                "citation_gold_recall": 0.0,
+                "citation_gold_f1": 0.0,
+                "citation_exact_quote_rate": null,
+                "citation_canonical_page_rate": null,
+                "citation_authored_region_overlap_rate": null,
+                "citation_count": 0,
+                "gold_chunk_count": 1,
+                "citation_gold_page_recall": 0.0,
+                "answer_tokens": 12,
+                "reference_tokens": 9,
+                "abstained": true,
+                "answer_reference_length_ratio": 1.3333333333333333
+              },
+              "timings": {
+                "retrieval_seconds": 1.7051814580045175,
+                "generation_seconds": 144.12954537500627,
+                "total_seconds": 145.8347734999843
+              },
+              "stage_calls": [
+                {
+                  "stage": "embedding",
+                  "seconds": 0.8151175410021096,
+                  "cached": false,
+                  "question_id": "text-02"
+                },
+                {
+                  "stage": "generation",
+                  "seconds": 57.7052247080137,
+                  "wall_seconds": 70.61433179097367,
+                  "cached": false,
+                  "question_id": "text-02",
+                  "usage": [
+                    {
+                      "prompt_eval_count": 7409,
+                      "eval_count": 687,
+                      "total_duration": 57560971500,
+                      "load_duration": 13533417,
+                      "prompt_eval_duration": 6639287000,
+                      "eval_duration": 43886121000,
+                      "input_images": 4,
+                      "served_model": "qwen3-vl:4b-instruct"
+                    }
+                  ],
+                  "lock_wait_seconds": 12.898881542001618
+                },
+                {
+                  "stage": "verification",
+                  "seconds": 23.10297962502227,
+                  "wall_seconds": 48.632922166987555,
+                  "cached": false,
+                  "question_id": "text-02",
+                  "usage": [
+                    {
+                      "prompt_eval_count": 3759,
+                      "eval_count": 5,
+                      "total_duration": 22936462250,
+                      "load_duration": 9864792,
+                      "prompt_eval_duration": 22661008000,
+                      "eval_duration": 178388000,
+                      "input_images": 2,
+                      "served_model": "qwen3-vl:4b-instruct"
+                    }
+                  ],
+                  "lock_wait_seconds": 25.51920933299698
+                },
+                {
+                  "stage": "verification",
+                  "seconds": 5.287569665990304,
+                  "wall_seconds": 22.85405933400034,
+                  "cached": false,
+                  "question_id": "text-02",
+                  "usage": [
+                    {
+                      "prompt_eval_count": 4253,
+                      "eval_count": 5,
+                      "total_duration": 5223469791,
+                      "load_duration": 5479583,
+                      "prompt_eval_duration": 4803644000,
+                      "eval_duration": 168252000,
+                      "input_images": 2,
+                      "served_model": "qwen3-vl:4b-instruct"
+                    }
+                  ],
+                  "lock_wait_seconds": 17.563007958000526
+                }
+              ]
+            },
+            {
+              "id": "text-03",
+              "run_id": "final-run-01",
+              "inference_pass": "main",
+              "suite": "pdf",
+              "modality": "text",
+              "question": "How long is the warranty for unit T2?",
+              "reference_answer": "Unit T2 has a warranty of 24 months.",
+              "unanswerable": false,
+              "type": "factual",
+              "result": {
+                "answer": "The available records do not contain enough direct evidence to answer confidently.",
+                "citations": [],
+                "confidence": "insufficient",
+                "mode": "abstention"
+              },
+              "retrieved_ids": [
+                "ff153b72-c6c9-5903-85d2-16ae04875892",
+                "fff0fd2b-37e9-51e3-929a-2b0ba50ea499",
+                "3dca5261-9e14-5813-87e9-c571f66107a7",
+                "58046e0a-f2a4-5359-aeac-0bd4034a1d05",
+                "e6295a27-6e17-59ca-a7e6-aaf361e8b504",
+                "6eafa82b-c3f4-522a-b17d-836568f190f0",
+                "d340104b-0faf-5b74-8079-d1112a25d110",
+                "7cc7ca0b-c183-503f-9500-721f567439f4",
+                "f94688c5-731a-5dc6-94dd-57186e9abc05",
+                "6678360d-35b9-5123-b184-f69eaeaf45da",
+                "290f604a-2482-50e4-98a2-d3f30a33fbb6",
+                "2bf8893f-73bb-567c-9f27-1b8c02f74ef9"
+              ],
+              "relevant_ids": [
+                "ff153b72-c6c9-5903-85d2-16ae04875892"
+              ],
+              "metrics": {
+                "exact_match": 0.0,
+                "token_f1": 0.0,
+                "rouge_l": 0.0,
+                "reference_term_coverage_diagnostic": 0.0,
+                "citation_gold_precision": 0.0,
+                "citation_gold_recall": 0.0,
+                "citation_gold_f1": 0.0,
+                "citation_exact_quote_rate": null,
+                "citation_canonical_page_rate": null,
+                "citation_authored_region_overlap_rate": null,
+                "citation_count": 0,
+                "gold_chunk_count": 1,
+                "citation_gold_page_recall": 0.0,
+                "answer_tokens": 12,
+                "reference_tokens": 8,
+                "abstained": true,
+                "answer_reference_length_ratio": 1.5
+              },
+              "timings": {
+                "retrieval_seconds": 0.3783302909869235,
+                "generation_seconds": 177.4995702500164,
+                "total_seconds": 177.8779352499987
+              },
+              "stage_calls": [
+                {
+                  "stage": "embedding",
+                  "seconds": 0.14260108300368302,
+                  "cached": false,
+                  "question_id": "text-03"
+                },
+                {
+                  "stage": "generation",
+                  "seconds": 71.5104031249939,
+                  "wall_seconds": 90.982287833991,
+                  "cached": false,
+                  "question_id": "text-03",
+                  "usage": [
+                    {
+                      "prompt_eval_count": 7407,
+                      "eval_count": 526,
+                      "total_duration": 71446085125,
+                      "load_duration": 9120959,
+                      "prompt_eval_duration": 44351841000,
+                      "eval_duration": 26973186000,
+                      "input_images": 4,
+                      "served_model": "qwen3-vl:4b-instruct"
+                    }
+                  ],
+                  "lock_wait_seconds": 19.466792167018866
+                },
+                {
+                  "stage": "verification",
+                  "seconds": 40.5348722920171,
+                  "wall_seconds": 59.32958437499474,
+                  "cached": false,
+                  "question_id": "text-03",
+                  "usage": [
+                    {
+                      "prompt_eval_count": 6450,
+                      "eval_count": 5,
+                      "total_duration": 40462845084,
+                      "load_duration": 12822584,
+                      "prompt_eval_duration": 40133036000,
+                      "eval_duration": 188450000,
+                      "input_images": 4,
+                      "served_model": "qwen3-vl:4b-instruct"
+                    }
+                  ],
+                  "lock_wait_seconds": 18.784776541986503
+                },
+                {
+                  "stage": "verification",
+                  "seconds": 4.8312747919990215,
+                  "wall_seconds": 24.914590999978827,
+                  "cached": false,
+                  "question_id": "text-03",
+                  "usage": [
+                    {
+                      "prompt_eval_count": 6760,
+                      "eval_count": 5,
+                      "total_duration": 4761952417,
+                      "load_duration": 10362333,
+                      "prompt_eval_duration": 4264175000,
+                      "eval_duration": 203111000,
+                      "input_images": 4,
+                      "served_model": "qwen3-vl:4b-instruct"
+                    }
+                  ],
+                  "lock_wait_seconds": 20.080086458998267
+                }
+              ]
+            },
+            {
+              "id": "text-04",
+              "run_id": "final-run-01",
+              "inference_pass": "main",
+              "suite": "pdf",
+              "modality": "text",
+              "question": "How often does unit T2 need a service inspection?",
+              "reference_answer": "Unit T2 requires a service inspection every 4 months.",
+              "unanswerable": false,
+              "type": "factual",
+              "result": {
+                "answer": "The available records do not contain enough direct evidence to answer confidently.",
+                "citations": [],
+                "confidence": "insufficient",
+                "mode": "abstention"
+              },
+              "retrieved_ids": [
+                "ff153b72-c6c9-5903-85d2-16ae04875892",
+                "fff0fd2b-37e9-51e3-929a-2b0ba50ea499",
+                "58046e0a-f2a4-5359-aeac-0bd4034a1d05",
+                "3dca5261-9e14-5813-87e9-c571f66107a7",
+                "e6295a27-6e17-59ca-a7e6-aaf361e8b504",
+                "6eafa82b-c3f4-522a-b17d-836568f190f0",
+                "d340104b-0faf-5b74-8079-d1112a25d110",
+                "7cc7ca0b-c183-503f-9500-721f567439f4",
+                "f94688c5-731a-5dc6-94dd-57186e9abc05",
+                "6678360d-35b9-5123-b184-f69eaeaf45da",
+                "290f604a-2482-50e4-98a2-d3f30a33fbb6",
+                "2bf8893f-73bb-567c-9f27-1b8c02f74ef9"
+              ],
+              "relevant_ids": [
+                "ff153b72-c6c9-5903-85d2-16ae04875892"
+              ],
+              "metrics": {
+                "exact_match": 0.0,
+                "token_f1": 0.0,
+                "rouge_l": 0.0,
+                "reference_term_coverage_diagnostic": 0.0,
+                "citation_gold_precision": 0.0,
+                "citation_gold_recall": 0.0,
+                "citation_gold_f1": 0.0,
+                "citation_exact_quote_rate": null,
+                "citation_canonical_page_rate": null,
+                "citation_authored_region_overlap_rate": null,
+                "citation_count": 0,
+                "gold_chunk_count": 1,
+                "citation_gold_page_recall": 0.0,
+                "answer_tokens": 12,
+                "reference_tokens": 9,
+                "abstained": true,
+                "answer_reference_length_ratio": 1.3333333333333333
+              },
+              "timings": {
+                "retrieval_seconds": 0.3589908340072725,
+                "generation_seconds": 240.25077254098142,
+                "total_seconds": 240.6098025420215
+              },
+              "stage_calls": [
+                {
+                  "stage": "embedding",
+                  "seconds": 0.13457345799542964,
+                  "cached": false,
+                  "question_id": "text-04"
+                },
+                {
+                  "stage": "generation",
+                  "seconds": 49.77604450000217,
+                  "wall_seconds": 94.20259820800857,
+                  "cached": false,
+                  "question_id": "text-04",
+                  "usage": [
+                    {
+                      "prompt_eval_count": 7408,
+                      "eval_count": 735,
+                      "total_duration": 49576890125,
+                      "load_duration": 13743959,
+                      "prompt_eval_duration": 6679852000,
+                      "eval_duration": 36686260000,
+                      "input_images": 4,
+                      "served_model": "qwen3-vl:4b-instruct"
+                    }
+                  ],
+                  "lock_wait_seconds": 44.406417874997715
+                },
+                {
+                  "stage": "verification",
+                  "seconds": 10.534373790986137,
+                  "wall_seconds": 51.65549041700433,
+                  "cached": false,
+                  "question_id": "text-04",
+                  "usage": [
+                    {
+                      "prompt_eval_count": 6659,
+                      "eval_count": 5,
+                      "total_duration": 10389895541,
+                      "load_duration": 18533291,
+                      "prompt_eval_duration": 3638837000,
+                      "eval_duration": 195014000,
+                      "input_images": 4,
+                      "served_model": "qwen3-vl:4b-instruct"
+                    }
+                  ],
+                  "lock_wait_seconds": 41.11328262501047
+                },
+                {
+                  "stage": "verification",
+                  "seconds": 12.736961999995401,
+                  "wall_seconds": 92.02989949999028,
+                  "cached": false,
+                  "question_id": "text-04",
+                  "usage": [
+                    {
+                      "prompt_eval_count": 7195,
+                      "eval_count": 5,
+                      "total_duration": 12600497709,
+                      "load_duration": 14303917,
+                      "prompt_eval_duration": 6103775000,
+                      "eval_duration": 203716000,
+                      "input_images": 4,
+                      "served_model": "qwen3-vl:4b-instruct"
+                    }
+                  ],
+                  "lock_wait_seconds": 79.28581220799242
+                }
+              ]
+            },
+            {
+              "id": "text-05",
+              "run_id": "final-run-01",
+              "inference_pass": "main",
+              "suite": "pdf",
+              "modality": "text",
+              "question": "How long is the warranty for unit T3?",
+              "reference_answer": "Unit T3 has a warranty of 30 months.",
+              "unanswerable": false,
+              "type": "factual",
+              "result": {
+                "answer": "### Warranty Duration for Unit T3\n\nThe warranty for unit T3 is explicitly stated as 30 months in the HomeAtlas evaluation record labeled 'text record 3'. This record is noted as a fictional evaluation fixture and not advice for a real product.\n\n| Unit | Warranty Duration |\n| --- | --- |\n| Unit T3 | 30 months |\n\n[1]",
+                "citations": [
+                  {
+                    "id": "3dca5261-9e14-5813-87e9-c571f66107a7",
+                    "sourceId": "087a4e15-9da8-5ffd-b6ba-5528f1a13616",
+                    "versionId": "cc2eb8d7-f61e-5e58-ba87-fb34f4b1c690",
+                    "title": "text.pdf",
+                    "page": 3,
+                    "bbox": [
+                      45.0,
+                      44.99998474121094,
+                      494.7498474121094,
+                      229.66561889648438
+                    ],
+                    "text": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 3\nUnit T3 has a warranty of 30 months.\nUnit T3 requires a service inspection every 5 months.\nThe service provider for unit T3 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                    "start": null,
+                    "end": null,
+                    "modality": "text",
+                    "metadata": {
+                      "coordinates": "pdf-points",
+                      "width": 600.0,
+                      "height": 750.0,
+                      "extractor": "pymupdf",
+                      "requires_visual_evidence": false,
+                      "content_text": "HomeAtlas evaluation: text record 3\nUnit T3 has a warranty of 30 months.\nUnit T3 requires a service inspection every 5 months.\nThe service provider for unit T3 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                      "location_path": "Study > Desk > Top drawer",
+                      "tags": [],
+                      "synthetic": true
+                    },
+                    "number": 1
+                  },
+                  {
+                    "id": "fff0fd2b-37e9-51e3-929a-2b0ba50ea499",
+                    "sourceId": "087a4e15-9da8-5ffd-b6ba-5528f1a13616",
+                    "versionId": "cc2eb8d7-f61e-5e58-ba87-fb34f4b1c690",
+                    "title": "text.pdf",
+                    "page": 1,
+                    "bbox": [
+                      45.0,
+                      44.99998474121094,
+                      494.7498474121094,
+                      229.66561889648438
+                    ],
+                    "text": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 1\nUnit T1 has a warranty of 18 months.\nUnit T1 requires a service inspection every 3 months.\nThe service provider for unit T1 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                    "start": null,
+                    "end": null,
+                    "modality": "text",
+                    "metadata": {
+                      "coordinates": "pdf-points",
+                      "width": 600.0,
+                      "height": 750.0,
+                      "extractor": "pymupdf",
+                      "requires_visual_evidence": false,
+                      "content_text": "HomeAtlas evaluation: text record 1\nUnit T1 has a warranty of 18 months.\nUnit T1 requires a service inspection every 3 months.\nThe service provider for unit T1 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                      "location_path": "Study > Desk > Top drawer",
+                      "tags": [],
+                      "synthetic": true
+                    },
+                    "number": 2
+                  },
+                  {
+                    "id": "ff153b72-c6c9-5903-85d2-16ae04875892",
+                    "sourceId": "087a4e15-9da8-5ffd-b6ba-5528f1a13616",
+                    "versionId": "cc2eb8d7-f61e-5e58-ba87-fb34f4b1c690",
+                    "title": "text.pdf",
+                    "page": 2,
+                    "bbox": [
+                      45.0,
+                      44.99998474121094,
+                      494.7498474121094,
+                      229.66561889648438
+                    ],
+                    "text": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 2\nUnit T2 has a warranty of 24 months.\nUnit T2 requires a service inspection every 4 months.\nThe service provider for unit T2 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                    "start": null,
+                    "end": null,
+                    "modality": "text",
+                    "metadata": {
+                      "coordinates": "pdf-points",
+                      "width": 600.0,
+                      "height": 750.0,
+                      "extractor": "pymupdf",
+                      "requires_visual_evidence": false,
+                      "content_text": "HomeAtlas evaluation: text record 2\nUnit T2 has a warranty of 24 months.\nUnit T2 requires a service inspection every 4 months.\nThe service provider for unit T2 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                      "location_path": "Study > Desk > Top drawer",
+                      "tags": [],
+                      "synthetic": true
+                    },
+                    "number": 3
+                  },
+                  {
+                    "id": "58046e0a-f2a4-5359-aeac-0bd4034a1d05",
+                    "sourceId": "087a4e15-9da8-5ffd-b6ba-5528f1a13616",
+                    "versionId": "cc2eb8d7-f61e-5e58-ba87-fb34f4b1c690",
+                    "title": "text.pdf",
+                    "page": 4,
+                    "bbox": [
+                      45.0,
+                      44.99998474121094,
+                      494.7498474121094,
+                      229.66561889648438
+                    ],
+                    "text": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 4\nUnit T4 has a warranty of 36 months.\nUnit T4 requires a service inspection every 6 months.\nThe service provider for unit T4 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                    "start": null,
+                    "end": null,
+                    "modality": "text",
+                    "metadata": {
+                      "coordinates": "pdf-points",
+                      "width": 600.0,
+                      "height": 750.0,
+                      "extractor": "pymupdf",
+                      "requires_visual_evidence": false,
+                      "content_text": "HomeAtlas evaluation: text record 4\nUnit T4 has a warranty of 36 months.\nUnit T4 requires a service inspection every 6 months.\nThe service provider for unit T4 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product.",
+                      "location_path": "Study > Desk > Top drawer",
+                      "tags": [],
+                      "synthetic": true
+                    },
+                    "number": 4
+                  }
+                ],
+                "confidence": "supported",
+                "mode": "local-model-explained"
+              },
+              "retrieved_ids": [
+                "3dca5261-9e14-5813-87e9-c571f66107a7",
+                "fff0fd2b-37e9-51e3-929a-2b0ba50ea499",
+                "ff153b72-c6c9-5903-85d2-16ae04875892",
+                "58046e0a-f2a4-5359-aeac-0bd4034a1d05",
+                "60b624e7-b305-5d2b-b977-25790f2b307d",
+                "e6295a27-6e17-59ca-a7e6-aaf361e8b504",
+                "2bf8893f-73bb-567c-9f27-1b8c02f74ef9",
+                "f8c0524d-20db-5e50-907f-5629613cadf8",
+                "10ec88f6-c46d-56ad-8da1-7843cbf3a56a",
+                "1e849b81-0b11-516c-a9cc-04893c63f2ca",
+                "4b39f556-aff5-540b-a5ad-b346c93e00d2",
+                "e42c500d-cd4a-56db-ad12-27839782f67b"
+              ],
+              "relevant_ids": [
+                "3dca5261-9e14-5813-87e9-c571f66107a7"
+              ],
+              "metrics": {
+                "exact_match": 0.0,
+                "token_f1": 0.21052631578947364,
+                "rouge_l": 0.21052631578947364,
+                "reference_term_coverage_diagnostic": 1.0,
+                "citation_gold_precision": 0.25,
+                "citation_gold_recall": 1.0,
+                "citation_gold_f1": 0.4,
+                "citation_exact_quote_rate": 1.0,
+                "citation_canonical_page_rate": 1.0,
+                "citation_authored_region_overlap_rate": null,
+                "citation_count": 4,
+                "gold_chunk_count": 1,
+                "citation_gold_page_recall": 1.0,
+                "answer_tokens": 49,
+                "reference_tokens": 8,
+                "abstained": false,
+                "answer_reference_length_ratio": 6.125
+              },
+              "timings": {
+                "retrieval_seconds": 1.20953366701724,
+                "generation_seconds": 142.91288083299878,
+                "total_seconds": 144.12245566700585
+              },
+              "stage_calls": [
+                {
+                  "stage": "embedding",
+                  "seconds": 0.22612895802012645,
+                  "cached": false,
+                  "question_id": "text-05"
+                },
+                {
+                  "stage": "generation",
+                  "seconds": 73.43575637499453,
+                  "wall_seconds": 139.04454112501116,
+                  "cached": false,
+                  "question_id": "text-05",
+                  "usage": [
+                    {
+                      "prompt_eval_count": 7399,
+                      "eval_count": 504,
+                      "total_duration": 73223345541,
+                      "load_duration": 16437791,
+                      "prompt_eval_duration": 46906797000,
+                      "eval_duration": 26098177000,
+                      "input_images": 4,
+                      "served_model": "qwen3-vl:4b-instruct"
+                    }
+                  ],
+                  "lock_wait_seconds": 65.5951103749976
+                },
+                {
+                  "stage": "verification",
+                  "seconds": 2.2640282080101315,
+                  "wall_seconds": 2.2682088750007097,
+                  "cached": false,
+                  "question_id": "text-05",
+                  "usage": [
+                    {
+                      "prompt_eval_count": 712,
+                      "eval_count": 7,
+                      "total_duration": 2247414791,
+                      "load_duration": 16895291,
+                      "prompt_eval_duration": 1432783000,
+                      "eval_duration": 183766000,
+                      "input_images": 0,
+                      "served_model": "qwen3-vl:4b-instruct"
+                    }
+                  ],
+                  "lock_wait_seconds": 0.00030741700902581215
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "run_records_sha256": "d6cb473c0cc15397dca871a958917ba2b08cf472f098d7eadd9414760086118a",
+      "processed_model_responses": [
+        {
+          "id": "text-01",
+          "decisions": [
+            {
+              "stage": "generation",
+              "response_cache_file": "64a2f892b62cd1ce7dd29323f395da47b2146b9c37a07f4624a82d91cce336fb.json",
+              "response_cache_sha256": "6167c7a159c26b0f90451ad735dc8133e614c43dd0f00727242ac8728493e40f",
+              "processed_model_return": {
+                "quotes": [
+                  {
+                    "index": 0,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 1\nUnit T1 has a warranty of 18 months.\nUnit T1 requires a service inspection every 3 months.\nThe service provider for unit T1 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 1,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 3\nUnit T3 has a warranty of 30 months.\nUnit T3 requires a service inspection every 5 months.\nThe service provider for unit T3 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 2,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 2\nUnit T2 has a warranty of 24 months.\nUnit T2 requires a service inspection every 4 months.\nThe service provider for unit T2 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 3,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 4\nUnit T4 has a warranty of 36 months.\nUnit T4 requires a service inspection every 6 months.\nThe service provider for unit T4 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  }
+                ],
+                "conflict": false,
+                "insufficient": false,
+                "sections": [
+                  {
+                    "heading": "Warranty Duration for Unit T1",
+                    "text": "The warranty for unit T1 is explicitly stated as 18 months in the HomeAtlas evaluation record. This information is sourced from a text record labeled 'text record 1' under the location 'Study > Desk > Top drawer'.",
+                    "table": {
+                      "columns": [
+                        "Unit",
+                        "Warranty Duration"
+                      ],
+                      "rows": [
+                        [
+                          "Unit T1",
+                          "18 months"
+                        ]
+                      ]
+                    },
+                    "evidence": [
+                      0
+                    ]
+                  }
+                ]
+              },
+              "observed_usage": [
+                {
+                  "prompt_eval_count": 7408,
+                  "eval_count": 508,
+                  "total_duration": 67653291250,
+                  "load_duration": 12282709,
+                  "prompt_eval_duration": 43266338000,
+                  "eval_duration": 24251819000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "actual_stage_seconds": 67.77310312501504
+            },
+            {
+              "stage": "verification",
+              "response_cache_file": "1793d80dacc2ddad0edbbba2b4ddcf82bce322ad1fc7800e929a7a04350e5f7d.json",
+              "response_cache_sha256": "6afe5e318fee10c59f38a3298997a686ba7b823795202ae4d577c2b0dffe4972",
+              "processed_model_return": [
+                0
+              ],
+              "observed_usage": [
+                {
+                  "prompt_eval_count": 716,
+                  "eval_count": 7,
+                  "total_duration": 1607784125,
+                  "load_duration": 576916,
+                  "prompt_eval_duration": 1387249000,
+                  "eval_duration": 207388000,
+                  "input_images": 0,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "actual_stage_seconds": 1.628855916991597
+            }
+          ]
+        },
+        {
+          "id": "text-02",
+          "decisions": [
+            {
+              "stage": "generation",
+              "response_cache_file": "1d02a2fcce3935d2c3674630bacb2af33797e45ccea4116322a55460d6c917dc.json",
+              "response_cache_sha256": "90f9d4d66fb2812618c2f4f1ea5fb9aaaaf70feb9910412398a7c286ae7002e2",
+              "processed_model_return": {
+                "quotes": [
+                  {
+                    "index": 0,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 1\nUnit T1 has a warranty of 18 months.\nUnit T1 requires a service inspection every 3 months.\nThe service provider for unit T1 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 1,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 4\nUnit T4 has a warranty of 36 months.\nUnit T4 requires a service inspection every 6 months.\nThe service provider for unit T4 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 2,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 2\nUnit T2 has a warranty of 24 months.\nUnit T2 requires a service inspection every 4 months.\nThe service provider for unit T2 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 3,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 3\nUnit T3 has a warranty of 30 months.\nUnit T3 requires a service inspection every 5 months.\nThe service provider for unit T3 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 4,
+                    "quote": "Location: Laundry > Shelf\n\nHomeAtlas evaluation: scanned record 1\nPump 51 was inspected on 2026-01-15.\nPump 51 pressure was 3 bar.\nTechnician: Morgan 1.\nNext inspection: 2027."
+                  },
+                  {
+                    "index": 5,
+                    "quote": "Location: Laundry > Shelf\n\nHomeAtlas evaluation: scanned record 1"
+                  },
+                  {
+                    "index": 6,
+                    "quote": "Location: Laundry > Shelf\n\nPump 51 was inspected on 2026-01-15."
+                  },
+                  {
+                    "index": 7,
+                    "quote": "Location: Laundry > Shelf\n\nPump 51 pressure was 3 bar."
+                  }
+                ],
+                "conflict": false,
+                "insufficient": false,
+                "sections": [
+                  {
+                    "heading": "Unit T1 Inspection Frequency",
+                    "text": "According to the provided records, Unit T1 requires a service inspection every 3 months. This information is explicitly stated in the text record 1 under the 'HomeAtlas evaluation' section.",
+                    "table": {
+                      "columns": [
+                        "Unit",
+                        "Inspection Frequency"
+                      ],
+                      "rows": [
+                        [
+                          "Unit T1",
+                          "Every 3 months"
+                        ]
+                      ]
+                    },
+                    "evidence": [
+                      0
+                    ]
+                  }
+                ]
+              },
+              "observed_usage": [
+                {
+                  "prompt_eval_count": 7409,
+                  "eval_count": 687,
+                  "total_duration": 57560971500,
+                  "load_duration": 13533417,
+                  "prompt_eval_duration": 6639287000,
+                  "eval_duration": 43886121000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "actual_stage_seconds": 57.7052247080137
+            },
+            {
+              "stage": "verification",
+              "response_cache_file": "0565b724d49217cc2f113f43068fe269b4e2a7108ab0204da85f9fbab761921c.json",
+              "response_cache_sha256": "0aea08362a37af481e1f6abbbca64c08eca78c61162d686912b11fb2ba3e830d",
+              "processed_model_return": [],
+              "observed_usage": [
+                {
+                  "prompt_eval_count": 3759,
+                  "eval_count": 5,
+                  "total_duration": 22936462250,
+                  "load_duration": 9864792,
+                  "prompt_eval_duration": 22661008000,
+                  "eval_duration": 178388000,
+                  "input_images": 2,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "actual_stage_seconds": 23.10297962502227
+            },
+            {
+              "stage": "verification",
+              "response_cache_file": "5b3dec8925bdcd990d149fbeb52a66839ed38e50013604b5b9bf08beeae03ac4.json",
+              "response_cache_sha256": "99b7337e462801a3588a43cfea37ab501501422ad495070f6acafcdcb1a0a664",
+              "processed_model_return": [],
+              "observed_usage": [
+                {
+                  "prompt_eval_count": 4253,
+                  "eval_count": 5,
+                  "total_duration": 5223469791,
+                  "load_duration": 5479583,
+                  "prompt_eval_duration": 4803644000,
+                  "eval_duration": 168252000,
+                  "input_images": 2,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "actual_stage_seconds": 5.287569665990304
+            }
+          ]
+        },
+        {
+          "id": "text-03",
+          "decisions": [
+            {
+              "stage": "generation",
+              "response_cache_file": "c7b9e8501161d7656a08e36254d134c636a0887d638d268f44e2a57aafa74596.json",
+              "response_cache_sha256": "cb94cb93d2136ece754e4f20a0c1853656c8778f6e8f046ee12bc157dedec278",
+              "processed_model_return": {
+                "quotes": [
+                  {
+                    "index": 0,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 2\nUnit T2 has a warranty of 24 months."
+                  },
+                  {
+                    "index": 1,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 1\nUnit T1 has a warranty of 18 months."
+                  },
+                  {
+                    "index": 2,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 3\nUnit T3 has a warranty of 30 months."
+                  },
+                  {
+                    "index": 3,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 4\nUnit T4 has a warranty of 36 months."
+                  },
+                  {
+                    "index": 4,
+                    "quote": "Location: Laundry > Shelf\n\nHomeAtlas evaluation: scanned record 2\nPump S2 was inspected on 2026-02-15."
+                  },
+                  {
+                    "index": 5,
+                    "quote": "Location: Laundry > Shelf\n\nHomeAtlas evaluation: scanned record 1\nPump 51 was inspected on 2026-01-15."
+                  },
+                  {
+                    "index": 6,
+                    "quote": "Location: Laundry > Shelf\n\nHomeAtlas evaluation: scanned record 1"
+                  },
+                  {
+                    "index": 7,
+                    "quote": "Location: Laundry > Shelf\n\nPump 51 was inspected on 2026-01-15."
+                  }
+                ],
+                "conflict": false,
+                "insufficient": false,
+                "sections": [
+                  {
+                    "heading": "Warranty Duration for Unit T2",
+                    "text": "The warranty for unit T2 is explicitly stated as 24 months in the HomeAtlas evaluation record labeled 'text record 2'. This information is located under the 'Location: Study > Desk > Top drawer' section of the evaluation.",
+                    "table": {
+                      "columns": [
+                        "Unit",
+                        "Warranty Duration"
+                      ],
+                      "rows": [
+                        [
+                          "Unit T2",
+                          "24 months"
+                        ]
+                      ]
+                    },
+                    "evidence": [
+                      0
+                    ]
+                  }
+                ]
+              },
+              "observed_usage": [
+                {
+                  "prompt_eval_count": 7407,
+                  "eval_count": 526,
+                  "total_duration": 71446085125,
+                  "load_duration": 9120959,
+                  "prompt_eval_duration": 44351841000,
+                  "eval_duration": 26973186000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "actual_stage_seconds": 71.5104031249939
+            },
+            {
+              "stage": "verification",
+              "response_cache_file": "5fd983f5a35c200f3cc26855b55692912b3dc6bc2b8047d1fb00265eb60f8036.json",
+              "response_cache_sha256": "1a1275a2a79f559e0e4cefffa1f3da892d61fe886be312f633c15b9f58af1cd7",
+              "processed_model_return": [],
+              "observed_usage": [
+                {
+                  "prompt_eval_count": 6450,
+                  "eval_count": 5,
+                  "total_duration": 40462845084,
+                  "load_duration": 12822584,
+                  "prompt_eval_duration": 40133036000,
+                  "eval_duration": 188450000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "actual_stage_seconds": 40.5348722920171
+            },
+            {
+              "stage": "verification",
+              "response_cache_file": "f94982e1b95a7df888651f532e7792b8a576fae2fdad7f8af8a6d1d7d3a4f97b.json",
+              "response_cache_sha256": "1b0ea082240975e7a903be432c13e40e8cea3fe38eb4a981ddc708317064c060",
+              "processed_model_return": [],
+              "observed_usage": [
+                {
+                  "prompt_eval_count": 6760,
+                  "eval_count": 5,
+                  "total_duration": 4761952417,
+                  "load_duration": 10362333,
+                  "prompt_eval_duration": 4264175000,
+                  "eval_duration": 203111000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "actual_stage_seconds": 4.8312747919990215
+            }
+          ]
+        },
+        {
+          "id": "text-04",
+          "decisions": [
+            {
+              "stage": "generation",
+              "response_cache_file": "c6ce437f8128c2b16a4337c65e2f69fa131a8430cf816dbeed71ec990872f6a6.json",
+              "response_cache_sha256": "54e139d523226fb88cf5f0f12478aca357f223260279e1d0cb2618ace301a9f3",
+              "processed_model_return": {
+                "quotes": [
+                  {
+                    "index": 0,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 2\nUnit T2 has a warranty of 24 months.\nUnit T2 requires a service inspection every 4 months.\nThe service provider for unit T2 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 1,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 1\nUnit T1 has a warranty of 18 months.\nUnit T1 requires a service inspection every 3 months.\nThe service provider for unit T1 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 2,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 4\nUnit T4 has a warranty of 36 months.\nUnit T4 requires a service inspection every 6 months.\nThe service provider for unit T4 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 3,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 3\nUnit T3 has a warranty of 30 months.\nUnit T3 requires a service inspection every 5 months.\nThe service provider for unit T3 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 4,
+                    "quote": "Location: Laundry > Shelf\n\nHomeAtlas evaluation: scanned record 2\nPump S2 was inspected on 2026-02-15.\nPump S2 pressure was 4 bar.\nTechnician: Morgan 2.\nNext inspection: 2027."
+                  },
+                  {
+                    "index": 5,
+                    "quote": "Location: Laundry > Shelf\n\nHomeAtlas evaluation: scanned record 1\nPump 51 was inspected on 2026-01-15.\nPump 51 pressure was 3 bar.\nTechnician: Morgan 1.\nNext inspection: 2027."
+                  },
+                  {
+                    "index": 6,
+                    "quote": "Location: Laundry > Shelf\n\nHomeAtlas evaluation: scanned record 1"
+                  },
+                  {
+                    "index": 7,
+                    "quote": "Location: Laundry > Shelf\n\nPump 51 was inspected on 2026-01-15."
+                  }
+                ],
+                "conflict": false,
+                "insufficient": false,
+                "sections": [
+                  {
+                    "heading": "Inspection Frequency for Unit T2",
+                    "text": "According to the HomeAtlas evaluation record, Unit T2 requires a service inspection every 4 months. This is specified in the text record 2, which is noted as a fictional evaluation fixture.",
+                    "table": {
+                      "columns": [
+                        "Unit",
+                        "Inspection Frequency"
+                      ],
+                      "rows": [
+                        [
+                          "Unit T2",
+                          "Every 4 months"
+                        ]
+                      ]
+                    },
+                    "evidence": [
+                      0
+                    ]
+                  }
+                ]
+              },
+              "observed_usage": [
+                {
+                  "prompt_eval_count": 7408,
+                  "eval_count": 735,
+                  "total_duration": 49576890125,
+                  "load_duration": 13743959,
+                  "prompt_eval_duration": 6679852000,
+                  "eval_duration": 36686260000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "actual_stage_seconds": 49.77604450000217
+            },
+            {
+              "stage": "verification",
+              "response_cache_file": "e4bbd6e98c7335a30c263ddd7545b96c10f7988fae99fb7511a20ed1e89dacee.json",
+              "response_cache_sha256": "a34646313d3a3d73b817be476e05fbb0226eb2d78fe8828c98a0c3e66cbae77d",
+              "processed_model_return": [],
+              "observed_usage": [
+                {
+                  "prompt_eval_count": 6659,
+                  "eval_count": 5,
+                  "total_duration": 10389895541,
+                  "load_duration": 18533291,
+                  "prompt_eval_duration": 3638837000,
+                  "eval_duration": 195014000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "actual_stage_seconds": 10.534373790986137
+            },
+            {
+              "stage": "verification",
+              "response_cache_file": "598b5ab8dd51dee26d6b5c78ac65fdab09da3fb7290b6956fd1345988357e4f3.json",
+              "response_cache_sha256": "f693a1f5cc49fdee5755071ce5b4d021deecb941a7b452cf464274343954415a",
+              "processed_model_return": [],
+              "observed_usage": [
+                {
+                  "prompt_eval_count": 7195,
+                  "eval_count": 5,
+                  "total_duration": 12600497709,
+                  "load_duration": 14303917,
+                  "prompt_eval_duration": 6103775000,
+                  "eval_duration": 203716000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "actual_stage_seconds": 12.736961999995401
+            }
+          ]
+        },
+        {
+          "id": "text-05",
+          "decisions": [
+            {
+              "stage": "generation",
+              "response_cache_file": "9c9c663e8a60c58573752bf10b34038ce17a2d782aa0a25901e4e8057630c5de.json",
+              "response_cache_sha256": "2b203cf03a37ba313fed8cfe30b94631bdfb06635bfa5e57dedddaee8f7d8e89",
+              "processed_model_return": {
+                "quotes": [
+                  {
+                    "index": 0,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 3\nUnit T3 has a warranty of 30 months.\nUnit T3 requires a service inspection every 5 months.\nThe service provider for unit T3 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 1,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 1\nUnit T1 has a warranty of 18 months.\nUnit T1 requires a service inspection every 3 months.\nThe service provider for unit T1 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 2,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 2\nUnit T2 has a warranty of 24 months.\nUnit T2 requires a service inspection every 4 months.\nThe service provider for unit T2 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  },
+                  {
+                    "index": 3,
+                    "quote": "Location: Study > Desk > Top drawer\n\nHomeAtlas evaluation: text record 4\nUnit T4 has a warranty of 36 months.\nUnit T4 requires a service inspection every 6 months.\nThe service provider for unit T4 is Cedar Workshop.\nThis fictional record is an evaluation fixture, not advice for a real product."
+                  }
+                ],
+                "conflict": false,
+                "insufficient": false,
+                "sections": [
+                  {
+                    "heading": "Warranty Duration for Unit T3",
+                    "text": "The warranty for unit T3 is explicitly stated as 30 months in the HomeAtlas evaluation record labeled 'text record 3'. This record is noted as a fictional evaluation fixture and not advice for a real product.",
+                    "table": {
+                      "columns": [
+                        "Unit",
+                        "Warranty Duration"
+                      ],
+                      "rows": [
+                        [
+                          "Unit T3",
+                          "30 months"
+                        ]
+                      ]
+                    },
+                    "evidence": [
+                      0
+                    ]
+                  }
+                ]
+              },
+              "observed_usage": [
+                {
+                  "prompt_eval_count": 7399,
+                  "eval_count": 504,
+                  "total_duration": 73223345541,
+                  "load_duration": 16437791,
+                  "prompt_eval_duration": 46906797000,
+                  "eval_duration": 26098177000,
+                  "input_images": 4,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "actual_stage_seconds": 73.43575637499453
+            },
+            {
+              "stage": "verification",
+              "response_cache_file": "e52ca060b811164b51d92d4f6492dc6c7303250d2ca757036c92e25e4c857501.json",
+              "response_cache_sha256": "6009ada713b38e02ce7bea9418f5e86aab4d9678c720174fe529d15752a63f46",
+              "processed_model_return": [
+                0
+              ],
+              "observed_usage": [
+                {
+                  "prompt_eval_count": 712,
+                  "eval_count": 7,
+                  "total_duration": 2247414791,
+                  "load_duration": 16895291,
+                  "prompt_eval_duration": 1432783000,
+                  "eval_duration": 183766000,
+                  "input_images": 0,
+                  "served_model": "qwen3-vl:4b-instruct"
+                }
+              ],
+              "actual_stage_seconds": 2.2640282080101315
+            }
+          ]
+        }
+      ],
+      "raw_http_content_retained": false,
+      "diagnostic_notes": [
+        "Gold evidence was retrieved for text-02 and text-03, and generation produced the correct supported fact in a section citing quote0. Both initial and fallback review stages returned processed empty supported-index lists.",
+        "Normal HTTP usage exists for the review calls, but their raw wire JSON and hidden rejection reasons were not captured. Unused scan images in review are an observed context issue, not a proven causal explanation.",
+        "text-01 accepted one section citing quote0 but returned four quote citations. Three citations were unused by the accepted answer.",
+        "text-02, text-03, and text-04 are preserved answerable false refusals in this five-question partial candidate. This is not a completed-suite quality estimate."
+      ],
+      "stop_telemetry": {
+        "stopped_process_group": 76492,
+        "stopped_pids": [
+          76492,
+          76493
+        ],
+        "active_members_after_stop": [],
+        "global_lock_available_at_check": true,
+        "own_lock_handles_released": true,
+        "services_not_targeted": true
+      },
+      "baseline_objects_preserved": true
+    }
   ]
 }
