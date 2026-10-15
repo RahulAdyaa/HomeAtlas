@@ -45,6 +45,11 @@ def literals(text):
 
 def supported_literals(section, evidence, question=''):
     from .vision_assets import needs_image
+    # Headings are rendered as answer prose too. Invalid non-string fields must
+    # fail closed instead of bypassing checks through implicit coercion.
+    heading, body = section.get('heading', ''), section.get('text', '')
+    if not isinstance(heading, str) or not isinstance(body, str):
+        return False
     cited = [row for row in evidence if row.get('index') in section.get('evidence', [])]
     if not cited:
         return False
@@ -52,4 +57,4 @@ def supported_literals(section, evidence, question=''):
     if any(row.get('image_path') and needs_image([row], question) for row in cited):
         return True
     supported = set().union(*(literals(row.get('text', '')) for row in cited))
-    return literals(section.get('text', '')).issubset(supported)
+    return literals(heading + '\n' + body).issubset(supported)

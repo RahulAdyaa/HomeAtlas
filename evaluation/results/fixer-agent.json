@@ -462,6 +462,40 @@
         "schema_migration_required": false,
         "reindex_required": false
       }
+    },
+    {
+      "cycle": "3-rendered-heading-coverage",
+      "timestamp": "2026-10-15T17:57:07.185630+00:00",
+      "base_app_commit": "0ec67d6",
+      "change": "Include rendered section heading alongside body in text-only numeric literal coverage; reject malformed non-string heading/body before visual skip.",
+      "deterministic_replay": {
+        "case": "Source warranty18 months; supported body18 months; unsupported heading99 months",
+        "before_supported_literals": true,
+        "after_supported_literals": false,
+        "model_http_calls": 0
+      },
+      "checks": [
+        {
+          "command": "python -m pytest tests/test_numeric_evidence.py -q",
+          "passed": 17,
+          "failed": 0,
+          "status": "PASS"
+        },
+        {
+          "command": "HOMEATLAS_DB_TESTS=1 python -m pytest tests -q",
+          "passed": 114,
+          "failed": 0,
+          "status": "PASS",
+          "warnings": "5 existing PyMuPDF/SWIG deprecation warnings"
+        }
+      ],
+      "typescript_checks": "No TypeScript changes in this cycle; preceding npm test87 passed and typecheck exit0 remain the latest applicable checks, not rerun.",
+      "full_metric_impact": "PENDING_NEW_APP_FINGERPRINT_FULL_SUITE_TWICE",
+      "deployment": {
+        "restart_required": true,
+        "schema_migration_required": false,
+        "reindex_required": false
+      }
     }
   ]
 }

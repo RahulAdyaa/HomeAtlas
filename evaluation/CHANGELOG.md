@@ -111,3 +111,12 @@ The unsupported 99-month claim exposed by the alignment control was accepted by 
 - Arithmetic policy: a new derived number absent from cited text is not independently validated here and abstains. This can reduce completeness for calculated totals or differences. Existing structured saved-record/direct-fact paths were not changed.
 - Limits: literal presence does not prove correct object/value pairing, units or date semantics. Spelled-out numeric claims and arbitrary numeric formats are not comprehensively validated. Referenced chart/OCR/image facts remain with visual review because they may be missing from the extracted text; that reviewer can still err. No universal numerical truth or zero-hallucination guarantee is claimed.
 - Deployment: restart merged code; no schema migration/reindex. Run both complete final evaluation passes against the new frozen source hash.
+
+## Fix cycle 3: rendered numeric headings
+
+Independent verification found that a rendered heading containing an unsupported number was omitted from the literal guard's input even when its body contained a supported value.
+
+- Change: check the heading together with the body. Non-string heading/body values fail closed before the existing visual-evidence skip. No arithmetic expansion, model/settings/prompt changes, metric edits or gold changes.
+- Deterministic before/after: a source and body saying `warranty 18 months` with heading `Warranty: 99 months` returned supported **True before → False after**, with **zero model calls**. A supported numeric heading still passes; four malformed heading types fail closed.
+- Checks: focused numeric suite **17 passed**; full Python with disposable PostgreSQL fixtures **114 passed**, with five existing PyMuPDF/SWIG deprecation warnings. No TypeScript code changed; the preceding **87 passing TypeScript tests** and successful typecheck are the latest applicable outcomes, not new reruns.
+- Deployment: restart merged code, no schema migration or reindex. Full final metrics must be measured twice against this latest source fingerprint; earlier candidate results remain historical.

@@ -16,6 +16,17 @@ def test_supported_direct_value_and_unsupported_substitution():
     assert not supported_literals(section('Unit T1 warranty is 99 months.'),evidence)
 
 
+def test_numeric_heading_is_checked_alongside_supported_body():
+    evidence=[quote('Unit T1 warranty is 18 months.')]
+    assert not supported_literals(dict(section('Unit T1 warranty is 18 months.'),heading='Warranty: 99 months'),evidence)
+    assert supported_literals(dict(section('Unit T1 warranty is 18 months.'),heading='Warranty: 18 months'),evidence)
+
+
+@pytest.mark.parametrize('heading',[None,99,{'value':'99 months'},['99 months']])
+def test_malformed_heading_fails_closed(heading):
+    assert not supported_literals(dict(section('18 months.'),heading=heading),[quote('18 months.')])
+
+
 def test_only_this_sections_cited_values_count():
     evidence=[quote('Unit T1 warranty is 18 months.'),quote('Unit T4 warranty is 36 months.',1)]
     assert supported_literals(section('T1: 18 months; T4: 36 months.',[0,1]),evidence)
