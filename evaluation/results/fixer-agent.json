@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "agent": "fixer-agent",
+  "phase": "post-fix-regression",
+  "timestamp": "2026-10-15T12:46:04.784186+00:00",
+  "app_commit": "d18cecd90b12f449b267eeb48f5c24630307126c",
+  "baseline_file": "evaluation/baseline_results.json",
+  "synthetic_only": true,
+  "measurement_code_modified": false,
+  "full_rag_metric_impact": "PENDING_UNCHANGED_SPECIALIST_FINAL_RUNS",
+  "checks": [
+    {
+      "command": "python -m pytest tests/test_visual_diversity.py tests/test_hybrid_search.py tests/test_image_pipeline.py -q",
+      "passed": 35,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "python -m pytest tests/test_numeric_retrieval.py tests/test_hybrid_search.py -q",
+      "passed": 26,
+      "failed": 0,
+      "status": "PASS",
+      "note": "Before named-unit intent follow-through"
+    },
+    {
+      "command": "python -m pytest tests/test_numeric_retrieval.py -q",
+      "passed": 3,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "python -m pytest tests/test_evidence_images.py tests/test_image_pipeline.py -q",
+      "passed": 12,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "python -m pytest tests/test_answer_responsiveness.py tests/test_worker.py tests/test_image_pipeline.py -q",
+      "passed": 28,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "python -m pytest tests/test_aggregate_intent.py tests/test_hybrid_search.py tests/test_answer_responsiveness.py -q",
+      "passed": 28,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "vitest run tests/client-api.test.ts",
+      "passed": 3,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "python -m pytest tests/test_file_hash.py -q",
+      "passed": 2,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "python -m pytest tests/test_cache_privacy.py tests/test_hybrid_search.py -q",
+      "passed": 35,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "HOMEATLAS_DB_TESTS=1 python -m pytest tests/test_eval_fixes_db.py tests/test_semantic_cache.py -q",
+      "passed": 9,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "HOMEATLAS_DB_TESTS=1 python -m pytest tests -q",
+      "passed": 92,
+      "failed": 0,
+      "status": "PASS",
+      "warnings": "5 existing PyMuPDF/SWIG deprecation warnings"
+    },
+    {
+      "command": "npm test",
+      "passed": 87,
+      "failed": 0,
+      "files_passed": 15,
+      "status": "PASS"
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "deployment": {
+    "schema_migration_required": false,
+    "restart_required": true,
+    "clear_legacy_ephemeral_answer_cache": true,
+    "reprocess_native_pdfs_recommended": true
+  },
+  "known_limits": [
+    "Same local Qwen provides generation and separate support verification; no independent judge is configured.",
+    "Conservative identifier-cache policy may lower frozen card-serial cache hit probes; do not change their formulas.",
+    "Universal PII detection, conversation-history support, structured chart/table parsers and calibrated numeric trust scores remain out of this narrow fix pass."
+  ]
+}

@@ -81,3 +81,11 @@ Recommended, not done in this narrow fix pass:
 - Calibrated numerical trust scores: categorical confidence cannot support AUROC/Brier/ECE or reliability claims without a defined probability and separate calibration data.
 - Universal PII zero retention: broader policy/classification and data lifecycle controls are needed beyond the conservative identifier bypass above.
 - Strictly beating fuzzy-only typo MRR when that channel already scores 1.0 is mathematically impossible on this frozen subset; no metric, gold, threshold, or weight was changed to disguise that limit.
+
+## Combined regression verification
+
+- `HOMEATLAS_DB_TESTS=1 python -m pytest tests -q` — **92 passed**, with five existing PyMuPDF/SWIG deprecation warnings.
+- `npm test` — **87 passed across 15 files**.
+- `npm run typecheck` — **passed** (exit 0).
+- Real database checks used freshly generated, disposable synthetic households and cleaned them up. No live user documents, query logs, cache payloads, or identifiers were inspected.
+- Exact commands and outcomes are saved in `evaluation/results/fixer-agent.json`. Frozen specialist evaluation scripts, inputs, score formulas, retrieval thresholds and weights were not edited. These are app regression results; the final RAG measurements remain the specialists' responsibility.
