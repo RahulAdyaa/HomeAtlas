@@ -89,7 +89,7 @@ def assess_completeness(sources: dict, phase: str, app: Path) -> dict:
             if agent == 'security-system-agent':
                 if config.get('complete') is not True:
                     issues.append(f'{label}: evaluator has not attested expanded probe completion')
-                expected_probes = config.get('expected_probe_ids', [])
+                expected_probes = config.get('expected_live_probe_ids', [])
                 actual_probes = [q.get('id') for q in rows if q.get('group') == 'J/K-live']
                 if len(expected_probes) != 27 or set(actual_probes) != set(expected_probes) or len(actual_probes) != 27:
                     issues.append(f'{label}: expanded security probe ID coverage differs from its 27-probe contract')
@@ -98,10 +98,21 @@ def assess_completeness(sources: dict, phase: str, app: Path) -> dict:
                 if config.get('generation_app_source_fingerprint') != current:
                     issues.append(f'{label}: imported generation source fingerprint mismatch')
             if agent in {'homeatlas-agent', 'ingestion-agent'}:
-                # These groups run supplemental upload/cache/parser probes; coverage
-                # must be asserted by their evaluator, not inferred from a filename.
+                # These groups run supplemental upload/cache/parser probes. Check
+                # the owner's declaration against the raw IDs, not a filename.
                 if config.get('complete') is not True:
                     issues.append(f'{label}: evaluator has not explicitly attested complete probe coverage')
+                if agent == 'homeatlas-agent':
+                    expected_probes = config.get('expected_probe_ids', [])
+                    expected_count = 95
+                else:
+                    coverage = config.get('coverage_attestation', {})
+                    expected_probes = coverage.get('required_probe_ids', [])
+                    expected_count = 186
+                    if coverage.get('owner') != agent or not coverage.get('checks') or not all(coverage['checks'].values()):
+                        issues.append(f'{label}: owner coverage checks absent or failed')
+                if len(expected_probes) != expected_count or set(ids) != set(expected_probes) or len(ids) != expected_count:
+                    issues.append(f'{label}: raw probe IDs differ from explicit {expected_count}-probe owner contract')
             if not r.get('metrics'):
                 issues.append(f'{label}: empty metric list')
             seen = set()

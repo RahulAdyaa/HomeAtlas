@@ -128,8 +128,13 @@ def main():
     chosen_path = Path(shutil.which(chosen_python) or chosen_python).absolute()
     if Path(sys.executable).absolute() != chosen_path:
         os.execv(str(chosen_path), [str(chosen_path), str(Path(__file__).resolve()), *sys.argv[1:]])
-    from protocol import frozen_dataset
+    from protocol import frozen_dataset, app_fingerprint
     frozen_dataset()  # Fail before any upload or model call if supplied gold changed.
+    if not args.aggregate_only and not args.check:
+        # Specialist import roots differ. Isolated worktrees are supported only
+        # when their application source matches the requested live app root.
+        if app_fingerprint(APP)['app_source_fingerprint'] != app_fingerprint(app)['app_source_fingerprint']:
+            raise SystemExit('Evaluator checkout and --app-root application source hashes differ. Apply the same application commit to both before dispatch; no inference was started.')
     missing = [str(Path(cmd[1]).relative_to(EVALUATION)) for _, _, cmd in plan if not Path(cmd[1]).is_file()]
     if missing and not args.aggregate_only and not args.check:
         raise SystemExit('Missing specialist scripts: ' + ', '.join(sorted(set(missing))))
