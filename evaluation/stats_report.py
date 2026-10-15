@@ -110,6 +110,19 @@ def write_outputs(evaluation: Path, payload: dict):
                  'neither a hit nor a more diverse result set proves that the answer is correct. '
                  'The complete tables retain every setting and failing case.', '']
         intro += table(headline, baseline_lookup)
+        household_keys = ['E.aggregate_fact_presence', 'H.variant_correct_answer_hit_rate',
+                          'H.near_miss_false_hit_rate', 'E.container_accuracy',
+                          'sensitive_answer_cache_persistence_rate']
+        selected_limits = [m for name in household_keys for m in all_metrics if m['metric'] == name]
+        intro += ['', '### Application outcomes and remaining limits', '']
+        intro += table(selected_limits, baseline_lookup)
+        intro += ['', 'Aggregate fact presence does not establish complete arithmetic answers. '
+                  'In the recorded household aggregate-total case, the answer lists the individual '
+                  'receipt amounts but omits their requested derived total. The variant cache-hit '
+                  'target must be judged against the measured rate; a rate below 0.90 misses the '
+                  'requested target. Zero near-miss false hits on ten probes does not prove a '
+                  'population false-hit rate below 2%. Likewise, one container case and one '
+                  'privacy canary do not establish universal reliability or universal PII prevention.']
         intro += ['']
         # Insert immediately after the opening outcome, before provenance.
         insertion = lines.index('## Frozen scope and provenance')
