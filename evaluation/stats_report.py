@@ -145,6 +145,10 @@ def write_outputs(evaluation: Path, payload: dict):
               'does not establish that the answer facts were extracted. Source-page and literal evidence '
               'diagnostics are reported separately.', '',
               '### Channel comparison and K=1/3/5/10', '']
+    if any(t['measure'] == 'mrr' and t['best_single_mean'] >= 1 for t in typo):
+        lines += ['The strongest single channel already achieves the maximum MRR on this typo sample. '
+                  'Strictly beating that value is impossible on the same fixed sample; tying it still does '
+                  'not satisfy the requested strict-superiority target.', '']
     selected = [m for m in all_metrics if m['agent'] == 'retrieval-agent' and
                 m['metric'].split('/')[0] in {'all', 'typo'} and
                 len(m['metric'].split('/')) == 3 and m['metric'].split('/')[1] in

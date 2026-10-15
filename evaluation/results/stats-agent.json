@@ -1,0 +1,3032 @@
+{
+  "schema_version": 1,
+  "agent": "stats-agent",
+  "runs": [
+    {
+      "phase": "baseline",
+      "run": 1,
+      "run_id": "baseline-statistical-assembly",
+      "timestamp_utc": "2026-10-15T12:33:30.003434+00:00",
+      "seed": 741,
+      "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
+      "app_source_fingerprint": "e89dd896bea27ebdf4ac879f91549f28c82c4004f7ffbb7b9b8c41fa68b08b25",
+      "config": {
+        "inference_performed_by_stats_agent": false,
+        "bootstrap_samples": 5000,
+        "independent_inference_runs_per_specialist": 2
+      },
+      "metrics": [
+        {
+          "metric": "all/hybrid_runtime-vs-best-single/precision@5",
+          "value": 0.07272727272727272,
+          "n": 121,
+          "status": "MEASURED",
+          "reason": null,
+          "ci95": {
+            "status": "MEASURED",
+            "low": 0.0396694214876033,
+            "high": 0.11239669421487604,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 121,
+            "n_observations": 121,
+            "small_sample_note": null
+          },
+          "p_value_holm": 0.0007999600019999
+        },
+        {
+          "metric": "all/hybrid_runtime-vs-best-single/recall@5",
+          "value": 0.0475206611570248,
+          "n": 121,
+          "status": "MEASURED",
+          "reason": null,
+          "ci95": {
+            "status": "MEASURED",
+            "low": 0.014798553719008269,
+            "high": 0.08264462809917356,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 121,
+            "n_observations": 121,
+            "small_sample_note": null
+          },
+          "p_value_holm": 0.033948302584870756
+        },
+        {
+          "metric": "all/hybrid_runtime-vs-best-single/mrr@5",
+          "value": 0.021763085399449034,
+          "n": 121,
+          "status": "MEASURED",
+          "reason": null,
+          "ci95": {
+            "status": "MEASURED",
+            "low": -0.028932506887052345,
+            "high": 0.07382920110192838,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 121,
+            "n_observations": 121,
+            "small_sample_note": null
+          },
+          "p_value_holm": 1.0
+        },
+        {
+          "metric": "all/hybrid_runtime-vs-best-single/ndcg@5",
+          "value": 0.04488420725193563,
+          "n": 121,
+          "status": "MEASURED",
+          "reason": null,
+          "ci95": {
+            "status": "MEASURED",
+            "low": -0.0010312316746925582,
+            "high": 0.09340577265377897,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 121,
+            "n_observations": 121,
+            "small_sample_note": null
+          },
+          "p_value_holm": 0.41097945102744865
+        },
+        {
+          "metric": "typo/hybrid_runtime-vs-best-single/precision@5",
+          "value": 0.0,
+          "n": 38,
+          "status": "MEASURED",
+          "reason": null,
+          "ci95": {
+            "status": "MEASURED",
+            "low": 0.0,
+            "high": 0.0,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 38,
+            "n_observations": 38,
+            "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+          },
+          "p_value_holm": 1.0
+        },
+        {
+          "metric": "typo/hybrid_runtime-vs-best-single/recall@5",
+          "value": 0.0,
+          "n": 38,
+          "status": "MEASURED",
+          "reason": null,
+          "ci95": {
+            "status": "MEASURED",
+            "low": 0.0,
+            "high": 0.0,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 38,
+            "n_observations": 38,
+            "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+          },
+          "p_value_holm": 1.0
+        },
+        {
+          "metric": "typo/hybrid_runtime-vs-best-single/mrr@5",
+          "value": -0.034210526315789476,
+          "n": 38,
+          "status": "MEASURED",
+          "reason": null,
+          "ci95": {
+            "status": "MEASURED",
+            "low": -0.08947368421052633,
+            "high": 0.0,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 38,
+            "n_observations": 38,
+            "small_sample_note": null
+          },
+          "p_value_holm": 1.0
+        },
+        {
+          "metric": "typo/hybrid_runtime-vs-best-single/ndcg@5",
+          "value": -0.02584782734721055,
+          "n": 38,
+          "status": "MEASURED",
+          "reason": null,
+          "ci95": {
+            "status": "MEASURED",
+            "low": -0.06783110713561737,
+            "high": 0.0,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 38,
+            "n_observations": 38,
+            "small_sample_note": null
+          },
+          "p_value_holm": 1.0
+        }
+      ],
+      "per_question": [
+        {
+          "metric": "all/hybrid_runtime-vs-best-single/precision@5",
+          "subset": "all",
+          "measure": "precision",
+          "k": 5,
+          "n": 121,
+          "n_runs": 2,
+          "hybrid_mean": 0.33884297520661155,
+          "best_single": "fuzzy",
+          "best_single_mean": 0.26611570247933886,
+          "difference": 0.07272727272727272,
+          "ci95_difference": {
+            "status": "MEASURED",
+            "low": 0.0396694214876033,
+            "high": 0.11239669421487604,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 121,
+            "n_observations": 121,
+            "small_sample_note": null
+          },
+          "p_value_two_sided": 9.99950002499875e-05,
+          "test": "Monte Carlo paired two-sided sign permutation; plus-one correction",
+          "permutations": 20000,
+          "seed": 741,
+          "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+          "paired_differences": [
+            {
+              "id": "aggregate-001",
+              "value": 0.0
+            },
+            {
+              "id": "aggregate-002",
+              "value": 0.0
+            },
+            {
+              "id": "aggregate-003",
+              "value": 0.0
+            },
+            {
+              "id": "chart-01",
+              "value": 0.0
+            },
+            {
+              "id": "chart-02",
+              "value": 0.0
+            },
+            {
+              "id": "chart-03",
+              "value": 0.0
+            },
+            {
+              "id": "chart-04",
+              "value": 0.0
+            },
+            {
+              "id": "chart-05",
+              "value": 0.0
+            },
+            {
+              "id": "chart-06",
+              "value": 0.0
+            },
+            {
+              "id": "chart-07",
+              "value": 0.0
+            },
+            {
+              "id": "chart-08",
+              "value": 0.0
+            },
+            {
+              "id": "chart-09",
+              "value": 0.8
+            },
+            {
+              "id": "chart-10",
+              "value": 0.0
+            },
+            {
+              "id": "follow-up-001",
+              "value": 0.0
+            },
+            {
+              "id": "follow-up-002",
+              "value": 0.0
+            },
+            {
+              "id": "follow-up-003",
+              "value": 0.0
+            },
+            {
+              "id": "household-001",
+              "value": 0.0
+            },
+            {
+              "id": "household-002",
+              "value": 0.0
+            },
+            {
+              "id": "household-003",
+              "value": 0.0
+            },
+            {
+              "id": "household-004",
+              "value": 0.0
+            },
+            {
+              "id": "household-005",
+              "value": 0.0
+            },
+            {
+              "id": "household-006",
+              "value": 0.0
+            },
+            {
+              "id": "household-007",
+              "value": 0.0
+            },
+            {
+              "id": "household-008",
+              "value": 0.0
+            },
+            {
+              "id": "household-009",
+              "value": 0.0
+            },
+            {
+              "id": "household-010",
+              "value": 0.0
+            },
+            {
+              "id": "household-011",
+              "value": 0.0
+            },
+            {
+              "id": "household-012",
+              "value": 0.0
+            },
+            {
+              "id": "household-013",
+              "value": 0.0
+            },
+            {
+              "id": "household-014",
+              "value": 0.0
+            },
+            {
+              "id": "household-015",
+              "value": 0.0
+            },
+            {
+              "id": "household-016",
+              "value": 0.0
+            },
+            {
+              "id": "household-017",
+              "value": 0.0
+            },
+            {
+              "id": "household-018",
+              "value": 0.0
+            },
+            {
+              "id": "household-019",
+              "value": 0.0
+            },
+            {
+              "id": "household-020",
+              "value": 0.0
+            },
+            {
+              "id": "household-021",
+              "value": 0.0
+            },
+            {
+              "id": "household-022",
+              "value": 0.0
+            },
+            {
+              "id": "household-023",
+              "value": 0.0
+            },
+            {
+              "id": "household-024",
+              "value": 0.0
+            },
+            {
+              "id": "household-025",
+              "value": 0.0
+            },
+            {
+              "id": "household-026",
+              "value": 0.0
+            },
+            {
+              "id": "household-027",
+              "value": 0.0
+            },
+            {
+              "id": "household-028",
+              "value": 0.0
+            },
+            {
+              "id": "household-029",
+              "value": 0.0
+            },
+            {
+              "id": "household-030",
+              "value": 0.0
+            },
+            {
+              "id": "household-031",
+              "value": 0.0
+            },
+            {
+              "id": "household-032",
+              "value": 0.0
+            },
+            {
+              "id": "household-033",
+              "value": 0.0
+            },
+            {
+              "id": "household-034",
+              "value": 0.0
+            },
+            {
+              "id": "household-035",
+              "value": 0.0
+            },
+            {
+              "id": "household-036",
+              "value": 0.0
+            },
+            {
+              "id": "household-037",
+              "value": 0.0
+            },
+            {
+              "id": "household-038",
+              "value": 0.0
+            },
+            {
+              "id": "household-039",
+              "value": 0.0
+            },
+            {
+              "id": "household-040",
+              "value": 0.0
+            },
+            {
+              "id": "household-041",
+              "value": 0.0
+            },
+            {
+              "id": "household-042",
+              "value": 0.0
+            },
+            {
+              "id": "household-043",
+              "value": 0.0
+            },
+            {
+              "id": "household-044",
+              "value": 0.0
+            },
+            {
+              "id": "household-045",
+              "value": 0.0
+            },
+            {
+              "id": "household-046",
+              "value": 0.0
+            },
+            {
+              "id": "household-047",
+              "value": 0.0
+            },
+            {
+              "id": "household-048",
+              "value": 0.0
+            },
+            {
+              "id": "household-049",
+              "value": 0.0
+            },
+            {
+              "id": "household-050",
+              "value": 0.0
+            },
+            {
+              "id": "household-051",
+              "value": 0.0
+            },
+            {
+              "id": "household-052",
+              "value": 0.0
+            },
+            {
+              "id": "household-053",
+              "value": 0.0
+            },
+            {
+              "id": "household-054",
+              "value": -0.2
+            },
+            {
+              "id": "household-055",
+              "value": 0.0
+            },
+            {
+              "id": "household-056",
+              "value": 0.0
+            },
+            {
+              "id": "household-057",
+              "value": 0.0
+            },
+            {
+              "id": "household-058",
+              "value": 0.0
+            },
+            {
+              "id": "household-059",
+              "value": 0.0
+            },
+            {
+              "id": "household-060",
+              "value": 0.0
+            },
+            {
+              "id": "household-061",
+              "value": 0.0
+            },
+            {
+              "id": "household-062",
+              "value": 0.0
+            },
+            {
+              "id": "household-063",
+              "value": 0.0
+            },
+            {
+              "id": "image-01",
+              "value": 0.19999999999999996
+            },
+            {
+              "id": "image-02",
+              "value": 0.19999999999999996
+            },
+            {
+              "id": "image-03",
+              "value": 0.19999999999999996
+            },
+            {
+              "id": "image-04",
+              "value": 0.19999999999999996
+            },
+            {
+              "id": "image-05",
+              "value": 0.19999999999999996
+            },
+            {
+              "id": "image-06",
+              "value": 0.19999999999999996
+            },
+            {
+              "id": "image-07",
+              "value": 0.19999999999999996
+            },
+            {
+              "id": "image-08",
+              "value": 0.19999999999999996
+            },
+            {
+              "id": "image-09",
+              "value": 0.8
+            },
+            {
+              "id": "image-10",
+              "value": 0.19999999999999996
+            },
+            {
+              "id": "location-001",
+              "value": 0.0
+            },
+            {
+              "id": "location-002",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-01",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-02",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-03",
+              "value": 0.4
+            },
+            {
+              "id": "scanned-04",
+              "value": 0.4
+            },
+            {
+              "id": "scanned-05",
+              "value": 0.4
+            },
+            {
+              "id": "scanned-06",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-07",
+              "value": 0.4
+            },
+            {
+              "id": "scanned-08",
+              "value": 0.4
+            },
+            {
+              "id": "scanned-09",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-10",
+              "value": 0.0
+            },
+            {
+              "id": "table-01",
+              "value": 0.0
+            },
+            {
+              "id": "table-02",
+              "value": 0.0
+            },
+            {
+              "id": "table-03",
+              "value": 0.0
+            },
+            {
+              "id": "table-04",
+              "value": 0.0
+            },
+            {
+              "id": "table-05",
+              "value": 0.0
+            },
+            {
+              "id": "table-06",
+              "value": 0.0
+            },
+            {
+              "id": "table-07",
+              "value": 0.0
+            },
+            {
+              "id": "table-08",
+              "value": 0.0
+            },
+            {
+              "id": "table-09",
+              "value": 0.2
+            },
+            {
+              "id": "table-10",
+              "value": 0.0
+            },
+            {
+              "id": "text-01",
+              "value": 0.0
+            },
+            {
+              "id": "text-02",
+              "value": 0.0
+            },
+            {
+              "id": "text-03",
+              "value": 0.0
+            },
+            {
+              "id": "text-04",
+              "value": 0.0
+            },
+            {
+              "id": "text-05",
+              "value": 0.0
+            },
+            {
+              "id": "text-06",
+              "value": 0.0
+            },
+            {
+              "id": "text-07",
+              "value": 0.0
+            },
+            {
+              "id": "text-08",
+              "value": 0.0
+            },
+            {
+              "id": "text-09",
+              "value": 0.4
+            },
+            {
+              "id": "text-10",
+              "value": 0.0
+            }
+          ],
+          "p_value_holm": 0.0007999600019999,
+          "multiplicity_family_n": 8,
+          "hybrid_significantly_better_at_05": true
+        },
+        {
+          "metric": "all/hybrid_runtime-vs-best-single/recall@5",
+          "subset": "all",
+          "measure": "recall",
+          "k": 5,
+          "n": 121,
+          "n_runs": 2,
+          "hybrid_mean": 0.8323002754820936,
+          "best_single": "fuzzy",
+          "best_single_mean": 0.7847796143250688,
+          "difference": 0.0475206611570248,
+          "ci95_difference": {
+            "status": "MEASURED",
+            "low": 0.014798553719008269,
+            "high": 0.08264462809917356,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 121,
+            "n_observations": 121,
+            "small_sample_note": null
+          },
+          "p_value_two_sided": 0.004849757512124394,
+          "test": "Monte Carlo paired two-sided sign permutation; plus-one correction",
+          "permutations": 20000,
+          "seed": 741,
+          "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+          "paired_differences": [
+            {
+              "id": "aggregate-001",
+              "value": 0.0
+            },
+            {
+              "id": "aggregate-002",
+              "value": 0.0
+            },
+            {
+              "id": "aggregate-003",
+              "value": 0.0
+            },
+            {
+              "id": "chart-01",
+              "value": 0.0
+            },
+            {
+              "id": "chart-02",
+              "value": 0.0
+            },
+            {
+              "id": "chart-03",
+              "value": 0.0
+            },
+            {
+              "id": "chart-04",
+              "value": 0.0
+            },
+            {
+              "id": "chart-05",
+              "value": 0.0
+            },
+            {
+              "id": "chart-06",
+              "value": 0.0
+            },
+            {
+              "id": "chart-07",
+              "value": 0.0
+            },
+            {
+              "id": "chart-08",
+              "value": 0.0
+            },
+            {
+              "id": "chart-09",
+              "value": 0.125
+            },
+            {
+              "id": "chart-10",
+              "value": 0.0
+            },
+            {
+              "id": "follow-up-001",
+              "value": 0.0
+            },
+            {
+              "id": "follow-up-002",
+              "value": 0.0
+            },
+            {
+              "id": "follow-up-003",
+              "value": 0.0
+            },
+            {
+              "id": "household-001",
+              "value": 0.0
+            },
+            {
+              "id": "household-002",
+              "value": 0.0
+            },
+            {
+              "id": "household-003",
+              "value": 0.0
+            },
+            {
+              "id": "household-004",
+              "value": 0.0
+            },
+            {
+              "id": "household-005",
+              "value": 0.0
+            },
+            {
+              "id": "household-006",
+              "value": 0.0
+            },
+            {
+              "id": "household-007",
+              "value": 0.0
+            },
+            {
+              "id": "household-008",
+              "value": 0.0
+            },
+            {
+              "id": "household-009",
+              "value": 0.0
+            },
+            {
+              "id": "household-010",
+              "value": 0.0
+            },
+            {
+              "id": "household-011",
+              "value": 0.0
+            },
+            {
+              "id": "household-012",
+              "value": 0.0
+            },
+            {
+              "id": "household-013",
+              "value": 0.0
+            },
+            {
+              "id": "household-014",
+              "value": 0.0
+            },
+            {
+              "id": "household-015",
+              "value": 0.0
+            },
+            {
+              "id": "household-016",
+              "value": 0.0
+            },
+            {
+              "id": "household-017",
+              "value": 0.0
+            },
+            {
+              "id": "household-018",
+              "value": 0.0
+            },
+            {
+              "id": "household-019",
+              "value": 0.0
+            },
+            {
+              "id": "household-020",
+              "value": 0.0
+            },
+            {
+              "id": "household-021",
+              "value": 0.0
+            },
+            {
+              "id": "household-022",
+              "value": 0.0
+            },
+            {
+              "id": "household-023",
+              "value": 0.0
+            },
+            {
+              "id": "household-024",
+              "value": 0.0
+            },
+            {
+              "id": "household-025",
+              "value": 0.0
+            },
+            {
+              "id": "household-026",
+              "value": 0.0
+            },
+            {
+              "id": "household-027",
+              "value": 0.0
+            },
+            {
+              "id": "household-028",
+              "value": 0.0
+            },
+            {
+              "id": "household-029",
+              "value": 0.0
+            },
+            {
+              "id": "household-030",
+              "value": 0.0
+            },
+            {
+              "id": "household-031",
+              "value": 0.0
+            },
+            {
+              "id": "household-032",
+              "value": 0.0
+            },
+            {
+              "id": "household-033",
+              "value": 0.0
+            },
+            {
+              "id": "household-034",
+              "value": 0.0
+            },
+            {
+              "id": "household-035",
+              "value": 0.0
+            },
+            {
+              "id": "household-036",
+              "value": 0.0
+            },
+            {
+              "id": "household-037",
+              "value": 0.0
+            },
+            {
+              "id": "household-038",
+              "value": 0.0
+            },
+            {
+              "id": "household-039",
+              "value": 0.0
+            },
+            {
+              "id": "household-040",
+              "value": 0.0
+            },
+            {
+              "id": "household-041",
+              "value": 0.0
+            },
+            {
+              "id": "household-042",
+              "value": 0.0
+            },
+            {
+              "id": "household-043",
+              "value": 0.0
+            },
+            {
+              "id": "household-044",
+              "value": 0.0
+            },
+            {
+              "id": "household-045",
+              "value": 0.0
+            },
+            {
+              "id": "household-046",
+              "value": 0.0
+            },
+            {
+              "id": "household-047",
+              "value": 0.0
+            },
+            {
+              "id": "household-048",
+              "value": 0.0
+            },
+            {
+              "id": "household-049",
+              "value": 0.0
+            },
+            {
+              "id": "household-050",
+              "value": 0.0
+            },
+            {
+              "id": "household-051",
+              "value": 0.0
+            },
+            {
+              "id": "household-052",
+              "value": 0.0
+            },
+            {
+              "id": "household-053",
+              "value": 0.0
+            },
+            {
+              "id": "household-054",
+              "value": -1.0
+            },
+            {
+              "id": "household-055",
+              "value": 0.0
+            },
+            {
+              "id": "household-056",
+              "value": 0.0
+            },
+            {
+              "id": "household-057",
+              "value": 0.0
+            },
+            {
+              "id": "household-058",
+              "value": 0.0
+            },
+            {
+              "id": "household-059",
+              "value": 0.0
+            },
+            {
+              "id": "household-060",
+              "value": 0.0
+            },
+            {
+              "id": "household-061",
+              "value": 0.0
+            },
+            {
+              "id": "household-062",
+              "value": 0.0
+            },
+            {
+              "id": "household-063",
+              "value": 0.0
+            },
+            {
+              "id": "image-01",
+              "value": 0.125
+            },
+            {
+              "id": "image-02",
+              "value": 0.125
+            },
+            {
+              "id": "image-03",
+              "value": 0.125
+            },
+            {
+              "id": "image-04",
+              "value": 0.125
+            },
+            {
+              "id": "image-05",
+              "value": 0.125
+            },
+            {
+              "id": "image-06",
+              "value": 0.125
+            },
+            {
+              "id": "image-07",
+              "value": 0.125
+            },
+            {
+              "id": "image-08",
+              "value": 0.125
+            },
+            {
+              "id": "image-09",
+              "value": 0.25
+            },
+            {
+              "id": "image-10",
+              "value": 0.125
+            },
+            {
+              "id": "location-001",
+              "value": 0.0
+            },
+            {
+              "id": "location-002",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-01",
+              "value": 0.8333333333333334
+            },
+            {
+              "id": "scanned-02",
+              "value": 0.8333333333333334
+            },
+            {
+              "id": "scanned-03",
+              "value": 0.33333333333333337
+            },
+            {
+              "id": "scanned-04",
+              "value": 0.33333333333333337
+            },
+            {
+              "id": "scanned-05",
+              "value": 0.33333333333333337
+            },
+            {
+              "id": "scanned-06",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-07",
+              "value": 0.33333333333333337
+            },
+            {
+              "id": "scanned-08",
+              "value": 0.33333333333333337
+            },
+            {
+              "id": "scanned-09",
+              "value": 0.4166666666666667
+            },
+            {
+              "id": "scanned-10",
+              "value": 0.0
+            },
+            {
+              "id": "table-01",
+              "value": 0.0
+            },
+            {
+              "id": "table-02",
+              "value": 0.0
+            },
+            {
+              "id": "table-03",
+              "value": 0.0
+            },
+            {
+              "id": "table-04",
+              "value": 0.0
+            },
+            {
+              "id": "table-05",
+              "value": 0.0
+            },
+            {
+              "id": "table-06",
+              "value": 0.0
+            },
+            {
+              "id": "table-07",
+              "value": 0.0
+            },
+            {
+              "id": "table-08",
+              "value": 0.0
+            },
+            {
+              "id": "table-09",
+              "value": 0.5
+            },
+            {
+              "id": "table-10",
+              "value": 0.0
+            },
+            {
+              "id": "text-01",
+              "value": 0.0
+            },
+            {
+              "id": "text-02",
+              "value": 0.0
+            },
+            {
+              "id": "text-03",
+              "value": 0.0
+            },
+            {
+              "id": "text-04",
+              "value": 0.0
+            },
+            {
+              "id": "text-05",
+              "value": 0.0
+            },
+            {
+              "id": "text-06",
+              "value": 0.0
+            },
+            {
+              "id": "text-07",
+              "value": 0.0
+            },
+            {
+              "id": "text-08",
+              "value": 0.0
+            },
+            {
+              "id": "text-09",
+              "value": 1.0
+            },
+            {
+              "id": "text-10",
+              "value": 0.0
+            }
+          ],
+          "p_value_holm": 0.033948302584870756,
+          "multiplicity_family_n": 8,
+          "hybrid_significantly_better_at_05": true
+        },
+        {
+          "metric": "all/hybrid_runtime-vs-best-single/mrr@5",
+          "subset": "all",
+          "measure": "mrr",
+          "k": 5,
+          "n": 121,
+          "n_runs": 2,
+          "hybrid_mean": 0.9308539944903581,
+          "best_single": "fuzzy",
+          "best_single_mean": 0.9090909090909091,
+          "difference": 0.021763085399449034,
+          "ci95_difference": {
+            "status": "MEASURED",
+            "low": -0.028932506887052345,
+            "high": 0.07382920110192838,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 121,
+            "n_observations": 121,
+            "small_sample_note": null
+          },
+          "p_value_two_sided": 0.4178291085445728,
+          "test": "Monte Carlo paired two-sided sign permutation; plus-one correction",
+          "permutations": 20000,
+          "seed": 741,
+          "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+          "paired_differences": [
+            {
+              "id": "aggregate-001",
+              "value": 0.0
+            },
+            {
+              "id": "aggregate-002",
+              "value": 0.0
+            },
+            {
+              "id": "aggregate-003",
+              "value": 0.0
+            },
+            {
+              "id": "chart-01",
+              "value": 0.0
+            },
+            {
+              "id": "chart-02",
+              "value": 0.0
+            },
+            {
+              "id": "chart-03",
+              "value": 0.0
+            },
+            {
+              "id": "chart-04",
+              "value": 0.0
+            },
+            {
+              "id": "chart-05",
+              "value": 0.0
+            },
+            {
+              "id": "chart-06",
+              "value": 0.0
+            },
+            {
+              "id": "chart-07",
+              "value": 0.0
+            },
+            {
+              "id": "chart-08",
+              "value": 0.0
+            },
+            {
+              "id": "chart-09",
+              "value": 0.5
+            },
+            {
+              "id": "chart-10",
+              "value": 0.0
+            },
+            {
+              "id": "follow-up-001",
+              "value": -0.8
+            },
+            {
+              "id": "follow-up-002",
+              "value": 0.0
+            },
+            {
+              "id": "follow-up-003",
+              "value": 0.0
+            },
+            {
+              "id": "household-001",
+              "value": 0.0
+            },
+            {
+              "id": "household-002",
+              "value": 0.0
+            },
+            {
+              "id": "household-003",
+              "value": 0.0
+            },
+            {
+              "id": "household-004",
+              "value": 0.0
+            },
+            {
+              "id": "household-005",
+              "value": 0.0
+            },
+            {
+              "id": "household-006",
+              "value": 0.0
+            },
+            {
+              "id": "household-007",
+              "value": 0.0
+            },
+            {
+              "id": "household-008",
+              "value": 0.0
+            },
+            {
+              "id": "household-009",
+              "value": -0.5
+            },
+            {
+              "id": "household-010",
+              "value": 0.0
+            },
+            {
+              "id": "household-011",
+              "value": 0.0
+            },
+            {
+              "id": "household-012",
+              "value": 0.0
+            },
+            {
+              "id": "household-013",
+              "value": 0.0
+            },
+            {
+              "id": "household-014",
+              "value": 0.0
+            },
+            {
+              "id": "household-015",
+              "value": 0.0
+            },
+            {
+              "id": "household-016",
+              "value": 0.0
+            },
+            {
+              "id": "household-017",
+              "value": 0.0
+            },
+            {
+              "id": "household-018",
+              "value": 0.0
+            },
+            {
+              "id": "household-019",
+              "value": 0.0
+            },
+            {
+              "id": "household-020",
+              "value": 0.0
+            },
+            {
+              "id": "household-021",
+              "value": 0.0
+            },
+            {
+              "id": "household-022",
+              "value": 0.0
+            },
+            {
+              "id": "household-023",
+              "value": 0.0
+            },
+            {
+              "id": "household-024",
+              "value": 0.0
+            },
+            {
+              "id": "household-025",
+              "value": 0.0
+            },
+            {
+              "id": "household-026",
+              "value": -0.8
+            },
+            {
+              "id": "household-027",
+              "value": 0.0
+            },
+            {
+              "id": "household-028",
+              "value": 0.0
+            },
+            {
+              "id": "household-029",
+              "value": 0.0
+            },
+            {
+              "id": "household-030",
+              "value": 0.0
+            },
+            {
+              "id": "household-031",
+              "value": 0.0
+            },
+            {
+              "id": "household-032",
+              "value": 0.0
+            },
+            {
+              "id": "household-033",
+              "value": 0.0
+            },
+            {
+              "id": "household-034",
+              "value": 0.0
+            },
+            {
+              "id": "household-035",
+              "value": 0.0
+            },
+            {
+              "id": "household-036",
+              "value": 0.0
+            },
+            {
+              "id": "household-037",
+              "value": 0.0
+            },
+            {
+              "id": "household-038",
+              "value": 0.0
+            },
+            {
+              "id": "household-039",
+              "value": 0.0
+            },
+            {
+              "id": "household-040",
+              "value": 0.0
+            },
+            {
+              "id": "household-041",
+              "value": 0.0
+            },
+            {
+              "id": "household-042",
+              "value": 0.0
+            },
+            {
+              "id": "household-043",
+              "value": 0.0
+            },
+            {
+              "id": "household-044",
+              "value": -0.8
+            },
+            {
+              "id": "household-045",
+              "value": -0.6666666666666667
+            },
+            {
+              "id": "household-046",
+              "value": 0.0
+            },
+            {
+              "id": "household-047",
+              "value": 0.0
+            },
+            {
+              "id": "household-048",
+              "value": 0.0
+            },
+            {
+              "id": "household-049",
+              "value": 0.0
+            },
+            {
+              "id": "household-050",
+              "value": 0.0
+            },
+            {
+              "id": "household-051",
+              "value": 0.0
+            },
+            {
+              "id": "household-052",
+              "value": 0.0
+            },
+            {
+              "id": "household-053",
+              "value": 0.0
+            },
+            {
+              "id": "household-054",
+              "value": -1.0
+            },
+            {
+              "id": "household-055",
+              "value": 0.0
+            },
+            {
+              "id": "household-056",
+              "value": -0.8
+            },
+            {
+              "id": "household-057",
+              "value": 0.0
+            },
+            {
+              "id": "household-058",
+              "value": 0.0
+            },
+            {
+              "id": "household-059",
+              "value": 0.0
+            },
+            {
+              "id": "household-060",
+              "value": 0.0
+            },
+            {
+              "id": "household-061",
+              "value": 0.0
+            },
+            {
+              "id": "household-062",
+              "value": 0.0
+            },
+            {
+              "id": "household-063",
+              "value": 0.0
+            },
+            {
+              "id": "image-01",
+              "value": 0.0
+            },
+            {
+              "id": "image-02",
+              "value": 0.0
+            },
+            {
+              "id": "image-03",
+              "value": 0.0
+            },
+            {
+              "id": "image-04",
+              "value": 0.0
+            },
+            {
+              "id": "image-05",
+              "value": 0.5
+            },
+            {
+              "id": "image-06",
+              "value": 0.5
+            },
+            {
+              "id": "image-07",
+              "value": 0.5
+            },
+            {
+              "id": "image-08",
+              "value": 0.5
+            },
+            {
+              "id": "image-09",
+              "value": 0.5
+            },
+            {
+              "id": "image-10",
+              "value": 0.0
+            },
+            {
+              "id": "location-001",
+              "value": 0.0
+            },
+            {
+              "id": "location-002",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-01",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-02",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-03",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-04",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-05",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-06",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-07",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-08",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-09",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-10",
+              "value": 0.0
+            },
+            {
+              "id": "table-01",
+              "value": 0.0
+            },
+            {
+              "id": "table-02",
+              "value": 0.0
+            },
+            {
+              "id": "table-03",
+              "value": 0.0
+            },
+            {
+              "id": "table-04",
+              "value": 0.0
+            },
+            {
+              "id": "table-05",
+              "value": 0.0
+            },
+            {
+              "id": "table-06",
+              "value": 0.0
+            },
+            {
+              "id": "table-07",
+              "value": 0.5
+            },
+            {
+              "id": "table-08",
+              "value": 0.5
+            },
+            {
+              "id": "table-09",
+              "value": 0.0
+            },
+            {
+              "id": "table-10",
+              "value": 0.0
+            },
+            {
+              "id": "text-01",
+              "value": 0.0
+            },
+            {
+              "id": "text-02",
+              "value": 0.0
+            },
+            {
+              "id": "text-03",
+              "value": 0.0
+            },
+            {
+              "id": "text-04",
+              "value": 0.0
+            },
+            {
+              "id": "text-05",
+              "value": 0.0
+            },
+            {
+              "id": "text-06",
+              "value": 0.0
+            },
+            {
+              "id": "text-07",
+              "value": 0.0
+            },
+            {
+              "id": "text-08",
+              "value": 0.0
+            },
+            {
+              "id": "text-09",
+              "value": 1.0
+            },
+            {
+              "id": "text-10",
+              "value": 0.0
+            }
+          ],
+          "p_value_holm": 1.0,
+          "multiplicity_family_n": 8,
+          "hybrid_significantly_better_at_05": false
+        },
+        {
+          "metric": "all/hybrid_runtime-vs-best-single/ndcg@5",
+          "subset": "all",
+          "measure": "ndcg",
+          "k": 5,
+          "n": 121,
+          "n_runs": 2,
+          "hybrid_mean": 0.8954996902389009,
+          "best_single": "fuzzy",
+          "best_single_mean": 0.8506154829869652,
+          "difference": 0.04488420725193563,
+          "ci95_difference": {
+            "status": "MEASURED",
+            "low": -0.0010312316746925582,
+            "high": 0.09340577265377897,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 121,
+            "n_observations": 121,
+            "small_sample_note": null
+          },
+          "p_value_two_sided": 0.06849657517124144,
+          "test": "Monte Carlo paired two-sided sign permutation; plus-one correction",
+          "permutations": 20000,
+          "seed": 741,
+          "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+          "paired_differences": [
+            {
+              "id": "aggregate-001",
+              "value": 0.0
+            },
+            {
+              "id": "aggregate-002",
+              "value": 0.0
+            },
+            {
+              "id": "aggregate-003",
+              "value": 0.0
+            },
+            {
+              "id": "chart-01",
+              "value": 0.0
+            },
+            {
+              "id": "chart-02",
+              "value": 0.0
+            },
+            {
+              "id": "chart-03",
+              "value": 0.0
+            },
+            {
+              "id": "chart-04",
+              "value": 0.0
+            },
+            {
+              "id": "chart-05",
+              "value": 0.0
+            },
+            {
+              "id": "chart-06",
+              "value": 0.0
+            },
+            {
+              "id": "chart-07",
+              "value": 0.0
+            },
+            {
+              "id": "chart-08",
+              "value": 0.0
+            },
+            {
+              "id": "chart-09",
+              "value": 0.6608397947263839
+            },
+            {
+              "id": "chart-10",
+              "value": 0.0
+            },
+            {
+              "id": "follow-up-001",
+              "value": -0.6131471927654584
+            },
+            {
+              "id": "follow-up-002",
+              "value": 0.0
+            },
+            {
+              "id": "follow-up-003",
+              "value": 0.0
+            },
+            {
+              "id": "household-001",
+              "value": 0.0
+            },
+            {
+              "id": "household-002",
+              "value": 0.0
+            },
+            {
+              "id": "household-003",
+              "value": 0.0
+            },
+            {
+              "id": "household-004",
+              "value": 0.0
+            },
+            {
+              "id": "household-005",
+              "value": 0.0
+            },
+            {
+              "id": "household-006",
+              "value": 0.0
+            },
+            {
+              "id": "household-007",
+              "value": 0.0
+            },
+            {
+              "id": "household-008",
+              "value": 0.0
+            },
+            {
+              "id": "household-009",
+              "value": -0.36907024642854247
+            },
+            {
+              "id": "household-010",
+              "value": 0.0
+            },
+            {
+              "id": "household-011",
+              "value": 0.0
+            },
+            {
+              "id": "household-012",
+              "value": 0.0
+            },
+            {
+              "id": "household-013",
+              "value": 0.0
+            },
+            {
+              "id": "household-014",
+              "value": 0.0
+            },
+            {
+              "id": "household-015",
+              "value": 0.0
+            },
+            {
+              "id": "household-016",
+              "value": 0.0
+            },
+            {
+              "id": "household-017",
+              "value": 0.0
+            },
+            {
+              "id": "household-018",
+              "value": 0.0
+            },
+            {
+              "id": "household-019",
+              "value": 0.0
+            },
+            {
+              "id": "household-020",
+              "value": 0.0
+            },
+            {
+              "id": "household-021",
+              "value": 0.0
+            },
+            {
+              "id": "household-022",
+              "value": 0.0
+            },
+            {
+              "id": "household-023",
+              "value": 0.0
+            },
+            {
+              "id": "household-024",
+              "value": 0.0
+            },
+            {
+              "id": "household-025",
+              "value": 0.0
+            },
+            {
+              "id": "household-026",
+              "value": -0.6131471927654584
+            },
+            {
+              "id": "household-027",
+              "value": 0.0
+            },
+            {
+              "id": "household-028",
+              "value": 0.0
+            },
+            {
+              "id": "household-029",
+              "value": 0.0
+            },
+            {
+              "id": "household-030",
+              "value": 0.0
+            },
+            {
+              "id": "household-031",
+              "value": 0.0
+            },
+            {
+              "id": "household-032",
+              "value": 0.0
+            },
+            {
+              "id": "household-033",
+              "value": 0.0
+            },
+            {
+              "id": "household-034",
+              "value": 0.0
+            },
+            {
+              "id": "household-035",
+              "value": 0.0
+            },
+            {
+              "id": "household-036",
+              "value": 0.0
+            },
+            {
+              "id": "household-037",
+              "value": 0.0
+            },
+            {
+              "id": "household-038",
+              "value": 0.0
+            },
+            {
+              "id": "household-039",
+              "value": 0.0
+            },
+            {
+              "id": "household-040",
+              "value": 0.0
+            },
+            {
+              "id": "household-041",
+              "value": 0.0
+            },
+            {
+              "id": "household-042",
+              "value": 0.0
+            },
+            {
+              "id": "household-043",
+              "value": 0.0
+            },
+            {
+              "id": "household-044",
+              "value": -0.6131471927654584
+            },
+            {
+              "id": "household-045",
+              "value": -0.5
+            },
+            {
+              "id": "household-046",
+              "value": 0.0
+            },
+            {
+              "id": "household-047",
+              "value": 0.0
+            },
+            {
+              "id": "household-048",
+              "value": 0.0
+            },
+            {
+              "id": "household-049",
+              "value": 0.0
+            },
+            {
+              "id": "household-050",
+              "value": 0.0
+            },
+            {
+              "id": "household-051",
+              "value": 0.0
+            },
+            {
+              "id": "household-052",
+              "value": 0.0
+            },
+            {
+              "id": "household-053",
+              "value": 0.0
+            },
+            {
+              "id": "household-054",
+              "value": -1.0
+            },
+            {
+              "id": "household-055",
+              "value": 0.0
+            },
+            {
+              "id": "household-056",
+              "value": -0.6131471927654584
+            },
+            {
+              "id": "household-057",
+              "value": 0.0
+            },
+            {
+              "id": "household-058",
+              "value": 0.0
+            },
+            {
+              "id": "household-059",
+              "value": 0.0
+            },
+            {
+              "id": "household-060",
+              "value": 0.0
+            },
+            {
+              "id": "household-061",
+              "value": 0.0
+            },
+            {
+              "id": "household-062",
+              "value": 0.0
+            },
+            {
+              "id": "household-063",
+              "value": 0.0
+            },
+            {
+              "id": "image-01",
+              "value": 0.16958010263680823
+            },
+            {
+              "id": "image-02",
+              "value": 0.16958010263680823
+            },
+            {
+              "id": "image-03",
+              "value": 0.14606834984270645
+            },
+            {
+              "id": "image-04",
+              "value": 0.17561123961006142
+            },
+            {
+              "id": "image-05",
+              "value": 0.31564845247951445
+            },
+            {
+              "id": "image-06",
+              "value": 0.279890770845532
+            },
+            {
+              "id": "image-07",
+              "value": 0.31564845247951445
+            },
+            {
+              "id": "image-08",
+              "value": 0.3242969329432515
+            },
+            {
+              "id": "image-09",
+              "value": 0.6608397947263839
+            },
+            {
+              "id": "image-10",
+              "value": 0.14606834984270645
+            },
+            {
+              "id": "location-001",
+              "value": 0.0
+            },
+            {
+              "id": "location-002",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-01",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-02",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-03",
+              "value": 0.2772734273550481
+            },
+            {
+              "id": "scanned-04",
+              "value": 0.2772734273550481
+            },
+            {
+              "id": "scanned-05",
+              "value": 0.2772734273550481
+            },
+            {
+              "id": "scanned-06",
+              "value": 0.0
+            },
+            {
+              "id": "scanned-07",
+              "value": 0.2772734273550481
+            },
+            {
+              "id": "scanned-08",
+              "value": 0.2772734273550481
+            },
+            {
+              "id": "scanned-09",
+              "value": 1.0
+            },
+            {
+              "id": "scanned-10",
+              "value": 0.0
+            },
+            {
+              "id": "table-01",
+              "value": 0.0
+            },
+            {
+              "id": "table-02",
+              "value": 0.0
+            },
+            {
+              "id": "table-03",
+              "value": 0.0
+            },
+            {
+              "id": "table-04",
+              "value": 0.0
+            },
+            {
+              "id": "table-05",
+              "value": 0.0
+            },
+            {
+              "id": "table-06",
+              "value": 0.0
+            },
+            {
+              "id": "table-07",
+              "value": 0.36907024642854247
+            },
+            {
+              "id": "table-08",
+              "value": 0.36907024642854247
+            },
+            {
+              "id": "table-09",
+              "value": 0.38685280723454163
+            },
+            {
+              "id": "table-10",
+              "value": 0.0
+            },
+            {
+              "id": "text-01",
+              "value": 0.0
+            },
+            {
+              "id": "text-02",
+              "value": 0.0
+            },
+            {
+              "id": "text-03",
+              "value": 0.0
+            },
+            {
+              "id": "text-04",
+              "value": 0.0
+            },
+            {
+              "id": "text-05",
+              "value": 0.0
+            },
+            {
+              "id": "text-06",
+              "value": 0.0
+            },
+            {
+              "id": "text-07",
+              "value": 0.0
+            },
+            {
+              "id": "text-08",
+              "value": 0.0
+            },
+            {
+              "id": "text-09",
+              "value": 0.8772153153380493
+            },
+            {
+              "id": "text-10",
+              "value": 0.0
+            }
+          ],
+          "p_value_holm": 0.41097945102744865,
+          "multiplicity_family_n": 8,
+          "hybrid_significantly_better_at_05": false
+        },
+        {
+          "metric": "typo/hybrid_runtime-vs-best-single/precision@5",
+          "subset": "typo",
+          "measure": "precision",
+          "k": 5,
+          "n": 38,
+          "n_runs": 2,
+          "hybrid_mean": 0.2,
+          "best_single": "fuzzy",
+          "best_single_mean": 0.2,
+          "difference": 0.0,
+          "ci95_difference": {
+            "status": "MEASURED",
+            "low": 0.0,
+            "high": 0.0,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 38,
+            "n_observations": 38,
+            "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+          },
+          "p_value_two_sided": 1.0,
+          "test": "Exact paired sign permutation (all differences zero)",
+          "permutations": 1,
+          "seed": 741,
+          "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+          "paired_differences": [
+            {
+              "id": "household-001",
+              "value": 0.0
+            },
+            {
+              "id": "household-002",
+              "value": 0.0
+            },
+            {
+              "id": "household-003",
+              "value": 0.0
+            },
+            {
+              "id": "household-004",
+              "value": 0.0
+            },
+            {
+              "id": "household-005",
+              "value": 0.0
+            },
+            {
+              "id": "household-006",
+              "value": 0.0
+            },
+            {
+              "id": "household-007",
+              "value": 0.0
+            },
+            {
+              "id": "household-008",
+              "value": 0.0
+            },
+            {
+              "id": "household-009",
+              "value": 0.0
+            },
+            {
+              "id": "household-010",
+              "value": 0.0
+            },
+            {
+              "id": "household-011",
+              "value": 0.0
+            },
+            {
+              "id": "household-012",
+              "value": 0.0
+            },
+            {
+              "id": "household-013",
+              "value": 0.0
+            },
+            {
+              "id": "household-014",
+              "value": 0.0
+            },
+            {
+              "id": "household-015",
+              "value": 0.0
+            },
+            {
+              "id": "household-016",
+              "value": 0.0
+            },
+            {
+              "id": "household-017",
+              "value": 0.0
+            },
+            {
+              "id": "household-018",
+              "value": 0.0
+            },
+            {
+              "id": "household-019",
+              "value": 0.0
+            },
+            {
+              "id": "household-020",
+              "value": 0.0
+            },
+            {
+              "id": "household-021",
+              "value": 0.0
+            },
+            {
+              "id": "household-022",
+              "value": 0.0
+            },
+            {
+              "id": "household-023",
+              "value": 0.0
+            },
+            {
+              "id": "household-024",
+              "value": 0.0
+            },
+            {
+              "id": "household-025",
+              "value": 0.0
+            },
+            {
+              "id": "household-026",
+              "value": 0.0
+            },
+            {
+              "id": "household-027",
+              "value": 0.0
+            },
+            {
+              "id": "household-028",
+              "value": 0.0
+            },
+            {
+              "id": "household-029",
+              "value": 0.0
+            },
+            {
+              "id": "household-030",
+              "value": 0.0
+            },
+            {
+              "id": "household-031",
+              "value": 0.0
+            },
+            {
+              "id": "household-032",
+              "value": 0.0
+            },
+            {
+              "id": "household-033",
+              "value": 0.0
+            },
+            {
+              "id": "household-034",
+              "value": 0.0
+            },
+            {
+              "id": "household-035",
+              "value": 0.0
+            },
+            {
+              "id": "household-036",
+              "value": 0.0
+            },
+            {
+              "id": "household-037",
+              "value": 0.0
+            },
+            {
+              "id": "household-038",
+              "value": 0.0
+            }
+          ],
+          "p_value_holm": 1.0,
+          "multiplicity_family_n": 8,
+          "hybrid_significantly_better_at_05": false
+        },
+        {
+          "metric": "typo/hybrid_runtime-vs-best-single/recall@5",
+          "subset": "typo",
+          "measure": "recall",
+          "k": 5,
+          "n": 38,
+          "n_runs": 2,
+          "hybrid_mean": 1.0,
+          "best_single": "fuzzy",
+          "best_single_mean": 1.0,
+          "difference": 0.0,
+          "ci95_difference": {
+            "status": "MEASURED",
+            "low": 0.0,
+            "high": 0.0,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 38,
+            "n_observations": 38,
+            "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+          },
+          "p_value_two_sided": 1.0,
+          "test": "Exact paired sign permutation (all differences zero)",
+          "permutations": 1,
+          "seed": 741,
+          "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+          "paired_differences": [
+            {
+              "id": "household-001",
+              "value": 0.0
+            },
+            {
+              "id": "household-002",
+              "value": 0.0
+            },
+            {
+              "id": "household-003",
+              "value": 0.0
+            },
+            {
+              "id": "household-004",
+              "value": 0.0
+            },
+            {
+              "id": "household-005",
+              "value": 0.0
+            },
+            {
+              "id": "household-006",
+              "value": 0.0
+            },
+            {
+              "id": "household-007",
+              "value": 0.0
+            },
+            {
+              "id": "household-008",
+              "value": 0.0
+            },
+            {
+              "id": "household-009",
+              "value": 0.0
+            },
+            {
+              "id": "household-010",
+              "value": 0.0
+            },
+            {
+              "id": "household-011",
+              "value": 0.0
+            },
+            {
+              "id": "household-012",
+              "value": 0.0
+            },
+            {
+              "id": "household-013",
+              "value": 0.0
+            },
+            {
+              "id": "household-014",
+              "value": 0.0
+            },
+            {
+              "id": "household-015",
+              "value": 0.0
+            },
+            {
+              "id": "household-016",
+              "value": 0.0
+            },
+            {
+              "id": "household-017",
+              "value": 0.0
+            },
+            {
+              "id": "household-018",
+              "value": 0.0
+            },
+            {
+              "id": "household-019",
+              "value": 0.0
+            },
+            {
+              "id": "household-020",
+              "value": 0.0
+            },
+            {
+              "id": "household-021",
+              "value": 0.0
+            },
+            {
+              "id": "household-022",
+              "value": 0.0
+            },
+            {
+              "id": "household-023",
+              "value": 0.0
+            },
+            {
+              "id": "household-024",
+              "value": 0.0
+            },
+            {
+              "id": "household-025",
+              "value": 0.0
+            },
+            {
+              "id": "household-026",
+              "value": 0.0
+            },
+            {
+              "id": "household-027",
+              "value": 0.0
+            },
+            {
+              "id": "household-028",
+              "value": 0.0
+            },
+            {
+              "id": "household-029",
+              "value": 0.0
+            },
+            {
+              "id": "household-030",
+              "value": 0.0
+            },
+            {
+              "id": "household-031",
+              "value": 0.0
+            },
+            {
+              "id": "household-032",
+              "value": 0.0
+            },
+            {
+              "id": "household-033",
+              "value": 0.0
+            },
+            {
+              "id": "household-034",
+              "value": 0.0
+            },
+            {
+              "id": "household-035",
+              "value": 0.0
+            },
+            {
+              "id": "household-036",
+              "value": 0.0
+            },
+            {
+              "id": "household-037",
+              "value": 0.0
+            },
+            {
+              "id": "household-038",
+              "value": 0.0
+            }
+          ],
+          "p_value_holm": 1.0,
+          "multiplicity_family_n": 8,
+          "hybrid_significantly_better_at_05": false
+        },
+        {
+          "metric": "typo/hybrid_runtime-vs-best-single/mrr@5",
+          "subset": "typo",
+          "measure": "mrr",
+          "k": 5,
+          "n": 38,
+          "n_runs": 2,
+          "hybrid_mean": 0.9657894736842105,
+          "best_single": "fuzzy",
+          "best_single_mean": 1.0,
+          "difference": -0.034210526315789476,
+          "ci95_difference": {
+            "status": "MEASURED",
+            "low": -0.08947368421052633,
+            "high": 0.0,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 38,
+            "n_observations": 38,
+            "small_sample_note": null
+          },
+          "p_value_two_sided": 0.5,
+          "test": "Exact paired two-sided sign permutation",
+          "permutations": 4,
+          "seed": 741,
+          "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+          "paired_differences": [
+            {
+              "id": "household-001",
+              "value": 0.0
+            },
+            {
+              "id": "household-002",
+              "value": 0.0
+            },
+            {
+              "id": "household-003",
+              "value": 0.0
+            },
+            {
+              "id": "household-004",
+              "value": 0.0
+            },
+            {
+              "id": "household-005",
+              "value": 0.0
+            },
+            {
+              "id": "household-006",
+              "value": 0.0
+            },
+            {
+              "id": "household-007",
+              "value": 0.0
+            },
+            {
+              "id": "household-008",
+              "value": 0.0
+            },
+            {
+              "id": "household-009",
+              "value": -0.5
+            },
+            {
+              "id": "household-010",
+              "value": 0.0
+            },
+            {
+              "id": "household-011",
+              "value": 0.0
+            },
+            {
+              "id": "household-012",
+              "value": 0.0
+            },
+            {
+              "id": "household-013",
+              "value": 0.0
+            },
+            {
+              "id": "household-014",
+              "value": 0.0
+            },
+            {
+              "id": "household-015",
+              "value": 0.0
+            },
+            {
+              "id": "household-016",
+              "value": 0.0
+            },
+            {
+              "id": "household-017",
+              "value": 0.0
+            },
+            {
+              "id": "household-018",
+              "value": 0.0
+            },
+            {
+              "id": "household-019",
+              "value": 0.0
+            },
+            {
+              "id": "household-020",
+              "value": 0.0
+            },
+            {
+              "id": "household-021",
+              "value": 0.0
+            },
+            {
+              "id": "household-022",
+              "value": 0.0
+            },
+            {
+              "id": "household-023",
+              "value": 0.0
+            },
+            {
+              "id": "household-024",
+              "value": 0.0
+            },
+            {
+              "id": "household-025",
+              "value": 0.0
+            },
+            {
+              "id": "household-026",
+              "value": -0.8
+            },
+            {
+              "id": "household-027",
+              "value": 0.0
+            },
+            {
+              "id": "household-028",
+              "value": 0.0
+            },
+            {
+              "id": "household-029",
+              "value": 0.0
+            },
+            {
+              "id": "household-030",
+              "value": 0.0
+            },
+            {
+              "id": "household-031",
+              "value": 0.0
+            },
+            {
+              "id": "household-032",
+              "value": 0.0
+            },
+            {
+              "id": "household-033",
+              "value": 0.0
+            },
+            {
+              "id": "household-034",
+              "value": 0.0
+            },
+            {
+              "id": "household-035",
+              "value": 0.0
+            },
+            {
+              "id": "household-036",
+              "value": 0.0
+            },
+            {
+              "id": "household-037",
+              "value": 0.0
+            },
+            {
+              "id": "household-038",
+              "value": 0.0
+            }
+          ],
+          "p_value_holm": 1.0,
+          "multiplicity_family_n": 8,
+          "hybrid_significantly_better_at_05": false
+        },
+        {
+          "metric": "typo/hybrid_runtime-vs-best-single/ndcg@5",
+          "subset": "typo",
+          "measure": "ndcg",
+          "k": 5,
+          "n": 38,
+          "n_runs": 2,
+          "hybrid_mean": 0.9741521726527894,
+          "best_single": "fuzzy",
+          "best_single_mean": 1.0,
+          "difference": -0.02584782734721055,
+          "ci95_difference": {
+            "status": "MEASURED",
+            "low": -0.06783110713561737,
+            "high": 0.0,
+            "level": 0.95,
+            "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+            "estimator": "mean",
+            "draws": 5000,
+            "valid_draws": 5000,
+            "seed": 741,
+            "n_clusters": 38,
+            "n_observations": 38,
+            "small_sample_note": null
+          },
+          "p_value_two_sided": 0.5,
+          "test": "Exact paired two-sided sign permutation",
+          "permutations": 4,
+          "seed": 741,
+          "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+          "paired_differences": [
+            {
+              "id": "household-001",
+              "value": 0.0
+            },
+            {
+              "id": "household-002",
+              "value": 0.0
+            },
+            {
+              "id": "household-003",
+              "value": 0.0
+            },
+            {
+              "id": "household-004",
+              "value": 0.0
+            },
+            {
+              "id": "household-005",
+              "value": 0.0
+            },
+            {
+              "id": "household-006",
+              "value": 0.0
+            },
+            {
+              "id": "household-007",
+              "value": 0.0
+            },
+            {
+              "id": "household-008",
+              "value": 0.0
+            },
+            {
+              "id": "household-009",
+              "value": -0.36907024642854247
+            },
+            {
+              "id": "household-010",
+              "value": 0.0
+            },
+            {
+              "id": "household-011",
+              "value": 0.0
+            },
+            {
+              "id": "household-012",
+              "value": 0.0
+            },
+            {
+              "id": "household-013",
+              "value": 0.0
+            },
+            {
+              "id": "household-014",
+              "value": 0.0
+            },
+            {
+              "id": "household-015",
+              "value": 0.0
+            },
+            {
+              "id": "household-016",
+              "value": 0.0
+            },
+            {
+              "id": "household-017",
+              "value": 0.0
+            },
+            {
+              "id": "household-018",
+              "value": 0.0
+            },
+            {
+              "id": "household-019",
+              "value": 0.0
+            },
+            {
+              "id": "household-020",
+              "value": 0.0
+            },
+            {
+              "id": "household-021",
+              "value": 0.0
+            },
+            {
+              "id": "household-022",
+              "value": 0.0
+            },
+            {
+              "id": "household-023",
+              "value": 0.0
+            },
+            {
+              "id": "household-024",
+              "value": 0.0
+            },
+            {
+              "id": "household-025",
+              "value": 0.0
+            },
+            {
+              "id": "household-026",
+              "value": -0.6131471927654584
+            },
+            {
+              "id": "household-027",
+              "value": 0.0
+            },
+            {
+              "id": "household-028",
+              "value": 0.0
+            },
+            {
+              "id": "household-029",
+              "value": 0.0
+            },
+            {
+              "id": "household-030",
+              "value": 0.0
+            },
+            {
+              "id": "household-031",
+              "value": 0.0
+            },
+            {
+              "id": "household-032",
+              "value": 0.0
+            },
+            {
+              "id": "household-033",
+              "value": 0.0
+            },
+            {
+              "id": "household-034",
+              "value": 0.0
+            },
+            {
+              "id": "household-035",
+              "value": 0.0
+            },
+            {
+              "id": "household-036",
+              "value": 0.0
+            },
+            {
+              "id": "household-037",
+              "value": 0.0
+            },
+            {
+              "id": "household-038",
+              "value": 0.0
+            }
+          ],
+          "p_value_holm": 1.0,
+          "multiplicity_family_n": 8,
+          "hybrid_significantly_better_at_05": false
+        }
+      ]
+    }
+  ]
+}
