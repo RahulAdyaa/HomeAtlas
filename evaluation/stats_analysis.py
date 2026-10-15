@@ -287,7 +287,9 @@ def bootstrap_interval(samples: list[list[dict]], estimator='mean', *, seed=SEED
             'level': .95, 'method': 'Percentile bootstrap; question/probe ID clusters shared across independent runs',
             'estimator': estimator, 'draws': draws, 'valid_draws': len(estimates), 'seed': seed,
             'n_clusters': len(clusters), 'n_observations': sum(len(rows) for rows in samples),
-            'small_sample_note': 'A degenerate interval with one/few probes does not establish population certainty.' if len(clusters) < 10 else None}
+            'small_sample_note': ('A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed.'
+                                  if math.isclose(float(low), float(high), abs_tol=1e-15) else
+                                  'Few probes provide weak population evidence.' if len(clusters) < 10 else None)}
 
 
 def estimate(samples: list[dict], estimator: str) -> float:
@@ -309,7 +311,9 @@ def aggregate_metrics(sources: dict, phase: str, draws=5000) -> list[dict]:
             row = {'agent': agent, 'metric': name, 'run_values': [p.get('value') if p else None for p in points],
                    'n_per_run': [p.get('n') if p else 0 for p in points], 'n_runs': len(runs),
                    'status': 'MEASURED', 'value': None, 'variance_between_runs': None,
-                   'standard_deviation_between_runs': None, 'absolute_run_difference': None}
+                   'standard_deviation_between_runs': None, 'absolute_run_difference': None,
+                   'metric_metadata_per_run': [{k: v for k, v in p.items() if k not in {'metric', 'value', 'n', 'status', 'reason'}}
+                                               if p else {} for p in points]}
             if agent == 'generation-agent' and name in {'consistency_over_three_runs', 'three_run_pairwise_token_f1'}:
                 # This is one cross-run statistic over three real passes, stored
                 # after run 2 completes, not a pair of independent scorecards.
@@ -434,6 +438,21 @@ def source_provenance(sources: dict, phase: str) -> list[dict]:
             for agent, source in sorted(sources.items())]
 
 
+def measurement_code_manifest(app: Path) -> dict:
+    """Pin the assembled metric implementation before any application fixes.
+
+    Formatting/docs are excluded so a report typo can be corrected without
+    changing measurement code. This is the assembly-time code manifest; older
+    specialist processes do not retroactively acquire a code hash.
+    """
+    root = app / 'evaluation'
+    paths = sorted({p for pattern in ['*.py', '*.mjs', 'requirements*.txt'] for p in root.glob(pattern)
+                    if p.name != 'stats_report.py'})
+    files = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
+    return {'fingerprint': digest(files), 'files': files,
+            'scope': 'Assembly-time evaluator/metric/dependency files; report formatting excluded.'}
+
+
 def aggregate(results_dir: Path, overrides: dict, phase: str, app: Path, evaluation: Path,
               *, bootstrap_samples=5000, permutations=20000) -> bool:
     sources = load_sources(results_dir, overrides)
@@ -444,6 +463,16 @@ def aggregate(results_dir: Path, overrides: dict, phase: str, app: Path, evaluat
         print(json.dumps(status, indent=2))
         return False
     provenance = source_provenance(sources, phase)
+    code = measurement_code_manifest(app)
+    if phase == 'final':
+        baseline_path = evaluation / 'baseline_results.json'
+        if not baseline_path.is_file():
+            raise RuntimeError('A complete frozen baseline is required before final statistical assembly.')
+        baseline = json.loads(baseline_path.read_text())
+        if baseline.get('dataset_fingerprint') != status['dataset_fingerprint']:
+            raise RuntimeError('Final dataset differs from the frozen baseline.')
+        if baseline.get('measurement_code', {}).get('fingerprint') != code['fingerprint']:
+            raise RuntimeError('Evaluation metric code/dependencies differ from the frozen baseline; refusing a before/after comparison.')
     snapshot_path = evaluation / (phase + '_results.json')
     if snapshot_path.exists():
         old = json.loads(snapshot_path.read_text())
@@ -455,6 +484,7 @@ def aggregate(results_dir: Path, overrides: dict, phase: str, app: Path, evaluat
                    'timestamp_utc': datetime.now(timezone.utc).isoformat(), 'seed': SEED,
                    'dataset_fingerprint': status['dataset_fingerprint'],
                    'app_source_fingerprint': status['app_source_fingerprint'],
+                   'measurement_code': code,
                    'sources': provenance, 'completeness': status,
                    'aggregation': 'Equal mean of two independent scorecards. CI resamples question/probe IDs jointly across runs, never counts repeats as independent questions.',
                    'bootstrap_samples': bootstrap_samples, 'permutations': permutations,

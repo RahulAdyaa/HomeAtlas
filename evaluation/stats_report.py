@@ -23,6 +23,8 @@ def estimate_cell(row):
     if ci.get('status') == 'MEASURED':
         interval = f'95% CI [{number(ci["low"])}, {number(ci["high"])}]'
         count = f'n={ci["n_clusters"]} clusters; observations={ci["n_observations"]}'
+        if ci.get('low') == ci.get('high'):
+            interval += '; degenerate empirical interval'
     else:
         interval = 'CI NOT MEASURED'
         count = f'n/run={n}'
@@ -106,7 +108,11 @@ def write_outputs(evaluation: Path, payload: dict):
               'A confidence interval is computed only if raw sample counts and the specified estimator reproduce '
               'both published point estimates. Otherwise its status and reason appear in the complete scorecard. '
               'Descriptive totals, extrema, missing numeric confidences and unsupported estimators are never '
-              'assigned invented intervals. Conditional denominators (for example, answers containing citations) '
+              'assigned invented intervals. A zero-failure sample can produce a degenerate [0,0] bootstrap '
+              'interval; it does not prove a zero population failure rate. In particular, zero false hits '
+              'on the ten near-miss probes cannot establish the requested population rate below 2%. '
+              'Repeated runs of those same probes do not double the number of independent probes. '
+              'Conditional denominators (for example, answers containing citations) '
               'are retained. Every metric and its n/run, run variance, interval status and reason is in '
               '[stats-metric-scorecard.csv](stats-metric-scorecard.csv).', '',
               '### Paired hybrid versus strongest single channel', '',
@@ -161,6 +167,18 @@ def write_outputs(evaluation: Path, payload: dict):
                  m['metric'].startswith(('cross_modal/', 'degraded_scan/', 'paraphrase/', 'typo/pairwise_')) or
                  (m['metric'].startswith('all/hybrid_runtime/') and m['metric'].split('/')[-1].split('@')[0] in {'unique_source_ratio', 'modality_entropy', 'gold_modality_hit'}))]
     lines += table(selected, baseline_lookup)
+    privacy_rows = [(phase_payload['phase'], m) for phase_payload in [baseline, final] if phase_payload
+                    for m in phase_payload['metrics'] if m['metric'] == 'sensitive_answer_cache_persistence_rate']
+    if privacy_rows:
+        lines += ['', '### Strict cache privacy gap', '']
+        for observed_phase, m in privacy_rows:
+            finding = ('The requested zero-sensitive-content cache target is **NOT MET**.' if m['value'] is not None and m['value'] > 0 else
+                       'No persistence was observed in this small synthetic sample; this does not establish a zero population leakage rate.' if m['value'] == 0 else
+                       'Sensitive-content cache persistence is NOT MEASURED for this phase.')
+            lines.append(observed_phase.capitalize() + ' sensitive-answer canary persistence: ' + estimate_cell(m) +
+                         '. ' + finding + ' '
+                         'Household/user isolation is a separate check and does not remove this persistence. '
+                         'Private process-log leakage remains NOT MEASURED; no real private logs were inspected.')
     chapters = [
         ('B/C/D: generation, citations and abstention', 'generation-agent',
          'Exact match, token F1 and ROUGE-L compare reference wording and can penalize valid longer answers. '
