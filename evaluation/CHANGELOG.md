@@ -38,3 +38,11 @@ Baseline is frozen in `evaluation/baseline_results.json` before these changes. R
 - Before: an irrelevant service-interval quote passed a serial-number question (one new regression failed, one passed).
 - After: `pytest tests/test_answer_responsiveness.py tests/test_worker.py tests/test_image_pipeline.py -q` — **28 passed**.
 - Full abstention/false-refusal impact: pending final specialist inference. This remains model-based review, not a correctness guarantee.
+
+## Aggregate query morphology
+
+- Problem: the unrelated-query abstention gate counted plural `warranties` and expiry phrasing as missing subjects, rejecting relevant dated warranty records before generation.
+- Change: compare simple plural and expiry/end inflections within that gate, excluding generic list verbs. Numeric terms and actual object/location terms remain meaningful. No retrieval weights or similarity thresholds changed.
+- Before: the new warranty aggregate test failed; the absent-valve subject rejection passed.
+- After: `pytest tests/test_aggregate_intent.py tests/test_hybrid_search.py tests/test_answer_responsiveness.py -q` — **28 passed**, including unrelated-subject rejection.
+- Full aggregate answer accuracy: pending final specialist runs.

@@ -178,10 +178,26 @@ def answer_from_evidence(question: str, candidates: list[dict], engine: LocalMod
 def unrelated_query(question: str, candidates: list[dict]) -> bool:
     """Reject an apparent hit when most distinct subject terms have no record support."""
     from .search.common import tokens, index_text, edit_distance
-    requested = set(tokens(question))
+    # Compare content rather than plural/expiry phrasing or generic list verbs.
+    # This affects the abstention gate only; index/query token identities and
+    # all retrieval thresholds remain unchanged.
+    filler = {'list', 'summarize', 'summary', 'all', 'appliance', 'appliances'}
+    def subject_terms(text):
+        result = set()
+        for word in tokens(text):
+            if word in filler: continue
+            if word in {'expiry', 'expire', 'expires', 'expiration', 'expiring', 'end', 'ends'}:
+                word = 'expiry'
+            elif word.endswith('ies') and len(word) > 4:
+                word = word[:-3] + 'y'
+            elif word.endswith('s') and len(word) > 4 and not word.endswith('ss'):
+                word = word[:-1]
+            result.add(word)
+        return result
+    requested = subject_terms(question)
     if len(requested) < 3 or not candidates:
         return False
-    found = set().union(*(set(tokens(index_text(row))) for row in candidates))
+    found = set().union(*(subject_terms(index_text(row)) for row in candidates))
     matches = sum(term in found or (len(term) >= 5 and not any(c.isdigit() for c in term) and
                   any(abs(len(term) - len(word)) <= 2 and edit_distance(term, word) <= 1 for word in found))
                   for term in requested)
