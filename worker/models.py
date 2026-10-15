@@ -215,6 +215,12 @@ class LocalModels:
         # original quote indices referenced by the sections.
         referenced = {index for section in sections for index in section.get('evidence', []) if type(index) is int}
         evidence = [row for row in evidence if row.get('index') in referenced]
+        from .numeric_evidence import supported_literals
+        eligible = {index for index, section in enumerate(sections) if supported_literals(section, evidence, question)}
+        if not eligible:
+            return []
+        referenced = {quote for index in eligible for quote in sections[index].get('evidence', [])}
+        evidence = [row for row in evidence if row.get('index') in referenced]
         schema = {'type': 'object', 'properties': {'supported': {'type': 'array', 'items': {'type': 'integer'}}}, 'required': ['supported']}
         payload = {'model': self.cfg.generation_model, 'stream': False, 'think': False, 'format': schema,
                    'messages': [{'role': 'system', 'content':
@@ -229,7 +235,7 @@ class LocalModels:
                      'If the requested object, attribute or comparison is absent, return no supported sections; do not substitute nearby facts. '
                      'Reject unreadable values, unsupported interpretations, invented comparisons and outside knowledge. '
                      'Do not accept a claim merely because it sounds plausible. Return {"supported":[]} if none pass.'},
-                     {'role': 'user', 'content': json.dumps({'question': question, 'sections': [dict(s, sectionIndex=i) for i, s in enumerate(sections)], 'quotes': [
+                     {'role': 'user', 'content': json.dumps({'question': question, 'sections': [dict(s, sectionIndex=i) for i, s in enumerate(sections) if i in eligible], 'quotes': [
                          {'index': e['index'], 'text': e['text'], 'page': e.get('page')} for e in evidence]})}],
                    'options': {'temperature': 0, 'num_ctx': 12288, 'num_predict': 250}}
         try:
@@ -241,7 +247,7 @@ class LocalModels:
             request = Request(self.cfg.ollama_url.rstrip('/') + '/api/chat', data=json.dumps(payload).encode(), headers={'Content-Type': 'application/json'})
             with urlopen(request, timeout=90) as response:
                 result = json.loads(json.loads(response.read())['message']['content'])
-            return [i for i in result.get('supported', []) if type(i) is int and 0 <= i < len(sections)]
+            return [i for i in result.get('supported', []) if type(i) is int and i in eligible]
         except Exception:
             return []
 

@@ -326,6 +326,142 @@
         "schema_migration_required": false,
         "reindex_required": false
       }
+    },
+    {
+      "cycle": "2-numeric-guard",
+      "timestamp": "2026-10-15T17:40:39.519757+00:00",
+      "base_app_commit": "dbdb80ba5d177936bbaca31f54f0a71d223cf8d4",
+      "changes": [
+        "Reject unsupported numeric literals and changed identifiers in each section own referenced text before same-model review, when no referenced visual evidence is needed.",
+        "Review only numerically eligible sections and their cited quotes, retaining original section/quote indices."
+      ],
+      "checks": [
+        {
+          "command": "python -m pytest tests/test_numeric_evidence.py tests/test_cited_evidence.py tests/test_answer_responsiveness.py -q",
+          "passed": 19,
+          "failed": 0,
+          "status": "PASS"
+        },
+        {
+          "command": "HOMEATLAS_DB_TESTS=1 python -m pytest tests -q",
+          "passed": 109,
+          "failed": 0,
+          "status": "PASS",
+          "warnings": "5 existing PyMuPDF/SWIG deprecation warnings"
+        },
+        {
+          "command": "npm test",
+          "passed": 87,
+          "failed": 0,
+          "files_passed": 15,
+          "status": "PASS"
+        },
+        {
+          "command": "npm run typecheck",
+          "status": "PASS",
+          "exit_code": 0
+        }
+      ],
+      "controlled_replay_final_guard": {
+        "schema_version": 1,
+        "timestamp": "2026-10-15T17:39:54.919046+00:00",
+        "kind": "controlled_cited_evidence_numeric_guard_review",
+        "old_app_commit": "ecb6aef",
+        "model": "qwen3-vl:4b-instruct",
+        "seed_note": "Same configured temperature zero; model requests are real, uncached.",
+        "source_diagnostics": "generation agent candidate434 saved synthetic outputs",
+        "runs": [
+          {
+            "case": "text-02",
+            "mode": "fixed-numeric-guard",
+            "original_payload_cache_identity_verified": true,
+            "accepted_section_indices": [
+              0
+            ],
+            "usage": [
+              {
+                "input_images": 0,
+                "prompt_eval_count": 444,
+                "eval_count": 7,
+                "served_model": "qwen3-vl:4b-instruct",
+                "raw_supported": [
+                  0
+                ],
+                "seconds": 0.8832063330046367,
+                "request_payload_sha256": "0e22ec06502cf1f458aa86e687c2cd2ffa29c45443f71bdac410b6bf878dae9e"
+              }
+            ],
+            "http_calls": 1
+          },
+          {
+            "case": "text-03",
+            "mode": "fixed-numeric-guard",
+            "original_payload_cache_identity_verified": true,
+            "accepted_section_indices": [
+              0
+            ],
+            "usage": [
+              {
+                "input_images": 0,
+                "prompt_eval_count": 415,
+                "eval_count": 7,
+                "served_model": "qwen3-vl:4b-instruct",
+                "raw_supported": [
+                  0
+                ],
+                "seconds": 0.6646407079824712,
+                "request_payload_sha256": "7466de0e4b9aeac2a3176175d7f95b9fd2cc8ee2aeafe9b59788084e4f3ec938"
+              }
+            ],
+            "http_calls": 1
+          },
+          {
+            "case": "unsupported-value",
+            "mode": "fixed-numeric-guard",
+            "original_payload_cache_identity_verified": false,
+            "accepted_section_indices": [],
+            "usage": [],
+            "http_calls": 0
+          },
+          {
+            "case": "irrelevant-quote",
+            "mode": "fixed-numeric-guard",
+            "original_payload_cache_identity_verified": false,
+            "accepted_section_indices": [],
+            "usage": [
+              {
+                "input_images": 0,
+                "prompt_eval_count": 445,
+                "eval_count": 5,
+                "served_model": "qwen3-vl:4b-instruct",
+                "raw_supported": [],
+                "seconds": 0.6867304170154966,
+                "request_payload_sha256": "4062f4a152755320b9bff8ca946b0d2b612697b4207162970acaa9de4b7acb31"
+              }
+            ],
+            "http_calls": 1
+          }
+        ]
+      },
+      "controlled_replay_interpretation": {
+        "positive_controls": "Saved text02 and text03 correct sections accepted through actual Qwen review, one HTTP call each.",
+        "unsupported_numeric": "Previously accepted unsupported 99-month value now rejected deterministically with zero HTTP calls.",
+        "irrelevant_quote": "Still rejected through one actual Qwen HTTP review.",
+        "measurement_scope": "Final retained guard probe uses three actual HTTP calls across four cases. A prior guard smoke replay also made three calls with the same decisions before the identifier-separator tightening; its detailed usage is not part of the retained final probe. These control probes are separate from frozen evaluation call counts."
+      },
+      "limitations": [
+        "Literal presence is necessary but not sufficient for semantic correctness: object/value pairing, units and date meaning still need support review.",
+        "Referenced visual/OCR claims skip the literal gate because image facts may be absent from extracted text; same-model vision review can still fail.",
+        "New derived numeric literals absent from cited text abstain; this can reduce completeness for arithmetic, totals and calculations. Structured saved-record fact paths are untouched.",
+        "Spelled-out numbers and arbitrary scientific/international numeric formats are not semantically validated by this guard.",
+        "Formatting normalization is bounded: standard decimal/thousands separators, common date components, grouped long digit identifiers and simple letter-prefix identifier separators. Identifier zeroes and arbitrary internal separators remain meaningful."
+      ],
+      "full_metric_impact": "PENDING_NEW_APP_FINGERPRINT_FULL_SUITE_TWICE",
+      "deployment": {
+        "restart_required": true,
+        "schema_migration_required": false,
+        "reindex_required": false
+      }
     }
   ]
 }
