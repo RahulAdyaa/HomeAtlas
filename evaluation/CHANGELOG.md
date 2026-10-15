@@ -46,3 +46,9 @@ Baseline is frozen in `evaluation/baseline_results.json` before these changes. R
 - Before: the new warranty aggregate test failed; the absent-valve subject rejection passed.
 - After: `pytest tests/test_aggregate_intent.py tests/test_hybrid_search.py tests/test_answer_responsiveness.py -q` — **28 passed**, including unrelated-subject rejection.
 - Full aggregate answer accuracy: pending final specialist runs.
+
+## Clear-cache HTTP method
+
+- Problem: the Settings button passed `{method:'DELETE'}` as application data to a helper that always used POST for any body. The cache route accepts GET/DELETE, so the action failed with 405.
+- Change: separate the browser helper's transport method from its JSON/form payload. The button now sends a bodyless DELETE with the existing household scope.
+- After: `vitest run tests/client-api.test.ts` — **3 passed** (DELETE request, preserved GET/POST/multipart behavior, and API error propagation). The frozen baseline's failing UI transport behavior is the before evidence; the final security/UI probe will check the application outcome.
