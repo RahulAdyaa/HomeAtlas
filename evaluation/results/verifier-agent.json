@@ -2,7 +2,7 @@
   "schema_version": 1,
   "agent": "verifier-agent",
   "stage": "preflight",
-  "status": "FINAL VERIFICATION PENDING; NUMERIC HEADING GAP REPORTED",
+  "status": "PREFLIGHT PASS; FINAL METRIC RECONCILIATION PENDING",
   "audited_commit": "41a8a813276c8b26d0ef3011c2b609a1446843fa",
   "timestamp_utc": "2026-10-15T12:07:52.266233+00:00",
   "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
@@ -215,7 +215,75 @@
           "evidence": "Definitive full independent final generation and other observations/statistics/docs remain in progress. Superseded candidate data must not be presented as definitive final. No README numerical-parity verdict issued."
         }
       ]
+    },
+    {
+      "stage": "heading-fixed definitive-source preflight",
+      "timestamp_utc": "2026-10-15T22:36:22.447192+00:00",
+      "audited_commit": "9cafa1e5876ba795444e5d79b23693a40fee13e4",
+      "app_source_fingerprint": "b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8",
+      "produced_evaluation_metrics": false,
+      "performed_inference": false,
+      "status": "PREFLIGHT PASS; FINAL METRIC RECONCILIATION PENDING",
+      "checks": [
+        {
+          "id": "numeric-heading-coverage",
+          "status": "RESOLVED",
+          "evidence": "Sole-fixer heading patch ff0d16c includes rendered heading and body in numeric coverage and rejects non-string fields before visual exemption. Previously confirmed unsupported-heading gap is fixed; referenced visuals remain explicitly outside text literal validation."
+        },
+        {
+          "id": "independent-heading-regressions",
+          "status": "PASS",
+          "evidence": "Independently ran numeric evidence, cited evidence and answer responsiveness tests: 24 passed with existing PyMuPDF/SWIG warnings. Fake engines/stub HTTP only, no actual inference or database-document access."
+        },
+        {
+          "id": "sealed-baseline-integrity",
+          "status": "PASS",
+          "evidence": "Current evaluation/baseline_results.json is byte-for-byte identical to commit 8c9349a sealed snapshot."
+        },
+        {
+          "id": "frozen-gold-and-measurement-code",
+          "status": "PASS",
+          "evidence": "protocol.frozen_dataset verified all frozen hashes. Git diff from 8c9349a showed no changes to specialist runners, protocol, metric helper files, requirement pins, testset/annotations/scenarios/frozen manifest or baseline snapshot."
+        },
+        {
+          "id": "current-source-provenance",
+          "status": "PASS",
+          "evidence": "Current main application source hash matches the orchestrator definitive heading-fixed source. Candidate history must remain separately identified."
+        },
+        {
+          "id": "local-links-and-screenshot",
+          "status": "PASS",
+          "evidence": "Main README, evaluation README and verification Markdown local links resolve. Previously visually inspected fictional locations-overview screenshot is byte-identical to audited historical version."
+        },
+        {
+          "id": "publication-privacy",
+          "status": "PASS WITH SCOPE",
+          "evidence": "No forbidden tracked private environments, runtime/data/model/dependency artifacts; no unique configured worker/auth/password values or generic API-token/private-key patterns found in tracked text. Intentional public development database default remains documented. No real private logs, source documents or DB cache payloads were inspected. Final staged-content recheck still required."
+        },
+        {
+          "id": "fresh-archive-cli",
+          "status": "PASS",
+          "evidence": "Fresh main git archive passed --help and explicit --phase final dry-runs, including A/G aliases. No specialist execution, dependency installation, database or model call. Full fresh-machine inference remains NOT VERIFIED."
+        },
+        {
+          "id": "documented-runner-workaround",
+          "status": "QUALIFIED",
+          "evidence": "Current evaluation README sets EVAL_APP_ROOT consistently and warns about conflicting explicit --app-root versus exported environment in frozen runner. Code precedence bug is not claimed fixed. Historical baseline reproduction uses separate matching source, outputs and development runtime."
+        },
+        {
+          "id": "canonical-final-numeric-parity",
+          "status": "PENDING",
+          "evidence": "Canonical final snapshot, final generation/system imports and completed documentation remain unavailable/in progress. README final columns intentionally Pending. No final numeric/CI/denominator reconciliation verdict or full clean-install inference claim."
+        }
+      ]
     }
   ],
-  "latest_audited_commit": "3915d1186c3625c2acffefc835bbc3199c4c9c68"
+  "latest_audited_commit": "9cafa1e5876ba795444e5d79b23693a40fee13e4",
+  "latest_app_source_fingerprint": "b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8",
+  "resolved_findings": [
+    "numeric-heading-coverage",
+    "evaluation-readme-default-phase",
+    "app-root-source-hash-guard",
+    "local-scorecard-link"
+  ]
 }

@@ -1,5 +1,15 @@
 # Independent verification
 
+**Latest preflight passes; final metric reconciliation is pending.** The definitive heading-fixed source is `b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8`, audited at `9cafa1e5876ba795444e5d79b23693a40fee13e4`. This verifier has produced no RAG evaluation scores or model inference. Earlier findings below are historical; the numeric-heading omission has been resolved by the sole fixer.
+
+- The heading/body numeric guard, cited-evidence alignment and answer responsiveness regressions independently pass **24 tests** with fake engines/stub HTTP. Existing PyMuPDF/SWIG warnings remain. These are regression outcomes, not RAG quality measurements.
+- The sealed baseline snapshot remains byte-identical to commit `8c9349a`. Frozen gold hashes validate; specialist runners, protocol, metric helpers and dependency pins are unchanged from that freeze.
+- Main/evaluation README and verification links resolve. The previously visually inspected fictional layout screenshot is unchanged. Tracked files contain no forbidden private runtime/data/dependency/model artifacts or detected unique configured credentials/API-key patterns. Private user documents, query logs and database cache payloads were not inspected.
+- Fresh archive CLI help and explicit final-phase dry-runs pass. The documented consistent-root workaround covers the frozen runner’s environment-precedence caveat; that code issue is not claimed fixed. Full fresh dependency installation and clean-machine inference are **NOT VERIFIED**.
+- Canonical final measurements, final generation/system imports, and README before/after values/denominators/intervals still require final reconciliation. Pending final columns are deliberate. No all-metrics publication pass is issued. A final tracked/staged privacy scan remains required.
+
+## Historical preflight record
+
 **Preflight only — final verification is pending.** This verifier has not generated evaluation scores, run model inference, or aggregated quality measurements. Application code, frozen inputs, metric definitions and other agents’ results were not changed.
 
 The audited revision is `41a8a813276c8b26d0ef3011c2b609a1446843fa`. Frozen inputs and application source hashes match the recorded baseline application.
