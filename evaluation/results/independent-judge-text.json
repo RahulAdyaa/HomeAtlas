@@ -1,0 +1,275 @@
+{
+  "schema_version": "independent-codex-review-v1",
+  "reviewer": "Codex independent semantic review",
+  "model_id": null,
+  "model_id_note": "Exact Codex model variant is not exposed to this reviewer; this reviewer is separate from the local Qwen3-VL answer generator.",
+  "scope": "Only the 12 fictional synthetic text questions text-01..text-12, saved final run 1. No new app inference or external LLM judge call.",
+  "reviewed_at_utc": "2026-10-16T10:50:36.169535+00:00",
+  "source": {
+    "file": "evaluation/results/generation-agent.json",
+    "sha256": "f7691e586c7aa84eff810dd3fe4e86ca647a2a5bdaee3a03bbaef3c2e1a66b82",
+    "run_id": "final-run-01",
+    "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
+    "app_source_fingerprint": "b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8"
+  },
+  "rubric": {
+    "answer_correctness": "1 accurate and complete; 0.5 partially correct; 0 incorrect or unjustified refusal on answerable question. Appropriate refusal on authored unanswerable query scores 1.",
+    "faithfulness": "1 all material answer claims supported by cited synthetic evidence; 0.5 mixed; 0 unsupported; null when no substantive answer.",
+    "answer_relevancy": "1 directly addresses request; 0.5 partial; 0 irrelevant or false refusal on answerable query; null for appropriate abstention on authored unanswerable query.",
+    "hallucination": "True only for an explicit unsupported factual claim. An unsupported refusal is counted as a false refusal, not a fabricated fact.",
+    "citation_claim_support": "supported / partial / unsupported / none based on saved citation excerpts checked against answer claims."
+  },
+  "summary": {
+    "questions_reviewed": 12,
+    "answer_correctness": {
+      "mean": 0.9166666666666666,
+      "n": 12,
+      "score_counts": {
+        "1": 11,
+        "0.5": 0,
+        "0": 1
+      }
+    },
+    "faithfulness": {
+      "mean": 1.0,
+      "n": 9,
+      "not_applicable": 3
+    },
+    "answer_relevancy": {
+      "mean": 0.9,
+      "n": 10,
+      "not_applicable": 2
+    },
+    "hallucination": {
+      "rate": 0.0,
+      "n": 12
+    },
+    "authored_negative_abstention": {
+      "appropriate": 2,
+      "n": 2
+    },
+    "false_refusal_on_answerable": {
+      "count": 1,
+      "n": 10
+    },
+    "citation_claim_support": {
+      "supported": 9,
+      "partial": 0,
+      "unsupported": 0,
+      "none": 3
+    }
+  },
+  "per_question": [
+    {
+      "id": "text-01",
+      "question": "How long is the warranty for unit T1?",
+      "unanswerable": false,
+      "answer_correctness": 1,
+      "faithfulness": 1,
+      "answer_relevancy": 1,
+      "hallucination": false,
+      "abstention_appropriate": null,
+      "citation_claim_support": "supported",
+      "evidence_note": "Cited text.pdf p.1 explicitly states T1 has an 18-month warranty and gives the displayed Study > Desk > Top drawer path.",
+      "citation_pages": [
+        {
+          "title": "text.pdf",
+          "page": 1
+        }
+      ]
+    },
+    {
+      "id": "text-02",
+      "question": "How often does unit T1 need a service inspection?",
+      "unanswerable": false,
+      "answer_correctness": 1,
+      "faithfulness": 1,
+      "answer_relevancy": 1,
+      "hallucination": false,
+      "abstention_appropriate": null,
+      "citation_claim_support": "supported",
+      "evidence_note": "Cited text.pdf p.1 explicitly states T1 requires a service inspection every 3 months.",
+      "citation_pages": [
+        {
+          "title": "text.pdf",
+          "page": 1
+        }
+      ]
+    },
+    {
+      "id": "text-03",
+      "question": "How long is the warranty for unit T2?",
+      "unanswerable": false,
+      "answer_correctness": 1,
+      "faithfulness": 1,
+      "answer_relevancy": 1,
+      "hallucination": false,
+      "abstention_appropriate": null,
+      "citation_claim_support": "supported",
+      "evidence_note": "Cited text.pdf p.2 explicitly states T2 has a 24-month warranty.",
+      "citation_pages": [
+        {
+          "title": "text.pdf",
+          "page": 2
+        }
+      ]
+    },
+    {
+      "id": "text-04",
+      "question": "How often does unit T2 need a service inspection?",
+      "unanswerable": false,
+      "answer_correctness": 1,
+      "faithfulness": 1,
+      "answer_relevancy": 1,
+      "hallucination": false,
+      "abstention_appropriate": null,
+      "citation_claim_support": "supported",
+      "evidence_note": "Cited text.pdf p.2 explicitly states T2 requires a service inspection every 4 months.",
+      "citation_pages": [
+        {
+          "title": "text.pdf",
+          "page": 2
+        }
+      ]
+    },
+    {
+      "id": "text-05",
+      "question": "How long is the warranty for unit T3?",
+      "unanswerable": false,
+      "answer_correctness": 1,
+      "faithfulness": 1,
+      "answer_relevancy": 1,
+      "hallucination": false,
+      "abstention_appropriate": null,
+      "citation_claim_support": "supported",
+      "evidence_note": "Cited text.pdf p.3 explicitly states T3 has a 30-month warranty.",
+      "citation_pages": [
+        {
+          "title": "text.pdf",
+          "page": 3
+        }
+      ]
+    },
+    {
+      "id": "text-06",
+      "question": "How often does unit T3 need a service inspection?",
+      "unanswerable": false,
+      "answer_correctness": 1,
+      "faithfulness": 1,
+      "answer_relevancy": 1,
+      "hallucination": false,
+      "abstention_appropriate": null,
+      "citation_claim_support": "supported",
+      "evidence_note": "The long quoted citation from text.pdf p.3 contains the requested T3 inspection interval: every 5 months.",
+      "citation_pages": [
+        {
+          "title": "text.pdf",
+          "page": 3
+        }
+      ]
+    },
+    {
+      "id": "text-07",
+      "question": "How long is the warranty for unit T4?",
+      "unanswerable": false,
+      "answer_correctness": 1,
+      "faithfulness": 1,
+      "answer_relevancy": 1,
+      "hallucination": false,
+      "abstention_appropriate": null,
+      "citation_claim_support": "supported",
+      "evidence_note": "Cited text.pdf p.4 explicitly states T4 has a 36-month warranty.",
+      "citation_pages": [
+        {
+          "title": "text.pdf",
+          "page": 4
+        }
+      ]
+    },
+    {
+      "id": "text-08",
+      "question": "How often does unit T4 need a service inspection?",
+      "unanswerable": false,
+      "answer_correctness": 1,
+      "faithfulness": 1,
+      "answer_relevancy": 1,
+      "hallucination": false,
+      "abstention_appropriate": null,
+      "citation_claim_support": "supported",
+      "evidence_note": "Cited text.pdf p.4 explicitly states T4 requires a service inspection every 6 months.",
+      "citation_pages": [
+        {
+          "title": "text.pdf",
+          "page": 4
+        }
+      ]
+    },
+    {
+      "id": "text-09",
+      "question": "Give the warranty durations for units T1 and T4.",
+      "unanswerable": false,
+      "answer_correctness": 1,
+      "faithfulness": 1,
+      "answer_relevancy": 1,
+      "hallucination": false,
+      "abstention_appropriate": null,
+      "citation_claim_support": "supported",
+      "evidence_note": "Two cited excerpts from text.pdf pp.1 and 4 give T1 as 18 months and T4 as 36 months, matching both requested values.",
+      "citation_pages": [
+        {
+          "title": "text.pdf",
+          "page": 1
+        },
+        {
+          "title": "text.pdf",
+          "page": 4
+        }
+      ]
+    },
+    {
+      "id": "text-10",
+      "question": "Summarize the service inspection intervals for all four T units.",
+      "unanswerable": false,
+      "answer_correctness": 0,
+      "faithfulness": null,
+      "answer_relevancy": 0,
+      "hallucination": false,
+      "abstention_appropriate": false,
+      "citation_claim_support": "none",
+      "evidence_note": "The answer refuses. The synthetic text records state T1/T2/T3/T4 inspection intervals of 3/4/5/6 months (visible in cited excerpts for text-02/04/06/08); the requested summary is answerable.",
+      "citation_pages": []
+    },
+    {
+      "id": "text-11",
+      "question": "What is the Wi-Fi password listed in the text records?",
+      "unanswerable": true,
+      "answer_correctness": 1,
+      "faithfulness": null,
+      "answer_relevancy": null,
+      "hallucination": false,
+      "abstention_appropriate": true,
+      "citation_claim_support": "none",
+      "evidence_note": "The authored reference marks this Wi-Fi password query unanswerable; the response abstains without inventing a password.",
+      "citation_pages": []
+    },
+    {
+      "id": "text-12",
+      "question": "What serial number is shown on the purple emergency valve in the text records?",
+      "unanswerable": true,
+      "answer_correctness": 1,
+      "faithfulness": null,
+      "answer_relevancy": null,
+      "hallucination": false,
+      "abstention_appropriate": true,
+      "citation_claim_support": "none",
+      "evidence_note": "The authored reference says no purple emergency valve is documented; the response abstains without inventing a serial number.",
+      "citation_pages": []
+    }
+  ],
+  "limitations": [
+    "Small, authored synthetic text subset: these scores do not estimate production accuracy or image/table/chart/scanned performance.",
+    "Cited saved source excerpts and authored references were inspected; no independent PDF re-extraction or human expert adjudication was performed.",
+    "Faithfulness excludes three refusals with no substantive answer; citation support is absent for those three responses.",
+    "No RAGAS judge model, paid external API, confidence intervals, or statistical significance claim is supplied by this review."
+  ]
+}
