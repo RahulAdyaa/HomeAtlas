@@ -3,6 +3,10 @@ import {itemFactIntent} from '../lib/item-facts';
 import {normalizeRecordName} from '../lib/record-names';
 it('recognizes natural serial-number questions without requiring one exact sentence',()=>{
  for(const question of ['What is my Aadhaar card serial number?','What is the serial number of my Aadhaar card?',"What's my Aadhaar card number?",'Tell me my Aadhaar number']){const intent=itemFactIntent(question);expect(intent?.field.key).toBe('serialNumber');expect(normalizeRecordName(intent?.target||'')).toBe('aadhaar');}
+ for(const question of ['Can you tell me the serial number of my air purifier?','Please find the serial number for my air purifier']){
+  const intent=itemFactIntent(question);expect(intent?.field.key).toBe('serialNumber');expect(normalizeRecordName(intent?.target||'')).toBe('airpurifier');
+ }
+ expect(itemFactIntent('What is its serial number?')).toMatchObject({target:'',field:{key:'serialNumber'}});
 });
 it('matches supported saved fields without confusing model number with serial number',()=>{
  expect(itemFactIntent('Show me the model number for my washing machine')?.field.key).toBe('model');

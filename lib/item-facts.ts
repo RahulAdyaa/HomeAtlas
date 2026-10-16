@@ -13,6 +13,10 @@ const fields=[
 export type ItemFactIntent={target:string;field:typeof fields[number]};
 export function itemFactIntent(question:string):ItemFactIntent|null{
  let body=question.trim().replace(/[?!.]+$/,'').replace(/[’‘]/g,"'");
+ // People often ask the assistant to tell/show them a fact instead of starting
+ // with the exact "What is ..." form used by the original matcher.
+ body=body.replace(/^(?:can|could|would)\s+you\s+(?:please\s+)?(?:tell|show|give)\s+me\s+/i,'tell me ')
+  .replace(/^(?:please\s+)?(?:find|look up)\s+(?:me\s+)?/i,'show me ');
  const clean=(target:string)=>target.replace(/^(?:(?:my|our|the|a|an)(?:\s+|$))+/i,'').replace(/'s$/i,'').trim();
  const warranty=body.match(/^when\s+(?:does|will)\s+(.+?)\s+warranty\s+(?:expire|end)$/i);
  if(warranty&&clean(warranty[1]))return {target:clean(warranty[1]),field:fields.find(f=>f.key==='warrantyDate')!};
@@ -30,17 +34,26 @@ export function itemFactIntent(question:string):ItemFactIntent|null{
   else if(/^(?:of|for|on)\b/i.test(after)&&/^(?:(?:my|our|the|a|an)\s*)?$/i.test(before))target=after.replace(/^(?:of|for|on)\s+/i,'');
   else continue;
   target=clean(target);
+  if(/^(?:it|its|this|that|this item)$/i.test(target))return {target:'',field};
   if(target&&normalizeRecordName(target))return {target,field};
+ }
+ // A selected inventory item supplies the subject for short questions such as
+ // "What is its serial number?". The caller must still enforce itemId.
+ if(/^(?:(?:the|its|my|this|that)\s+)?(?:serial\s*(?:number|no)|s\s*\/\s*n|model\s*number|model|brand|make)(?:\s+(?:for|of)\s+(?:it|this(?:\s+item)?))?$/i.test(body)){
+  const field=/^(?:(?:the|its|my|this|that)\s+)?(?:model)/i.test(body)?fields[1]:/^(?:(?:the|its|my|this|that)\s+)?(?:brand|make)/i.test(body)?fields[2]:fields[0];
+  return {target:'',field};
  }
  return null;
 }
 export async function lookupItemFact(db:DB,householdId:string,question:string,itemId?:string|null,roomId?:string|null){
  const intent=itemFactIntent(question);if(!intent)return null;
  const {field,target}=intent;
+ if(!target&&!itemId)return null;
  // The selected column comes exclusively from the server-owned field list, never generated SQL.
  const rows=(await db.query(`SELECT id,name,location_id,location_path,photo_source_id,${field.column} AS recorded_value FROM items
  WHERE household_id=$1 AND ($2::uuid IS NULL OR id=$2) AND ($4::uuid IS NULL OR room_id=$4)
- AND (${recordNameSql('name')}=$3 OR ($2::uuid IS NOT NULL AND $3 IN ('it','thisitem','this')))
+ AND (${recordNameSql('name')}=$3 OR (length($3)>3 AND right(${recordNameSql('name')},length($3))=$3)
+ OR ($2::uuid IS NOT NULL AND $3 IN ('','it','thisitem','this')))
  ORDER BY created_at,id LIMIT 6`,[householdId,itemId||null,normalizeRecordName(target),roomId||null])).rows;
  if(!rows.length||rows.every(row=>row.recorded_value===null||String(row.recorded_value).trim()===''))return null;
  const locations=rows.slice(0,5).map(row=>recordLocation(householdId,'item',row));

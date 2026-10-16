@@ -74,6 +74,16 @@ it('creates room/zone/container, moves documents, updates paths, and blocks inva
  expect(fact.mode).toBe('recorded-fact');expect(fact.recordFacts[0]).toMatchObject({id:aadhaar,field:'serialNumber',value:fixtureSerial});expect(fact.answer).toContain(fixtureSerial);expect(fact.citations).toEqual([]);
  const fieldResponse=await askRoute.POST(request({question:'What is my Aadhaar card model number?',operationId:randomUUID()}));expect(fieldResponse.status).toBe(200);expect((await fieldResponse.json()).recordFacts[0].value).toBe('Fixture model');
  const {lookupItemFact}=await import('../lib/item-facts');
+ const addedProduct=await atlasRoute.POST(request({action:'addItem',name:'Bedroom air purifier',roomId:room,serialNumber:'TEST-SERIAL-418'}));
+ expect(addedProduct.status).toBe(200);
+ const productId=(await addedProduct.json()).item.id;
+ const productQuestion=await askRoute.POST(request({question:'Can you tell me the serial number of my air purifier?',operationId:randomUUID()}));
+ expect(productQuestion.status).toBe(200);
+ expect(await productQuestion.json()).toMatchObject({mode:'recorded-fact',recordFacts:[{id:productId,value:'TEST-SERIAL-418'}]});
+ const selectedQuestion=await askRoute.POST(request({question:'What is its serial number?',itemId:productId,operationId:randomUUID()}));
+ expect(selectedQuestion.status).toBe(200);
+ expect(await selectedQuestion.json()).toMatchObject({mode:'recorded-fact',recordFacts:[{id:productId,value:'TEST-SERIAL-418'}]});
+ expect(await lookupItemFact(pool,home,'What is its serial number?')).toBeNull();
  expect(await lookupItemFact(pool,other,'What is my Aadhaar card serial number?')).toBeNull();
  expect(await lookupItemFact(pool,home,'What is my Aadhaar card serial number?',pan)).toBeNull();
  expect((await lookupItemFact(pool,home,'What is my Aadhaar card warranty end date?'))?.recordFacts[0].value).toBe('2030-01-02');
