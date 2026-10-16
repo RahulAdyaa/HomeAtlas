@@ -8,6 +8,7 @@ import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
 import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
 import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
 import python from 'react-syntax-highlighter/dist/esm/languages/prism/python';
+import {highlightNodes,highlightTerms} from '@/lib/answer-highlight';
 
 SyntaxHighlighter.registerLanguage('bash', bash);
 SyntaxHighlighter.registerLanguage('javascript', javascript);
@@ -21,11 +22,15 @@ export function completeMath(text: string): string {
   return text;
 }
 
-export default function AnswerContent({ text }: { text: string }) {
+export default function AnswerContent({ text, query='' }: { text: string; query?: string }) {
+  const terms=highlightTerms(query,text);
   return <div className="answer-text answer-content"><ReactMarkdown
     remarkPlugins={[remarkGfm, remarkMath]}
     rehypePlugins={[rehypeSanitize, [rehypeKatex, { throwOnError: false, strict: 'ignore' }]]}
     components={{
+      p: ({children}) => <p>{highlightNodes(children,terms)}</p>,
+      li: ({children}) => <li>{highlightNodes(children,terms)}</li>,
+      h3: ({children}) => <h3>{highlightNodes(children,terms)}</h3>,
       a: ({children, href}) => <a href={href || '#'} target="_blank" rel="noopener noreferrer">{children}</a>,
       table: ({children}) => <div className="answer-table-wrap" tabIndex={0} aria-label="Supporting table"><table>{children}</table></div>,
       th: ({children}) => <th scope="col">{children}</th>,

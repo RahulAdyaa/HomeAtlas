@@ -39,6 +39,8 @@ body{font-variant-numeric:tabular-nums}
 .answer-content th,.answer-content td{border:1px solid var(--line);padding:.6rem .75rem;text-align:left}
 .answer-content th{background:var(--sage);font-weight:700;color:var(--ink)}
 .answer-copy{margin:.25rem 0 1rem;min-height:38px}
+.answer-content mark,.evidence-snippet mark{background:#fff0b8;color:#263024;border-radius:3px;padding:0 .08em}
+[data-theme="dark"] .answer-content mark,[data-theme="dark"] .evidence-snippet mark{background:#665a22;color:#fff8d1}
 [data-theme="dark"] .answer-content pre{background:#101822;color:#e8f0e8}
 @media(max-width:700px){.answer-content{font-size:1rem;max-width:100%}.answer-content pre{font-size:.8rem}}
 .answer-table-wrap{overflow:auto;max-width:100%;margin:20px 0;border:1px solid var(--line);border-radius:12px}
