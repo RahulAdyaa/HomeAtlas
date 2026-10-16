@@ -18,6 +18,7 @@ E = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(E))
 from protocol import app_fingerprint, frozen_dataset
 from stats_analysis import AGENTS, INFERENCE_AGENTS, aggregate_metrics, digest, paired_significance
+from requested_coverage import augment, coverage_markdown
 
 SELECTED = {
  'retrieval-agent': ['all/hybrid_runtime/precision@5','all/hybrid_runtime/recall@5',
@@ -131,6 +132,7 @@ def main():
     'Final RAGAS embedding similarity/BERTScore: reference postprocessing was not reached.',
     'Scanned-PDF generation quality: no scanned questions in the stopped prefix.',
     'HTTP timeout rate, production capacity/cost, numeric trust calibration and isolated3D FPS: not established.']}
+ augment(payload,runs,baseline)
  save(out/'showcase_results.json',payload)
  appendix=out/'RAG_EVALUATION_BASELINE_APPENDIX.md'
  if not appendix.exists():
@@ -198,6 +200,7 @@ def render(out,data):
   'Selected intervals use the frozen 5,000-draw percentile bootstrap, seed741, with repeated runs clustered by question/probe ID. A degenerate [0,0] or [1,1] empirical interval is not a population guarantee. Prefix intervals are conditional on the stopped prefix, not representative multimodal quality. Superseded candidate runs remain in raw `candidate_history` and are excluded from this primary source version.',
   '', 'Known historical provenance limit: the baseline security metadata digest was captured before generation metadata finalized; its reused stage-call/timing rows match. Raw baseline objects are preserved. The actual records and model identities remain in [specialist results](results/).',
   '', '[Full historical baseline report](RAG_EVALUATION_BASELINE_APPENDIX.md) · [Unchanged historical metric CSV](stats-metric-scorecard.csv) · [Frozen baseline JSON](baseline_results.json) · [Fix log](CHANGELOG.md)','']
+ lines+=coverage_markdown(data)
  (out/'RAG_EVALUATION_REPORT.md').write_text('\n'.join(lines))
 
 if __name__=='__main__':main()

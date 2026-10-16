@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "status": "BUDGET_LIMITED_SHOWCASE_PARTIAL_GENERATION",
-  "timestamp_utc": "2026-10-16T06:08:41.140000+00:00",
+  "timestamp_utc": "2026-10-16T06:22:45.099685+00:00",
   "app_source_fingerprint": "b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8",
   "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
   "baseline_file": "baseline_results.json",
@@ -2978,6 +2978,2972 @@
         "n_clusters": 1,
         "n_observations": 2
       }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "text/hybrid_runtime/precision@5",
+      "phase": "final",
+      "value": 0.20987654320987656,
+      "run_values": [
+        0.20987654320987656,
+        0.20987654320987656
+      ],
+      "n_per_run": [
+        81,
+        81
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "text/hybrid_runtime/precision@5",
+          "value": 0.20987654320987656,
+          "n": 81
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "text/hybrid_runtime/precision@5",
+          "value": 0.20987654320987656,
+          "n": 81
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "text/hybrid_runtime/precision@5",
+        "run_values": [
+          0.20740740740740743,
+          0.20740740740740743
+        ],
+        "n_per_run": [
+          81,
+          81
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.20740740740740743,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.1901234567901232,
+          "high": 0.22716049382716022,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 81,
+          "n_observations": 162,
+          "small_sample_note": null
+        },
+        "n_clusters": 81,
+        "n_observations": 162
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "text/hybrid_runtime/recall@5",
+      "phase": "final",
+      "value": 0.9753086419753086,
+      "run_values": [
+        0.9753086419753086,
+        0.9753086419753086
+      ],
+      "n_per_run": [
+        81,
+        81
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "text/hybrid_runtime/recall@5",
+          "value": 0.9753086419753086,
+          "n": 81
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "text/hybrid_runtime/recall@5",
+          "value": 0.9753086419753086,
+          "n": 81
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "text/hybrid_runtime/recall@5",
+        "run_values": [
+          0.9629629629629629,
+          0.9629629629629629
+        ],
+        "n_per_run": [
+          81,
+          81
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.9629629629629629,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.9135802469135802,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 81,
+          "n_observations": 162,
+          "small_sample_note": null
+        },
+        "n_clusters": 81,
+        "n_observations": 162
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "text/hybrid_runtime/hit@5",
+      "phase": "final",
+      "value": 0.9753086419753086,
+      "run_values": [
+        0.9753086419753086,
+        0.9753086419753086
+      ],
+      "n_per_run": [
+        81,
+        81
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "text/hybrid_runtime/hit@5",
+          "value": 0.9753086419753086,
+          "n": 81
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "text/hybrid_runtime/hit@5",
+          "value": 0.9753086419753086,
+          "n": 81
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "text/hybrid_runtime/hit@5",
+        "run_values": [
+          0.9629629629629629,
+          0.9629629629629629
+        ],
+        "n_per_run": [
+          81,
+          81
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.9629629629629629,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.9135802469135802,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 81,
+          "n_observations": 162,
+          "small_sample_note": null
+        },
+        "n_clusters": 81,
+        "n_observations": 162
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "text/hybrid_runtime/mrr@5",
+      "phase": "final",
+      "value": 0.911522633744856,
+      "run_values": [
+        0.911522633744856,
+        0.911522633744856
+      ],
+      "n_per_run": [
+        81,
+        81
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "text/hybrid_runtime/mrr@5",
+          "value": 0.911522633744856,
+          "n": 81
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "text/hybrid_runtime/mrr@5",
+          "value": 0.911522633744856,
+          "n": 81
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "text/hybrid_runtime/mrr@5",
+        "run_values": [
+          0.9090534979423869,
+          0.9090534979423869
+        ],
+        "n_per_run": [
+          81,
+          81
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.9090534979423869,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.8473251028806585,
+          "high": 0.9617283950617285,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 81,
+          "n_observations": 162,
+          "small_sample_note": null
+        },
+        "n_clusters": 81,
+        "n_observations": 162
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "text/hybrid_runtime/ndcg@5",
+      "phase": "final",
+      "value": 0.9267307875277058,
+      "run_values": [
+        0.9267307875277058,
+        0.9267307875277058
+      ],
+      "n_per_run": [
+        81,
+        81
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "text/hybrid_runtime/ndcg@5",
+          "value": 0.9267307875277058,
+          "n": 81
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "text/hybrid_runtime/ndcg@5",
+          "value": 0.9267307875277058,
+          "n": 81
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "text/hybrid_runtime/ndcg@5",
+        "run_values": [
+          0.9204389666400947,
+          0.9204389666400947
+        ],
+        "n_per_run": [
+          81,
+          81
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.9204389666400947,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.8668630999114636,
+          "high": 0.9664426010293652,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 81,
+          "n_observations": 162,
+          "small_sample_note": null
+        },
+        "n_clusters": 81,
+        "n_observations": 162
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "table/hybrid_runtime/precision@5",
+      "phase": "final",
+      "value": 0.22,
+      "run_values": [
+        0.22,
+        0.22
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "table/hybrid_runtime/precision@5",
+          "value": 0.22,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "table/hybrid_runtime/precision@5",
+          "value": 0.22,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "table/hybrid_runtime/precision@5",
+        "run_values": [
+          0.22,
+          0.22
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.22,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.19999999999999998,
+          "high": 0.26000000000000006,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "table/hybrid_runtime/recall@5",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "table/hybrid_runtime/recall@5",
+          "value": 1.0,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "table/hybrid_runtime/recall@5",
+          "value": 1.0,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "table/hybrid_runtime/recall@5",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "table/hybrid_runtime/hit@5",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "table/hybrid_runtime/hit@5",
+          "value": 1.0,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "table/hybrid_runtime/hit@5",
+          "value": 1.0,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "table/hybrid_runtime/hit@5",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "table/hybrid_runtime/mrr@5",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "table/hybrid_runtime/mrr@5",
+          "value": 1.0,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "table/hybrid_runtime/mrr@5",
+          "value": 1.0,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "table/hybrid_runtime/mrr@5",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "table/hybrid_runtime/ndcg@5",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "table/hybrid_runtime/ndcg@5",
+          "value": 1.0,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "table/hybrid_runtime/ndcg@5",
+          "value": 1.0,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "table/hybrid_runtime/ndcg@5",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "image/hybrid_runtime/precision@5",
+      "phase": "final",
+      "value": 0.42000000000000004,
+      "run_values": [
+        0.42000000000000004,
+        0.42000000000000004
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "image/hybrid_runtime/precision@5",
+          "value": 0.42000000000000004,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "image/hybrid_runtime/precision@5",
+          "value": 0.42000000000000004,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "image/hybrid_runtime/precision@5",
+        "run_values": [
+          0.62,
+          0.62
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.62,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.5999999999999999,
+          "high": 0.6599999999999999,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "image/hybrid_runtime/recall@5",
+      "phase": "final",
+      "value": 0.25,
+      "run_values": [
+        0.25,
+        0.25
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "image/hybrid_runtime/recall@5",
+          "value": 0.25,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "image/hybrid_runtime/recall@5",
+          "value": 0.25,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "image/hybrid_runtime/recall@5",
+        "run_values": [
+          0.3625,
+          0.3625
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.3625,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.3375,
+          "high": 0.375,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "image/hybrid_runtime/hit@5",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "image/hybrid_runtime/hit@5",
+          "value": 1.0,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "image/hybrid_runtime/hit@5",
+          "value": 1.0,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "image/hybrid_runtime/hit@5",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "image/hybrid_runtime/mrr@5",
+      "phase": "final",
+      "value": 0.8,
+      "run_values": [
+        0.8,
+        0.8
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "image/hybrid_runtime/mrr@5",
+          "value": 0.8,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "image/hybrid_runtime/mrr@5",
+          "value": 0.8,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "image/hybrid_runtime/mrr@5",
+        "run_values": [
+          0.95,
+          0.95
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.95,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.85,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "image/hybrid_runtime/ndcg@5",
+      "phase": "final",
+      "value": 0.47510527326037283,
+      "run_values": [
+        0.47510527326037283,
+        0.47510527326037283
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "image/hybrid_runtime/ndcg@5",
+          "value": 0.47510527326037283,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "image/hybrid_runtime/ndcg@5",
+          "value": 0.47510527326037283,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "image/hybrid_runtime/ndcg@5",
+        "run_values": [
+          0.6911800699883425,
+          0.6911800699883425
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.6911800699883425,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.6754821372315527,
+          "high": 0.7056468665024178,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "chart/hybrid_runtime/precision@5",
+      "phase": "final",
+      "value": 0.58,
+      "run_values": [
+        0.58,
+        0.58
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "chart/hybrid_runtime/precision@5",
+          "value": 0.58,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "chart/hybrid_runtime/precision@5",
+          "value": 0.58,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "chart/hybrid_runtime/precision@5",
+        "run_values": [
+          0.62,
+          0.62
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.62,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.5999999999999999,
+          "high": 0.6599999999999999,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "chart/hybrid_runtime/recall@5",
+      "phase": "final",
+      "value": 0.20625,
+      "run_values": [
+        0.20625,
+        0.20625
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "chart/hybrid_runtime/recall@5",
+          "value": 0.20625,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "chart/hybrid_runtime/recall@5",
+          "value": 0.20625,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "chart/hybrid_runtime/recall@5",
+        "run_values": [
+          0.2125,
+          0.2125
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.2125,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.1875,
+          "high": 0.2375,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "chart/hybrid_runtime/hit@5",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "chart/hybrid_runtime/hit@5",
+          "value": 1.0,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "chart/hybrid_runtime/hit@5",
+          "value": 1.0,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "chart/hybrid_runtime/hit@5",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "chart/hybrid_runtime/mrr@5",
+      "phase": "final",
+      "value": 0.95,
+      "run_values": [
+        0.95,
+        0.95
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "chart/hybrid_runtime/mrr@5",
+          "value": 0.95,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "chart/hybrid_runtime/mrr@5",
+          "value": 0.95,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "chart/hybrid_runtime/mrr@5",
+        "run_values": [
+          0.95,
+          0.95
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.95,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.85,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "chart/hybrid_runtime/ndcg@5",
+      "phase": "final",
+      "value": 0.6888105521175902,
+      "run_values": [
+        0.6888105521175902,
+        0.6888105521175902
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "chart/hybrid_runtime/ndcg@5",
+          "value": 0.6888105521175902,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "chart/hybrid_runtime/ndcg@5",
+          "value": 0.6888105521175902,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "chart/hybrid_runtime/ndcg@5",
+        "run_values": [
+          0.716537894853095,
+          0.716537894853095
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.716537894853095,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.7041605392693813,
+          "high": 0.7227265726449518,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "scanned/hybrid_runtime/precision@5",
+      "phase": "final",
+      "value": 0.56,
+      "run_values": [
+        0.56,
+        0.56
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "scanned/hybrid_runtime/precision@5",
+          "value": 0.56,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "scanned/hybrid_runtime/precision@5",
+          "value": 0.56,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "scanned/hybrid_runtime/precision@5",
+        "run_values": [
+          0.96,
+          0.96
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.96,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.8799999999999999,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "scanned/hybrid_runtime/recall@5",
+      "phase": "final",
+      "value": 0.3833333333333333,
+      "run_values": [
+        0.3833333333333333,
+        0.3833333333333333
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "scanned/hybrid_runtime/recall@5",
+          "value": 0.3833333333333333,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "scanned/hybrid_runtime/recall@5",
+          "value": 0.3833333333333333,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "scanned/hybrid_runtime/recall@5",
+        "run_values": [
+          0.6958333333333334,
+          0.6958333333333334
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.6958333333333334,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.5458333333333334,
+          "high": 0.8333333333333333,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "scanned/hybrid_runtime/hit@5",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "scanned/hybrid_runtime/hit@5",
+          "value": 1.0,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "scanned/hybrid_runtime/hit@5",
+          "value": 1.0,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "scanned/hybrid_runtime/hit@5",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "scanned/hybrid_runtime/mrr@5",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "scanned/hybrid_runtime/mrr@5",
+          "value": 1.0,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "scanned/hybrid_runtime/mrr@5",
+          "value": 1.0,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "scanned/hybrid_runtime/mrr@5",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "scanned/hybrid_runtime/ndcg@5",
+      "phase": "final",
+      "value": 0.675226969139226,
+      "run_values": [
+        0.675226969139226,
+        0.675226969139226
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "scanned/hybrid_runtime/ndcg@5",
+          "value": 0.675226969139226,
+          "n": 10
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "scanned/hybrid_runtime/ndcg@5",
+          "value": 0.675226969139226,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "scanned/hybrid_runtime/ndcg@5",
+        "run_values": [
+          0.9722726572644952,
+          0.9722726572644952
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.9722726572644952,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.9168179717934855,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "cross_modal/source_page_hit@5",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        5,
+        5
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "cross_modal/source_page_hit@5",
+          "value": 1.0,
+          "n": 5
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "cross_modal/source_page_hit@5",
+          "value": 1.0,
+          "n": 5
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "cross_modal/source_page_hit@5",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          5,
+          5
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 5,
+          "n_observations": 10,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 5,
+        "n_observations": 10
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "cross_modal/text_modality_hit@5",
+      "phase": "final",
+      "value": 0.4,
+      "run_values": [
+        0.4,
+        0.4
+      ],
+      "n_per_run": [
+        5,
+        5
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "cross_modal/text_modality_hit@5",
+          "value": 0.4,
+          "n": 5
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "cross_modal/text_modality_hit@5",
+          "value": 0.4,
+          "n": 5
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "cross_modal/text_modality_hit@5",
+        "run_values": [
+          0.6,
+          0.6
+        ],
+        "n_per_run": [
+          5,
+          5
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.6,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.2,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 5,
+          "n_observations": 10,
+          "small_sample_note": "Few probes provide weak population evidence."
+        },
+        "n_clusters": 5,
+        "n_observations": 10
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.room_accuracy",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        20,
+        20
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "E.room_accuracy",
+          "value": 1.0,
+          "n": 20
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "E.room_accuracy",
+          "value": 1.0,
+          "n": 20
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "E.room_accuracy",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          20,
+          20
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 20,
+          "n_observations": 40,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 20,
+        "n_observations": 40
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.zone_accuracy",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        20,
+        20
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "E.zone_accuracy",
+          "value": 1.0,
+          "n": 20
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "E.zone_accuracy",
+          "value": 1.0,
+          "n": 20
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "E.zone_accuracy",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          20,
+          20
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 20,
+          "n_observations": 40,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 20,
+        "n_observations": 40
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.semantic_hit_rate",
+      "phase": "final",
+      "value": 0.8,
+      "run_values": [
+        0.8,
+        0.8
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "H.semantic_hit_rate",
+          "value": 0.8,
+          "n": 10
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "H.semantic_hit_rate",
+          "value": 0.8,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "H.semantic_hit_rate",
+        "run_values": [
+          0.8,
+          0.8
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.8,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.5,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.item_move_delete_freshness",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        2,
+        2
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "H.item_move_delete_freshness",
+          "value": 1.0,
+          "n": 2
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "H.item_move_delete_freshness",
+          "value": 1.0,
+          "n": 2
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "H.item_move_delete_freshness",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          2,
+          2
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 2,
+          "n_observations": 4,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 2,
+        "n_observations": 4
+      }
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "image.literal_label_recall",
+      "phase": "final",
+      "value": 1,
+      "run_values": [
+        1,
+        1
+      ],
+      "n_per_run": [
+        24,
+        24
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "completed paired component observations",
+      "source_refs": [
+        {
+          "file": "results/ingestion-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "image.literal_label_recall",
+          "value": 1,
+          "n": 24
+        },
+        {
+          "file": "results/ingestion-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "image.literal_label_recall",
+          "value": 1,
+          "n": 24
+        }
+      ],
+      "baseline": {
+        "agent": "ingestion-agent",
+        "metric": "image.literal_label_recall",
+        "run_values": [
+          1,
+          1
+        ],
+        "n_per_run": [
+          24,
+          24
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1,
+        "variance_between_runs": 0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0,
+        "metric_metadata_per_run": [
+          {
+            "interpretation": "Frozen literal labels/identifiers/numbers only; does not measure colors, arrows, spatial relations or semantic understanding."
+          },
+          {
+            "interpretation": "Frozen literal labels/identifiers/numbers only; does not measure colors, arrows, spatial relations or semantic understanding."
+          }
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 24,
+          "n_observations": 48,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 24,
+        "n_observations": 48
+      }
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "abstention_precision",
+      "phase": "final",
+      "value": 0.8571428571428571,
+      "run_values": [
+        0.8571428571428571
+      ],
+      "n_per_run": [
+        7
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "abstention_precision",
+          "value": 0.8571428571428571,
+          "n": 7
+        }
+      ],
+      "baseline": null
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "negative_answer_rate",
+      "phase": "final",
+      "value": 0.0,
+      "run_values": [
+        0.0
+      ],
+      "n_per_run": [
+        6
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "negative_answer_rate",
+          "value": 0.0,
+          "n": 6
+        }
+      ],
+      "baseline": null
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_precision__text",
+      "phase": "final",
+      "value": 0.9,
+      "run_values": [
+        0.9
+      ],
+      "n_per_run": [
+        10
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_precision__text",
+          "value": 0.9,
+          "n": 10
+        }
+      ],
+      "baseline": null
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_recall__text",
+      "phase": "final",
+      "value": 0.9,
+      "run_values": [
+        0.9
+      ],
+      "n_per_run": [
+        10
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_recall__text",
+          "value": 0.9,
+          "n": 10
+        }
+      ],
+      "baseline": null
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_page_recall__text",
+      "phase": "final",
+      "value": 0.9,
+      "run_values": [
+        0.9
+      ],
+      "n_per_run": [
+        10
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_page_recall__text",
+          "value": 0.9,
+          "n": 10
+        }
+      ],
+      "baseline": null
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_precision__table",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0
+      ],
+      "n_per_run": [
+        10
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_precision__table",
+          "value": 1.0,
+          "n": 10
+        }
+      ],
+      "baseline": null
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_recall__table",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0
+      ],
+      "n_per_run": [
+        10
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_recall__table",
+          "value": 1.0,
+          "n": 10
+        }
+      ],
+      "baseline": null
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_page_recall__table",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0
+      ],
+      "n_per_run": [
+        10
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_page_recall__table",
+          "value": 1.0,
+          "n": 10
+        }
+      ],
+      "baseline": null
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_precision__image",
+      "phase": "final",
+      "value": 0.9166666666666666,
+      "run_values": [
+        0.9166666666666666
+      ],
+      "n_per_run": [
+        10
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_precision__image",
+          "value": 0.9166666666666666,
+          "n": 10
+        }
+      ],
+      "baseline": null
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_recall__image",
+      "phase": "final",
+      "value": 0.15,
+      "run_values": [
+        0.15
+      ],
+      "n_per_run": [
+        10
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_recall__image",
+          "value": 0.15,
+          "n": 10
+        }
+      ],
+      "baseline": null
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_page_recall__image",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0
+      ],
+      "n_per_run": [
+        10
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_page_recall__image",
+          "value": 1.0,
+          "n": 10
+        }
+      ],
+      "baseline": null
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_precision__chart",
+      "phase": "final",
+      "value": 0.9285714285714286,
+      "run_values": [
+        0.9285714285714286
+      ],
+      "n_per_run": [
+        7
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_precision__chart",
+          "value": 0.9285714285714286,
+          "n": 7
+        }
+      ],
+      "baseline": null
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_recall__chart",
+      "phase": "final",
+      "value": 0.1636904761904762,
+      "run_values": [
+        0.1636904761904762
+      ],
+      "n_per_run": [
+        7
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_recall__chart",
+          "value": 0.1636904761904762,
+          "n": 7
+        }
+      ],
+      "baseline": null
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_page_recall__chart",
+      "phase": "final",
+      "value": 1.0,
+      "run_values": [
+        1.0
+      ],
+      "n_per_run": [
+        7
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "reason": null,
+      "ci95": {
+        "status": "NOT MEASURED",
+        "reason": "Additional coverage points only under the user time budget; no extra bootstrap requested."
+      },
+      "scope": "stopped generation prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_page_recall__chart",
+          "value": 1.0,
+          "n": 7
+        }
+      ],
+      "baseline": null
     }
   ],
   "paired_retrieval_tests": [
@@ -5988,5 +8954,536 @@
     "Final RAGAS embedding similarity/BERTScore: reference postprocessing was not reached.",
     "Scanned-PDF generation quality: no scanned questions in the stopped prefix.",
     "HTTP timeout rate, production capacity/cost, numeric trust calibration and isolated3D FPS: not established."
-  ]
+  ],
+  "requested_unmeasured": [
+    {
+      "request": "Context precision@5",
+      "value": null,
+      "n": 0,
+      "status": "NOT MEASURED",
+      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
+    },
+    {
+      "request": "Context recall",
+      "value": null,
+      "n": 0,
+      "status": "NOT MEASURED",
+      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
+    },
+    {
+      "request": "Faithfulness / groundedness",
+      "value": null,
+      "n": 0,
+      "status": "NOT MEASURED",
+      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
+    },
+    {
+      "request": "Answer correctness",
+      "value": null,
+      "n": 0,
+      "status": "NOT MEASURED",
+      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
+    },
+    {
+      "request": "Answer relevancy",
+      "value": null,
+      "n": 0,
+      "status": "NOT MEASURED",
+      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
+    },
+    {
+      "request": "Hallucination rate",
+      "value": null,
+      "n": 0,
+      "status": "NOT MEASURED",
+      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
+    },
+    {
+      "request": "Semantic chart/image understanding",
+      "value": null,
+      "n": 0,
+      "status": "NOT MEASURED",
+      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
+    },
+    {
+      "request": "Claim-level citation accuracy",
+      "value": null,
+      "n": 0,
+      "status": "NOT MEASURED",
+      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
+    },
+    {
+      "request": "Currency cost per query",
+      "value": null,
+      "n": 0,
+      "status": "NOT MEASURED",
+      "reason": "Local hardware, energy and amortization cost were not instrumented; token telemetry is not currency cost."
+    }
+  ],
+  "per_modality_coverage": {
+    "text": {
+      "saved_generation_questions": 12,
+      "generation": {
+        "citation_gold_precision": {
+          "value": 0.9,
+          "n": 10,
+          "source_refs": [
+            {
+              "file": "results/generation-agent.json",
+              "phase": "final",
+              "run": 1,
+              "metric_id": "citation_gold_precision__text",
+              "value": 0.9,
+              "n": 10
+            }
+          ]
+        },
+        "citation_gold_recall": {
+          "value": 0.9,
+          "n": 10,
+          "source_refs": [
+            {
+              "file": "results/generation-agent.json",
+              "phase": "final",
+              "run": 1,
+              "metric_id": "citation_gold_recall__text",
+              "value": 0.9,
+              "n": 10
+            }
+          ]
+        },
+        "citation_gold_page_recall": {
+          "value": 0.9,
+          "n": 10,
+          "source_refs": [
+            {
+              "file": "results/generation-agent.json",
+              "phase": "final",
+              "run": 1,
+              "metric_id": "citation_gold_page_recall__text",
+              "value": 0.9,
+              "n": 10
+            }
+          ]
+        },
+        "abstention_recall": {
+          "value": 1.0,
+          "n": 2,
+          "definition": "Frozen conditional abstention mean, scoped to saved modality rows; raw metrics unchanged.",
+          "source_refs": {
+            "file": "results/generation-agent.json",
+            "phase": "final",
+            "run": 1,
+            "field": "per_question.metrics.abstained",
+            "modality": "text",
+            "sample_ids": [
+              "text-11",
+              "text-12"
+            ]
+          },
+          "reason": null
+        },
+        "false_refusal_rate": {
+          "value": 0.1,
+          "n": 10,
+          "definition": "Frozen conditional abstention mean, scoped to saved modality rows; raw metrics unchanged.",
+          "source_refs": {
+            "file": "results/generation-agent.json",
+            "phase": "final",
+            "run": 1,
+            "field": "per_question.metrics.abstained",
+            "modality": "text",
+            "sample_ids": [
+              "text-01",
+              "text-02",
+              "text-03",
+              "text-04",
+              "text-05",
+              "text-06",
+              "text-07",
+              "text-08",
+              "text-09",
+              "text-10"
+            ]
+          },
+          "reason": null
+        }
+      }
+    },
+    "table": {
+      "saved_generation_questions": 12,
+      "generation": {
+        "citation_gold_precision": {
+          "value": 1.0,
+          "n": 10,
+          "source_refs": [
+            {
+              "file": "results/generation-agent.json",
+              "phase": "final",
+              "run": 1,
+              "metric_id": "citation_gold_precision__table",
+              "value": 1.0,
+              "n": 10
+            }
+          ]
+        },
+        "citation_gold_recall": {
+          "value": 1.0,
+          "n": 10,
+          "source_refs": [
+            {
+              "file": "results/generation-agent.json",
+              "phase": "final",
+              "run": 1,
+              "metric_id": "citation_gold_recall__table",
+              "value": 1.0,
+              "n": 10
+            }
+          ]
+        },
+        "citation_gold_page_recall": {
+          "value": 1.0,
+          "n": 10,
+          "source_refs": [
+            {
+              "file": "results/generation-agent.json",
+              "phase": "final",
+              "run": 1,
+              "metric_id": "citation_gold_page_recall__table",
+              "value": 1.0,
+              "n": 10
+            }
+          ]
+        },
+        "abstention_recall": {
+          "value": 1.0,
+          "n": 2,
+          "definition": "Frozen conditional abstention mean, scoped to saved modality rows; raw metrics unchanged.",
+          "source_refs": {
+            "file": "results/generation-agent.json",
+            "phase": "final",
+            "run": 1,
+            "field": "per_question.metrics.abstained",
+            "modality": "table",
+            "sample_ids": [
+              "table-11",
+              "table-12"
+            ]
+          },
+          "reason": null
+        },
+        "false_refusal_rate": {
+          "value": 0.0,
+          "n": 10,
+          "definition": "Frozen conditional abstention mean, scoped to saved modality rows; raw metrics unchanged.",
+          "source_refs": {
+            "file": "results/generation-agent.json",
+            "phase": "final",
+            "run": 1,
+            "field": "per_question.metrics.abstained",
+            "modality": "table",
+            "sample_ids": [
+              "table-01",
+              "table-02",
+              "table-03",
+              "table-04",
+              "table-05",
+              "table-06",
+              "table-07",
+              "table-08",
+              "table-09",
+              "table-10"
+            ]
+          },
+          "reason": null
+        }
+      }
+    },
+    "image": {
+      "saved_generation_questions": 12,
+      "generation": {
+        "citation_gold_precision": {
+          "value": 0.9166666666666666,
+          "n": 10,
+          "source_refs": [
+            {
+              "file": "results/generation-agent.json",
+              "phase": "final",
+              "run": 1,
+              "metric_id": "citation_gold_precision__image",
+              "value": 0.9166666666666666,
+              "n": 10
+            }
+          ]
+        },
+        "citation_gold_recall": {
+          "value": 0.15,
+          "n": 10,
+          "source_refs": [
+            {
+              "file": "results/generation-agent.json",
+              "phase": "final",
+              "run": 1,
+              "metric_id": "citation_gold_recall__image",
+              "value": 0.15,
+              "n": 10
+            }
+          ]
+        },
+        "citation_gold_page_recall": {
+          "value": 1.0,
+          "n": 10,
+          "source_refs": [
+            {
+              "file": "results/generation-agent.json",
+              "phase": "final",
+              "run": 1,
+              "metric_id": "citation_gold_page_recall__image",
+              "value": 1.0,
+              "n": 10
+            }
+          ]
+        },
+        "abstention_recall": {
+          "value": 1.0,
+          "n": 2,
+          "definition": "Frozen conditional abstention mean, scoped to saved modality rows; raw metrics unchanged.",
+          "source_refs": {
+            "file": "results/generation-agent.json",
+            "phase": "final",
+            "run": 1,
+            "field": "per_question.metrics.abstained",
+            "modality": "image",
+            "sample_ids": [
+              "image-11",
+              "image-12"
+            ]
+          },
+          "reason": null
+        },
+        "false_refusal_rate": {
+          "value": 0.0,
+          "n": 10,
+          "definition": "Frozen conditional abstention mean, scoped to saved modality rows; raw metrics unchanged.",
+          "source_refs": {
+            "file": "results/generation-agent.json",
+            "phase": "final",
+            "run": 1,
+            "field": "per_question.metrics.abstained",
+            "modality": "image",
+            "sample_ids": [
+              "image-01",
+              "image-02",
+              "image-03",
+              "image-04",
+              "image-05",
+              "image-06",
+              "image-07",
+              "image-08",
+              "image-09",
+              "image-10"
+            ]
+          },
+          "reason": null
+        }
+      }
+    },
+    "chart": {
+      "saved_generation_questions": 7,
+      "generation": {
+        "citation_gold_precision": {
+          "value": 0.9285714285714286,
+          "n": 7,
+          "source_refs": [
+            {
+              "file": "results/generation-agent.json",
+              "phase": "final",
+              "run": 1,
+              "metric_id": "citation_gold_precision__chart",
+              "value": 0.9285714285714286,
+              "n": 7
+            }
+          ]
+        },
+        "citation_gold_recall": {
+          "value": 0.1636904761904762,
+          "n": 7,
+          "source_refs": [
+            {
+              "file": "results/generation-agent.json",
+              "phase": "final",
+              "run": 1,
+              "metric_id": "citation_gold_recall__chart",
+              "value": 0.1636904761904762,
+              "n": 7
+            }
+          ]
+        },
+        "citation_gold_page_recall": {
+          "value": 1.0,
+          "n": 7,
+          "source_refs": [
+            {
+              "file": "results/generation-agent.json",
+              "phase": "final",
+              "run": 1,
+              "metric_id": "citation_gold_page_recall__chart",
+              "value": 1.0,
+              "n": 7
+            }
+          ]
+        },
+        "abstention_recall": {
+          "value": null,
+          "n": 0,
+          "definition": "Frozen conditional abstention mean, scoped to saved modality rows; raw metrics unchanged.",
+          "source_refs": {
+            "file": "results/generation-agent.json",
+            "phase": "final",
+            "run": 1,
+            "field": "per_question.metrics.abstained",
+            "modality": "chart",
+            "sample_ids": []
+          },
+          "reason": "No applicable saved questions."
+        },
+        "false_refusal_rate": {
+          "value": 0.0,
+          "n": 7,
+          "definition": "Frozen conditional abstention mean, scoped to saved modality rows; raw metrics unchanged.",
+          "source_refs": {
+            "file": "results/generation-agent.json",
+            "phase": "final",
+            "run": 1,
+            "field": "per_question.metrics.abstained",
+            "modality": "chart",
+            "sample_ids": [
+              "chart-01",
+              "chart-02",
+              "chart-03",
+              "chart-04",
+              "chart-05",
+              "chart-06",
+              "chart-07"
+            ]
+          },
+          "reason": null
+        }
+      }
+    },
+    "scanned": {
+      "saved_generation_questions": 0,
+      "generation": {
+        "citation_gold_precision": {
+          "value": null,
+          "n": 0,
+          "reason": "No saved scanned-generation questions."
+        },
+        "citation_gold_recall": {
+          "value": null,
+          "n": 0,
+          "reason": "No saved scanned-generation questions."
+        },
+        "citation_gold_page_recall": {
+          "value": null,
+          "n": 0,
+          "reason": "No saved scanned-generation questions."
+        },
+        "abstention_recall": {
+          "value": null,
+          "n": 0,
+          "definition": "Frozen conditional abstention mean, scoped to saved modality rows; raw metrics unchanged.",
+          "source_refs": {
+            "file": "results/generation-agent.json",
+            "phase": "final",
+            "run": 1,
+            "field": "per_question.metrics.abstained",
+            "modality": "scanned",
+            "sample_ids": []
+          },
+          "reason": "No applicable saved questions."
+        },
+        "false_refusal_rate": {
+          "value": null,
+          "n": 0,
+          "definition": "Frozen conditional abstention mean, scoped to saved modality rows; raw metrics unchanged.",
+          "source_refs": {
+            "file": "results/generation-agent.json",
+            "phase": "final",
+            "run": 1,
+            "field": "per_question.metrics.abstained",
+            "modality": "scanned",
+            "sample_ids": []
+          },
+          "reason": "No applicable saved questions."
+        }
+      }
+    }
+  },
+  "requested_metric_inventory": {
+    "Recall@5": [
+      "all/hybrid_runtime/recall@5"
+    ],
+    "Precision@5": [
+      "all/hybrid_runtime/precision@5"
+    ],
+    "Hit@5": [
+      "all/hybrid_runtime/hit@5"
+    ],
+    "MRR@5": [
+      "all/hybrid_runtime/mrr@5"
+    ],
+    "NDCG@5": [
+      "all/hybrid_runtime/ndcg@5"
+    ],
+    "Citation accuracy \u2014 source provenance only": [
+      "citation_gold_precision",
+      "citation_gold_recall",
+      "citation_gold_page_recall"
+    ],
+    "Abstention / not found": [
+      "abstention_precision",
+      "abstention_recall",
+      "false_refusal_rate"
+    ],
+    "OCR CER/WER": [
+      "ocr.scanned.cer_macro",
+      "ocr.scanned.wer_macro"
+    ],
+    "Table extraction": [
+      "table.cell_text_recall",
+      "table.structured_output_rate"
+    ],
+    "Chart/image literal diagnostics \u2014 not understanding": [
+      "chart.numeric_label_text_recall",
+      "image.literal_label_recall"
+    ],
+    "Cross-modal retrieval hit": [
+      "cross_modal/source_page_hit@5",
+      "cross_modal/text_modality_hit@5"
+    ],
+    "Location room/zone/container": [
+      "E.room_accuracy",
+      "E.zone_accuracy",
+      "E.container_accuracy"
+    ],
+    "Typo / spelling": [
+      "typo/hybrid_runtime/mrr@5",
+      "typo/fuzzy/mrr@5"
+    ],
+    "Cache hit / false hit / stale answers": [
+      "H.exact_hit_rate",
+      "H.semantic_hit_rate",
+      "H.near_miss_false_hit_rate",
+      "H.move_delete_invalidation",
+      "H.item_move_delete_freshness"
+    ]
+  },
+  "requested_latency_binding": {
+    "request": "p95 latency",
+    "value": 162.59062423780267,
+    "n": 43,
+    "source": "results/generation-agent.json final run1 per_question.timings.total_seconds",
+    "definition": "Linear p95 of saved-prefix in-process wall times; not an HTTP SLA."
+  }
 }
