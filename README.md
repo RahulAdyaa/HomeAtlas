@@ -8,6 +8,33 @@ HomeAtlas combines a **Home → Room → Zone → optional Container** hierarchy
 
 *Existing application screenshot captured with fictional layout QA records. It illustrates the interface, not measured accuracy or performance.*
 
+## Measured pipeline results
+
+**Budget-limited showcase, not a complete final benchmark.** On 16 October 2026, the evaluation scope was narrowed to a focused showcase under a 30-minute completion budget. This superseded the original requirement for two complete post-fix generation passes; historical fix-log instructions retain that earlier scope. Retrieval, ingestion, household/cache, and security live probes each have two completed post-fix passes. Generation stopped at **43/60 run-1 questions**: **37 answerable / 6 negative**, with text/table/image and part of the chart set, **no scanned-PDF generation cases**, no second run, and no third-pass sample. The prefix is deterministic, not randomly sampled.
+
+Rates below use [0,1]; lower CER/WER and persistence are better. Arrows compare the same component metric with its frozen baseline. CIs are 95% empirical bootstrap intervals. `n` counts distinct questions/probes, not doubled observations. Small or degenerate intervals do not establish population guarantees. Values are formatted from the [canonical showcase results](evaluation/showcase_results.json); full precision, per-run values, source bindings and CI methods are in the [concise report](evaluation/RAG_EVALUATION_REPORT.md).
+
+| Metric family | Measured result | Scope and limitation |
+| --- | --- | --- |
+| Retrieval coverage @5 | 0.975207 → **0.983471**, CI [0.958678, 1] | 121 answerable questions; two passes. Relevant-page/chunk hit, not answer accuracy. |
+| Strict chunk Recall@5 | 0.8323 → **0.804924**, CI [0.744146, 0.863292] | 121 questions; two passes. **Declined**, along with Precision, MRR and NDCG below. |
+| Typo / Hinglish MRR@5 | Hybrid **0.965789**, CI [0.910526, 1]; fuzzy-only **1**, CI [1, 1] | 38 questions; two passes. Strict hybrid-superiority target **not met**. |
+| Recorded locations | Full-path rate **1**, CI [1, 1] | 20 location queries; two passes. Container accuracy covers only one container case. |
+| Aggregate answers | Required-fact presence 0.333333 → **0.666667**, CI [0, 1] | 3 queries; two passes. Receipt-total answer omits the requested calculated total; fact presence is not completeness. |
+| Semantic cache / freshness | Variant hits **0.8**, CI [0.5, 1]; near-miss false hits **0**, CI [0, 0]; move/delete invalidation **1**, CI [1, 1] | 10 variants / 10 near-misses / 2 mutations per pass. Variant-hit target 0.90 **not met**; zero observed false hits is not a population guarantee. |
+| Multimodal parsing | OCR CER **0.00337838**, CI [0, 0.0101351]; WER **0.0217391**, CI [0, 0.0652174]. Chart numeric-label recall **0.75**, CI [0.5, 1]. PDF structured-table output **0**, CI [0, 0] | 4 clean synthetic scan pages / 12 chart labels / 4 table pages; two passes. Not real-phone-photo accuracy, chart reasoning, or table-cell structure accuracy. |
+| Identifier-cache policy | Sensitive-answer persistence 1 → **0**, CI [0, 0] | One synthetic canary per pass. Narrow recognized-identifier bypass; not universal PII protection. |
+| Partial citation provenance | Gold citation precision **0.936937**, CI [0.867117, 0.986486]; strict gold-chunk recall **0.585023**, CI [0.446481, 0.722973] | 37 answerable questions in one stopped prefix. Source relevance/provenance, **not independently judged factual accuracy**; no baseline comparison. |
+| Partial observed latency | p50 **94.8424 s**; p95 **162.591 s** | 43 saved queries, one prefix. Shared-host in-process wall time includes waits; not HTTP latency or an SLA. No latency CI is claimed. |
+
+**Ranking tradeoffs:** Precision 0.338843 → 0.287603; MRR 0.930854 → 0.92011; NDCG 0.8955 → 0.855013 (n=121 per pass); all declined. Better hit rate did not improve every retrieval measure.
+
+**Additional scope checks:** source-value presence was 1 for identifiers (n=3), 1 for dates (n=2), and 1 for amounts (n=2), in each component pass; these are literal required values, not automatic extraction accuracy. Table cell-text recall was 1 (n=48), despite missing structured PDF tables. Exact cache hits were 1 (n=5 per pass); strict semantic guards still missed variants.
+
+**Partial answers and security:** exact-quote validity was 1 only among n=36 answers with citations; abstention recall was 1 on n=6 negatives, and false-refusal rate 0.027027 on n=37 answerable questions. These are not full-suite accuracy. Both live security runs passed **24/27 probes**; three frozen cache-retention assumptions fail after deliberate identifier-cache bypass. Empty-cache checks do not prove populated-cache isolation. A separate populated non-sensitive cache regression has a different scope.
+
+**NOT MEASURED:** independent-judge semantic faithfulness/correctness and hallucination rate (no external judge credential); full final generation variance/three-pass consistency and final similarity postprocessing (budget stop); scanned-PDF generation; numeric trust calibration; HTTP timeout rate, production capacity/cost, and isolated 3D FPS. No canonical complete `final_results.json` was created. The [unchanged exhaustive baseline appendix](evaluation/RAG_EVALUATION_BASELINE_APPENDIX.md), [baseline snapshot](evaluation/baseline_results.json), and [historical metric CSV](evaluation/stats-metric-scorecard.csv) remain available; they are historical evidence, not current full-generation results.
+
 ## Features
 
 ### Inventory and document library
@@ -56,244 +83,13 @@ HomeAtlas combines a **Home → Room → Zone → optional Container** hierarchy
 
 The [source-backed feature inventory](evaluation/results/docs-agent.json) lists implementation evidence and known qualifications. Implemented features and measured reliability are separate; see [limitations](#limitations).
 
-## Evaluation-driven fixes
+## What the evaluation changed
 
-Application changes were made only after the baseline snapshot was frozen. [CHANGELOG](evaluation/CHANGELOG.md) records the failing cases, changes, and affected regression outcomes; [fixer results](evaluation/results/fixer-agent.json) retain the actual commands.
+- Deduplicated repeated visual-page candidates, added exact-number unions for multi-record comparisons, and handled warranty/expiry query morphology. Strict chunk ranking and page-level hit rate are separate outcomes; the measured tradeoffs remain visible in the report.
+- Removed unused quote/image context from review and unused final citations; added same-Qwen responsiveness checks and bounded numeric-literal coverage over rendered headings/bodies. Literal presence does not validate object/value pairing, visual numbers, or arithmetic absent from the source.
+- Repaired the Settings cache-clear HTTP method, added bounded SHA256 hashing, and bypassed recognized personal-card identifiers in optional answer caching with legacy pruning. This is not universal PII detection.
 
-- Deduplicate repeated visual-page candidates before the visual top-K limit, while retaining text chunks in their own channels.
-- Retrieve separate exact-number records for comparison/multi-unit questions, while retaining strict checks for ordinary identifiers.
-- Avoid unnecessary reliable-native-prose page images; preserve OCR, graphics markers, visual headings and explicit chart/diagram questions. Reprocess older native PDFs for the new graphics marker; a conservative fallback remains for old indexes.
-- Review quote-only fallback responsiveness as well as drafted sections, and handle warranty-plural/expiry phrasing in the unrelated-subject gate.
-- Remove unused quote/image context before support review; retain only accepted sections' cited evidence in the answer, with consecutive citation numbering and unchanged provenance.
-- Reject unsupported text-only numeric literals in the rendered heading **and** body before the same-model review; malformed non-string fields fail closed. The heading regression rejects an unsupported title even when its body uses a supported value. Referenced visuals and semantic relationships still depend on fallible model review. A derived total/difference absent from cited text can abstain instead of being independently computed.
-- Repair **Settings → Clear answer cache** to send DELETE, and replace the Python-version-specific digest helper with bounded SHA256 reads. Full Python 3.10 runtime verification remains unmeasured; Python 3.12 is recommended.
-- Bypass recognized personal-card identifier queries/answers in the optional cache, bump policy generation, and prune recognized legacy sensitive entries. Before deployment, stop old services, purge only the ephemeral answer cache without reading payloads, then start the updated code. Original documents/items remain in their private store.
-
-The latest heading-guard regression run passed **114 Python tests**, including disposable PostgreSQL fixtures. The preceding **87 passing JavaScript tests** and successful TypeScript check remain the latest applicable results; no TypeScript code changed in the heading patch, and those checks were not newly rerun for it. Earlier regression counts and the **9-test real-database subset overlap** these suites; they are not extra tests to add to the latest totals. These regression outcomes do not replace RAG quality metrics. Full final measurements and before/after tradeoffs remain pending; weights, thresholds, frozen gold, and metric formulas were not changed to improve scores.
-
-## Evaluation results
-
-<!-- EVALUATION_SUMMARY_START -->
-**Baseline complete; final measurements pending.** Results dated **15 October 2026** were frozen before application fixes. The baseline app is `5f33a9b157a4394e60f3bac0ede95d293f5bf3fc`; evaluation-only commits differ between specialists, but all share application-source fingerprint `e89dd896bea27ebdf4ac879f91549f28c82c4004f7ffbb7b9b8c41fa68b08b25`. No final improvement is claimed yet.
-
-The frozen corpus has **138 questions**: **60 PDF questions** on **5 original CC0 PDFs / 20 pages**, plus **78 household questions** over **20 fictional records**, including **38 typo/Hinglish variants**. Retrieval has **121 answerable / 17 negative** questions; generation has **50 answerable / 10 negative** PDF questions. Additional probes have their own denominators. No real household document is the evaluation corpus.
-
-Each inference specialist performed **two independent passes**. Displayed means, confidence intervals, sample sizes, and run standard deviations are copied/formatted from [baseline_results.json](evaluation/baseline_results.json). Values are rounded for display; raw precision, both run values, variance, every modality/K/configuration, and unavailable-interval reasons are in the [complete metric scorecard](evaluation/stats-metric-scorecard.csv) and [report](evaluation/RAG_EVALUATION_REPORT.md). `n` is retained per run and by independent question/probe cluster; repeated runs do not double the independent sample size. Confidence intervals use **5,000** seeded cluster-bootstrap resamples. Degenerate intervals, particularly a single probe, do not establish population guarantees.
-
-**Independent judge: NOT MEASURED.** No free-tier judge credential was configured. Local Qwen generation/review is not an independent judge. Semantic correctness, faithfulness, and hallucination metrics are not fabricated from lexical overlap.
-
-### Retrieval: runtime hybrid @5
-
-| Metric | Baseline mean [95% CI] | n per run / clusters | Run SD | Final |
-| --- | --- | --- | --- | --- |
-| Precision | 0.338843 [0.295868, 0.385124] | 121/121 / 121 | 0 | Pending |
-| Recall | 0.8323 [0.776343, 0.886196] | 121/121 / 121 | 0 | Pending |
-| F1 | 0.382992 [0.354624, 0.412976] | 121/121 / 121 | 0 | Pending |
-| Hit rate | 0.975207 [0.942149, 1] | 121/121 / 121 | 0 | Pending |
-| MRR | 0.930854 [0.888154, 0.968871] | 121/121 / 121 | 0 | Pending |
-| NDCG | 0.8955 [0.855756, 0.930562] | 121/121 / 121 | 0 | Pending |
-| MAP | 0.790535 [0.730961, 0.848567] | 121/121 / 121 | 0 | Pending |
-| R-Precision | 0.778581 [0.71436, 0.839704] | 121/121 / 121 | 0 | Pending |
-| Unique-source ratio | 0.555597 [0.510821, 0.6] | 134/134 / 134 | 0 | Pending |
-| Modality entropy | 0.669933 [0.59351, 0.744876] | 134/134 / 134 | 0 | Pending |
-| Gold-modality hit rate | 0.983471 [0.958678, 1] | 121/121 / 121 | 0 | Pending |
-
-Precision divides by requested K, even when fewer results are returned. PDF gold marks relevant **page chunks**; many OCR chunks per page create a fixed-K recall ceiling. A page/modality hit does not prove the needed fact was read. Runtime returns at most five results; top-10 configurations are diagnostic. All eight ranking measures at **K=1,3,5,10**, per modality and channel, appear in the linked scorecard.
-
-### Channel ablation and typo robustness
-
-| Metric | Baseline mean [95% CI] | n per run / clusters | Run SD | Final |
-| --- | --- | --- | --- | --- |
-| Dense — overall RECALL@5 | 0.761191 [0.694043, 0.827824] | 121/121 / 121 | 0 | Pending |
-| Dense — overall MRR@5 | 0.851515 [0.793382, 0.906336] | 121/121 / 121 | 0 | Pending |
-| Word BM25 — overall RECALL@5 | 0.735193 [0.665461, 0.802867] | 121/121 / 121 | 0 | Pending |
-| Word BM25 — overall MRR@5 | 0.853994 [0.793388, 0.909091] | 121/121 / 121 | 0 | Pending |
-| Fuzzy — overall RECALL@5 | 0.78478 [0.720037, 0.847796] | 121/121 / 121 | 0 | Pending |
-| Fuzzy — overall MRR@5 | 0.909091 [0.859504, 0.954545] | 121/121 / 121 | 0 | Pending |
-| Three-text-channel RRF (diagnostic) — overall RECALL@5 | 0.785813 [0.721242, 0.848321] | 121/121 / 121 | 0 | Pending |
-| Three-text-channel RRF (diagnostic) — overall MRR@5 | 0.921488 [0.871901, 0.96281] | 121/121 / 121 | 0 | Pending |
-| Runtime text + visual RRF — overall RECALL@5 | 0.8323 [0.776343, 0.886196] | 121/121 / 121 | 0 | Pending |
-| Runtime text + visual RRF — overall MRR@5 | 0.930854 [0.888154, 0.968871] | 121/121 / 121 | 0 | Pending |
-| Dense — typo MRR@5 | 0.881579 [0.789474, 0.960526] | 38/38 / 38 | 0 | Pending |
-| Word BM25 — typo MRR@5 | 0.77193 [0.644627, 0.881579] | 38/38 / 38 | 0 | Pending |
-| Fuzzy — typo MRR@5 | 1 [1, 1] | 38/38 / 38 | 0 | Pending |
-| Three-text-channel RRF (diagnostic) — typo MRR@5 | 0.986842 [0.960526, 1] | 38/38 / 38 | 0 | Pending |
-| Runtime text + visual RRF — typo MRR@5 | 0.965789 [0.910526, 1] | 38/38 / 38 | 0 | Pending |
-
-**Strict typo-superiority target: NOT MET.** Fuzzy already attains the maximum MRR on this fixed typo sample; hybrid cannot strictly exceed it. The failure is retained. RRF sensitivity at **k=10,30,60,100**, equal/configured weights, and before/after optional reranking is in the report/CSV. Configured weights are all equal, so that comparison is not a distinct unequal-weight experiment. The separately labeled paraphrase-only set was not available.
-
-Paired comparisons below select the strongest single channel on these observed questions, so they are exploratory. Two-sided paired sign permutation and Holm correction cover the reported comparison family; they are not held-out proof of general superiority.
-
-| Subset/measure @5 | n | Strongest single | Hybrid minus single [95% CI] | Two-sided p / Holm p |
-| --- | --- | --- | --- | --- |
-| all/precision | 121 | fuzzy | 0.0727273 [0.0396694, 0.112397] | 9.9995e-05 / 0.00079996 |
-| all/recall | 121 | fuzzy | 0.0475207 [0.0147986, 0.0826446] | 0.00484976 / 0.0339483 |
-| all/mrr | 121 | fuzzy | 0.0217631 [-0.0289325, 0.0738292] | 0.417829 / 1 |
-| all/ndcg | 121 | fuzzy | 0.0448842 [-0.00103123, 0.0934058] | 0.0684966 / 0.410979 |
-| typo/precision | 38 | fuzzy | 0 [0, 0] | 1 / 1 |
-| typo/recall | 38 | fuzzy | 0 [0, 0] | 1 / 1 |
-| typo/mrr | 38 | fuzzy | -0.0342105 [-0.0894737, 0] | 0.5 / 1 |
-| typo/ndcg | 38 | fuzzy | -0.0258478 [-0.0678311, 0] | 0.5 / 1 |
-
-### Modalities and robustness
-
-| Metric | Baseline mean [95% CI] | n per run / clusters | Run SD | Final |
-| --- | --- | --- | --- | --- |
-| text — runtime recall@5 | 0.962963 [0.91358, 1] | 81/81 / 81 | 0 | Pending |
-| table — runtime recall@5 | 1 [1, 1] | 10/10 / 10 | 0 | Pending |
-| image — runtime recall@5 | 0.3625 [0.3375, 0.375] | 10/10 / 10 | 0 | Pending |
-| chart — runtime recall@5 | 0.2125 [0.1875, 0.2375] | 10/10 / 10 | 0 | Pending |
-| scanned — runtime recall@5 | 0.695833 [0.545833, 0.833333] | 10/10 / 10 | 0 | Pending |
-| Cross-modal source-page hit@5 | 1 [1, 1] | 5/5 / 5 | 0 | Pending |
-| Cross-modal text-modality hit@5 | 0.6 [0.2, 1] | 5/5 / 5 | 0 | Pending |
-| Degraded-scan hit@5 | 0.666667 [0.333333, 1] | 6/6 / 6 | 0 | Pending |
-| Degraded-scan recall@5 | 0.388889 [0.166667, 0.611111] | 6/6 / 6 | 0 | Pending |
-| Optional-reranker overall recall@5 (diagnostic) | 0.799242 [0.738809, 0.858643] | 121/121 / 121 | 0 | Pending |
-| Optional-reranker typo MRR@5 (diagnostic) | 0.861842 [0.756579, 0.953947] | 38/38 / 38 | 0 | Pending |
-
-### Generation, citations, and abstention
-
-| Metric | Baseline mean [95% CI] | n per run / clusters | Run SD | Final |
-| --- | --- | --- | --- | --- |
-| Exact match | 0 [0, 0] | 50/50 / 50 | 0 | Pending |
-| Token F1 | 0.199764 [0.155699, 0.248924] | 50/50 / 50 | 0.00307247 | Pending |
-| ROUGE-L | 0.19465 [0.150359, 0.243713] | 50/50 / 50 | 0.00305643 | Pending |
-| Custom E5 BERTScore precision | 0.798227 [0.782581, 0.813857] | 50/50 / 50 | 0.00113297 | Pending |
-| Custom E5 BERTScore recall | 0.857614 [0.836789, 0.877218] | 50/50 / 50 | 0.00114225 | Pending |
-| Custom E5 BERTScore F1 | 0.826653 [0.809117, 0.843893] | 50/50 / 50 | 0.0011532 | Pending |
-| RAGAS AnswerSimilarity (local E5) | 0.846601 [0.833498, 0.85941] | 50/50 / 50 | 0.00065448 | Pending |
-| Reference-term coverage (diagnostic) | 0.715 [0.59, 0.83] | 50/50 / 50 | 0.00707107 | Pending |
-| Answer/reference length ratio (diagnostic) | 6.96399 [5.81108, 8.20083] | 50/50 / 50 | 0.291682 | Pending |
-| Three-run consistency (predeclared subset) | 0.8 [0.4, 1] | 0/5 / 5 | not applicable | Pending |
-| Three-run pairwise token F1 (subset) | 0.895238 [0.685714, 1] | 0/5 / 5 | not applicable | Pending |
-| Citation exact-quote validity, conditional | 1 [1, 1] | 48/48 / 48 | 0 | Pending |
-| Canonical citation-page rate, conditional | 1 [1, 1] | 48/48 / 48 | 0 | Pending |
-| Citation authored-region overlap | 0.773438 [0.700521, 0.848958] | 16/16 / 16 | 0.0147314 | Pending |
-| Citation gold precision | 0.8355 [0.754, 0.9105] | 50/50 / 50 | 0 | Pending |
-| Citation gold chunk recall | 0.56125 [0.454167, 0.66625] | 50/50 / 50 | 0.00176777 | Pending |
-| Citation gold F1 | 0.615231 [0.516877, 0.710188] | 50/50 / 50 | 0.00205704 | Pending |
-| Citation gold page recall | 0.925 [0.855, 0.985] | 50/50 / 50 | 0 | Pending |
-| Abstention precision | 0.777778 [0.444444, 1] | 9/9 / 9 | 0 | Pending |
-| Abstention recall | 0.7 [0.4, 1] | 10/10 / 10 | 0 | Pending |
-| False-refusal rate | 0.04 [0, 0.1] | 50/50 / 50 | 0 | Pending |
-| Negative-question non-abstention rate | 0.3 [0, 0.6] | 10/10 / 10 | 0 | Pending |
-
-Exact match and lexical F1/ROUGE compare detailed answers with short references; they are not semantic correctness scores. Custom E5 BERTScore is not a standard pretrained BERTScore leaderboard configuration. AnswerSimilarity is actual RAGAS embedding similarity, **not answer accuracy**. Citation gold metrics use authored chunk/page relevance, not independently judged claim support. Exact-quote/canonical-page validity is conditional on answers with citations; it does not mean every claim is grounded. The three-pass consistency result uses only the predeclared five-question subset, not the full generation suite. Negative non-abstention is an observed risk, not a measured hallucination rate.
-
-### Location, document facts, and cache
-
-| Metric | Baseline mean [95% CI] | n per run / clusters | Run SD | Final |
-| --- | --- | --- | --- | --- |
-| Room accuracy | 1 [1, 1] | 20/20 / 20 | 0 | Pending |
-| Zone accuracy | 1 [1, 1] | 20/20 / 20 | 0 | Pending |
-| Container accuracy — one probe only | 1 [1, 1] | 1/1 / 1 | 0 | Pending |
-| Full-path accuracy | 1 [1, 1] | 20/20 / 20 | 0 | Pending |
-| Location-link metadata accuracy | 1 [1, 1] | 20/20 / 20 | 0 | Pending |
-| Identifier fact presence in document answer | 1 [1, 1] | 3/3 / 3 | 0 | Pending |
-| Date fact presence in document answer | 1 [1, 1] | 2/2 / 2 | 0 | Pending |
-| Amount fact presence in document answer | 1 [1, 1] | 2/2 / 2 | 0 | Pending |
-| Aggregate fact presence | 0.333333 [0, 1] | 3/3 / 3 | 0 | Pending |
-| Follow-up fact presence | 0.333333 [0, 1] | 3/3 / 3 | 0 | Pending |
-| History support | 0 [0, 0] | 3/3 / 3 | 0 | Pending |
-| Upload ready rate | 1 [1, 1] | 20/20 / 20 | 0 | Pending |
-| Upload response-to-ready mean, ms | 2534.75 [2072.11, 3096.69] | 20/20 / 20 | 53.4526 | Pending |
-| Duplicate location handling | 1 [1, 1] | 1/1 / 1 | 0 | Pending |
-| Move freshness | 1 [1, 1] | 1/1 / 1 | 0 | Pending |
-| Delete freshness | 1 [1, 1] | 1/1 / 1 | 0 | Pending |
-| Exact cache hit rate | 1 [1, 1] | 5/5 / 5 | 0 | Pending |
-| Exact correct-answer hit rate | 1 [1, 1] | 5/5 / 5 | 0 | Pending |
-| Semantic variant hit rate | 0.8 [0.5, 1] | 10/10 / 10 | 0 | Pending |
-| Variant answer accuracy | 1 [1, 1] | 10/10 / 10 | 0 | Pending |
-| Variant correct-answer hit rate | 0.8 [0.5, 1] | 10/10 / 10 | 0 | Pending |
-| Near-miss false-hit rate | 0 [0, 0] | 10/10 / 10 | 0 | Pending |
-| Source move/delete invalidation | 1 [1, 1] | 2/2 / 2 | 0 | Pending |
-| Item move/delete freshness | 1 [1, 1] | 2/2 / 2 | 0 | Pending |
-| Bypass HTTP mean, ms — saved facts | 140.341 [88.8584, 194.545] | 5/5 / 5 | 10.1492 | Pending |
-| Exact-cache HTTP mean, ms — saved facts | 66.9641 [50.7144, 83.3369] | 5/5 / 5 | 25.8652 | Pending |
-| Semantic HTTP mean, ms — variants | 439.495 [320.298, 557.771] | 10/10 / 10 | 171.91 | Pending |
-| Generated in-process bypass LLM calls | 2 [2, 2] | 1/1 / 1 | 0 | Pending |
-| Generated in-process cached LLM calls | 0 [0, 0] | 1/1 / 1 | 0 | Pending |
-| Generated in-process latency saved, ms | 9463.87 [9463.87, 9463.87] | 1/1 / 1 | 1719.44 | Pending |
-
-Container accuracy has only one independent container probe. Document fact presence checks frozen required values in answers; it is not automatic structured entity extraction. Aggregate/follow-up failures remain visible. The cache variant-hit target is unmet in baseline; zero false hits on ten near-misses does not establish a population false-hit rate below the requested threshold. The generated-answer cache/call experiment has one paired query per run and instruments actual local model HTTP calls; saved-fact API timings and generated-answer timings are different workloads. Raw latency-saved estimates without a supported CI remain in the complete scorecard.
-
-### Ingestion and chunking
-
-| Metric | Baseline mean [95% CI] | n per run / clusters | Run SD | Final |
-| --- | --- | --- | --- | --- |
-| Scanned OCR character error rate (macro) | 0.00337838 [0, 0.0101351] | 4/4 / 4 | 0 | Pending |
-| Scanned OCR word error rate (macro) | 0.0217391 [0, 0.0652174] | 4/4 / 4 | 0 | Pending |
-| Table literal cell-text recall | 1 [1, 1] | 48/48 / 48 | 0 | Pending |
-| Table row-major text sequence retention | 1 [1, 1] | 4/4 / 4 | 0 | Pending |
-| PDF structured-table output rate | 0 [0, 0] | 4/4 / 4 | 0 | Pending |
-| Figure/image page-preview retention | 1 [1, 1] | 8/8 / 8 | 0 | Pending |
-| Image literal-label recall | 1 [1, 1] | 24/24 / 24 | 0 | Pending |
-| Chart axis/legend text recall | 1 [1, 1] | 12/12 / 12 | 0 | Pending |
-| Chart numeric-label text recall | 0.75 [0.5, 1] | 12/12 / 12 | 0 | Pending |
-| Evidence single-chunk rate (literal diagnostic) | 0.78 [0.66, 0.8805] | 50/50 / 50 | 0 | Pending |
-| Table split rate (literal diagnostic) | 0 [0, 0] | 4/4 / 4 | 0 | Pending |
-| Figure label/caption single-chunk rate (literal) | 1 [1, 1] | 4/4 / 4 | 0 | Pending |
-| Content characters/chunk, mean | 36.5083 [26.9329, 47.025] | 120/120 / 120 | 0 | Pending |
-| Content characters/chunk, p95 | 148 [90.95, 257] | 120/120 / 120 | 0 | Pending |
-| Parser seconds/page, mean | 0.234306 [0.15814, 0.30966] | 20/20 / 20 | 0.0139534 | Pending |
-| Parser seconds/page, p95 | 0.460223 [0.374111, 0.495632] | 20/20 / 20 | 0.0183464 | Pending |
-
-OCR uses only four clean synthetic scanned pages: low error here does **not** establish real phone-photo, identity-card, handwriting, or degraded-image accuracy. Severe blur/noise probes include misses. Table text retention is not aligned-cell/structure accuracy. A retained preview is not figure detection; chart-label text retention is not correct bar/value interpretation. Parser-only timings exclude queue, embeddings, and database publication. All chunk-size distributions and modality-specific parser timings remain in the report/CSV.
-
-### Security and system measurements
-
-| Metric | Baseline mean [95% CI] | n per run / clusters | Run SD | Final |
-| --- | --- | --- | --- | --- |
-| Household/user/cache isolation pass rate | 1 [1, 1] | 10/10 / 10 | 0 | Pending |
-| Prompt-injection resistance — output probes | 1 [1, 1] | 2/2 / 2 | 0 | Pending |
-| Prompt-injection HTTP safety | 1 [1, 1] | 3/3 / 3 | 0 | Pending |
-| Prompt-injection answer fact presence | 0.666667 [0, 1] | 3/3 / 3 | 0 | Pending |
-| Sensitive identifier persisted in authorized cache | 1 [1, 1] | 1/1 / 1 | 0 | Pending |
-| Publication sensitive-value leak files | 0 [CI not measured] | 177/177 / — | 0 | Pending |
-| PDF retrieval p50, seconds | 1.33559 [1.27064, 1.40237] | 60/60 / 60 | 0.0520009 | Pending |
-| PDF retrieval p95, seconds | 4.59082 [2.50271, 6.19212] | 60/60 / 60 | 3.14373 | Pending |
-| PDF model generation p50, seconds | 77.1864 [68.8046, 84.1225] | 56/56 / 56 | 8.24899 | Pending |
-| PDF model generation p95, seconds | 115.856 [106.783, 124.35] | 56/56 / 56 | 13.9816 | Pending |
-| PDF verification p50, seconds | 25.442 [18.102, 35.7845] | 31/31 / 31 | 1.36463 | Pending |
-| PDF verification p95, seconds | 72.8954 [58.2561, 78.5023] | 31/31 / 31 | 8.46019 | Pending |
-| PDF total p50, seconds | 90.7399 [74.8842, 108.954] | 60/60 / 60 | 24.8932 | Pending |
-| PDF total p95, seconds | 180.663 [150.885, 192.576] | 60/60 / 60 | 22.4499 | Pending |
-| PDF model calls/query, mean | 1.45 [1.3, 1.6] | 60/60 / 60 | 0 | Pending |
-| PDF prompt tokens, conditional mean | 12420 [11361.7, 13508.7] | 56/55 / 56 | 109.277 | Pending |
-| PDF completion tokens, conditional mean | 361.367 [311.243, 410.295] | 56/55 / 56 | 2.38717 | Pending |
-| Concurrent saved-fact p95, ms | 50.7579 [45.7438, 50.9332] | 4/4 / 4 | 10.1415 | Pending |
-| Concurrent saved-fact failure rate | 0 [0, 0] | 4/4 / 4 | 0 | Pending |
-| Text parse: 4,096 bytes, seconds | 0.0011161 [CI not measured] | 1/1 / — | 0.000587282 | Pending |
-| Text parse: 262,144 bytes, seconds | 0.00575183 [CI not measured] | 1/1 / — | 0.000315723 | Pending |
-| Text parse: 2,097,152 bytes, seconds | 0.0464653 [CI not measured] | 1/1 / — | 0.000203617 | Pending |
-
-**Baseline “no sensitive identifier in cache” requirement: NOT MET.** The synthetic identifier was retained in its authorized user's cache. Post-baseline code now bypasses recognized personal-card identifiers and prunes recognized legacy entries; complete final-phase results are pending. This remains separate from isolation checks and is not evidence of a cross-household leak or a universal zero-PII guarantee. Shared private process logs were deliberately not inspected. Publication-file screening covers the inspected tracked text, not private runtime stores.
-
-Latency is observed on shared local hardware with model contention and experiment scheduling; it is not production capacity. Stage timing denominators vary because some queries abstain before generation or do not invoke verification, and token telemetry is conditional on observed calls. Concurrent probes measure saved inventory facts only. Large-file probes cover plain-text parser scaling only, not maximum-size multimodal upload/LLM throughput. All per-modality p50/p95, token/call counts, run variation, and conditional n values are in the scorecard.
-
-### All requested metric families and unmeasured outcomes
-
-| Family | Recorded coverage / remaining measurement gap |
-| --- | --- |
-| Retrieval A | Precision, Recall, F1, Hit Rate, MRR, NDCG, MAP, R-Precision at all requested K; modality/channel ablations, RRF sensitivity, reranking, source diversity and entropy are in the complete scorecard. |
-| Robustness G | Typo/Hinglish/identifier/no-match subsets, degraded scans and cross-modal retrieval measured. A separately labeled paraphrase-only retrieval set: **NOT MEASURED**; absent from frozen gold. |
-| Generation B | EM, token F1, ROUGE-L, custom E5 BERTScore precision/recall/F1, local RAGAS AnswerSimilarity, reference-length/term diagnostics, and subset three-run consistency measured. |
-| RAGAS judge metrics B | Faithfulness, answer relevancy, context precision/recall/entity recall, noise sensitivity, answer correctness, factual correctness, multimodal faithfulness/relevance: **NOT MEASURED**, no external free-tier judge credential. |
-| Answer completeness/conciseness B | **NOT MEASURED** semantically; length ratio/term coverage remain explicitly labeled diagnostics. |
-| Citations C | Gold chunk precision/recall/F1, page recall, canonical metadata, exact quotes, authored-region overlap measured. Claim-level precision/recall/F1 and groundedness: **NOT MEASURED**, no independent judge. Browser click-through: **NOT MEASURED**, no supported navigation probe executed. |
-| Abstention D | Precision/recall, false refusal and negative non-abstention measured. Hallucination rate: **NOT MEASURED**, not inferred from refusal or lexical mismatch. |
-| Household E | Room/zone/container/path/link metadata, literal identifier/date/amount fact presence, aggregates/follow-ups, freshness, and duplicate handling measured. Automatic semantic document-type/person-name extraction: **NOT MEASURED**, no structured output or applicable frozen name gold. |
-| Ingestion F | CER/WER, literal table/label/chart retention, chunk splitting/size distributions, previews, parser timing measured. Aligned table-cell accuracy/TEDS, figure detection recall, structured chart reading: **NOT MEASURED**, parser lacks these outputs. Caption quality/image hallucination: **NOT MEASURED**, no caption stage/independent judge. |
-| Cache H | Exact/semantic/correct-answer hits, near-misses, version invalidation, latency and instrumented LLM calls measured on stated workloads; small-probe limits apply. |
-| Calibration I | AUROC, Brier score, ECE and reliability table: **NOT MEASURED**, app emits categorical confidence without numeric correctness probabilities. |
-| Security J | Isolation, prompt injection, publication screening and authorized-cache persistence measured. Shared-log canary leak rate: **NOT MEASURED**, real private logs not read. Baseline no-sensitive-cache policy: **NOT MET**; post-fix recognized-identifier bypass awaits the consolidated final comparison. |
-| Systems K | Stage/modality p50/p95, observed tokens/calls, saved-fact concurrency and plain-text scaling measured. Full RAG concurrency, distinct timeout rate, real USD cost, 3D load time/active-render FPS: **NOT MEASURED**, absent instrumentation or unsupported workload. No hosted token invoice is not zero compute cost. |
-| Statistics L | Cluster-bootstrap intervals, repeated-run variance, exploratory paired permutation tests and Holm correction recorded; unsupported CI estimators remain explicit rather than invented. |
-
-Read the [full report](evaluation/RAG_EVALUATION_REPORT.md), [exhaustive machine-readable scorecard](evaluation/stats-metric-scorecard.csv), [baseline snapshot](evaluation/baseline_results.json), and [independent verification status](evaluation/VERIFICATION.md). Final columns remain pending until both complete passes against the latest heading-guard source are frozen. Superseded candidates are preserved in specialist `candidate_history`, not substituted for definitive final observations. The recorded intermediate candidate improved page hit rate while strict chunk Precision, Recall, MRR, and NDCG declined; page-hit improvement must not be described as improvement in all retrieval metrics. Unmeasured metrics are not passing scores.
-<!-- EVALUATION_SUMMARY_END -->
-
-Historical evidence remains in [verification](docs/VERIFICATION.md), [hierarchy/layout checks](docs/LOCATION_UPGRADE.md), [hybrid evaluation](evaluation/HYBRID_EVALUATION_REPORT.md), and [image evaluation](evaluation/IMAGE_PIPELINE_REPORT.md). Their dates, model profiles, and datasets differ; do not combine them with the expanded benchmark.
+The latest Python regression run passed **114 tests**, including disposable database fixtures. The preceding **87 JavaScript tests** and TypeScript check passed; no TypeScript code changed in the last heading patch, so those are earlier applicable checks, not fresh reruns. Earlier counts and the database subset overlap these suites and are not additive. [Fix details and controlled tests](evaluation/CHANGELOG.md) · [recorded commands](evaluation/results/fixer-agent.json).
 
 ## How it works
 
@@ -492,12 +288,22 @@ node scripts/passkey-check.mjs
 Journeys use fictional accounts/households; their credentials/session files stay in ignored `.data/`. They do not verify every physical passkey device or deployment.
 
 <!-- EVALUATION_COMMANDS_START -->
+The saved-results summary can be rebuilt without new inference:
+
+```sh
+evaluation/.venv/bin/python evaluation/showcase/report.py --app-root "$PWD"
+```
+
+This reads existing observations and writes the showcase summary/report. It does not complete the stopped benchmark or produce a complete `final_results.json`.
+
+
 Set up the isolated evaluation environment after installing the application/system prerequisites and pinned models:
 
 ```sh
 python3.12 -m venv evaluation/.venv
 evaluation/.venv/bin/python -m pip install -r evaluation/requirements.lock.txt
 evaluation/.venv/bin/python -m pip install -r evaluation/requirements-metrics.txt
+export EVAL_APP_ROOT="$PWD"
 export MODEL_DIR="$PWD/data/models"
 export EVAL_SHARED_RUNTIME="$PWD/evaluation/runtime"
 export EVAL_PYTHON="$PWD/evaluation/.venv/bin/python"
@@ -505,7 +311,7 @@ python evaluation/run_eval.py --dry-run --phase final
 python evaluation/run_eval.py --phase final
 ```
 
-On the current post-fix checkout, `--phase final` executes both independent final passes and assembles statistics. The runner defaults to `baseline`; reproducing the frozen pre-fix baseline requires its recorded application source, while changed source cannot overwrite that snapshot. Full local inference can take hours. It uses disposable fictional accounts/documents in the development database, with model work serialized where needed; customer documents are not the corpus. Resume is limited to the same source/data/phase/run identity, and a second run cannot reuse the first run's generated answer.
+Optional full reproduction: on the current post-fix checkout, `--phase final` requests both independent final passes and assembles statistics. This can run for hours and is separate from the recorded budget-limited showcase. The runner defaults to `baseline`; reproducing the frozen pre-fix baseline requires its recorded application source. It uses disposable fictional accounts/documents in the development database, with model work serialized where needed; customer documents are not the corpus. Resume is limited to the same source/data/phase/run identity, and a second run cannot reuse the first run's generated answer.
 
 ```sh
 python evaluation/run_eval.py --phase final --group retrieval
@@ -535,11 +341,17 @@ Compose publishes web on loopback port 3000; keep database/worker/Ollama private
 - **No numeric trust calibration:** confidence is categorical. AUROC/Brier/ECE/reliability calibration need a defined score and labeled outcomes.
 - **No conversational context:** each ask is independent despite stored message rows. Restate the object/question explicitly.
 - **Visual/table gaps:** no dedicated figure detector, caption generator, semantic table structure model, or chart parser. Tiny text, handwriting, blur/noise, complex charts, and brief video events can fail. The clean synthetic scan sample does not validate real phone photos or identity cards.
-- **Retrieval/cache tradeoffs:** RRF/reranking need not beat fuzzy search on typo-heavy questions; strict cache guards and identifier privacy bypass can lower hit rate. Visual page crowding and multi-record numeric matching have regression-tested fixes; only complete final evaluation establishes their broader quality/latency tradeoffs.
+- **Retrieval/cache tradeoffs:** RRF/reranking need not beat fuzzy search on typo-heavy questions; strict cache guards and identifier privacy bypass can lower hit rate. Visual page crowding and multi-record numeric matching have regression-tested fixes; the measured retrieval tradeoffs above remain visible, while full generation quality remains unestablished.
 - **Capacity:** exact vectors, bounded lexical pools, private filesystem storage, and shared local inference need fresh scale/concurrency testing. No 120-FPS or latency SLA is claimed.
 - **Privacy boundary:** application membership checks/predicates and tenant foreign keys do not replace database RLS. Server/database administrators can access private originals, messages, cache, and exports. Host/DB compromise is outside this access boundary.
 - **Not implemented:** object-storage/MinIO integration, payments, floor-plan-image-to-layout generation, arbitrary office-file ingestion, physical item tracking, or emailed maintenance notifications.
-- **Evaluation scope:** synthetic data, small subgroups, shared-machine contention, and absent external-judge credentials limit generalization. Missing metrics stay missing; older reports may describe different models.
+- **Evaluation scope:** synthetic data, small subgroups, shared-machine contention, and absent external-judge credentials limit generalization. The latest generation run is a stopped deterministic prefix, with no scanned-PDF cases; it cannot establish full multimodal answer accuracy or a like-for-like full-baseline improvement. Missing metrics stay missing; older reports may describe different models.
+
+## Resume / LinkedIn description
+
+- Built a self-hosted household multimodal RAG application with hierarchical location metadata, an editable React Three Fiber home, and source/page/region/timestamp citations.
+- Implemented multilingual dense, word-BM25, fuzzy n-gram, and visual retrieval with RRF, plus household/user-scoped exact/semantic caching, invalidation, and identifier-cache controls.
+- Benchmarked hybrid retrieval on **121 answerable synthetic queries** and recorded full paths correctly in **20/20 synthetic location queries**, with disclosed ranking regressions, cache misses, and partial generation coverage.
 
 ## Repository guide
 
