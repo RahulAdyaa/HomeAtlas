@@ -4,7 +4,7 @@
   "audit_date": "2026-10-16",
   "app_baseline_commit": "5f33a9b157a4394e60f3bac0ede95d293f5bf3fc",
   "method": "Read-only source and lockfile audit; inspected the existing fictional locations-overview screenshot. No live reliability metrics produced by this agent.",
-  "evaluation_numbers_status": "Budget-limited showcase headline values formatted from canonical showcase_results.json. No complete final benchmark claimed; original full generation pair superseded by explicit user budget.",
+  "evaluation_numbers_status": "Original showcase headline values unchanged; bounded independent Codex grades now formatted from the canonical aggregate with exact denominator bindings. No complete final benchmark or formal RAGAS claim.",
   "features": [
     {
       "id": "inventory",
@@ -1177,7 +1177,7 @@
     "generation_coverage_note": "43/60 run-1 questions saved; 37 answerable / 6 negative; no scanned-PDF generation, run 2, or third sample. Deterministic prefix, not random or complete benchmark."
   },
   "showcase_source": "evaluation/showcase_results.json",
-  "showcase_sha256": "157b3b7f7d5a1f00616c5c934af251025af41dca1a6ba2b2085c60c45f8c5413",
+  "showcase_sha256": "9fad52326aeda82e964bdba3ad79b7eef0ba1f067ca0145f50bac9636588b61b",
   "showcase_status": "BUDGET_LIMITED_SHOWCASE_PARTIAL_GENERATION",
   "generation_coverage": {
     "saved_questions": 43,
@@ -1224,5 +1224,46 @@
     ],
     "report": "evaluation/RAG_EVALUATION_REPORT.md#requested-metric-coverage",
     "qualification": "Every requested metric and all five modalities are accounted for by actual measurements or explicit NOT MEASURED status/reason; no independent semantic scores inferred from overlap or literal labels. Existing headline values unchanged."
-  }
+  },
+  "independent_review_source": "evaluation/results/independent-judge-summary.json",
+  "independent_review_sha256": "6dbde1745120cd258dbce35e054bc720c8f1530f67d5c7adf68450625bef0a72",
+  "readme_independent_review_bindings": [
+    {
+      "path": "overall.answerable_correctness",
+      "source": "evaluation/results/independent-judge-summary.json"
+    },
+    {
+      "path": "overall.faithfulness",
+      "source": "evaluation/results/independent-judge-summary.json"
+    },
+    {
+      "path": "overall.answer_relevancy",
+      "source": "evaluation/results/independent-judge-summary.json"
+    },
+    {
+      "path": "overall.hallucination_all_reviewed",
+      "source": "evaluation/results/independent-judge-summary.json"
+    },
+    {
+      "path": "overall.appropriate_negative_abstention",
+      "source": "evaluation/results/independent-judge-summary.json"
+    },
+    {
+      "path": "by_modality.image.answerable_correctness",
+      "source": "evaluation/results/independent-judge-summary.json"
+    },
+    {
+      "path": "by_modality.chart.answerable_correctness",
+      "source": "evaluation/results/independent-judge-summary.json"
+    },
+    {
+      "path": "coverage",
+      "source": "evaluation/results/independent-judge-summary.json"
+    },
+    {
+      "path": "reviewer_provenance",
+      "source": "evaluation/results/independent-judge-summary.json"
+    }
+  ],
+  "independent_review_qualification": "43/60 deterministic synthetic stopped prefix, 37 answerable and 6 negatives separately; no scanned questions. A 0 / 0.5 / 1 source-review rubric gives half-credit means, not binary fully-correct accuracy. Codex is distinct from local Qwen; exact serving model unavailable. No human, formal RAGAS, inter-rater calibration, production, or confidence-interval claim."
 }
