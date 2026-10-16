@@ -148,6 +148,12 @@ class LocalModels:
             'First create quotes: each has index (source evidence index) and quote (an exact substring of extracted text). '
             "For a visual claim, copy that source's supplied anchor as the quote; put the visual explanation in sections, not in the quote. "
             'Then create sections: each has heading, text, and evidence (zero-based positions in your quotes array). '
+            'The first section MUST directly answer the question in one or two complete sentences. '
+            'Use later sections only for necessary supporting details, as short Markdown bullets. '
+            'Bold key terms and verified numbers with **bold**. Use headings only for a genuinely long answer. '
+            'Write equations only when legible in source evidence, using $...$ inline or \\(...\\) for display; never guess missing symbols. '
+            'Use fenced blocks for code and the structured table object for tabular values. '
+            'Do not paste whole source quotations into section text: evidence is displayed separately. '
             'Explain the relevant definitions, mechanisms, steps, equations, diagrams, table comparisons and chart trends thoroughly. '
             'Use only as many sections as needed: answer the question directly without filler or repeated descriptions. '
             'For a requested or useful table, populate the section table object with columns and rows of strings containing the actual values. '

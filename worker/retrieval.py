@@ -58,6 +58,31 @@ def citation(row: dict, index: int, quote: str) -> dict:
             'metadata': row.get('metadata', {}), 'number': index}
 
 
+def brief_evidence(quote: str, limit: int = 260) -> str:
+    """Readable extractive fallback; the citation retains the exact source span."""
+    cleaned = re.sub(r'(?m)^\s*Location:\s*[^\n]*\n*', '', quote).strip()
+    cleaned = re.sub(r'\s+', ' ', cleaned)
+    sentences = re.split(r'(?<=[.!?])\s+', cleaned)
+    first = sentences[0].strip() if sentences else ''
+    if len(first) <= limit:
+        return first
+    boundary = first[:limit + 1].rfind(' ')
+    return first[:boundary].rstrip(' ,;:') + '…' if boundary > 40 else ''
+
+
+def extractive_answer(quotes: list[tuple[dict, str]], conflict: bool) -> str:
+    points = []
+    for index, (_, quote) in enumerate(quotes):
+        sentence = brief_evidence(quote)
+        if sentence and sentence not in {point[0] for point in points}:
+            points.append((sentence, index + 1))
+    if not points:
+        return 'I found a relevant record, but its text is not readable enough to answer confidently.'
+    lead = ('These records disagree. Check the cited versions below.' if conflict else
+            'The available record says:')
+    return lead + '\n\n' + '\n'.join(f'- **{sentence}** [{index}]' for sentence, index in points)
+
+
 def answer_from_evidence(question: str, candidates: list[dict], engine: LocalModels = models,
                          image: Path | None = None) -> dict:
     if not candidates:
@@ -98,8 +123,8 @@ def answer_from_evidence(question: str, candidates: list[dict], engine: LocalMod
     if not quotes:
         return {'answer': 'The available records do not contain enough direct evidence to answer confidently.',
                 'citations': [], 'confidence': 'insufficient', 'mode': 'abstention'}
-    intro = 'These records may conflict; confirm the applicable version before relying on them.' if conflict else 'Your records say:'
-    answer = intro + '\n\n' + '\n\n'.join(f'“{quote}” [{i + 1}]' for i, (_, quote) in enumerate(quotes))
+    intro = 'These records may conflict; confirm the applicable version before relying on them.' if conflict else ''
+    answer = extractive_answer(quotes, conflict)
     sections = []
     accepted = []
     if generated and quotes and hasattr(engine, 'verify_sections'):
@@ -148,8 +173,10 @@ def answer_from_evidence(question: str, candidates: list[dict], engine: LocalMod
             quotes = [quotes[index] for index in used]
             accepted = [dict(section, evidence=[display_index[index] for index in section['evidence']])
                         for section in accepted]
-            answer = ('These records may conflict; confirm the applicable version before relying on them.\n\n' if conflict else '')
-            answer += '\n\n'.join((f'### {s["heading"]}\n\n' if s['heading'] else '') + s['text'] + '\n\n' +
+            # Lead with the verified answer, then add brief supporting points.
+            # Source headings are not needed for one-line answers.
+            answer = (intro + '\n\n' if intro else '')
+            answer += '\n\n'.join((f'### {s["heading"]}\n\n' if s['heading'] and len(accepted) > 2 else '') + s['text'] + '\n\n' +
                                     ' '.join(f'[{i + 1}]' for i in s['evidence']) for s in accepted)
             if len(accepted) < len(generated.get('sections', [])):
                 answer += '\n\nSome proposed details could not be verified against these records and have been omitted.'
@@ -168,7 +195,7 @@ def answer_from_evidence(question: str, candidates: list[dict], engine: LocalMod
             return {'answer': 'The available records do not contain enough direct evidence to answer confidently.',
                     'citations': [], 'confidence': 'insufficient', 'mode': 'abstention'}
         quotes = [quotes[i] for i in valid]
-        answer = intro + '\n\n' + '\n\n'.join(f'“{quote}” [{i + 1}]' for i, (_, quote) in enumerate(quotes))
+        answer = extractive_answer(quotes, conflict)
     if not accepted and any((row.get('metadata') or {}).get('visual_anchor') for row,_ in quotes):
         return {'answer': 'I found a matching image, but could not verify an answer from it. Try a clearer image or add a description.',
                 'confidence':'insufficient','mode':'abstention','citations':[]}

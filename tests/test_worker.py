@@ -147,6 +147,15 @@ def test_missing_models_return_explicit_extractive_mode():
     assert result['citations'][0]['text'] in result['answer']
 
 
+def test_extract_fallback_is_short_and_keeps_metadata_out_of_answer():
+    source = row('Location: Living room\n\nThe QLoRA method uses 4-bit quantization. Extra material follows for context.', lexical_score=1)
+    result = answer_from_evidence('How does QLoRA quantize?', [source], NoModels())
+    assert 'Location:' not in result['answer']
+    assert 'The QLoRA method uses 4-bit quantization.' in result['answer']
+    assert 'Extra material' not in result['answer']
+    assert result['citations'][0]['text'] in source['text']
+
+
 def test_fabricated_model_quote_is_rejected():
     class Hallucinating(NoModels):
         def generate(self, *args, **kwargs):
