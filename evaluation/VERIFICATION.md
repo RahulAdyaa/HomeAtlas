@@ -1,8 +1,8 @@
 # Independent verification
 
-**PASS for the published budget-limited showcase.** This verifies documentation, evidence bindings and publication hygiene. It does not certify a complete final benchmark or perfect application behavior.
+**PASS for the published budget-limited showcase and requested metric coverage.** This verifies documentation, evidence bindings and publication hygiene. It does not certify a complete final benchmark or perfect application behavior.
 
-Audited application/docs commit: `a97b86709c33680188a67bca793d316bc2fd5bdb`. Application source: `b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8`. The verifier produced no RAG quality scores, performed no model inference, and changed no application, frozen gold, metric code, raw observations or README.
+Audited application/docs commit: `2663efb7beb0898336c97c2a852a0bf1bb0bd1e1`. Application source: `b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8`. The verifier produced no RAG quality scores, performed no model inference, and changed no application, frozen gold, metric code, raw observations or README.
 
 ## Evidence checks
 
@@ -26,6 +26,16 @@ evaluation/.venv/bin/python evaluation/showcase/report.py --app-root "$PWD"
 Verification used its `--output-dir` option to avoid changing the published report during the check. This command summarizes existing observations; it does not complete the stopped evaluation.
 
 The earlier numeric-heading omission was fixed by the sole fixer. Independent focused regressions previously passed **24 tests** with fake engines/stub transport on this unchanged source. These are application regression results, not new RAG quality measurements. The main working tree was clean at the audit, including `next-env.d.ts`.
+
+## Requested coverage follow-up
+
+All requested metric families are now explicitly covered with an existing measured value/sample size or a **NOT MEASURED** reason. The audit checked all **80 existing metric bindings**, preserving the original **34 headline point/CI objects** unchanged. Newly displayed coverage points do not claim extra confidence intervals.
+
+The text/table/image/chart/scanned matrices reconcile with the saved specialist evidence. Conditional generation abstention/false-refusal sample IDs, denominators and values match raw saved flags. No scanned-generation observations or missing chart negatives are represented as successes. Retrieval text includes household and PDF scenarios; generation text is the stopped PDF prefix.
+
+Judged context precision/recall, faithfulness, answer correctness/relevancy, claim-level citation accuracy, hallucination, and semantic chart/image understanding remain unavailable with explicit reasons and zero judged samples. Retrieval overlap, exact quotations and image-label presence are separate diagnostics. Currency cost is unmeasured; local operation does not imply zero compute cost.
+
+The updated report-only helper reproduced the metric inventory, unavailable reasons, modality matrices and latency/coverage bindings exactly in temporary output without inference. README coverage anchors/canonical SHA, report displays, links/table shapes and the publication file list reconcile. Sealed baseline, frozen gold/measurement code and app fingerprint remain unchanged. Changed publication text passed the scoped credential screen. No fresh environment installation, full inference or broader testing was added.
 
 ## Limits retained
 

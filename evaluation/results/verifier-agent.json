@@ -2,7 +2,7 @@
   "schema_version": 1,
   "agent": "verifier-agent",
   "stage": "preflight",
-  "status": "VERIFIED_FOR_BUDGET_LIMITED_SHOWCASE",
+  "status": "VERIFIED_FOR_BUDGET_LIMITED_SHOWCASE_AND_REQUESTED_COVERAGE",
   "audited_commit": "41a8a813276c8b26d0ef3011c2b609a1446843fa",
   "timestamp_utc": "2026-10-15T12:07:52.266233+00:00",
   "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
@@ -278,7 +278,7 @@
       ]
     }
   ],
-  "latest_audited_commit": "a97b86709c33680188a67bca793d316bc2fd5bdb",
+  "latest_audited_commit": "2663efb7beb0898336c97c2a852a0bf1bb0bd1e1",
   "latest_app_source_fingerprint": "b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8",
   "resolved_findings": [
     "numeric-heading-coverage",
@@ -287,72 +287,51 @@
     "local-scorecard-link"
   ],
   "final_verification": {
-    "timestamp_utc": "2026-10-16T06:15:29.764551+00:00",
-    "audited_commit": "a97b86709c33680188a67bca793d316bc2fd5bdb",
-    "scope": "Published budget-limited showcase only; not a complete final benchmark or universal application correctness certificate.",
-    "showcase_sha256": "13d40f5f616178cb0907e16356deee5e95ab2ce0c43c2b531aab6953f97608ff",
-    "readme_sha256": "1df27132fb282811656e131399de6bf6d702acfa321c835c8acad6d68fb8805b",
+    "timestamp_utc": "2026-10-16T10:13:20.769931+00:00",
+    "audited_commit": "2663efb7beb0898336c97c2a852a0bf1bb0bd1e1",
+    "status": "PASS_FOR_BUDGET_LIMITED_SHOWCASE_AND_REQUESTED_COVERAGE",
+    "scope": "Documentation and existing-observation coverage audit only; not a complete final multimodal benchmark.",
+    "showcase_sha256": "157b3b7f7d5a1f00616c5c934af251025af41dca1a6ba2b2085c60c45f8c5413",
+    "readme_sha256": "17f9aaca2ba214431f482e4f6cdd328c8d19f975dbf25f5ca426ab75bf557d20",
     "app_source_fingerprint": "b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8",
     "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
-    "baseline_sha256": "b08a6f02bb5b887aede182b66900bb7b7214e4f5321dfe5fe3e452c3591fbee4",
     "produced_evaluation_metrics": false,
     "performed_inference": false,
-    "readme_edits_needed": false,
     "checks": [
       {
-        "id": "canonical-raw-source-parity",
+        "id": "requested-family-inventory",
         "status": "PASS",
-        "evidence": "Each showcase source_ref value/n equals the exact raw specialist metric for its phase/run. Run-value and n lists, copied baseline objects, source/data fingerprints and generation coverage reconcile."
+        "evidence": "All requested retrieval, context, faithfulness, answer correctness/relevancy, citation, abstention/hallucination, OCR/table/chart/image, cross-modal, room/zone/container, typo/cache/staleness, p95 and currency-cost families are present with existing source/n or explicit NOT MEASURED reason."
       },
       {
-        "id": "report-numeric-display",
+        "id": "all-existing-source-points",
         "status": "PASS",
-        "evidence": "Every report metric row, baseline/current display, denominator and empirical CI matches the canonical showcase artifact. Markdown table header/delimiter shapes are valid."
+        "evidence": "All 80 metric source bindings, per-run values/denominators and summaries match existing raw agent observations. Original34 headline objects, including empirical CIs, are unchanged. Additional intervals are explicitly unmeasured under the budget."
       },
       {
-        "id": "readme-headlines-and-resume",
+        "id": "five-modality-coverage",
         "status": "PASS",
-        "evidence": "README headline points/CIs, baseline arrows, ranking tradeoffs, literal fact/quote/abstention diagnostics, partial latency, coverage and security counts match canonical/source bindings. Resume sample-size/location statements are bounded to their actual synthetic probes. Docs canonical SHA and all displayed metric bindings match."
+        "evidence": "Text/table/image/chart/scanned retrieval points are sourced. Partial generation citation points and conditional abstention/false-refusal sample IDs and values match saved rows. Empty chart-negative and scanned-generation denominators are not passing scores."
       },
       {
-        "id": "reduced-scope-honesty",
+        "id": "semantic-diagnostic-separation",
         "status": "PASS",
-        "evidence": "Documentation explicitly states a stopped deterministic prefix of 43/60 questions, 37 answerable/6 negative, no scanned generation, no second/third generation pass, no complete final benchmark, no final cross-run generation variance and no canonical final_results.json. Generation baseline comparison is omitted for unequal coverage."
+        "evidence": "Judged context precision/recall, faithfulness, correctness, relevancy, hallucination, claim citation accuracy and true chart/image understanding remain null with zero judged samples and reasons. Retrieval overlap, quote validity and literal labels are explicitly separate. Currency cost is unmeasured, not zero."
       },
       {
-        "id": "failures-and-uncertainty",
+        "id": "report-README-and-provenance",
         "status": "PASS",
-        "evidence": "Retrieval ranking declines, unmet hybrid typo superiority, cache-variant misses, incomplete receipt aggregate, structured-table absence, limited identifier canary, failed retention-assumption probes, conditional citations and absent independent judge/calibration/capacity measurements remain visible. Raw failures and candidate history are preserved."
+        "evidence": "Inventory display points/n and unavailable reasons match canonical data. README retains previous verified headline values and adds valid coverage/modality anchors; docs canonical SHA is current. Table shapes/local links and publication manifest match; text retrieval includes household+PDF whereas generation text is the PDF prefix."
       },
       {
         "id": "report-only-reproduction",
         "status": "PASS",
-        "evidence": "Executed evaluation/showcase/report.py with existing pinned environment and isolated temporary output. Selected metrics/CIs, paired comparisons, telemetry, coverage and security sections exactly reproduced canonical values. Raw/frozen files unchanged; no model inference or application mutation. New timestamp was not treated as metric drift."
+        "evidence": "Updated helper reproduced metrics, requested inventory, unmeasured reasons, per-modality coverage, latency binding and generation coverage exactly in temporary output, without inference or raw-file changes."
       },
       {
-        "id": "immutable-baseline-gold-measurement",
+        "id": "frozen-integrity-and-publication",
         "status": "PASS",
-        "evidence": "Sealed baseline remains byte-identical to commit8c9349a; frozen inputs and original measurement-file hashes verify. Historical baseline appendix is byte-identical to the original frozen report. Current application hash matches definitive b253 source."
-      },
-      {
-        "id": "publication-manifest-and-privacy",
-        "status": "PASS WITH STATED SCOPE",
-        "evidence": "PUBLICATION_FILES.txt path list exactly equals proposed changes from5f33a9b plus itself; listed files exist. No forbidden private artifact paths, detected unique configured credentials, generic API keys or private keys in publication text. Real private logs, uploads and DB cache contents were not inspected. Known public development database default is intentionally documented."
-      },
-      {
-        "id": "links-screenshot-diagrams",
-        "status": "PASS",
-        "evidence": "README/evaluation report/setup local links resolve; all four Mermaid diagrams remain. Referenced fictional layout screenshot is unchanged from prior visual audit."
-      },
-      {
-        "id": "working-tree-at-audit",
-        "status": "PASS",
-        "evidence": "Main checkout was clean, including generated next-env.d.ts, before verifier report-only commit."
-      },
-      {
-        "id": "previous-heading-finding",
-        "status": "RESOLVED",
-        "evidence": "Sole-fixer patch covers rendered heading/body and malformed fields. Independent targeted regression checks previously passed24 tests on unchanged definitive source, using stubs without inference."
+        "evidence": "Sealed baseline is unchanged, gold/original measurement hashes and definitive app source validate. Publication manifest matches current diff. Changed publication text since prior full scan contains no detected unique configured secrets/API/private keys. No private document/log/DB payload reads."
       }
     ],
     "known_unverified_or_limited": [
@@ -364,5 +343,86 @@
       "Privacy screening is bounded to publication artifacts and authorized synthetic probes. Conservative identifier-cache bypass is not universal PII detection."
     ],
     "github_write_actions_performed": false
-  }
+  },
+  "publication_verification_history": [
+    {
+      "timestamp_utc": "2026-10-16T06:15:29.764551+00:00",
+      "audited_commit": "a97b86709c33680188a67bca793d316bc2fd5bdb",
+      "scope": "Published budget-limited showcase only; not a complete final benchmark or universal application correctness certificate.",
+      "showcase_sha256": "13d40f5f616178cb0907e16356deee5e95ab2ce0c43c2b531aab6953f97608ff",
+      "readme_sha256": "1df27132fb282811656e131399de6bf6d702acfa321c835c8acad6d68fb8805b",
+      "app_source_fingerprint": "b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8",
+      "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
+      "baseline_sha256": "b08a6f02bb5b887aede182b66900bb7b7214e4f5321dfe5fe3e452c3591fbee4",
+      "produced_evaluation_metrics": false,
+      "performed_inference": false,
+      "readme_edits_needed": false,
+      "checks": [
+        {
+          "id": "canonical-raw-source-parity",
+          "status": "PASS",
+          "evidence": "Each showcase source_ref value/n equals the exact raw specialist metric for its phase/run. Run-value and n lists, copied baseline objects, source/data fingerprints and generation coverage reconcile."
+        },
+        {
+          "id": "report-numeric-display",
+          "status": "PASS",
+          "evidence": "Every report metric row, baseline/current display, denominator and empirical CI matches the canonical showcase artifact. Markdown table header/delimiter shapes are valid."
+        },
+        {
+          "id": "readme-headlines-and-resume",
+          "status": "PASS",
+          "evidence": "README headline points/CIs, baseline arrows, ranking tradeoffs, literal fact/quote/abstention diagnostics, partial latency, coverage and security counts match canonical/source bindings. Resume sample-size/location statements are bounded to their actual synthetic probes. Docs canonical SHA and all displayed metric bindings match."
+        },
+        {
+          "id": "reduced-scope-honesty",
+          "status": "PASS",
+          "evidence": "Documentation explicitly states a stopped deterministic prefix of 43/60 questions, 37 answerable/6 negative, no scanned generation, no second/third generation pass, no complete final benchmark, no final cross-run generation variance and no canonical final_results.json. Generation baseline comparison is omitted for unequal coverage."
+        },
+        {
+          "id": "failures-and-uncertainty",
+          "status": "PASS",
+          "evidence": "Retrieval ranking declines, unmet hybrid typo superiority, cache-variant misses, incomplete receipt aggregate, structured-table absence, limited identifier canary, failed retention-assumption probes, conditional citations and absent independent judge/calibration/capacity measurements remain visible. Raw failures and candidate history are preserved."
+        },
+        {
+          "id": "report-only-reproduction",
+          "status": "PASS",
+          "evidence": "Executed evaluation/showcase/report.py with existing pinned environment and isolated temporary output. Selected metrics/CIs, paired comparisons, telemetry, coverage and security sections exactly reproduced canonical values. Raw/frozen files unchanged; no model inference or application mutation. New timestamp was not treated as metric drift."
+        },
+        {
+          "id": "immutable-baseline-gold-measurement",
+          "status": "PASS",
+          "evidence": "Sealed baseline remains byte-identical to commit8c9349a; frozen inputs and original measurement-file hashes verify. Historical baseline appendix is byte-identical to the original frozen report. Current application hash matches definitive b253 source."
+        },
+        {
+          "id": "publication-manifest-and-privacy",
+          "status": "PASS WITH STATED SCOPE",
+          "evidence": "PUBLICATION_FILES.txt path list exactly equals proposed changes from5f33a9b plus itself; listed files exist. No forbidden private artifact paths, detected unique configured credentials, generic API keys or private keys in publication text. Real private logs, uploads and DB cache contents were not inspected. Known public development database default is intentionally documented."
+        },
+        {
+          "id": "links-screenshot-diagrams",
+          "status": "PASS",
+          "evidence": "README/evaluation report/setup local links resolve; all four Mermaid diagrams remain. Referenced fictional layout screenshot is unchanged from prior visual audit."
+        },
+        {
+          "id": "working-tree-at-audit",
+          "status": "PASS",
+          "evidence": "Main checkout was clean, including generated next-env.d.ts, before verifier report-only commit."
+        },
+        {
+          "id": "previous-heading-finding",
+          "status": "RESOLVED",
+          "evidence": "Sole-fixer patch covers rendered heading/body and malformed fields. Independent targeted regression checks previously passed24 tests on unchanged definitive source, using stubs without inference."
+        }
+      ],
+      "known_unverified_or_limited": [
+        "Full fresh dependency installation and clean-machine application/model inference were not performed; only CLI/archive checks and existing-environment report reproduction passed.",
+        "Original exhaustive final two-pass generation and third consistency sample were stopped by explicit user budget. No complete multimodal accuracy, full generation variance or scanned-generation quality is established.",
+        "Independent-judge semantic correctness/faithfulness/hallucination, numerical trust calibration, HTTP timeout rate, production capacity/cost and isolated3D FPS are not established.",
+        "Frozen runner retains default-baseline and conflicting exported EVAL_APP_ROOT precedence caveats; documentation uses explicit final phase and consistent root variables. No runner-code repair is claimed.",
+        "Baseline Ollama artifact observation was late; sampled digest cannot retroactively establish an unrecorded immutable historical tag.",
+        "Privacy screening is bounded to publication artifacts and authorized synthetic probes. Conservative identifier-cache bypass is not universal PII detection."
+      ],
+      "github_write_actions_performed": false
+    }
+  ]
 }
