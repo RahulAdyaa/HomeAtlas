@@ -175,7 +175,7 @@ Every requested metric is explicitly measured with scope or marked NOT MEASURED 
 
 ### Retrieval by modality at K=5
 
-Complete paired component runs; n is answerable questions per run. Source/page gold maps to chunks and does not prove extracted-answer or semantic context coverage.
+Complete paired component runs; n is answerable questions per run. Retrieval text includes household text scenarios plus PDF text; generation text below covers only the PDF prefix, so their denominators differ. Source/page gold maps to chunks and does not prove extracted-answer or semantic context coverage.
 
 | Modality | n/run | Precision@5 | Recall@5 | Hit@5 | MRR@5 | NDCG@5 |
 | --- | --- | --- | --- | --- | --- | --- |

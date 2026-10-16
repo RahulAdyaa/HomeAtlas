@@ -63,7 +63,7 @@ def coverage_markdown(data):
  p=data['requested_latency_binding'];rows.append(['p95 latency',num(p['value'])+' seconds (n='+str(p['n'])+'). '+p['definition']])
  lines+=['']+table(['Requested metric','Observed value / explicit unavailability'],rows)
  lines+=['','### Retrieval by modality at K=5','',
- 'Complete paired component runs; n is answerable questions per run. Source/page gold maps to chunks and does not prove extracted-answer or semantic context coverage.']
+ 'Complete paired component runs; n is answerable questions per run. Retrieval text includes household text scenarios plus PDF text; generation text below covers only the PDF prefix, so their denominators differ. Source/page gold maps to chunks and does not prove extracted-answer or semantic context coverage.']
  rows=[]
  for mod in MODS:rows.append([mod,look[f'{mod}/hybrid_runtime/recall@5']['n_per_run'][0]]+[num(look[f'{mod}/hybrid_runtime/{field}@5']['value'])for field in FIELDS])
  lines+=['']+table(['Modality','n/run','Precision@5','Recall@5','Hit@5','MRR@5','NDCG@5'],rows)
