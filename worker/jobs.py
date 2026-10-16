@@ -111,7 +111,7 @@ def process_job(job: dict, cfg: Settings = settings, engine: LocalModels = model
                 chunk_id = uuid.uuid5(uuid.UUID(str(job['version_id'])), fingerprint)
                 image_vector = image_vectors.get(chunk.image_path)
                 metadata = dict(chunk.metadata, source_sha256=source['sha256'], source_version=source['version'],
-                                location_id=str(source['location_id']), location_path=source['location_path'], permissions='household-members', extractor_version='homeatlas-2-image-evidence', active=True)
+                                location_id=str(source['location_id']), location_path=source['location_path'], permissions='household-members', extractor_version='homeatlas-3-clean-pdf', active=True)
                 conn.execute('''INSERT INTO chunks(id,household_id,source_id,version_id,item_id,room_id,text,page,bbox,
                     start_seconds,end_seconds,modality,embedding,embedding_model,model_revision,image_path,metadata,image_embedding,image_embedding_model)
                     VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT(id) DO UPDATE SET

@@ -11,7 +11,7 @@ from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 from .common import CONFIG, ALIASES, normalize, tokens, edit_distance
 
-CONFIG_VERSION=hashlib.sha256(json.dumps([CONFIG,ALIASES,'cache-v4-sensitive-identifiers'],sort_keys=True).encode()).hexdigest()
+CONFIG_VERSION=hashlib.sha256(json.dumps([CONFIG,ALIASES,'cache-v5-readable-answers-clean-pdf'],sort_keys=True).encode()).hexdigest()
 FILLER=set('could would kindly tell show find locate stored kept located put know give details detail about information find out please'.split())
 
 PERSONAL_RECORD = re.compile(r'\b(aadhaar|aadhar|adhaar|adhar|pan|passport|uid|ssn|social security|voter|driving licen[cs]e)\b|आधार', re.I)

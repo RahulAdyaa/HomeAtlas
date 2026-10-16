@@ -12,6 +12,9 @@ import csv
 import posixpath
 import zipfile
 import xml.etree.ElementTree as ET
+import re
+import unicodedata
+from collections import Counter
 
 import fitz
 from PIL import Image, ImageOps
@@ -140,6 +143,32 @@ def split_text(text: str, limit: int = 1200) -> list[str]:
         if current:
             parts.append(current)
     return parts
+
+
+def clean_pdf_text(raw: str, repeated_margins: set[str] | None = None) -> str:
+    """Normalize searchable prose without changing page/bounding-box provenance."""
+    raw = unicodedata.normalize('NFKC', raw.replace('\ufb01', 'fi').replace('\ufb02', 'fl'))
+    lines = [line.strip() for line in raw.replace('\r\n', '\n').split('\n')]
+    lines = [line for line in lines if line and line not in (repeated_margins or set()) and
+             not re.fullmatch(r'page\s+\d{1,4}', line, re.I)]
+    text = '\n'.join(lines)
+    text = re.sub(r'(?<=\w)-\s*\n\s*(?=\w)', '', text)
+    text = re.sub(r'(?<!\n)\n(?!\n)', ' ', text)
+    return re.sub(r'[ \t]+', ' ', text).strip()
+
+
+def repeated_pdf_margins(document: fitz.Document) -> set[str]:
+    if len(document) < 3:
+        return set()
+    found = Counter()
+    for page in document:
+        top, bottom = page.rect.height * .1, page.rect.height * .9
+        lines = set()
+        for block in page.get_text('blocks'):
+            if block[6] == 0 and (block[1] <= top or block[3] >= bottom):
+                lines.update(line.strip() for line in block[4].splitlines() if line.strip())
+        found.update(lines)
+    return {line for line, count in found.items() if count >= max(2, len(document) // 2) and len(line) < 180}
 
 
 def _xml_local_name(tag: str) -> str:
@@ -302,6 +331,7 @@ def extract_pdf(path: Path, artifact_dir: Path, cfg: Settings = settings) -> lis
             raise ValueError('Password-protected PDFs cannot be indexed')
         if len(document) > cfg.max_pdf_pages:
             raise ValueError('PDF exceeds the page limit')
+        repeated_margins = repeated_pdf_margins(document)
         for index, page in enumerate(document):
             blocks = page.get_text('blocks', sort=True)
             text_blocks = [block for block in blocks if block[6] == 0 and len(block[4].strip()) > 3]
@@ -312,21 +342,23 @@ def extract_pdf(path: Path, artifact_dir: Path, cfg: Settings = settings) -> lis
                 # PDF layout engines often split a heading and each following line into separate blocks.
                 # Group adjacent blocks within the same page so model numbers stay with their heading.
                 groups = []
-                pending, coordinates = [], []
+                pending, raw_pending, coordinates = [], [], []
                 for block in text_blocks:
-                    for text in split_text(block[4]):
+                    for text in split_text(clean_pdf_text(block[4], repeated_margins)):
                         if pending and len(' '.join(pending)) + len(text) > 1200:
-                            groups.append((pending, coordinates))
-                            pending, coordinates = [], []
+                            groups.append((pending, raw_pending, coordinates))
+                            pending, raw_pending, coordinates = [], [], []
                         pending.append(text)
+                        raw_pending.append(block[4])
                         coordinates.append(block[:4])
                 if pending:
-                    groups.append((pending, coordinates))
-                for texts, boxes in groups:
+                    groups.append((pending, raw_pending, coordinates))
+                for texts, raw_texts, boxes in groups:
                     bounds = [min(b[0] for b in boxes), min(b[1] for b in boxes), max(b[2] for b in boxes), max(b[3] for b in boxes)]
                     chunks.append(ExtractedChunk('\n'.join(texts), page=index + 1, bbox=[float(v) for v in bounds], image_path=str(image_path) if image_path else None,
                                                  metadata={'coordinates': 'pdf-points', 'width': page.rect.width,
                                                            'height': page.rect.height, 'extractor': 'pymupdf',
+                                                           'raw_text': '\n'.join(raw_texts)[:16000],
                                                            'requires_visual_evidence': bool(page.get_images() or page.get_drawings())}))
                 for info in sorted(page.get_image_info(),key=lambda i:fitz.Rect(i['bbox']).get_area(),reverse=True)[:8]:
                     rect=fitz.Rect(info['bbox']) & page.rect

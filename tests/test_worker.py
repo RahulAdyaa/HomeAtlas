@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw, ImageFont
 import pytest
 
 from worker.config import Settings
-from worker.ingestion import extract, validate_file, split_text
+from worker.ingestion import extract, validate_file, split_text, clean_pdf_text
 from worker.retrieval import rank_candidates, answer_from_evidence
 
 
@@ -61,6 +61,16 @@ def test_pdf_keeps_page_and_exact_region(tmp_path):
     assert chunks[1].page == 2 and '2028' in chunks[1].text
     assert 30 < chunks[0].bbox[0] < 50
     assert chunks[0].metadata['coordinates'] == 'pdf-points'
+    assert 'raw_text' in chunks[0].metadata
+
+
+def test_pdf_cleanup_joins_words_and_preserves_numbers():
+    raw = 'The quanti-\nzation method uses a ﬁxed scale.\nThe ﬂow remains stable.\n42\nPage 7'
+    assert clean_pdf_text(raw) == 'The quantization method uses a fixed scale. The flow remains stable. 42'
+
+
+def test_pdf_cleanup_removes_only_known_repeated_margins():
+    assert clean_pdf_text('HomeAtlas Journal\nThe result is 7.\n42', {'HomeAtlas Journal'}) == 'The result is 7. 42'
 
 
 def test_image_ocr_is_real(tmp_path):
