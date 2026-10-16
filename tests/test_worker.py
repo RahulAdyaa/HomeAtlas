@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw, ImageFont
 import pytest
 
 from worker.config import Settings
-from worker.ingestion import extract, validate_file, split_text, clean_pdf_text
+from worker.ingestion import extract, validate_file, split_text, clean_pdf_text, equation_candidate
 from worker.retrieval import rank_candidates, answer_from_evidence
 
 
@@ -71,6 +71,12 @@ def test_pdf_cleanup_joins_words_and_preserves_numbers():
 
 def test_pdf_cleanup_removes_only_known_repeated_margins():
     assert clean_pdf_text('HomeAtlas Journal\nThe result is 7.\n42', {'HomeAtlas Journal'}) == 'The result is 7. 42'
+
+
+def test_equation_detection_flags_visual_fallback_without_inventing_latex():
+    assert equation_candidate('L = sum_i x_i / n')
+    assert equation_candidate('α ≈ 0.5')
+    assert not equation_candidate('The method has four stages.')
 
 
 def test_image_ocr_is_real(tmp_path):

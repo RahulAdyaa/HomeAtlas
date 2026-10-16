@@ -171,6 +171,12 @@ def repeated_pdf_margins(document: fitz.Document) -> set[str]:
     return {line for line, count in found.items() if count >= max(2, len(document) // 2) and len(line) < 180}
 
 
+def equation_candidate(text: str) -> bool:
+    """Flag uncertain PDF math for a source-image fallback, never infer LaTeX."""
+    return bool(re.search(r'[=∑∫≈≤≥]|\\(?:frac|sum|int)\b', text) and
+                re.search(r'[A-Za-zα-ωΑ-Ω0-9]', text))
+
+
 def _xml_local_name(tag: str) -> str:
     return tag.rsplit('}', 1)[-1]
 
@@ -359,7 +365,8 @@ def extract_pdf(path: Path, artifact_dir: Path, cfg: Settings = settings) -> lis
                                                  metadata={'coordinates': 'pdf-points', 'width': page.rect.width,
                                                            'height': page.rect.height, 'extractor': 'pymupdf',
                                                            'raw_text': '\n'.join(raw_texts)[:16000],
-                                                           'requires_visual_evidence': bool(page.get_images() or page.get_drawings())}))
+                                                           'equation_candidate': equation_candidate(' '.join(texts)),
+                                                           'requires_visual_evidence': bool(page.get_images() or page.get_drawings() or equation_candidate(' '.join(texts)))}))
                 for info in sorted(page.get_image_info(),key=lambda i:fitz.Rect(i['bbox']).get_area(),reverse=True)[:8]:
                     rect=fitz.Rect(info['bbox']) & page.rect
                     if rect.is_empty or rect.width*rect.height<2500:continue

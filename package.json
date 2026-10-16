@@ -36,6 +36,7 @@
     "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
+    "sharp": "^0.35.5",
     "three": "^0.186.1",
     "zod": "^4.6.5"
   },
