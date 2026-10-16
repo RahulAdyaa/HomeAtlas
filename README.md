@@ -35,6 +35,8 @@ Rates below use [0,1]; lower CER/WER and persistence are better. Arrows compare 
 
 **NOT MEASURED:** independent-judge semantic faithfulness/correctness and hallucination rate (no external judge credential); full final generation variance/three-pass consistency and final similarity postprocessing (budget stop); scanned-PDF generation; numeric trust calibration; HTTP timeout rate, production capacity/cost, and isolated 3D FPS. No canonical complete `final_results.json` was created. The [unchanged exhaustive baseline appendix](evaluation/RAG_EVALUATION_BASELINE_APPENDIX.md), [baseline snapshot](evaluation/baseline_results.json), and [historical metric CSV](evaluation/stats-metric-scorecard.csv) remain available; they are historical evidence, not current full-generation results.
 
+The report includes the [complete requested-metric inventory](evaluation/RAG_EVALUATION_REPORT.md#requested-metric-coverage), [retrieval by modality](evaluation/RAG_EVALUATION_REPORT.md#retrieval-by-modality-at-k5), and [partial generation by modality](evaluation/RAG_EVALUATION_REPORT.md#generation-by-modality--stopped-run-1-only) for text, tables, images, charts, and scans. Context precision/recall, semantic faithfulness/correctness/relevancy, hallucination, true chart/image understanding, and currency cost remain explicitly **NOT MEASURED** with reasons; source overlap and literal labels are not substitutes.
+
 ## Features
 
 ### Inventory and document library

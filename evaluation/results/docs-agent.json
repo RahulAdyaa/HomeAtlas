@@ -1177,7 +1177,7 @@
     "generation_coverage_note": "43/60 run-1 questions saved; 37 answerable / 6 negative; no scanned-PDF generation, run 2, or third sample. Deterministic prefix, not random or complete benchmark."
   },
   "showcase_source": "evaluation/showcase_results.json",
-  "showcase_sha256": "13d40f5f616178cb0907e16356deee5e95ab2ce0c43c2b531aab6953f97608ff",
+  "showcase_sha256": "157b3b7f7d5a1f00616c5c934af251025af41dca1a6ba2b2085c60c45f8c5413",
   "showcase_status": "BUDGET_LIMITED_SHOWCASE_PARTIAL_GENERATION",
   "generation_coverage": {
     "saved_questions": 43,
@@ -1213,5 +1213,16 @@
     "regressions": "evaluation/results/fixer-agent.json: fix_cycles[cycle=3-rendered-heading-coverage].checks",
     "dataset": "evaluation/frozen_manifest.json",
     "resume": "retrieval all/hybrid_runtime/hit@5 n=121 and household E.full_path_accuracy value=1 n=20; no universal accuracy claim"
+  },
+  "requested_coverage_binding": {
+    "source": "evaluation/showcase_results.json",
+    "fields": [
+      "requested_metric_inventory",
+      "requested_unmeasured",
+      "per_modality_coverage",
+      "requested_latency_binding"
+    ],
+    "report": "evaluation/RAG_EVALUATION_REPORT.md#requested-metric-coverage",
+    "qualification": "Every requested metric and all five modalities are accounted for by actual measurements or explicit NOT MEASURED status/reason; no independent semantic scores inferred from overlap or literal labels. Existing headline values unchanged."
   }
 }
