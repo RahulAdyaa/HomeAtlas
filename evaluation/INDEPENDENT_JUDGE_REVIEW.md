@@ -1,4 +1,4 @@
-# Independent Codex review of saved HomeAtlas answers
+# Independent review of saved HomeAtlas answers
 
 **Bounded review: 43/60 questions from one stopped generation run; 37 answerable, 6 authored negatives, and no scanned-PDF generation.** Three independent Codex review assignments covered disjoint text, table, and visual partitions. This is not a RAGAS score, human review, calibrated multi-rater evaluation, or production accuracy estimate. The exact Codex serving model ID was unavailable; the answer generator was the separate self-hosted `qwen3-vl:4b-instruct`.
 
