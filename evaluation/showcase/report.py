@@ -151,7 +151,7 @@ def render(out,data):
   c=m['ci95'];return '['+num(c['low'])+', '+num(c['high'])+']'if c.get('status')=='MEASURED'else 'NOT MEASURED'
  def n(m):return '/'.join(str(v)for v in m['n_per_run'])
  def block(names,heading,note):
-  lines=['','### '+heading,'',note,'','| Metric ID | Baseline | Current observed | n per run | 95% empirical CI |','| --- | --- | --- | --- | --- | --- |']
+  lines=['','### '+heading,'',note,'','| Metric ID | Baseline | Current observed | n per run | 95% empirical CI |','| --- | --- | --- | --- | --- |']
   for name in names:
    m=lookup[name];lines.append(f'| `{esc(name)}` | {point(m.get("baseline"))} | {point(m)} | {n(m)} | {ci(m)} |')
   return lines

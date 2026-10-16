@@ -1,5 +1,13 @@
 # Reproduce the HomeAtlas evaluation
 
+The published report now uses the user's explicit 2026-10-16 budget scope: completed component runs plus a stopped 43-question generation prefix. It is not a complete final multimodal evaluation. To regenerate only that summary from saved evidence without inference:
+
+```sh
+evaluation/.venv/bin/python evaluation/showcase/report.py --app-root "$PWD"
+```
+
+The full-suite commands below retain the original runner and can take hours; they are not required to reproduce the budget-limited showcase.
+
 The commands below evaluate the current application with the explicit `--phase final` option and execute the frozen synthetic suite twice using separate run namespaces. They dispatch actual ingestion, retrieval, generation, household/cache and security evaluators sequentially, then compute confidence intervals and assemble the report. This can take several hours on a 16 GB development computer. Completed work resumes only within the same phase/run; a second run cannot reuse the first run's model answer. The frozen CLI defaults to `baseline` when the phase is omitted, so always specify the phase on the current checkout.
 
 Run from the repository root with Python 3.12, PostgreSQL and the app/worker running as described in the main README. The database must have the repository migrations applied. The runners create and delete disposable `example.invalid` accounts and fictional documents; use a development database. Existing household documents are never the evaluation corpus.

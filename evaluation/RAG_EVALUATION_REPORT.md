@@ -14,7 +14,7 @@ Values are rates in [0,1] unless stated otherwise. Paired component columns aver
 **Precision, strict chunk recall, MRR and NDCG declined while hit rate improved.** All original gold and thresholds were retained. Page gold can include many OCR chunks: finding a relevant page does not establish extracted-answer coverage.
 
 | Metric ID | Baseline | Current observed | n per run | 95% empirical CI |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | `all/hybrid_runtime/precision@5` | 0.338843 | 0.287603 | 121/121 | [0.259504, 0.317355] |
 | `all/hybrid_runtime/recall@5` | 0.8323 | 0.804924 | 121/121 | [0.744146, 0.863292] |
 | `all/hybrid_runtime/mrr@5` | 0.930854 | 0.92011 | 121/121 | [0.877135, 0.958678] |
@@ -26,7 +26,7 @@ Values are rates in [0,1] unless stated otherwise. Paired component columns aver
 Hybrid does not beat the best single channel on this typo subset. Fuzzy MRR already reaches the maximum on these synthetic questions; strict superiority is impossible on the same fixed sample.
 
 | Metric ID | Baseline | Current observed | n per run | 95% empirical CI |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | `typo/hybrid_runtime/mrr@5` | 0.965789 | 0.965789 | 38/38 | [0.910526, 1] |
 | `typo/fuzzy/mrr@5` | 1 | 1 | 38/38 | [1, 1] |
 
@@ -35,7 +35,7 @@ Hybrid does not beat the best single channel on this typo subset. Fuzzy MRR alre
 Macro character/word error rates across four authored scanned pages; lower is better. These transcription errors are distinct from answer accuracy. Small synthetic-page coverage limits generalization.
 
 | Metric ID | Baseline | Current observed | n per run | 95% empirical CI |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | `ocr.scanned.cer_macro` | 0.00337838 | 0.00337838 | 4/4 | [0, 0.0101351] |
 | `ocr.scanned.wer_macro` | 0.0217391 | 0.0217391 | 4/4 | [0, 0.0652174] |
 
@@ -44,7 +44,7 @@ Macro character/word error rates across four authored scanned pages; lower is be
 Table cell text presence, structured parser output, and chart numeric-label text recall are separate. All table strings can be present while row/column structure is absent. Numeric label recall does not establish chart reasoning, captions or semantic figure understanding.
 
 | Metric ID | Baseline | Current observed | n per run | 95% empirical CI |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | `table.cell_text_recall` | 1 | 1 | 48/48 | [1, 1] |
 | `table.structured_output_rate` | 0 | 0 | 4/4 | [0, 0] |
 | `chart.numeric_label_text_recall` | 0.75 | 0.75 | 12/12 | [0.5, 1] |
@@ -54,7 +54,7 @@ Table cell text presence, structured parser output, and chart numeric-label text
 Identifier/date/amount rows total seven distinct source-value checks. Required-value presence is not automatic structured extraction or independently judged semantic correctness. Container coverage is only one case.
 
 | Metric ID | Baseline | Current observed | n per run | 95% empirical CI |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | `E.full_path_accuracy` | 1 | 1 | 20/20 | [1, 1] |
 | `E.container_accuracy` | 1 | 1 | 1/1 | [1, 1] |
 | `E.document_identifier_fact_presence` | 1 | 1 | 3/3 | [1, 1] |
@@ -66,7 +66,7 @@ Identifier/date/amount rows total seven distinct source-value checks. Required-v
 The two source-listing questions contain required facts, but the receipt-total question lists individual amounts and omits the requested derived total. Fact presence does not establish complete aggregate answers.
 
 | Metric ID | Baseline | Current observed | n per run | 95% empirical CI |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | `E.aggregate_fact_presence` | 0.333333 | 0.666667 | 3/3 | [0, 1] |
 
 ### 7. Semantic cache and freshness
@@ -74,7 +74,7 @@ The two source-listing questions contain required facts, but the receipt-total q
 Variant hits are below the requested 0.90 target; misses can still produce correct fallback answers. Zero false hits on ten near-miss probes does not prove a population false-hit rate below 2%. Move/delete invalidation uses two specific probes, not universal freshness coverage.
 
 | Metric ID | Baseline | Current observed | n per run | 95% empirical CI |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | `H.exact_hit_rate` | 1 | 1 | 5/5 | [1, 1] |
 | `H.variant_hit_rate` | 0.8 | 0.8 | 10/10 | [0.5, 1] |
 | `H.variant_answer_accuracy` | 1 | 1 | 10/10 | [1, 1] |
@@ -87,7 +87,7 @@ Variant hits are below the requested 0.90 target; misses can still produce corre
 Zero persistence is observed for one synthetic sensitive-answer canary per run; this is not universal PII detection or zero leakage. Private process logs were not read. Frozen cache-isolation probes use the now-bypassed answer and do not establish populated-cache isolation.
 
 | Metric ID | Baseline | Current observed | n per run | 95% empirical CI |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | `sensitive_answer_cache_persistence_rate` | 1 | 0 | 1/1 | [0, 0] |
 Live security run 1: 24/27 probes passed; failed IDs: `cache-own-exact-hit-A`, `cache-second-user-own-hit`, `cache-stored-content-policy`.
 Live security run 2: 24/27 probes passed; failed IDs: `cache-own-exact-hit-A`, `cache-second-user-own-hit`, `cache-stored-content-policy`.
@@ -99,7 +99,7 @@ Those failures reflect frozen sensitive-answer retention assumptions after the p
 **Only 43 saved run-1 questions; 37 answerable / 6 negative, no scans.** No full-baseline comparison is shown because coverage differs. Exact quotation/page provenance is not independent claim faithfulness or answer correctness. False refusal is measured among answerable questions; abstention recall is measured among negatives.
 
 | Metric ID | Baseline | Current observed | n per run | 95% empirical CI |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | `citation_gold_precision` | — | 0.936937 | 37 | [0.867117, 0.986486] |
 | `citation_gold_recall` | — | 0.585023 | 37 | [0.446481, 0.722973] |
 | `citation_gold_f1` | — | 0.630781 | 37 | [0.505773, 0.754501] |
