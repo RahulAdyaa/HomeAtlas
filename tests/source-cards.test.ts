@@ -24,4 +24,10 @@ describe('source evidence display',()=>{
   expect(answer).toContain('class="citation-chip"');
   expect(answer).toContain('[28]');
  });
+ it('keeps citations from two versions of one document in a single card',()=>{
+  const html=renderToStaticMarkup(createElement(SourceCards,{citations:[citation,{...citation,id:'new-version-chunk',versionId:'version2',page:6,number:2}],query:'QLoRA',onOpen:()=>{},scopedPath:(x:string)=>x}));
+  expect(html.match(/class="source-card"/g)?.length).toBe(1);
+  expect(html).toContain('Pages 4, 6');
+  expect(html.match(/class="evidence-snippet"/g)?.length).toBe(2);
+ });
 });

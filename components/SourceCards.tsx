@@ -4,7 +4,7 @@ import {readableSnippet} from '@/lib/evidence-display';
 
 export default function SourceCards({citations,query,onOpen,scopedPath}:{citations:Citation[];query:string;onOpen:(citation:Citation)=>void;scopedPath:(path:string)=>string}){
  const documents=new Map<string,Citation[]>();
- for(const citation of citations){const key=`${citation.sourceId}:${citation.versionId}`;documents.set(key,[...(documents.get(key)||[]),citation])}
+ for(const citation of citations){const key=citation.sourceId;documents.set(key,[...(documents.get(key)||[]),citation])}
  if(!citations.length)return null;
  return <details className="source-cards"><summary>Evidence · {documents.size} {documents.size===1?'document':'documents'}</summary>
   {[...documents].map(([key,entries])=>{
