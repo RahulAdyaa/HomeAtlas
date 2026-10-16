@@ -38,7 +38,6 @@ evaluation/IMAGE_PIPELINE_REPORT.md
 evaluation/INDEPENDENT_JUDGE_REVIEW.md
 evaluation/MATH_EXTRACTION_DECISION.md
 evaluation/PUBLICATION_FILES.txt
-evaluation/RAG_EVALUATION_BASELINE_APPENDIX.md
 evaluation/RAG_EVALUATION_REPORT.md
 evaluation/README.md
 evaluation/VERIFICATION.md

@@ -141,7 +141,7 @@ Selected intervals use the frozen 5,000-draw percentile bootstrap, seed741, with
 
 Known historical provenance limit: the baseline security metadata digest was captured before generation metadata finalized; its reused stage-call/timing rows match. Raw baseline objects are preserved. The actual records and model identities remain in [specialist results](results/).
 
-[Full historical baseline report](RAG_EVALUATION_BASELINE_APPENDIX.md) · [Unchanged historical metric CSV](stats-metric-scorecard.csv) · [Frozen baseline JSON](baseline_results.json) · [Fix log](CHANGELOG.md)
+[Unchanged historical metric CSV](stats-metric-scorecard.csv) · [Frozen baseline JSON](baseline_results.json) · [Fix log](CHANGELOG.md)
 
 
 ## Independent Codex review of saved answers

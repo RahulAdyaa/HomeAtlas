@@ -11,7 +11,7 @@ Audited application/docs commit: `2663efb7beb0898336c97c2a852a0bf1bb0bd1e1`. App
 | Canonical observations | Every displayed source binding, per-run value/sample size, copied baseline object and source/data fingerprint matches the raw specialist evidence. |
 | README/report parity | Headline values, intervals, denominators, before/after arrows, ranking declines, partial latency, security counts and bounded resume statements reconcile. No README correction was necessary. |
 | Report-only command | Reproduced the selected summary/CI/comparison/telemetry sections exactly in temporary output using the existing pinned environment; raw and frozen files were unchanged. No inference occurred. |
-| Integrity | Baseline JSON remains byte-identical to sealed commit `8c9349a`; frozen inputs and original measurement hashes validate. Historical baseline appendix is byte-identical to the frozen original report. |
+| Integrity | Baseline JSON remains byte-identical to sealed commit `8c9349a`; frozen inputs and original measurement hashes validate. |
 | Scope | Documentation discloses the stopped deterministic generation prefix, absent scans/second/third pass, incomplete exhaustive final benchmark and unavailable measurements. |
 | Failures | Ranking declines, typo/cache targets not met, incomplete calculated aggregate, missing table structure, conditional citation evidence and failed security retention assumptions remain visible. |
 | Publication | The publication path list exactly matches the proposed diff; files exist and no forbidden runtime/data/model/dependency artifacts or detected unique credentials/API/private keys were found in inspected publication text. |
