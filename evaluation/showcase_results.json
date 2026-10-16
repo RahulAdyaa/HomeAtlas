@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "status": "BUDGET_LIMITED_SHOWCASE_PARTIAL_GENERATION",
-  "timestamp_utc": "2026-10-16T06:22:45.099685+00:00",
+  "timestamp_utc": "2026-10-16T10:57:20.148012+00:00",
   "app_source_fingerprint": "b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8",
   "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
   "baseline_file": "baseline_results.json",
@@ -8949,68 +8949,1751 @@
   ],
   "confidence_note": "Selected metrics only. Frozen percentile bootstrap, 5,000 draws, seed741; repeated runs cluster by question/probe ID. Degenerate intervals and small synthetic samples do not establish population guarantees. Prefix CIs are conditional on the stopped prefix, not representative multimodal accuracy.",
   "not_measured": [
-    "Independent-judge faithfulness/semantic correctness/hallucination rate: no external judge credential.",
+    "External RAGAS LLM-judge metrics and exact semantic context precision/recall: NOT MEASURED. Separate bounded Codex review covers 43 saved answers.",
     "Full generation final pair, cross-run final variance and three-pass consistency: stopped by user budget.",
     "Final RAGAS embedding similarity/BERTScore: reference postprocessing was not reached.",
     "Scanned-PDF generation quality: no scanned questions in the stopped prefix.",
     "HTTP timeout rate, production capacity/cost, numeric trust calibration and isolated3D FPS: not established."
   ],
+  "independent_review": {
+    "schema_version": "independent-codex-review-aggregate-v1",
+    "status": "BOUNDED_REVIEW_OF_STOPPED_GENERATION_PREFIX",
+    "method": "Mechanical aggregation of three existing independent Codex review artifacts; this aggregator does not rejudge or rescore any answer.",
+    "reviewer_provenance": {
+      "reviewer": "Three Codex review assignments, one reviewer per text, table, or image/chart partition",
+      "judge_model_id": null,
+      "judge_model_id_reason": "Exact serving model identifier was not exposed in the review artifacts.",
+      "separate_from_answer_generator": true,
+      "answer_generator": "Self-hosted qwen3-vl:4b-instruct",
+      "external_judge_api_used": false,
+      "ragas_score": false,
+      "human_review": false,
+      "inter_rater_calibration": false,
+      "new_application_model_calls": 0
+    },
+    "generation_source": {
+      "file": "results/generation-agent.json",
+      "sha256": "f7691e586c7aa84eff810dd3fe4e86ca647a2a5bdaee3a03bbaef3c2e1a66b82",
+      "phase": "final",
+      "run": 1,
+      "run_id": "final-run-01",
+      "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
+      "app_source_fingerprint": "b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8",
+      "saved_rows_sha256": "7fc68d599e397c88cb1e9cfa44f19824ca9e365907ce47c726307a49b49304d9"
+    },
+    "sources": [
+      {
+        "file": "results/independent-judge-text.json",
+        "sha256": "39672aefed7233d29c2c06e08feeca6df056451522b1ddce896f1a41923232fb",
+        "reviewed_ids": [
+          "text-01",
+          "text-02",
+          "text-03",
+          "text-04",
+          "text-05",
+          "text-06",
+          "text-07",
+          "text-08",
+          "text-09",
+          "text-10",
+          "text-11",
+          "text-12"
+        ],
+        "reviewed_n": 12,
+        "judge_model_id": null
+      },
+      {
+        "file": "results/independent-judge-table.json",
+        "sha256": "ae6a3602fa243180111de9cf463bf522da1999f6a95733f7d81cf7e969f779b4",
+        "reviewed_ids": [
+          "table-01",
+          "table-02",
+          "table-03",
+          "table-04",
+          "table-05",
+          "table-06",
+          "table-07",
+          "table-08",
+          "table-09",
+          "table-10",
+          "table-11",
+          "table-12"
+        ],
+        "reviewed_n": 12,
+        "judge_model_id": null
+      },
+      {
+        "file": "results/independent-judge-visual.json",
+        "sha256": "ffe6af162a32277139fa678556c478725884b1104ce9b202de900c0970524f12",
+        "reviewed_ids": [
+          "image-01",
+          "image-02",
+          "image-03",
+          "image-04",
+          "image-05",
+          "image-06",
+          "image-07",
+          "image-08",
+          "image-09",
+          "image-10",
+          "image-11",
+          "image-12",
+          "chart-01",
+          "chart-02",
+          "chart-03",
+          "chart-04",
+          "chart-05",
+          "chart-06",
+          "chart-07"
+        ],
+        "reviewed_n": 19,
+        "judge_model_id": null
+      }
+    ],
+    "coverage": {
+      "reviewed_n": 43,
+      "saved_generation_n": 43,
+      "planned_generation_n": 60,
+      "remaining_unreviewed_and_ungenerated_n": 17,
+      "answerable_n": 37,
+      "authored_negative_n": 6,
+      "by_modality": {
+        "text": 12,
+        "table": 12,
+        "image": 12,
+        "chart": 7,
+        "scanned": 0
+      },
+      "sampling": "Deterministic 43/60 stopped prefix; not randomly sampled. One incomplete run; no scanned generation, second final run, or third-pass consistency sample.",
+      "per_modality_mean_weights": "Overall means weight applicable question rows equally; they do not average modality means."
+    },
+    "definitions": {
+      "answer_correctness": "Existing 0/0.5/1 rubric. Answerable-only weighted mean is primary; correct negative abstentions are reported separately. A score of 0.5 is partial credit, not a fully correct answer.",
+      "nulls": "Null score values are excluded from means and explicitly counted. Faithfulness excludes 7 no-substantive-answer refusals; relevancy excludes 6 appropriate authored-negative abstentions.",
+      "false_refusal": "Saved generation metrics.abstained is true AND authored unanswerable is false. Judge abstention_appropriate=false is not itself a refusal; table reviewers also used it for correctly answered positives.",
+      "hallucination": "Existing reviewer explicit unsupported factual-claim flag. Report all-row, answerable, and substantive-answer denominators; a false refusal is not a fabricated fact.",
+      "citation_support": "Existing supported/partial/unsupported/none category per answer; no fabricated claim counts or numeric partial weights. Claim-count citation precision and recall remain NOT MEASURED."
+    },
+    "overall": {
+      "reviewed_n": 43,
+      "answerable_n": 37,
+      "authored_negative_n": 6,
+      "answerable_correctness": {
+        "sum": 30.5,
+        "n": 37,
+        "null_n": 0,
+        "mean": 0.8243243243243243,
+        "score_counts": {
+          "1": 30,
+          "0.5": 1,
+          "0": 6
+        }
+      },
+      "authored_negative_correctness": {
+        "sum": 6,
+        "n": 6,
+        "null_n": 0,
+        "mean": 1.0,
+        "score_counts": {
+          "1": 6,
+          "0.5": 0,
+          "0": 0
+        }
+      },
+      "all_question_correctness_including_negatives": {
+        "sum": 36.5,
+        "n": 43,
+        "null_n": 0,
+        "mean": 0.8488372093023255,
+        "score_counts": {
+          "1": 36,
+          "0.5": 1,
+          "0": 6
+        }
+      },
+      "faithfulness": {
+        "sum": 35.0,
+        "n": 36,
+        "null_n": 7,
+        "mean": 0.9722222222222222,
+        "score_counts": {
+          "1": 34,
+          "0.5": 2,
+          "0": 0
+        }
+      },
+      "answer_relevancy": {
+        "sum": 31.5,
+        "n": 37,
+        "null_n": 6,
+        "mean": 0.8513513513513513,
+        "score_counts": {
+          "1": 30,
+          "0.5": 3,
+          "0": 4
+        }
+      },
+      "hallucination_all_reviewed": {
+        "true_n": 2,
+        "false_n": 41,
+        "n": 43,
+        "null_n": 0,
+        "rate": 0.046511627906976744
+      },
+      "hallucination_answerable": {
+        "true_n": 2,
+        "false_n": 35,
+        "n": 37,
+        "null_n": 0,
+        "rate": 0.05405405405405406
+      },
+      "hallucination_substantive_answers": {
+        "true_n": 2,
+        "false_n": 34,
+        "n": 36,
+        "null_n": 0,
+        "rate": 0.05555555555555555
+      },
+      "appropriate_negative_abstention": {
+        "count": 6,
+        "n": 6,
+        "rate": 1.0,
+        "ids": [
+          "text-11",
+          "text-12",
+          "table-11",
+          "table-12",
+          "image-11",
+          "image-12"
+        ]
+      },
+      "false_refusal_on_answerable": {
+        "count": 1,
+        "n": 37,
+        "rate": 0.02702702702702703,
+        "ids": [
+          "text-10"
+        ]
+      },
+      "citation_claim_support_per_response": {
+        "counts": {
+          "supported": 27,
+          "partial": 9,
+          "unsupported": 0,
+          "none": 7
+        },
+        "all_reviewed_n": 43,
+        "substantive_judgment_n": 36,
+        "none_n": 7,
+        "fully_supported_n": 27,
+        "fully_supported_rate_excluding_none": 0.75,
+        "definition": "Categorical per-response judgment, not a counted-claim precision/recall metric; partial is not assigned a numeric weight."
+      }
+    },
+    "by_modality": {
+      "text": {
+        "reviewed_n": 12,
+        "answerable_n": 10,
+        "authored_negative_n": 2,
+        "answerable_correctness": {
+          "sum": 9,
+          "n": 10,
+          "null_n": 0,
+          "mean": 0.9,
+          "score_counts": {
+            "1": 9,
+            "0.5": 0,
+            "0": 1
+          }
+        },
+        "authored_negative_correctness": {
+          "sum": 2,
+          "n": 2,
+          "null_n": 0,
+          "mean": 1.0,
+          "score_counts": {
+            "1": 2,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "all_question_correctness_including_negatives": {
+          "sum": 11,
+          "n": 12,
+          "null_n": 0,
+          "mean": 0.9166666666666666,
+          "score_counts": {
+            "1": 11,
+            "0.5": 0,
+            "0": 1
+          }
+        },
+        "faithfulness": {
+          "sum": 9,
+          "n": 9,
+          "null_n": 3,
+          "mean": 1.0,
+          "score_counts": {
+            "1": 9,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "answer_relevancy": {
+          "sum": 9,
+          "n": 10,
+          "null_n": 2,
+          "mean": 0.9,
+          "score_counts": {
+            "1": 9,
+            "0.5": 0,
+            "0": 1
+          }
+        },
+        "hallucination_all_reviewed": {
+          "true_n": 0,
+          "false_n": 12,
+          "n": 12,
+          "null_n": 0,
+          "rate": 0.0
+        },
+        "hallucination_answerable": {
+          "true_n": 0,
+          "false_n": 10,
+          "n": 10,
+          "null_n": 0,
+          "rate": 0.0
+        },
+        "hallucination_substantive_answers": {
+          "true_n": 0,
+          "false_n": 9,
+          "n": 9,
+          "null_n": 0,
+          "rate": 0.0
+        },
+        "appropriate_negative_abstention": {
+          "count": 2,
+          "n": 2,
+          "rate": 1.0,
+          "ids": [
+            "text-11",
+            "text-12"
+          ]
+        },
+        "false_refusal_on_answerable": {
+          "count": 1,
+          "n": 10,
+          "rate": 0.1,
+          "ids": [
+            "text-10"
+          ]
+        },
+        "citation_claim_support_per_response": {
+          "counts": {
+            "supported": 9,
+            "partial": 0,
+            "unsupported": 0,
+            "none": 3
+          },
+          "all_reviewed_n": 12,
+          "substantive_judgment_n": 9,
+          "none_n": 3,
+          "fully_supported_n": 9,
+          "fully_supported_rate_excluding_none": 1.0,
+          "definition": "Categorical per-response judgment, not a counted-claim precision/recall metric; partial is not assigned a numeric weight."
+        }
+      },
+      "table": {
+        "reviewed_n": 12,
+        "answerable_n": 10,
+        "authored_negative_n": 2,
+        "answerable_correctness": {
+          "sum": 10,
+          "n": 10,
+          "null_n": 0,
+          "mean": 1.0,
+          "score_counts": {
+            "1": 10,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "authored_negative_correctness": {
+          "sum": 2,
+          "n": 2,
+          "null_n": 0,
+          "mean": 1.0,
+          "score_counts": {
+            "1": 2,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "all_question_correctness_including_negatives": {
+          "sum": 12,
+          "n": 12,
+          "null_n": 0,
+          "mean": 1.0,
+          "score_counts": {
+            "1": 12,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "faithfulness": {
+          "sum": 10,
+          "n": 10,
+          "null_n": 2,
+          "mean": 1.0,
+          "score_counts": {
+            "1": 10,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "answer_relevancy": {
+          "sum": 10,
+          "n": 10,
+          "null_n": 2,
+          "mean": 1.0,
+          "score_counts": {
+            "1": 10,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "hallucination_all_reviewed": {
+          "true_n": 0,
+          "false_n": 12,
+          "n": 12,
+          "null_n": 0,
+          "rate": 0.0
+        },
+        "hallucination_answerable": {
+          "true_n": 0,
+          "false_n": 10,
+          "n": 10,
+          "null_n": 0,
+          "rate": 0.0
+        },
+        "hallucination_substantive_answers": {
+          "true_n": 0,
+          "false_n": 10,
+          "n": 10,
+          "null_n": 0,
+          "rate": 0.0
+        },
+        "appropriate_negative_abstention": {
+          "count": 2,
+          "n": 2,
+          "rate": 1.0,
+          "ids": [
+            "table-11",
+            "table-12"
+          ]
+        },
+        "false_refusal_on_answerable": {
+          "count": 0,
+          "n": 10,
+          "rate": 0.0,
+          "ids": []
+        },
+        "citation_claim_support_per_response": {
+          "counts": {
+            "supported": 10,
+            "partial": 0,
+            "unsupported": 0,
+            "none": 2
+          },
+          "all_reviewed_n": 12,
+          "substantive_judgment_n": 10,
+          "none_n": 2,
+          "fully_supported_n": 10,
+          "fully_supported_rate_excluding_none": 1.0,
+          "definition": "Categorical per-response judgment, not a counted-claim precision/recall metric; partial is not assigned a numeric weight."
+        }
+      },
+      "image": {
+        "reviewed_n": 12,
+        "answerable_n": 10,
+        "authored_negative_n": 2,
+        "answerable_correctness": {
+          "sum": 6.5,
+          "n": 10,
+          "null_n": 0,
+          "mean": 0.65,
+          "score_counts": {
+            "1": 6,
+            "0.5": 1,
+            "0": 3
+          }
+        },
+        "authored_negative_correctness": {
+          "sum": 2,
+          "n": 2,
+          "null_n": 0,
+          "mean": 1.0,
+          "score_counts": {
+            "1": 2,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "all_question_correctness_including_negatives": {
+          "sum": 8.5,
+          "n": 12,
+          "null_n": 0,
+          "mean": 0.7083333333333334,
+          "score_counts": {
+            "1": 8,
+            "0.5": 1,
+            "0": 3
+          }
+        },
+        "faithfulness": {
+          "sum": 9.0,
+          "n": 10,
+          "null_n": 2,
+          "mean": 0.9,
+          "score_counts": {
+            "1": 8,
+            "0.5": 2,
+            "0": 0
+          }
+        },
+        "answer_relevancy": {
+          "sum": 6.5,
+          "n": 10,
+          "null_n": 2,
+          "mean": 0.65,
+          "score_counts": {
+            "1": 6,
+            "0.5": 1,
+            "0": 3
+          }
+        },
+        "hallucination_all_reviewed": {
+          "true_n": 2,
+          "false_n": 10,
+          "n": 12,
+          "null_n": 0,
+          "rate": 0.16666666666666666
+        },
+        "hallucination_answerable": {
+          "true_n": 2,
+          "false_n": 8,
+          "n": 10,
+          "null_n": 0,
+          "rate": 0.2
+        },
+        "hallucination_substantive_answers": {
+          "true_n": 2,
+          "false_n": 8,
+          "n": 10,
+          "null_n": 0,
+          "rate": 0.2
+        },
+        "appropriate_negative_abstention": {
+          "count": 2,
+          "n": 2,
+          "rate": 1.0,
+          "ids": [
+            "image-11",
+            "image-12"
+          ]
+        },
+        "false_refusal_on_answerable": {
+          "count": 0,
+          "n": 10,
+          "rate": 0.0,
+          "ids": []
+        },
+        "citation_claim_support_per_response": {
+          "counts": {
+            "supported": 5,
+            "partial": 5,
+            "unsupported": 0,
+            "none": 2
+          },
+          "all_reviewed_n": 12,
+          "substantive_judgment_n": 10,
+          "none_n": 2,
+          "fully_supported_n": 5,
+          "fully_supported_rate_excluding_none": 0.5,
+          "definition": "Categorical per-response judgment, not a counted-claim precision/recall metric; partial is not assigned a numeric weight."
+        }
+      },
+      "chart": {
+        "reviewed_n": 7,
+        "answerable_n": 7,
+        "authored_negative_n": 0,
+        "answerable_correctness": {
+          "sum": 5,
+          "n": 7,
+          "null_n": 0,
+          "mean": 0.7142857142857143,
+          "score_counts": {
+            "1": 5,
+            "0.5": 0,
+            "0": 2
+          }
+        },
+        "authored_negative_correctness": {
+          "sum": 0,
+          "n": 0,
+          "null_n": 0,
+          "mean": null,
+          "score_counts": {
+            "1": 0,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "all_question_correctness_including_negatives": {
+          "sum": 5,
+          "n": 7,
+          "null_n": 0,
+          "mean": 0.7142857142857143,
+          "score_counts": {
+            "1": 5,
+            "0.5": 0,
+            "0": 2
+          }
+        },
+        "faithfulness": {
+          "sum": 7,
+          "n": 7,
+          "null_n": 0,
+          "mean": 1.0,
+          "score_counts": {
+            "1": 7,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "answer_relevancy": {
+          "sum": 6.0,
+          "n": 7,
+          "null_n": 0,
+          "mean": 0.8571428571428571,
+          "score_counts": {
+            "1": 5,
+            "0.5": 2,
+            "0": 0
+          }
+        },
+        "hallucination_all_reviewed": {
+          "true_n": 0,
+          "false_n": 7,
+          "n": 7,
+          "null_n": 0,
+          "rate": 0.0
+        },
+        "hallucination_answerable": {
+          "true_n": 0,
+          "false_n": 7,
+          "n": 7,
+          "null_n": 0,
+          "rate": 0.0
+        },
+        "hallucination_substantive_answers": {
+          "true_n": 0,
+          "false_n": 7,
+          "n": 7,
+          "null_n": 0,
+          "rate": 0.0
+        },
+        "appropriate_negative_abstention": {
+          "count": 0,
+          "n": 0,
+          "rate": null,
+          "ids": []
+        },
+        "false_refusal_on_answerable": {
+          "count": 0,
+          "n": 7,
+          "rate": 0.0,
+          "ids": []
+        },
+        "citation_claim_support_per_response": {
+          "counts": {
+            "supported": 3,
+            "partial": 4,
+            "unsupported": 0,
+            "none": 0
+          },
+          "all_reviewed_n": 7,
+          "substantive_judgment_n": 7,
+          "none_n": 0,
+          "fully_supported_n": 3,
+          "fully_supported_rate_excluding_none": 0.42857142857142855,
+          "definition": "Categorical per-response judgment, not a counted-claim precision/recall metric; partial is not assigned a numeric weight."
+        }
+      },
+      "scanned": {
+        "reviewed_n": 0,
+        "answerable_n": 0,
+        "authored_negative_n": 0,
+        "answerable_correctness": {
+          "sum": 0,
+          "n": 0,
+          "null_n": 0,
+          "mean": null,
+          "score_counts": {
+            "1": 0,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "authored_negative_correctness": {
+          "sum": 0,
+          "n": 0,
+          "null_n": 0,
+          "mean": null,
+          "score_counts": {
+            "1": 0,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "all_question_correctness_including_negatives": {
+          "sum": 0,
+          "n": 0,
+          "null_n": 0,
+          "mean": null,
+          "score_counts": {
+            "1": 0,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "faithfulness": {
+          "sum": 0,
+          "n": 0,
+          "null_n": 0,
+          "mean": null,
+          "score_counts": {
+            "1": 0,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "answer_relevancy": {
+          "sum": 0,
+          "n": 0,
+          "null_n": 0,
+          "mean": null,
+          "score_counts": {
+            "1": 0,
+            "0.5": 0,
+            "0": 0
+          }
+        },
+        "hallucination_all_reviewed": {
+          "true_n": 0,
+          "false_n": 0,
+          "n": 0,
+          "null_n": 0,
+          "rate": null
+        },
+        "hallucination_answerable": {
+          "true_n": 0,
+          "false_n": 0,
+          "n": 0,
+          "null_n": 0,
+          "rate": null
+        },
+        "hallucination_substantive_answers": {
+          "true_n": 0,
+          "false_n": 0,
+          "n": 0,
+          "null_n": 0,
+          "rate": null
+        },
+        "appropriate_negative_abstention": {
+          "count": 0,
+          "n": 0,
+          "rate": null,
+          "ids": []
+        },
+        "false_refusal_on_answerable": {
+          "count": 0,
+          "n": 0,
+          "rate": null,
+          "ids": []
+        },
+        "citation_claim_support_per_response": {
+          "counts": {
+            "supported": 0,
+            "partial": 0,
+            "unsupported": 0,
+            "none": 0
+          },
+          "all_reviewed_n": 0,
+          "substantive_judgment_n": 0,
+          "none_n": 0,
+          "fully_supported_n": 0,
+          "fully_supported_rate_excluding_none": null,
+          "definition": "Categorical per-response judgment, not a counted-claim precision/recall metric; partial is not assigned a numeric weight."
+        }
+      }
+    },
+    "visual_answerable": {
+      "reviewed_n": 17,
+      "answerable_n": 17,
+      "authored_negative_n": 0,
+      "answerable_correctness": {
+        "sum": 11.5,
+        "n": 17,
+        "null_n": 0,
+        "mean": 0.6764705882352942,
+        "score_counts": {
+          "1": 11,
+          "0.5": 1,
+          "0": 5
+        }
+      },
+      "authored_negative_correctness": {
+        "sum": 0,
+        "n": 0,
+        "null_n": 0,
+        "mean": null,
+        "score_counts": {
+          "1": 0,
+          "0.5": 0,
+          "0": 0
+        }
+      },
+      "all_question_correctness_including_negatives": {
+        "sum": 11.5,
+        "n": 17,
+        "null_n": 0,
+        "mean": 0.6764705882352942,
+        "score_counts": {
+          "1": 11,
+          "0.5": 1,
+          "0": 5
+        }
+      },
+      "faithfulness": {
+        "sum": 16.0,
+        "n": 17,
+        "null_n": 0,
+        "mean": 0.9411764705882353,
+        "score_counts": {
+          "1": 15,
+          "0.5": 2,
+          "0": 0
+        }
+      },
+      "answer_relevancy": {
+        "sum": 12.5,
+        "n": 17,
+        "null_n": 0,
+        "mean": 0.7352941176470589,
+        "score_counts": {
+          "1": 11,
+          "0.5": 3,
+          "0": 3
+        }
+      },
+      "hallucination_all_reviewed": {
+        "true_n": 2,
+        "false_n": 15,
+        "n": 17,
+        "null_n": 0,
+        "rate": 0.11764705882352941
+      },
+      "hallucination_answerable": {
+        "true_n": 2,
+        "false_n": 15,
+        "n": 17,
+        "null_n": 0,
+        "rate": 0.11764705882352941
+      },
+      "hallucination_substantive_answers": {
+        "true_n": 2,
+        "false_n": 15,
+        "n": 17,
+        "null_n": 0,
+        "rate": 0.11764705882352941
+      },
+      "appropriate_negative_abstention": {
+        "count": 0,
+        "n": 0,
+        "rate": null,
+        "ids": []
+      },
+      "false_refusal_on_answerable": {
+        "count": 0,
+        "n": 17,
+        "rate": 0.0,
+        "ids": []
+      },
+      "citation_claim_support_per_response": {
+        "counts": {
+          "supported": 8,
+          "partial": 9,
+          "unsupported": 0,
+          "none": 0
+        },
+        "all_reviewed_n": 17,
+        "substantive_judgment_n": 17,
+        "none_n": 0,
+        "fully_supported_n": 8,
+        "fully_supported_rate_excluding_none": 0.47058823529411764,
+        "definition": "Categorical per-response judgment, not a counted-claim precision/recall metric; partial is not assigned a numeric weight."
+      }
+    },
+    "failure_ids": {
+      "not_fully_correct_answerable": [
+        "text-10",
+        "image-02",
+        "image-04",
+        "image-06",
+        "image-10",
+        "chart-01",
+        "chart-02"
+      ],
+      "hallucination": [
+        "image-06",
+        "image-08"
+      ],
+      "false_refusal": [
+        "text-10"
+      ],
+      "partial_citation_support": [
+        "image-02",
+        "image-04",
+        "image-06",
+        "image-08",
+        "image-10",
+        "chart-01",
+        "chart-02",
+        "chart-03",
+        "chart-07"
+      ]
+    },
+    "not_measured": [
+      "Exact semantic context precision@5 and context recall: contexts were not independently scored as complete ranked sets.",
+      "Claim-count citation precision/recall: judgments are categorical per answer, without claim enumeration.",
+      "External RAGAS LLM-judge scores: no external judge call or credential; these separately named Codex review scores do not fill frozen RAGAS fields.",
+      "Scanned-PDF generation quality: zero saved generation responses; scanned ingestion metrics remain a separate scope.",
+      "Population/production accuracy, repeat-run stability, inter-rater agreement, and statistical confidence for this review."
+    ],
+    "limitations": [
+      "Fictional authored PDFs and non-random incomplete coverage; 43/60 is not a full multimodal benchmark.",
+      "Text review used saved excerpts/references; table and visual reviews also inspected source PDF pages. Original pages may contain evidence absent from the exact OCR quote.",
+      "Different reviewer partitions are not multiple ratings of the same answers; no inter-rater calibration or human expert adjudication.",
+      "Faithfulness can be high for a relevant-source quotation that still fails to answer the question; visual failure IDs must be read alongside correctness and relevancy.",
+      "No matched-subset independent baseline review exists, so this review does not establish semantic improvement over baseline."
+    ],
+    "per_question": [
+      {
+        "id": "text-01",
+        "question": "How long is the warranty for unit T1?",
+        "unanswerable": false,
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Cited text.pdf p.1 explicitly states T1 has an 18-month warranty and gives the displayed Study > Desk > Top drawer path.",
+        "citation_pages": [
+          {
+            "title": "text.pdf",
+            "page": 1
+          }
+        ],
+        "modality": "text",
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-text.json"
+      },
+      {
+        "id": "text-02",
+        "question": "How often does unit T1 need a service inspection?",
+        "unanswerable": false,
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Cited text.pdf p.1 explicitly states T1 requires a service inspection every 3 months.",
+        "citation_pages": [
+          {
+            "title": "text.pdf",
+            "page": 1
+          }
+        ],
+        "modality": "text",
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-text.json"
+      },
+      {
+        "id": "text-03",
+        "question": "How long is the warranty for unit T2?",
+        "unanswerable": false,
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Cited text.pdf p.2 explicitly states T2 has a 24-month warranty.",
+        "citation_pages": [
+          {
+            "title": "text.pdf",
+            "page": 2
+          }
+        ],
+        "modality": "text",
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-text.json"
+      },
+      {
+        "id": "text-04",
+        "question": "How often does unit T2 need a service inspection?",
+        "unanswerable": false,
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Cited text.pdf p.2 explicitly states T2 requires a service inspection every 4 months.",
+        "citation_pages": [
+          {
+            "title": "text.pdf",
+            "page": 2
+          }
+        ],
+        "modality": "text",
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-text.json"
+      },
+      {
+        "id": "text-05",
+        "question": "How long is the warranty for unit T3?",
+        "unanswerable": false,
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Cited text.pdf p.3 explicitly states T3 has a 30-month warranty.",
+        "citation_pages": [
+          {
+            "title": "text.pdf",
+            "page": 3
+          }
+        ],
+        "modality": "text",
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-text.json"
+      },
+      {
+        "id": "text-06",
+        "question": "How often does unit T3 need a service inspection?",
+        "unanswerable": false,
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "The long quoted citation from text.pdf p.3 contains the requested T3 inspection interval: every 5 months.",
+        "citation_pages": [
+          {
+            "title": "text.pdf",
+            "page": 3
+          }
+        ],
+        "modality": "text",
+        "saved_abstained": false,
+        "saved_mode": "local-model-grounded",
+        "judgment_source_file": "results/independent-judge-text.json"
+      },
+      {
+        "id": "text-07",
+        "question": "How long is the warranty for unit T4?",
+        "unanswerable": false,
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Cited text.pdf p.4 explicitly states T4 has a 36-month warranty.",
+        "citation_pages": [
+          {
+            "title": "text.pdf",
+            "page": 4
+          }
+        ],
+        "modality": "text",
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-text.json"
+      },
+      {
+        "id": "text-08",
+        "question": "How often does unit T4 need a service inspection?",
+        "unanswerable": false,
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Cited text.pdf p.4 explicitly states T4 requires a service inspection every 6 months.",
+        "citation_pages": [
+          {
+            "title": "text.pdf",
+            "page": 4
+          }
+        ],
+        "modality": "text",
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-text.json"
+      },
+      {
+        "id": "text-09",
+        "question": "Give the warranty durations for units T1 and T4.",
+        "unanswerable": false,
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Two cited excerpts from text.pdf pp.1 and 4 give T1 as 18 months and T4 as 36 months, matching both requested values.",
+        "citation_pages": [
+          {
+            "title": "text.pdf",
+            "page": 1
+          },
+          {
+            "title": "text.pdf",
+            "page": 4
+          }
+        ],
+        "modality": "text",
+        "saved_abstained": false,
+        "saved_mode": "local-model-grounded",
+        "judgment_source_file": "results/independent-judge-text.json"
+      },
+      {
+        "id": "text-10",
+        "question": "Summarize the service inspection intervals for all four T units.",
+        "unanswerable": false,
+        "answer_correctness": 0,
+        "faithfulness": null,
+        "answer_relevancy": 0,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "none",
+        "evidence_note": "The answer refuses. The synthetic text records state T1/T2/T3/T4 inspection intervals of 3/4/5/6 months (visible in cited excerpts for text-02/04/06/08); the requested summary is answerable.",
+        "citation_pages": [],
+        "modality": "text",
+        "saved_abstained": true,
+        "saved_mode": "abstention",
+        "judgment_source_file": "results/independent-judge-text.json"
+      },
+      {
+        "id": "text-11",
+        "question": "What is the Wi-Fi password listed in the text records?",
+        "unanswerable": true,
+        "answer_correctness": 1,
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "hallucination": false,
+        "abstention_appropriate": true,
+        "citation_claim_support": "none",
+        "evidence_note": "The authored reference marks this Wi-Fi password query unanswerable; the response abstains without inventing a password.",
+        "citation_pages": [],
+        "modality": "text",
+        "saved_abstained": true,
+        "saved_mode": "abstention",
+        "judgment_source_file": "results/independent-judge-text.json"
+      },
+      {
+        "id": "text-12",
+        "question": "What serial number is shown on the purple emergency valve in the text records?",
+        "unanswerable": true,
+        "answer_correctness": 1,
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "hallucination": false,
+        "abstention_appropriate": true,
+        "citation_claim_support": "none",
+        "evidence_note": "The authored reference says no purple emergency valve is documented; the response abstains without inventing a serial number.",
+        "citation_pages": [],
+        "modality": "text",
+        "saved_abstained": true,
+        "saved_mode": "abstention",
+        "judgment_source_file": "results/independent-judge-text.json"
+      },
+      {
+        "id": "table-01",
+        "question": "In table 1, what is the Boost power in watts?",
+        "source_document": "evaluation/fixtures/table.pdf",
+        "source_pages": [
+          1
+        ],
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "supported",
+        "evidence_note": "PDF page 1, Boost row, Power W column is 71; the answer and cited row agree.",
+        "modality": "table",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-table.json"
+      },
+      {
+        "id": "table-02",
+        "question": "In table 1, what is the monthly Normal cost in USD?",
+        "source_document": "evaluation/fixtures/table.pdf",
+        "source_pages": [
+          1
+        ],
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "supported",
+        "evidence_note": "PDF page 1, Normal row, Cost USD column is 7; extra 41 W is also on the same row.",
+        "modality": "table",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-table.json"
+      },
+      {
+        "id": "table-03",
+        "question": "In table 2, what is the Boost power in watts?",
+        "source_document": "evaluation/fixtures/table.pdf",
+        "source_pages": [
+          2
+        ],
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "supported",
+        "evidence_note": "PDF page 2, Boost row, Power W column is 72; the complete reproduced table matches the source.",
+        "modality": "table",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-table.json"
+      },
+      {
+        "id": "table-04",
+        "question": "In table 2, what is the monthly Normal cost in USD?",
+        "source_document": "evaluation/fixtures/table.pdf",
+        "source_pages": [
+          2
+        ],
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "supported",
+        "evidence_note": "PDF page 2, Normal row, Cost USD column is 8; citation points to that page.",
+        "modality": "table",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-table.json"
+      },
+      {
+        "id": "table-05",
+        "question": "In table 3, what is the Boost power in watts?",
+        "source_document": "evaluation/fixtures/table.pdf",
+        "source_pages": [
+          3
+        ],
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "supported",
+        "evidence_note": "PDF page 3, Boost row gives 73 W and 13 USD; both statements are supported.",
+        "modality": "table",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-table.json"
+      },
+      {
+        "id": "table-06",
+        "question": "In table 3, what is the monthly Normal cost in USD?",
+        "source_document": "evaluation/fixtures/table.pdf",
+        "source_pages": [
+          3
+        ],
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "supported",
+        "evidence_note": "PDF page 3, Normal row gives 9 USD and 43 W; both statements are supported.",
+        "modality": "table",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-table.json"
+      },
+      {
+        "id": "table-07",
+        "question": "In table 4, what is the Boost power in watts?",
+        "source_document": "evaluation/fixtures/table.pdf",
+        "source_pages": [
+          4
+        ],
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "supported",
+        "evidence_note": "PDF page 4, Boost row, Power W column is 74; reproduced table matches the source.",
+        "modality": "table",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-table.json"
+      },
+      {
+        "id": "table-08",
+        "question": "In table 4, what is the monthly Normal cost in USD?",
+        "source_document": "evaluation/fixtures/table.pdf",
+        "source_pages": [
+          4
+        ],
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "supported",
+        "evidence_note": "PDF page 4, Normal row, Cost USD column is 10; reproduced table matches the source.",
+        "modality": "table",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-table.json"
+      },
+      {
+        "id": "table-09",
+        "question": "Give Boost power in table 1 and table 4.",
+        "source_document": "evaluation/fixtures/table.pdf",
+        "source_pages": [
+          1,
+          4
+        ],
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "supported",
+        "evidence_note": "PDF page 1 gives Boost 71 W and page 4 gives Boost 74 W; both are separately cited and correctly attributed.",
+        "modality": "table",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-table.json"
+      },
+      {
+        "id": "table-10",
+        "question": "What period applies to the Eco cost of 4 USD in table 1?",
+        "source_document": "evaluation/fixtures/table.pdf",
+        "source_pages": [
+          1
+        ],
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "supported",
+        "evidence_note": "PDF page 1 explicitly says costs below are monthly. The answer quotes that heading rather than restating per month, but supplies the requested period.",
+        "modality": "table",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-grounded",
+        "judgment_source_file": "results/independent-judge-table.json"
+      },
+      {
+        "id": "table-11",
+        "question": "What is the Wi-Fi password listed in the table records?",
+        "source_document": "evaluation/fixtures/table.pdf",
+        "source_pages": [],
+        "answer_correctness": 1,
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "hallucination": false,
+        "abstention_appropriate": true,
+        "citation_claim_support": "none",
+        "evidence_note": "The four source pages list modes, power, and costs; no Wi-Fi password appears. Abstention is appropriate.",
+        "modality": "table",
+        "unanswerable": true,
+        "saved_abstained": true,
+        "saved_mode": "abstention",
+        "judgment_source_file": "results/independent-judge-table.json"
+      },
+      {
+        "id": "table-12",
+        "question": "What serial number is shown on the purple emergency valve in the table records?",
+        "source_document": "evaluation/fixtures/table.pdf",
+        "source_pages": [],
+        "answer_correctness": 1,
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "hallucination": false,
+        "abstention_appropriate": true,
+        "citation_claim_support": "none",
+        "evidence_note": "The four source pages contain no purple emergency valve or serial number. Abstention is appropriate.",
+        "modality": "table",
+        "unanswerable": true,
+        "saved_abstained": true,
+        "saved_mode": "abstention",
+        "judgment_source_file": "results/independent-judge-table.json"
+      },
+      {
+        "id": "image-01",
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Diagram 1 page 1 visibly labels cartridge H100 and fan speed 2; cited page 1 covers that diagram.",
+        "modality": "image",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "image-02",
+        "answer_correctness": 0,
+        "faithfulness": 1,
+        "answer_relevancy": 0,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "partial",
+        "evidence_note": "Page 1 visually shows HEPA directly before FAN, but the response only quotes the H100 caption and does not answer which stage.",
+        "modality": "image",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-grounded",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "image-03",
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Diagram 2 page 2 visibly labels cartridge H200; the quoted cited caption supplies the requested identifier.",
+        "modality": "image",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-grounded",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "image-04",
+        "answer_correctness": 0,
+        "faithfulness": 1,
+        "answer_relevancy": 0,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "partial",
+        "evidence_note": "Page 2 visually shows HEPA directly before FAN, but the response quotes only the H200 caption.",
+        "modality": "image",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-grounded",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "image-05",
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Diagram 3 page 3 visibly labels cartridge H300; the cited caption gives the identifier.",
+        "modality": "image",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-grounded",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "image-06",
+        "answer_correctness": 0.5,
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.5,
+        "hallucination": true,
+        "abstention_appropriate": null,
+        "citation_claim_support": "partial",
+        "evidence_note": "Page 3 shows INLET -> MESH -> HEPA -> FAN; response lists these stages but never directly identifies HEPA as the predecessor. Added component functions are not established by the diagram, and citation 4 is an unrelated scanned pump page.",
+        "modality": "image",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "image-07",
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Diagram 4 page 4 visibly labels cartridge H400; the cited caption gives the identifier.",
+        "modality": "image",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-grounded",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "image-08",
+        "answer_correctness": 1,
+        "faithfulness": 0.5,
+        "answer_relevancy": 1,
+        "hallucination": true,
+        "abstention_appropriate": null,
+        "citation_claim_support": "partial",
+        "evidence_note": "Page 4 visually shows HEPA immediately before FAN, so core answer is correct. Claim of consistency across H200/H300/H400 also invokes page 3, which was not cited; design-standardization is an inference, not a documented fact.",
+        "modality": "image",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "image-09",
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Cited pages 1 and 4 visibly label H100 and H400 respectively; response gives both correctly.",
+        "modality": "image",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "image-10",
+        "answer_correctness": 0,
+        "faithfulness": 1,
+        "answer_relevancy": 0,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "partial",
+        "evidence_note": "Page 2 visibly shows INLET -> MESH -> HEPA -> FAN, but response only quotes the H200 caption and fan speed, omitting the airflow sequence.",
+        "modality": "image",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-grounded",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "image-11",
+        "answer_correctness": 1,
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "hallucination": false,
+        "abstention_appropriate": true,
+        "citation_claim_support": "none",
+        "evidence_note": "All four image PDF pages were inspected; no Wi-Fi password is present, and the response abstains.",
+        "modality": "image",
+        "unanswerable": true,
+        "saved_abstained": true,
+        "saved_mode": "abstention",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "image-12",
+        "answer_correctness": 1,
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "hallucination": false,
+        "abstention_appropriate": true,
+        "citation_claim_support": "none",
+        "evidence_note": "All four image PDF pages were inspected; no purple emergency valve or its serial number exists, and the response abstains.",
+        "modality": "image",
+        "unanswerable": true,
+        "saved_abstained": true,
+        "saved_mode": "abstention",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "chart-01",
+        "answer_correctness": 0,
+        "faithfulness": 1,
+        "answer_relevancy": 0.5,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "partial",
+        "evidence_note": "Chart 1 page 1 visibly labels March as 65 kWh. Response quotes noisy OCR including 65 and Mar but never states March usage or binds 65 to March.",
+        "modality": "chart",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-grounded",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "chart-02",
+        "answer_correctness": 0,
+        "faithfulness": 1,
+        "answer_relevancy": 0.5,
+        "hallucination": false,
+        "abstention_appropriate": false,
+        "citation_claim_support": "partial",
+        "evidence_note": "Chart 1 page 1 shows bars 25,45,65 kWh rising Jan to Mar. Response only quotes OCR and does not describe the upward trend.",
+        "modality": "chart",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-grounded",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "chart-03",
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "partial",
+        "evidence_note": "Chart 2 page 2 visually confirms Jan 30, Feb 50, Mar 70 kWh; response is correct. Citation 4 points to unrelated chart 1, while citations 1-3 point to chart 2.",
+        "modality": "chart",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "chart-04",
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Cited chart 2 page 2 visibly shows 30,50,70 kWh and an increasing Jan-Mar trend.",
+        "modality": "chart",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "chart-05",
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Cited chart 3 page 3 visibly shows Jan 35, Feb 55, Mar 75 kWh; response gives March as 75 kWh.",
+        "modality": "chart",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "chart-06",
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "supported",
+        "evidence_note": "Cited chart 3 page 3 visibly shows 35,55,75 kWh, increasing Jan-Mar; response matches.",
+        "modality": "chart",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      },
+      {
+        "id": "chart-07",
+        "answer_correctness": 1,
+        "faithfulness": 1,
+        "answer_relevancy": 1,
+        "hallucination": false,
+        "abstention_appropriate": null,
+        "citation_claim_support": "partial",
+        "evidence_note": "Chart 4 page 4 visually shows Jan 40, Feb 60, Mar 80 kWh and supports answer. Citation 4 points to unrelated chart 3.",
+        "modality": "chart",
+        "unanswerable": false,
+        "saved_abstained": false,
+        "saved_mode": "local-model-explained",
+        "judgment_source_file": "results/independent-judge-visual.json"
+      }
+    ]
+  },
   "requested_unmeasured": [
     {
       "request": "Context precision@5",
       "value": null,
       "n": 0,
       "status": "NOT MEASURED",
-      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
+      "reason": "No independent scoring of the full ranked top-five context sets; answer judgments and retrieval overlap are not substitutes."
     },
     {
       "request": "Context recall",
       "value": null,
       "n": 0,
       "status": "NOT MEASURED",
-      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
+      "reason": "No independent enumeration and scoring of all required contextual facts."
     },
     {
-      "request": "Faithfulness / groundedness",
+      "request": "Claim-count citation precision/recall",
       "value": null,
       "n": 0,
       "status": "NOT MEASURED",
-      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
+      "reason": "Existing Codex judgments are categorical per answer, without enumerated claim counts."
     },
     {
-      "request": "Answer correctness",
+      "request": "External RAGAS LLM-judge scores",
       "value": null,
       "n": 0,
       "status": "NOT MEASURED",
-      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
-    },
-    {
-      "request": "Answer relevancy",
-      "value": null,
-      "n": 0,
-      "status": "NOT MEASURED",
-      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
-    },
-    {
-      "request": "Hallucination rate",
-      "value": null,
-      "n": 0,
-      "status": "NOT MEASURED",
-      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
-    },
-    {
-      "request": "Semantic chart/image understanding",
-      "value": null,
-      "n": 0,
-      "status": "NOT MEASURED",
-      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
-    },
-    {
-      "request": "Claim-level citation accuracy",
-      "value": null,
-      "n": 0,
-      "status": "NOT MEASURED",
-      "reason": "No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts."
+      "reason": "No external RAGAS judge calls; separately named bounded Codex review metrics are not substituted."
     },
     {
       "request": "Currency cost per query",
@@ -9020,6 +10703,10 @@
       "reason": "Local hardware, energy and amortization cost were not instrumented; token telemetry is not currency cost."
     }
   ],
+  "requested_independent_review": {
+    "source": "results/independent-judge-summary.json",
+    "scope": "43/60 stopped synthetic generation questions; no scanned generation; no RAGAS/human/production claim"
+  },
   "per_modality_coverage": {
     "text": {
       "saved_generation_questions": 12,

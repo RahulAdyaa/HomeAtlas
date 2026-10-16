@@ -19,6 +19,7 @@ sys.path.insert(0, str(E))
 from protocol import app_fingerprint, frozen_dataset
 from stats_analysis import AGENTS, INFERENCE_AGENTS, aggregate_metrics, digest, paired_significance
 from requested_coverage import augment, coverage_markdown
+from independent_review import collect as collect_review, write as write_review, bind as bind_review, markdown as review_markdown
 
 SELECTED = {
  'retrieval-agent': ['all/hybrid_runtime/precision@5','all/hybrid_runtime/recall@5',
@@ -127,16 +128,20 @@ def main():
   'paired_retrieval_tests':paired_significance(sources,'final',permutations=20000,draws=5000),
   'partial_generation_telemetry':telemetry,'security_live_probes':security,'sources':provenance,
   'confidence_note':'Selected metrics only. Frozen percentile bootstrap, 5,000 draws, seed741; repeated runs cluster by question/probe ID. Degenerate intervals and small synthetic samples do not establish population guarantees. Prefix CIs are conditional on the stopped prefix, not representative multimodal accuracy.',
-  'not_measured':['Independent-judge faithfulness/semantic correctness/hallucination rate: no external judge credential.',
+  'not_measured':['External RAGAS LLM-judge scores: NOT MEASURED; separately named bounded Codex review is reported below.',
     'Full generation final pair, cross-run final variance and three-pass consistency: stopped by user budget.',
     'Final RAGAS embedding similarity/BERTScore: reference postprocessing was not reached.',
     'Scanned-PDF generation quality: no scanned questions in the stopped prefix.',
     'HTTP timeout rate, production capacity/cost, numeric trust calibration and isolated3D FPS: not established.']}
+ review=collect_review(app/'evaluation')
+ write_review(out,review)
+ bind_review(payload,review)
  augment(payload,runs,baseline)
  save(out/'showcase_results.json',payload)
  appendix=out/'RAG_EVALUATION_BASELINE_APPENDIX.md'
  if not appendix.exists():
-  old=app/'evaluation/RAG_EVALUATION_REPORT.md'
+  old=app/'evaluation/RAG_EVALUATION_BASELINE_APPENDIX.md'
+  if not old.exists():old=app/'evaluation/RAG_EVALUATION_REPORT.md'
   assert 'Completed phase: **baseline**'in old.read_text(), 'Historical appendix must come from unchanged baseline report'
   shutil.copyfile(old,appendix)
  render(out,payload)
@@ -164,6 +169,10 @@ def render(out,data):
   f'Application source: `{data["app_source_fingerprint"]}`. Dataset: `{data["dataset_fingerprint"]}`. Assembly UTC: `{data["timestamp_utc"]}`. Raw metric IDs, per-run values/n, source paths and CIs: [showcase_results.json](showcase_results.json).','',
   '## Headline scorecard',
   'Values are rates in [0,1] unless stated otherwise. Paired component columns average two independent runs; `n per run` lists each denominator, not a doubled independent sample. Generation uses only its saved prefix. Gold citation metrics assess source/page provenance, not semantic factual correctness.']
+ if data.get('independent_review'):
+  d=data['independent_review']['overall'];a=d['answerable_correctness'];neg=d['appropriate_negative_abstention'];h=d['hallucination_all_reviewed'];f=d['false_refusal_on_answerable']
+  position=next(i for i,line in enumerate(lines)if line.startswith('Application source:'))
+  lines[position:position]=[f'Independent Codex review of those saved answers: **answerable correctness {a["sum"]:g}/{a["n"]} = {a["mean"]:.6f}**, separate authored-negative abstention **{neg["count"]}/{neg["n"]}**; **{f["count"]}/{f["n"]} false refusal** and **{h["true_n"]}/{h["n"]} explicit hallucination flags**. Image answerable correctness is 6.5/10 and chart correctness 5/7. This bounded review is not RAGAS, human review, or production accuracy; exact denominators and failures are detailed below.','']
  lines+=block(SELECTED['retrieval-agent'][:5],'1. Retrieval at K=5',
   '**Precision, strict chunk recall, MRR and NDCG declined while hit rate improved.** All original gold and thresholds were retained. Page gold can include many OCR chunks: finding a relevant page does not establish extracted-answer coverage.')
  lines+=block(SELECTED['retrieval-agent'][5:],'2. Typo/Hinglish robustness',
@@ -200,6 +209,8 @@ def render(out,data):
   'Selected intervals use the frozen 5,000-draw percentile bootstrap, seed741, with repeated runs clustered by question/probe ID. A degenerate [0,0] or [1,1] empirical interval is not a population guarantee. Prefix intervals are conditional on the stopped prefix, not representative multimodal quality. Superseded candidate runs remain in raw `candidate_history` and are excluded from this primary source version.',
   '', 'Known historical provenance limit: the baseline security metadata digest was captured before generation metadata finalized; its reused stage-call/timing rows match. Raw baseline objects are preserved. The actual records and model identities remain in [specialist results](results/).',
   '', '[Full historical baseline report](RAG_EVALUATION_BASELINE_APPENDIX.md) · [Unchanged historical metric CSV](stats-metric-scorecard.csv) · [Frozen baseline JSON](baseline_results.json) · [Fix log](CHANGELOG.md)','']
+ if data.get('independent_review'):
+  lines+=['']+review_markdown(data['independent_review'])
  lines+=coverage_markdown(data)
  (out/'RAG_EVALUATION_REPORT.md').write_text('\n'.join(lines))
 

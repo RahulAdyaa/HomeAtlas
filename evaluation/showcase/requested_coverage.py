@@ -1,6 +1,7 @@
 """Explicit requested-metric inventory from saved observations; no model calls."""
 from statistics import mean
 from stats_analysis import generation_samples
+from independent_review import fmt_score, fmt_rate, support_label
 MODS=['text','table','image','chart','scanned']
 FIELDS=['precision','recall','hit','mrr','ndcg']
 
@@ -21,8 +22,15 @@ def augment(data,runs,baseline):
     'source_refs':[{'file':'results/'+agent+'.json','phase':'final','run':r['run'],'metric_id':name,'value':m['value'],'n':m['n']}for r,m in zip(runs[agent],points)],
     'baseline':None if agent=='generation-agent'else base.get((agent,name))}
    look[name]=row;data['metrics'].append(row)
- unjudged=['Context precision@5','Context recall','Faithfulness / groundedness','Answer correctness','Answer relevancy','Hallucination rate','Semantic chart/image understanding','Claim-level citation accuracy']
- data['requested_unmeasured']=[{'request':name,'value':None,'n':0,'status':'NOT MEASURED','reason':'No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts.'}for name in unjudged]
+ unjudged={'Context precision@5':'No independent scoring of the full ranked top-five context sets; answer judgments and retrieval overlap are not substitutes.',
+  'Context recall':'No independent enumeration and scoring of all required contextual facts.',
+  'Claim-count citation precision/recall':'Existing Codex judgments are categorical per answer, without enumerated claim counts.',
+  'External RAGAS LLM-judge scores':'No external RAGAS judge calls; separately named bounded Codex review metrics are not substituted.'}
+ data['requested_unmeasured']=[{'request':name,'value':None,'n':0,'status':'NOT MEASURED','reason':reason}for name,reason in unjudged.items()]
+ if data.get('independent_review'):
+  data['requested_independent_review']={'source':'results/independent-judge-summary.json','scope':'43/60 stopped synthetic generation questions; no scanned generation; no RAGAS/human/production claim'}
+ else:
+  data['requested_unmeasured'] += [{'request':name,'value':None,'n':0,'status':'NOT MEASURED','reason':'No independent review artifacts bound to this report.'}for name in ['Faithfulness / groundedness','Answer correctness','Answer relevancy','Hallucination rate','Semantic chart/image understanding','Per-answer citation claim support']]
  data['requested_unmeasured'].append({'request':'Currency cost per query','value':None,'n':0,'status':'NOT MEASURED','reason':'Local hardware, energy and amortization cost were not instrumented; token telemetry is not currency cost.'})
  gen=runs['generation-agent'][0];matrix={}
  for mod in MODS:
@@ -59,6 +67,15 @@ def coverage_markdown(data):
  rows=[]
  for request,names in data['requested_metric_inventory'].items():
   rows.append([request,'; '.join('`'+name+'`='+num(look[name]['value'])+' (n/run='+ '/'.join(map(str,look[name]['n_per_run']))+')'for name in names)])
+ if data.get('independent_review'):
+  d=data['independent_review']['overall'];v=data['independent_review']['visual_answerable'];h=d['hallucination_all_reviewed'];a=d['appropriate_negative_abstention']
+  rows += [['Answer correctness — bounded Codex review, answerable only',fmt_score(d['answerable_correctness'])],
+   ['Authored-negative appropriate abstention — bounded Codex review',fmt_rate(a['count'],a['n'])],
+   ['Faithfulness / groundedness — bounded Codex review',fmt_score(d['faithfulness'])],
+   ['Answer relevancy — bounded Codex review',fmt_score(d['answer_relevancy'])],
+   ['Hallucination flags — bounded Codex review',fmt_rate(h['true_n'],h['n'])+'; all reviewed answers, including negatives'],
+   ['Semantic chart/image answers — bounded Codex review',fmt_score(v['answerable_correctness'])+'; answerable visual correctness, not a broad visual-understanding benchmark'],
+   ['Per-answer citation claim support — bounded Codex review',support_label(d['citation_claim_support_per_response'])+'; no claim-count precision/recall']]
  for m in data['requested_unmeasured']:rows.append([m['request'],'NOT MEASURED — '+m['reason']])
  p=data['requested_latency_binding'];rows.append(['p95 latency',num(p['value'])+' seconds (n='+str(p['n'])+'). '+p['definition']])
  lines+=['']+table(['Requested metric','Observed value / explicit unavailability'],rows)
@@ -73,9 +90,19 @@ def coverage_markdown(data):
  for mod,d in data['per_modality_coverage'].items():
   rows.append([mod,d['saved_generation_questions']]+[num(d['generation'][name]['value'])+' (n='+str(d['generation'][name]['n'])+')'for name in ['citation_gold_precision','citation_gold_recall','citation_gold_page_recall','abstention_recall','false_refusal_rate']])
  lines+=['']+table(['Modality','Saved','Citation precision','Citation chunk recall','Citation page recall','Abstention recall','False refusal'],rows)
- lines+=['','### Requested semantic metrics by modality — unmeasured','',
- 'J = no independent judge scoring (zero judged samples); S = no saved scanned-generation questions. No lexical, label or citation-validity proxy is substituted. Context precision@5 also lacks a judged top-five context evaluation.']
- rows=[[m['request']]+['NOT MEASURED (J)']*4+['NOT MEASURED (S/J)']for m in data['requested_unmeasured']if m['request']!='Currency cost per query']
+ lines+=['','### Requested semantic metrics by modality — bounded independent review','',
+ 'Scores below mechanically aggregate existing Codex judgments, with nulls excluded and shown. Answer correctness uses answerable questions only; authored negatives appear separately. This is not RAGAS, human review, or production accuracy. Exact semantic context precision@5/recall and claim-count citation precision/recall remain unmeasured.']
+ rows=[]
+ review=data.get('independent_review')
+ if review:
+  for label,key in [('Answer correctness — answerable only','answerable_correctness'),('Faithfulness / groundedness','faithfulness'),('Answer relevancy','answer_relevancy')]:
+   rows.append([label]+[fmt_score(review['by_modality'][mod][key])for mod in MODS])
+  for label,key,count in [('Authored-negative appropriate abstention','appropriate_negative_abstention','count'),('Hallucination flags — all reviewed','hallucination_all_reviewed','true_n'),('False refusal — answerable only','false_refusal_on_answerable','count')]:
+   rows.append([label]+[fmt_rate(review['by_modality'][mod][key][count],review['by_modality'][mod][key]['n'])for mod in MODS])
+  rows.append(['Per-answer citation claim support']+[support_label(review['by_modality'][mod]['citation_claim_support_per_response'])if review['by_modality'][mod]['reviewed_n']else'NOT MEASURED (n=0)'for mod in MODS])
+  rows.append(['Semantic chart/image answers']+['Not a visual modality','Not a visual modality',fmt_score(review['by_modality']['image']['answerable_correctness']),fmt_score(review['by_modality']['chart']['answerable_correctness']),'NOT MEASURED (n=0)'])
+ for name in ['Context precision@5','Context recall','Claim-count citation precision/recall','External RAGAS LLM-judge scores']:
+  rows.append([name]+['NOT MEASURED']*5)
  lines+=['']+table(['Metric','Text','Table','Image','Chart','Scanned'],rows)
- lines+=['','Currency cost/query is NOT MEASURED for every modality: local hardware/energy were not instrumented. Literal image-label recall and chart numeral recall above do not establish semantic chart/image understanding. Negative unsupported-answer rate, if inspected in raw metrics, is not an independently judged hallucination rate.']
+ lines+=['','Currency cost/query is NOT MEASURED for every modality: local hardware/energy were not instrumented. Literal image-label recall and chart numeral recall do not establish semantic understanding; the separately named bounded visual review above evaluates only saved answers. Raw negative unsupported-answer metrics are distinct from the independent reviewer hallucination flags.']
  return lines

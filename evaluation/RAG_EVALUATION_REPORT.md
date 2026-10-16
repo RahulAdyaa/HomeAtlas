@@ -4,7 +4,9 @@
 
 Generation coverage: **43/60 questions in run 1**, 37 answerable and 6 negative; run 2 and the third-pass sample were not executed. Modality counts: text=12, table=12, image=12, chart=7. **No scanned-PDF generation questions.** The prefix is deterministic, not randomly sampled.
 
-Application source: `b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8`. Dataset: `0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda`. Assembly UTC: `2026-10-16T06:22:45.099685+00:00`. Raw metric IDs, per-run values/n, source paths and CIs: [showcase_results.json](showcase_results.json).
+Independent Codex review of those saved answers: **answerable correctness 30.5/37 = 0.824324**, separate authored-negative abstention **6/6**; **1/37 false refusal** and **2/43 explicit hallucination flags**. Image answerable correctness is 6.5/10 and chart correctness 5/7. This bounded review is not RAGAS, human review, or production accuracy; exact denominators and failures are detailed below.
+
+Application source: `b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8`. Dataset: `0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda`. Assembly UTC: `2026-10-16T10:57:20.148012+00:00`. Raw metric IDs, per-run values/n, source paths and CIs: [showcase_results.json](showcase_results.json).
 
 ## Headline scorecard
 Values are rates in [0,1] unless stated otherwise. Paired component columns average two independent runs; `n per run` lists each denominator, not a doubled independent sample. Generation uses only its saved prefix. Gold citation metrics assess source/page provenance, not semantic factual correctness.
@@ -121,7 +123,7 @@ generation_model_calls and verification_model_calls count wrapper invocations, n
 
 ## What remains unmeasured
 
-- Independent-judge faithfulness/semantic correctness/hallucination rate: no external judge credential.
+- External RAGAS LLM-judge metrics and exact semantic context precision/recall: NOT MEASURED. Separate bounded Codex review covers 43 saved answers.
 - Full generation final pair, cross-run final variance and three-pass consistency: stopped by user budget.
 - Final RAGAS embedding similarity/BERTScore: reference postprocessing was not reached.
 - Scanned-PDF generation quality: no scanned questions in the stopped prefix.
@@ -141,6 +143,41 @@ Known historical provenance limit: the baseline security metadata digest was cap
 
 [Full historical baseline report](RAG_EVALUATION_BASELINE_APPENDIX.md) · [Unchanged historical metric CSV](stats-metric-scorecard.csv) · [Frozen baseline JSON](baseline_results.json) · [Fix log](CHANGELOG.md)
 
+
+## Independent Codex review of saved answers
+
+**Bounded review: 43/60 questions from one stopped generation run; 37 answerable, 6 authored negatives, and no scanned-PDF generation.** Three independent Codex review assignments covered disjoint text, table, and visual partitions. This is not a RAGAS score, human review, calibrated multi-rater evaluation, or production accuracy estimate. The exact Codex serving model ID was unavailable; the answer generator was the separate self-hosted `qwen3-vl:4b-instruct`.
+
+Primary answerable correctness: **30.5/37 = 0.824324 (null=0)**. This includes 30 fully correct answers, one half-credit answer, and six zero-credit answers. The six authored negatives are separate: **6/6 = 1.000000 appropriate abstentions**. Including those negatives would give 36.5/43 = 0.848837 (null=0); that is not the answerable-only correctness score.
+
+| Review measure | Exact accounting |
+| --- | --- |
+| Faithfulness | 35/36 = 0.972222 (null=7); seven non-substantive refusals excluded |
+| Answer relevancy | 31.5/37 = 0.851351 (null=6); six appropriate negative abstentions excluded |
+| Explicit hallucination flags, all reviewed answers | 2/43 = 0.046512 |
+| Explicit hallucination flags, answerable only | 2/37 = 0.054054 |
+| Explicit hallucination flags, substantive answers only | 2/36 = 0.055556 |
+| False refusals on answerable questions | 1/37 = 0.027027 (`text-10`) |
+| Citation claim support, categorical per answer | 27 supported / 9 partial / 0 unsupported / 7 none |
+| Fully supported citation judgments, excluding none | 27/36 = 0.750000; not claim-count precision/recall |
+
+Null faithfulness/relevancy values are excluded, not converted into zero or one. Hallucination rates count explicit unsupported factual-claim flags, not refusals. A table reviewer used `abstention_appropriate=false` for correctly answered positives, so false refusals are derived from saved `metrics.abstained` and authored answerability.
+
+| Modality | Reviewed / answerable / negatives | Answerable correctness | Negative abstention | Faithfulness | Relevancy | Hallucination flags (all reviewed) | Citation support: supported / partial / unsupported / none |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| text | 12 / 10 / 2 | 9/10 = 0.900000 (null=0) | 2/2 = 1.000000 | 9/9 = 1.000000 (null=3) | 9/10 = 0.900000 (null=2) | 0/12 = 0.000000 | 9 / 0 / 0 / 3 |
+| table | 12 / 10 / 2 | 10/10 = 1.000000 (null=0) | 2/2 = 1.000000 | 10/10 = 1.000000 (null=2) | 10/10 = 1.000000 (null=2) | 0/12 = 0.000000 | 10 / 0 / 0 / 2 |
+| image | 12 / 10 / 2 | 6.5/10 = 0.650000 (null=0) | 2/2 = 1.000000 | 9/10 = 0.900000 (null=2) | 6.5/10 = 0.650000 (null=2) | 2/12 = 0.166667 | 5 / 5 / 0 / 2 |
+| chart | 7 / 7 / 0 | 5/7 = 0.714286 (null=0) | NOT MEASURED (n=0) | 7/7 = 1.000000 (null=0) | 6/7 = 0.857143 (null=0) | 0/7 = 0.000000 | 3 / 4 / 0 / 0 |
+| scanned | 0 / 0 / 0 | NOT MEASURED (n=0; null=0) | NOT MEASURED (n=0) | NOT MEASURED (n=0; null=0) | NOT MEASURED (n=0; null=0) | NOT MEASURED (n=0) | 0 / 0 / 0 / 0 |
+
+**Observed failures must remain visible.** `text-10` falsely refused the answerable four-unit service-interval summary. `image-02`, `image-04`, and `image-10` quoted labels but omitted the requested visual relationships. `chart-01` did not bind March to its usage and `chart-02` did not state the trend. `image-06` received half credit and an unsupported-claim flag; `image-08` answered the core question correctly but also received an unsupported-claim flag. Partial citation support also includes unrelated citations in `chart-03` and `chart-07`. These are the original reviewers’ findings, not new judgments by the aggregator.
+
+For the 17 answerable image/chart cases combined, correctness is 11.5/17 = 0.676471 (null=0). High faithfulness of quoted material does not establish that the response answered its visual question.
+
+Still **NOT MEASURED**: exact semantic context precision@5/recall, claim-count citation precision/recall, external RAGAS LLM-judge scores, scanned generation quality, inter-rater agreement, repeat-run semantic stability, and production generalization. No confidence interval or baseline semantic-improvement claim is added for this review.
+
+Artifacts: [aggregate JSON](results/independent-judge-summary.json), [text judgments](results/independent-judge-text.json), [table judgments](results/independent-judge-table.json), [visual judgments](results/independent-judge-visual.json). Full review and provenance: [independent review](INDEPENDENT_JUDGE_REVIEW.md).
 
 ## Requested metric coverage
 
@@ -162,14 +199,17 @@ Every requested metric is explicitly measured with scope or marked NOT MEASURED 
 | Location room/zone/container | `E.room_accuracy`=1 (n/run=20/20); `E.zone_accuracy`=1 (n/run=20/20); `E.container_accuracy`=1 (n/run=1/1) |
 | Typo / spelling | `typo/hybrid_runtime/mrr@5`=0.965789 (n/run=38/38); `typo/fuzzy/mrr@5`=1 (n/run=38/38) |
 | Cache hit / false hit / stale answers | `H.exact_hit_rate`=1 (n/run=5/5); `H.semantic_hit_rate`=0.8 (n/run=10/10); `H.near_miss_false_hit_rate`=0 (n/run=10/10); `H.move_delete_invalidation`=1 (n/run=2/2); `H.item_move_delete_freshness`=1 (n/run=2/2) |
-| Context precision@5 | NOT MEASURED — No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts. |
-| Context recall | NOT MEASURED — No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts. |
-| Faithfulness / groundedness | NOT MEASURED — No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts. |
-| Answer correctness | NOT MEASURED — No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts. |
-| Answer relevancy | NOT MEASURED — No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts. |
-| Hallucination rate | NOT MEASURED — No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts. |
-| Semantic chart/image understanding | NOT MEASURED — No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts. |
-| Claim-level citation accuracy | NOT MEASURED — No independent semantic judge scoring; retrieval overlap, literal labels, source quotation and refusal behavior are not substitutes. Context precision@5 additionally requires judged top-five contexts. |
+| Answer correctness — bounded Codex review, answerable only | 30.5/37 = 0.824324 (null=0) |
+| Authored-negative appropriate abstention — bounded Codex review | 6/6 = 1.000000 |
+| Faithfulness / groundedness — bounded Codex review | 35/36 = 0.972222 (null=7) |
+| Answer relevancy — bounded Codex review | 31.5/37 = 0.851351 (null=6) |
+| Hallucination flags — bounded Codex review | 2/43 = 0.046512; all reviewed answers, including negatives |
+| Semantic chart/image answers — bounded Codex review | 11.5/17 = 0.676471 (null=0); answerable visual correctness, not a broad visual-understanding benchmark |
+| Per-answer citation claim support — bounded Codex review | 27 supported / 9 partial / 0 unsupported / 7 none; no claim-count precision/recall |
+| Context precision@5 | NOT MEASURED — No independent scoring of the full ranked top-five context sets; answer judgments and retrieval overlap are not substitutes. |
+| Context recall | NOT MEASURED — No independent enumeration and scoring of all required contextual facts. |
+| Claim-count citation precision/recall | NOT MEASURED — Existing Codex judgments are categorical per answer, without enumerated claim counts. |
+| External RAGAS LLM-judge scores | NOT MEASURED — No external RAGAS judge calls; separately named bounded Codex review metrics are not substituted. |
 | Currency cost per query | NOT MEASURED — Local hardware, energy and amortization cost were not instrumented; token telemetry is not currency cost. |
 | p95 latency | 162.591 seconds (n=43). Linear p95 of saved-prefix in-process wall times; not an HTTP SLA. |
 
@@ -197,19 +237,23 @@ Citation columns are source/chunk/page provenance, not judged claim accuracy. Ab
 | chart | 7 | 0.928571 (n=7) | 0.16369 (n=7) | 1 (n=7) | NOT MEASURED (n=0) | 0 (n=7) |
 | scanned | 0 | NOT MEASURED (n=0) | NOT MEASURED (n=0) | NOT MEASURED (n=0) | NOT MEASURED (n=0) | NOT MEASURED (n=0) |
 
-### Requested semantic metrics by modality — unmeasured
+### Requested semantic metrics by modality — bounded independent review
 
-J = no independent judge scoring (zero judged samples); S = no saved scanned-generation questions. No lexical, label or citation-validity proxy is substituted. Context precision@5 also lacks a judged top-five context evaluation.
+Scores below mechanically aggregate existing Codex judgments, with nulls excluded and shown. Answer correctness uses answerable questions only; authored negatives appear separately. This is not RAGAS, human review, or production accuracy. Exact semantic context precision@5/recall and claim-count citation precision/recall remain unmeasured.
 
 | Metric | Text | Table | Image | Chart | Scanned |
 | --- | --- | --- | --- | --- | --- |
-| Context precision@5 | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (S/J) |
-| Context recall | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (S/J) |
-| Faithfulness / groundedness | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (S/J) |
-| Answer correctness | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (S/J) |
-| Answer relevancy | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (S/J) |
-| Hallucination rate | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (S/J) |
-| Semantic chart/image understanding | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (S/J) |
-| Claim-level citation accuracy | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (J) | NOT MEASURED (S/J) |
+| Answer correctness — answerable only | 9/10 = 0.900000 (null=0) | 10/10 = 1.000000 (null=0) | 6.5/10 = 0.650000 (null=0) | 5/7 = 0.714286 (null=0) | NOT MEASURED (n=0; null=0) |
+| Faithfulness / groundedness | 9/9 = 1.000000 (null=3) | 10/10 = 1.000000 (null=2) | 9/10 = 0.900000 (null=2) | 7/7 = 1.000000 (null=0) | NOT MEASURED (n=0; null=0) |
+| Answer relevancy | 9/10 = 0.900000 (null=2) | 10/10 = 1.000000 (null=2) | 6.5/10 = 0.650000 (null=2) | 6/7 = 0.857143 (null=0) | NOT MEASURED (n=0; null=0) |
+| Authored-negative appropriate abstention | 2/2 = 1.000000 | 2/2 = 1.000000 | 2/2 = 1.000000 | NOT MEASURED (n=0) | NOT MEASURED (n=0) |
+| Hallucination flags — all reviewed | 0/12 = 0.000000 | 0/12 = 0.000000 | 2/12 = 0.166667 | 0/7 = 0.000000 | NOT MEASURED (n=0) |
+| False refusal — answerable only | 1/10 = 0.100000 | 0/10 = 0.000000 | 0/10 = 0.000000 | 0/7 = 0.000000 | NOT MEASURED (n=0) |
+| Per-answer citation claim support | 9 supported / 0 partial / 0 unsupported / 3 none | 10 supported / 0 partial / 0 unsupported / 2 none | 5 supported / 5 partial / 0 unsupported / 2 none | 3 supported / 4 partial / 0 unsupported / 0 none | NOT MEASURED (n=0) |
+| Semantic chart/image answers | Not a visual modality | Not a visual modality | 6.5/10 = 0.650000 (null=0) | 5/7 = 0.714286 (null=0) | NOT MEASURED (n=0) |
+| Context precision@5 | NOT MEASURED | NOT MEASURED | NOT MEASURED | NOT MEASURED | NOT MEASURED |
+| Context recall | NOT MEASURED | NOT MEASURED | NOT MEASURED | NOT MEASURED | NOT MEASURED |
+| Claim-count citation precision/recall | NOT MEASURED | NOT MEASURED | NOT MEASURED | NOT MEASURED | NOT MEASURED |
+| External RAGAS LLM-judge scores | NOT MEASURED | NOT MEASURED | NOT MEASURED | NOT MEASURED | NOT MEASURED |
 
-Currency cost/query is NOT MEASURED for every modality: local hardware/energy were not instrumented. Literal image-label recall and chart numeral recall above do not establish semantic chart/image understanding. Negative unsupported-answer rate, if inspected in raw metrics, is not an independently judged hallucination rate.
+Currency cost/query is NOT MEASURED for every modality: local hardware/energy were not instrumented. Literal image-label recall and chart numeral recall do not establish semantic understanding; the separately named bounded visual review above evaluates only saved answers. Raw negative unsupported-answer metrics are distinct from the independent reviewer hallucination flags.
