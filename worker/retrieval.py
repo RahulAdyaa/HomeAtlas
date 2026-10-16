@@ -80,7 +80,7 @@ def extractive_answer(quotes: list[tuple[dict, str]], conflict: bool) -> str:
         return 'I found a relevant record, but its text is not readable enough to answer confidently.'
     lead = ('These records disagree. Check the cited versions below.' if conflict else
             'The available record says:')
-    return lead + '\n\n' + '\n'.join(f'- **{sentence}** [{index}]' for sentence, index in points)
+    return lead + '\n\n' + '\n'.join(f'- **{sentence}** ⟦{index}⟧' for sentence, index in points)
 
 
 def answer_from_evidence(question: str, candidates: list[dict], engine: LocalModels = models,
@@ -139,7 +139,9 @@ def answer_from_evidence(question: str, candidates: list[dict], engine: LocalMod
             if not isinstance(text, str) or len(text) > 4000 or not isinstance(heading, str):
                 continue
             # Citation numbers are assigned by the server, never trusted from generated prose.
-            text = re.sub(r'\[\d+\]', '', text).strip()
+            # Keep the paper's own [28] references as plain text; server-issued
+            # citation markers use a distinct syntax that the UI alone styles.
+            text = re.sub(r'⟦\d+⟧', '', text).strip()
             table = section.get('table', {})
             if isinstance(table, dict):
                 columns, rows = table.get('columns', []), table.get('rows', [])
@@ -177,7 +179,7 @@ def answer_from_evidence(question: str, candidates: list[dict], engine: LocalMod
             # Source headings are not needed for one-line answers.
             answer = (intro + '\n\n' if intro else '')
             answer += '\n\n'.join((f'### {s["heading"]}\n\n' if s['heading'] and len(accepted) > 2 else '') + s['text'] + '\n\n' +
-                                    ' '.join(f'[{i + 1}]' for i in s['evidence']) for s in accepted)
+                                    ' '.join(f'⟦{i + 1}⟧' for i in s['evidence']) for s in accepted)
             if len(accepted) < len(generated.get('sections', [])):
                 answer += '\n\nSome proposed details could not be verified against these records and have been omitted.'
             mode = 'local-model-explained'

@@ -28,12 +28,15 @@ export function markedText(text:string,terms:string[]):ReactNode{
     <mark key={index}>{part}</mark>:part);
 }
 
-export function highlightNodes(children:ReactNode,terms:string[]):ReactNode{
+export function highlightNodes(children:ReactNode,terms:string[],citation?:(number:number)=>ReactNode):ReactNode{
   return Children.map(children,child=>{
-    if(typeof child==='string')return markedText(child,terms);
+    if(typeof child==='string')return child.split(/(⟦\d+⟧)/g).map(part=>{
+      const number=/^⟦(\d+)⟧$/.exec(part);
+      return number&&citation?citation(Number(number[1])):markedText(part,terms);
+    });
     if(!isValidElement<{children?:ReactNode;className?:string}>(child))return child;
     const type=typeof child.type==='string'?child.type:'';
     if(type==='code'||type==='pre'||child.props.className?.includes('katex'))return child;
-    return cloneElement(child,{},highlightNodes(child.props.children,terms));
+    return cloneElement(child,{},highlightNodes(child.props.children,terms,citation));
   });
 }

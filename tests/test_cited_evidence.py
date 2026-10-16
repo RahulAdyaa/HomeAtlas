@@ -26,7 +26,7 @@ def test_review_excludes_unused_visual_quotes_and_keeps_original_indices():
             assert all(not r.get('image_path') for r in evidence)
             return [0]
     answer=answer_from_evidence('What model is my fridge?',RECORDS,Engine())
-    assert '[1]' in answer['answer'] and '[3]' not in answer['answer']
+    assert '⟦1⟧' in answer['answer'] and '⟦3⟧' not in answer['answer']
     assert [(c['id'],c['number'],c['page'],c['bbox']) for c in answer['citations']]==[('3',1,3,[1,2,3,4])]
     assert answer['citations'][0]['sourceId']=='source-3'
     assert answer['citations'][0]['versionId']=='version-3'
@@ -42,8 +42,8 @@ def test_multiple_accepted_sections_renumber_only_used_citations():
         def verify_sections(self,*args):return [0,1]
     answer=answer_from_evidence('Give the fridge model and warranty.',RECORDS,Engine())
     assert [(c['id'],c['number']) for c in answer['citations']]==[('1',1),('3',2)]
-    assert 'Model FR-900.\n\n[2]' in answer['answer']
-    assert 'Ends May 2028.\n\n[1]' in answer['answer']
+    assert 'Model FR-900.\n\n⟦2⟧' in answer['answer']
+    assert 'Ends May 2028.\n\n⟦1⟧' in answer['answer']
     assert 'unsupported number' not in answer['answer']
 
 
@@ -60,7 +60,7 @@ def test_rejected_fabricated_quote_positions_do_not_corrupt_citation_mapping():
             return [0]
     answer=answer_from_evidence('What is the fridge model?',RECORDS,Engine())
     assert [(c['id'],c['number']) for c in answer['citations']]==[('3',1)]
-    assert '[1]' in answer['answer']
+    assert '⟦1⟧' in answer['answer']
 
 
 def test_local_verifier_payload_omits_unreferenced_images(monkeypatch):

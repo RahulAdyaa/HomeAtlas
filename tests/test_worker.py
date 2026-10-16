@@ -225,7 +225,7 @@ def test_explanation_rejects_unverified_sections_and_fabricated_references():
             return [0]
     result = answer_from_evidence('Explain maintenance.', [row('Replace filter every six months.')], Explained())
     assert result['mode'] == 'local-model-explained'
-    assert 'six months' in result['answer'] and '[1]' in result['answer']
+    assert 'six months' in result['answer'] and '⟦1⟧' in result['answer']
     assert '$500' not in result['answer'] and 'Lifetime' not in result['answer']
     assert 'omitted' in result['answer']
 
