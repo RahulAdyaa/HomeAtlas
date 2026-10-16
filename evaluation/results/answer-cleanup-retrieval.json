@@ -1,0 +1,817 @@
+{
+  "scope": "20 fixed synthetic answerable questions, 5 each text/table/image/chart; source-page relevance; in-process three text channels with pinned multilingual embeddings; visual channel disabled identically before/after; no user data or live DB",
+  "before": {
+    "n": 20,
+    "recall_at_5": 1.0,
+    "mrr_at_5": 0.975,
+    "per_question": [
+      {
+        "id": "text-01",
+        "ranked_source_pages": [
+          "text.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "text.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "text-02",
+        "ranked_source_pages": [
+          "text.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "text.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "text-03",
+        "ranked_source_pages": [
+          "text.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "text.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "text-04",
+        "ranked_source_pages": [
+          "text.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "text.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "text-05",
+        "ranked_source_pages": [
+          "text.pdf:3"
+        ],
+        "relevant_source_pages": [
+          "text.pdf:3"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "table-01",
+        "ranked_source_pages": [
+          "table.pdf:1",
+          "chart.pdf:1",
+          "chart.pdf:1",
+          "text.pdf:1",
+          "chart.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "table.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "table-02",
+        "ranked_source_pages": [
+          "table.pdf:1",
+          "chart.pdf:1",
+          "image.pdf:1",
+          "chart.pdf:1",
+          "text.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "table.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "table-03",
+        "ranked_source_pages": [
+          "table.pdf:2",
+          "image.pdf:1",
+          "chart.pdf:2",
+          "chart.pdf:2",
+          "text.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "table.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "table-04",
+        "ranked_source_pages": [
+          "table.pdf:2",
+          "chart.pdf:2",
+          "chart.pdf:2",
+          "image.pdf:2",
+          "chart.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "table.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "table-05",
+        "ranked_source_pages": [
+          "table.pdf:3",
+          "image.pdf:2",
+          "chart.pdf:3",
+          "chart.pdf:3",
+          "image.pdf:3"
+        ],
+        "relevant_source_pages": [
+          "table.pdf:3"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "image-01",
+        "ranked_source_pages": [
+          "image.pdf:1",
+          "image.pdf:1",
+          "chart.pdf:1",
+          "image.pdf:1",
+          "text.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "image.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 2.0616063116448506,
+          "ap": 2.75
+        }
+      },
+      {
+        "id": "image-02",
+        "ranked_source_pages": [
+          "image.pdf:1",
+          "image.pdf:1",
+          "chart.pdf:1",
+          "text.pdf:1",
+          "chart.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "image.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.6309297535714575,
+          "ap": 2.0
+        }
+      },
+      {
+        "id": "image-03",
+        "ranked_source_pages": [
+          "image.pdf:2",
+          "image.pdf:1",
+          "image.pdf:2",
+          "chart.pdf:2",
+          "image.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "image.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.8868528072345416,
+          "ap": 2.2666666666666666
+        }
+      },
+      {
+        "id": "image-04",
+        "ranked_source_pages": [
+          "image.pdf:1",
+          "image.pdf:2",
+          "image.pdf:1",
+          "image.pdf:2",
+          "chart.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "image.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 0.5,
+          "ndcg": 1.0616063116448506,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "image-05",
+        "ranked_source_pages": [
+          "image.pdf:3",
+          "image.pdf:2",
+          "image.pdf:3",
+          "chart.pdf:3",
+          "image.pdf:3"
+        ],
+        "relevant_source_pages": [
+          "image.pdf:3"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.8868528072345416,
+          "ap": 2.2666666666666666
+        }
+      },
+      {
+        "id": "chart-01",
+        "ranked_source_pages": [
+          "chart.pdf:1",
+          "chart.pdf:1",
+          "chart.pdf:1",
+          "text.pdf:1",
+          "table.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "chart.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 2.1309297535714578,
+          "ap": 3.0
+        }
+      },
+      {
+        "id": "chart-02",
+        "ranked_source_pages": [
+          "chart.pdf:1",
+          "chart.pdf:1",
+          "chart.pdf:1",
+          "text.pdf:1",
+          "image.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "chart.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 2.1309297535714578,
+          "ap": 3.0
+        }
+      },
+      {
+        "id": "chart-03",
+        "ranked_source_pages": [
+          "chart.pdf:2",
+          "chart.pdf:2",
+          "chart.pdf:2",
+          "image.pdf:1",
+          "text.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "chart.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 2.1309297535714578,
+          "ap": 3.0
+        }
+      },
+      {
+        "id": "chart-04",
+        "ranked_source_pages": [
+          "chart.pdf:2",
+          "chart.pdf:2",
+          "chart.pdf:2",
+          "text.pdf:2",
+          "image.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "chart.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 2.1309297535714578,
+          "ap": 3.0
+        }
+      },
+      {
+        "id": "chart-05",
+        "ranked_source_pages": [
+          "chart.pdf:3",
+          "chart.pdf:3",
+          "chart.pdf:3",
+          "image.pdf:3",
+          "image.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "chart.pdf:3"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 2.1309297535714578,
+          "ap": 3.0
+        }
+      }
+    ]
+  },
+  "after": {
+    "n": 20,
+    "recall_at_5": 1.0,
+    "mrr_at_5": 0.975,
+    "per_question": [
+      {
+        "id": "text-01",
+        "ranked_source_pages": [
+          "text.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "text.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "text-02",
+        "ranked_source_pages": [
+          "text.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "text.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "text-03",
+        "ranked_source_pages": [
+          "text.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "text.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "text-04",
+        "ranked_source_pages": [
+          "text.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "text.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "text-05",
+        "ranked_source_pages": [
+          "text.pdf:3"
+        ],
+        "relevant_source_pages": [
+          "text.pdf:3"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "table-01",
+        "ranked_source_pages": [
+          "table.pdf:1",
+          "chart.pdf:1",
+          "chart.pdf:1",
+          "text.pdf:1",
+          "chart.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "table.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "table-02",
+        "ranked_source_pages": [
+          "table.pdf:1",
+          "chart.pdf:1",
+          "image.pdf:1",
+          "chart.pdf:1",
+          "text.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "table.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "table-03",
+        "ranked_source_pages": [
+          "table.pdf:2",
+          "image.pdf:1",
+          "chart.pdf:2",
+          "chart.pdf:2",
+          "text.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "table.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "table-04",
+        "ranked_source_pages": [
+          "table.pdf:2",
+          "chart.pdf:2",
+          "chart.pdf:2",
+          "image.pdf:2",
+          "chart.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "table.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "table-05",
+        "ranked_source_pages": [
+          "table.pdf:3",
+          "image.pdf:2",
+          "chart.pdf:3",
+          "chart.pdf:3",
+          "image.pdf:3"
+        ],
+        "relevant_source_pages": [
+          "table.pdf:3"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "image-01",
+        "ranked_source_pages": [
+          "image.pdf:1",
+          "image.pdf:1",
+          "chart.pdf:1",
+          "image.pdf:1",
+          "text.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "image.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 2.0616063116448506,
+          "ap": 2.75
+        }
+      },
+      {
+        "id": "image-02",
+        "ranked_source_pages": [
+          "image.pdf:1",
+          "image.pdf:1",
+          "chart.pdf:1",
+          "text.pdf:1",
+          "chart.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "image.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.6309297535714575,
+          "ap": 2.0
+        }
+      },
+      {
+        "id": "image-03",
+        "ranked_source_pages": [
+          "image.pdf:2",
+          "image.pdf:1",
+          "image.pdf:2",
+          "chart.pdf:2",
+          "image.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "image.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.8868528072345416,
+          "ap": 2.2666666666666666
+        }
+      },
+      {
+        "id": "image-04",
+        "ranked_source_pages": [
+          "image.pdf:1",
+          "image.pdf:2",
+          "image.pdf:1",
+          "image.pdf:2",
+          "chart.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "image.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 0.5,
+          "ndcg": 1.0616063116448506,
+          "ap": 1.0
+        }
+      },
+      {
+        "id": "image-05",
+        "ranked_source_pages": [
+          "image.pdf:3",
+          "image.pdf:2",
+          "image.pdf:3",
+          "chart.pdf:3",
+          "image.pdf:3"
+        ],
+        "relevant_source_pages": [
+          "image.pdf:3"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.8868528072345416,
+          "ap": 2.2666666666666666
+        }
+      },
+      {
+        "id": "chart-01",
+        "ranked_source_pages": [
+          "chart.pdf:1",
+          "chart.pdf:1",
+          "chart.pdf:1",
+          "text.pdf:1",
+          "table.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "chart.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 2.1309297535714578,
+          "ap": 3.0
+        }
+      },
+      {
+        "id": "chart-02",
+        "ranked_source_pages": [
+          "chart.pdf:1",
+          "chart.pdf:1",
+          "chart.pdf:1",
+          "text.pdf:1",
+          "image.pdf:1"
+        ],
+        "relevant_source_pages": [
+          "chart.pdf:1"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 2.1309297535714578,
+          "ap": 3.0
+        }
+      },
+      {
+        "id": "chart-03",
+        "ranked_source_pages": [
+          "chart.pdf:2",
+          "chart.pdf:2",
+          "chart.pdf:2",
+          "image.pdf:1",
+          "text.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "chart.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 2.1309297535714578,
+          "ap": 3.0
+        }
+      },
+      {
+        "id": "chart-04",
+        "ranked_source_pages": [
+          "chart.pdf:2",
+          "chart.pdf:2",
+          "chart.pdf:2",
+          "text.pdf:2",
+          "image.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "chart.pdf:2"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 2.1309297535714578,
+          "ap": 3.0
+        }
+      },
+      {
+        "id": "chart-05",
+        "ranked_source_pages": [
+          "chart.pdf:3",
+          "chart.pdf:3",
+          "chart.pdf:3",
+          "image.pdf:3",
+          "image.pdf:2"
+        ],
+        "relevant_source_pages": [
+          "chart.pdf:3"
+        ],
+        "metrics": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hit": 1.0,
+          "mrr": 1.0,
+          "ndcg": 2.1309297535714578,
+          "ap": 3.0
+        }
+      }
+    ]
+  }
+}
