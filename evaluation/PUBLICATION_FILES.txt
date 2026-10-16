@@ -37,6 +37,7 @@ evaluation/scenarios.json
 evaluation/security_system_eval.py
 evaluation/security_system_live.mjs
 evaluation/showcase/report.py
+evaluation/showcase/requested_coverage.py
 evaluation/showcase_results.json
 evaluation/stats-metric-scorecard.csv
 evaluation/stats_analysis.py
