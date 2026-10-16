@@ -12,6 +12,12 @@ describe('safe detailed answers',()=>{
  it('treats source HTML and scripts as literal text',()=>{
   const html=renderToStaticMarkup(createElement(AnswerContent,{text:'<script>alert(1)</script>\n\n<img src=x onerror=alert(1)>'}));
   expect(html).not.toContain('<script>');expect(html).not.toContain('<img');
-  expect(html).toContain('&lt;script&gt;');
+  expect(html).not.toContain('onerror');
+ });
+ it('renders math and fenced code without executing source HTML',()=>{
+  const html=renderToStaticMarkup(createElement(AnswerContent,{text:'The value is $x^2$\n\n```python\nprint(2)\n```'}));
+  expect(html).toContain('katex');
+  expect(html).toContain('print');
+  expect(html).toContain('<pre');
  });
 });

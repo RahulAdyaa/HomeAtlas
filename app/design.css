@@ -24,6 +24,23 @@ body{font-variant-numeric:tabular-nums}
 /* Complete answers and privately served source-page evidence. */
 .answer-content p{white-space:pre-wrap;margin:0 0 18px;overflow-wrap:anywhere}
 .answer-content h3{font-size:1.15rem;margin:28px 0 12px;line-height:1.4}
+.answer-content{max-width:72ch;overflow-wrap:anywhere;font-family:var(--sans),"Noto Sans Devanagari","Noto Sans Gurmukhi",sans-serif}
+.answer-content p,.answer-content li{line-height:1.7}
+.answer-content ul,.answer-content ol{padding-left:1.5rem;margin:0 0 1.1rem}
+.answer-content li+li{margin-top:.4rem}
+.answer-content strong{color:var(--ink);font-weight:700}
+.answer-content blockquote{border-left:3px solid var(--green);padding:.3rem 1rem;margin:1rem 0;color:var(--muted)}
+.answer-content pre{overflow:auto;border-radius:8px;padding:1rem;background:#1b2632;color:#f4f8f2;font-size:.88rem;line-height:1.5}
+.answer-content pre .token.keyword{color:#a4c7ff}.answer-content pre .token.string{color:#b6df9f}.answer-content pre .token.number{color:#eac489}.answer-content pre .token.comment{color:#9aa8a6}
+.answer-content :not(pre)>code{padding:.1rem .3rem;border-radius:4px;background:var(--sage);font-size:.88em}
+.answer-content .katex-display{overflow-x:auto;overflow-y:hidden;padding:.5rem 0}
+.answer-content .answer-table-wrap{overflow-x:auto;max-width:100%;margin:1.2rem 0}
+.answer-content table{border-collapse:collapse;width:100%;min-width:320px}
+.answer-content th,.answer-content td{border:1px solid var(--line);padding:.6rem .75rem;text-align:left}
+.answer-content th{background:var(--sage);font-weight:700;color:var(--ink)}
+.answer-copy{margin:.25rem 0 1rem;min-height:38px}
+[data-theme="dark"] .answer-content pre{background:#101822;color:#e8f0e8}
+@media(max-width:700px){.answer-content{font-size:1rem;max-width:100%}.answer-content pre{font-size:.8rem}}
 .answer-table-wrap{overflow:auto;max-width:100%;margin:20px 0;border:1px solid var(--line);border-radius:12px}
 .answer-table-wrap table{border-collapse:collapse;width:100%;font-size:.95rem;white-space:normal}
 .answer-table-wrap th,.answer-table-wrap td{padding:12px;text-align:left;border-bottom:1px solid var(--line);min-width:100px}

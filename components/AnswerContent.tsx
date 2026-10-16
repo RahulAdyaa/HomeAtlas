@@ -1,32 +1,39 @@
-import { Fragment } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeSanitize from 'rehype-sanitize';
+import rehypeKatex from 'rehype-katex';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
+import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
+import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
+import python from 'react-syntax-highlighter/dist/esm/languages/prism/python';
 
-// Render a small, safe Markdown subset. Uploaded/model text never becomes HTML.
-function inline(text: string) {
-  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
-    part.startsWith('**') ? <strong key={i}>{part.slice(2, -2)}</strong> : <Fragment key={i}>{part}</Fragment>);
+SyntaxHighlighter.registerLanguage('bash', bash);
+SyntaxHighlighter.registerLanguage('javascript', javascript);
+SyntaxHighlighter.registerLanguage('json', json);
+SyntaxHighlighter.registerLanguage('python', python);
+
+export function completeMath(text: string): string {
+  // Keep a partial streamed expression literal until its closing delimiter arrives.
+  const dollars = (text.match(/(?<!\\)\$/g) || []).length;
+  if (dollars % 2) text = text.replace(/(?<!\\)\$(?![\s\S]*\$)/, '\\$');
+  return text;
 }
+
 export default function AnswerContent({ text }: { text: string }) {
-  const lines = text.split('\n');
-  const blocks = [];
-  for (let i = 0; i < lines.length;) {
-    const line = lines[i];
-    if (!line.trim()) { i++; continue; }
-    if (/^#{1,3} /.test(line)) { blocks.push(<h3 key={i}>{inline(line.replace(/^#{1,3} /, ''))}</h3>); i++; continue; }
-    if (line.includes('|') && /^\s*\|?\s*:?-{3,}/.test(lines[i + 1] || '')) {
-      const key = i;
-      const cells = (row: string) => row.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
-      const headers = cells(line); i += 2;
-      const rows = [];
-      while (i < lines.length && lines[i].includes('|') && lines[i].trim()) rows.push(cells(lines[i++]));
-      blocks.push(<div className="answer-table-wrap" key={key} tabIndex={0} aria-label="Supporting table"><table><thead><tr>{headers.map((c, j) => <th scope="col" key={j}>{inline(c)}</th>)}</tr></thead><tbody>{rows.map((r, j) => <tr key={j}>{headers.map((_, k) => <td key={k}>{inline(r[k] || '')}</td>)}</tr>)}</tbody></table></div>);
-      continue;
-    }
-    const key = i, paragraph = [];
-    while (i < lines.length && lines[i].trim() && !/^#{1,3} /.test(lines[i])) {
-      if (i > key && lines[i].includes('|') && /^\s*\|?\s*:?-{3,}/.test(lines[i + 1] || '')) break;
-      paragraph.push(lines[i++]);
-    }
-    blocks.push(<p key={key}>{inline(paragraph.join('\n'))}</p>);
-  }
-  return <div className="answer-text answer-content">{blocks}</div>;
+  return <div className="answer-text answer-content"><ReactMarkdown
+    remarkPlugins={[remarkGfm, remarkMath]}
+    rehypePlugins={[rehypeSanitize, [rehypeKatex, { throwOnError: false, strict: 'ignore' }]]}
+    components={{
+      a: ({children, href}) => <a href={href || '#'} target="_blank" rel="noopener noreferrer">{children}</a>,
+      table: ({children}) => <div className="answer-table-wrap" tabIndex={0} aria-label="Supporting table"><table>{children}</table></div>,
+      th: ({children}) => <th scope="col">{children}</th>,
+      code: ({children, className}) => {
+        const language = /language-([\w-]+)/.exec(className || '')?.[1];
+        const content = String(children).replace(/\n$/, '');
+        return language ? <SyntaxHighlighter language={language} useInlineStyles={false}>{content}</SyntaxHighlighter> : <code>{children}</code>;
+      },
+    }}
+  >{completeMath(text)}</ReactMarkdown></div>;
 }
