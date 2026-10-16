@@ -1,0 +1,5992 @@
+{
+  "schema_version": 1,
+  "status": "BUDGET_LIMITED_SHOWCASE_PARTIAL_GENERATION",
+  "timestamp_utc": "2026-10-16T06:08:41.140000+00:00",
+  "app_source_fingerprint": "b253dd629e6ab18415e3bccf0448566e123f81907f631daa1407b51b588c95c8",
+  "dataset_fingerprint": "0bf5aba28055da78843f3a973c1886f79624dd3909bb48c6c032f3986c543fda",
+  "baseline_file": "baseline_results.json",
+  "baseline_sha256": "b08a6f02bb5b887aede182b66900bb7b7214e4f5321dfe5fe3e452c3591fbee4",
+  "scope": "Explicit user 30-minute scope override on 2026-10-16. Summarizes existing evidence only; original exhaustive final evaluation was not completed.",
+  "full_final_suite_complete": false,
+  "canonical_final_results_written": false,
+  "new_inference_calls": 0,
+  "original_measurement_files_unchanged": true,
+  "generation_coverage": {
+    "saved_questions": 43,
+    "planned_questions_per_run": 60,
+    "answerable": 37,
+    "negative": 6,
+    "by_modality": {
+      "text": 12,
+      "table": 12,
+      "image": 12,
+      "chart": 7
+    },
+    "last_saved_question": "chart-07",
+    "full_final_runs_completed": 0,
+    "second_run_saved_questions": 0,
+    "third_pass_saved_questions": 0,
+    "sampling": "Deterministic stopped prefix, not a random sample. No scanned-PDF generation questions.",
+    "scope_change": {
+      "reason": "Explicit user request to fit remaining work within 30 minutes and prioritize measured headline metrics for resume/LinkedIn/GitHub. Exhaustive inference stopped; original full-pair target not achieved.",
+      "recorded_at_utc": "2026-10-16T06:04:40.249332+00:00",
+      "saved_main_questions": 43,
+      "planned_original_main_questions_per_run": 60,
+      "completed_main_runs": 0,
+      "second_run_saved_questions": 0,
+      "third_pass_saved_questions": 0,
+      "new_model_requests_after_stop": 0
+    }
+  },
+  "metrics": [
+    {
+      "agent": "ingestion-agent",
+      "metric": "chart.numeric_label_text_recall",
+      "run_values": [
+        0.75,
+        0.75
+      ],
+      "n_per_run": [
+        12,
+        12
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.75,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {
+          "interpretation": "A printed value token exists on the correct chart page. Does not establish association with a bar or month."
+        },
+        {
+          "interpretation": "A printed value token exists on the correct chart page. Does not establish association with a bar or month."
+        }
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.5,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 12,
+        "n_observations": 24,
+        "small_sample_note": null
+      },
+      "n_clusters": 12,
+      "n_observations": 24,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/ingestion-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "chart.numeric_label_text_recall",
+          "value": 0.75,
+          "n": 12
+        },
+        {
+          "file": "results/ingestion-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "chart.numeric_label_text_recall",
+          "value": 0.75,
+          "n": 12
+        }
+      ],
+      "baseline": {
+        "agent": "ingestion-agent",
+        "metric": "chart.numeric_label_text_recall",
+        "run_values": [
+          0.75,
+          0.75
+        ],
+        "n_per_run": [
+          12,
+          12
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.75,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {
+            "interpretation": "A printed value token exists on the correct chart page. Does not establish association with a bar or month."
+          },
+          {
+            "interpretation": "A printed value token exists on the correct chart page. Does not establish association with a bar or month."
+          }
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.5,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 12,
+          "n_observations": 24,
+          "small_sample_note": null
+        },
+        "n_clusters": 12,
+        "n_observations": 24
+      }
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "ocr.scanned.cer_macro",
+      "run_values": [
+        0.0033783783783783786,
+        0.0033783783783783786
+      ],
+      "n_per_run": [
+        4,
+        4
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.0033783783783783786,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.0,
+        "high": 0.010135135135135136,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 4,
+        "n_observations": 8,
+        "small_sample_note": "Few probes provide weak population evidence."
+      },
+      "n_clusters": 4,
+      "n_observations": 8,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/ingestion-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "ocr.scanned.cer_macro",
+          "value": 0.0033783783783783786,
+          "n": 4
+        },
+        {
+          "file": "results/ingestion-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "ocr.scanned.cer_macro",
+          "value": 0.0033783783783783786,
+          "n": 4
+        }
+      ],
+      "baseline": {
+        "agent": "ingestion-agent",
+        "metric": "ocr.scanned.cer_macro",
+        "run_values": [
+          0.0033783783783783786,
+          0.0033783783783783786
+        ],
+        "n_per_run": [
+          4,
+          4
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.0033783783783783786,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.0,
+          "high": 0.010135135135135136,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 4,
+          "n_observations": 8,
+          "small_sample_note": "Few probes provide weak population evidence."
+        },
+        "n_clusters": 4,
+        "n_observations": 8
+      }
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "ocr.scanned.wer_macro",
+      "run_values": [
+        0.021739130434782608,
+        0.021739130434782608
+      ],
+      "n_per_run": [
+        4,
+        4
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.021739130434782608,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.0,
+        "high": 0.06521739130434782,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 4,
+        "n_observations": 8,
+        "small_sample_note": "Few probes provide weak population evidence."
+      },
+      "n_clusters": 4,
+      "n_observations": 8,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/ingestion-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "ocr.scanned.wer_macro",
+          "value": 0.021739130434782608,
+          "n": 4
+        },
+        {
+          "file": "results/ingestion-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "ocr.scanned.wer_macro",
+          "value": 0.021739130434782608,
+          "n": 4
+        }
+      ],
+      "baseline": {
+        "agent": "ingestion-agent",
+        "metric": "ocr.scanned.wer_macro",
+        "run_values": [
+          0.021739130434782608,
+          0.021739130434782608
+        ],
+        "n_per_run": [
+          4,
+          4
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.021739130434782608,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.0,
+          "high": 0.06521739130434782,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 4,
+          "n_observations": 8,
+          "small_sample_note": "Few probes provide weak population evidence."
+        },
+        "n_clusters": 4,
+        "n_observations": 8
+      }
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "table.cell_text_recall",
+      "run_values": [
+        1,
+        1
+      ],
+      "n_per_run": [
+        48,
+        48
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 1,
+      "variance_between_runs": 0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0,
+      "metric_metadata_per_run": [
+        {
+          "interpretation": "Whole-token cell text present on correct source page. Does not establish row/column association."
+        },
+        {
+          "interpretation": "Whole-token cell text present on correct source page. Does not establish row/column association."
+        }
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 1.0,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 48,
+        "n_observations": 96,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 48,
+      "n_observations": 96,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/ingestion-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "table.cell_text_recall",
+          "value": 1,
+          "n": 48
+        },
+        {
+          "file": "results/ingestion-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "table.cell_text_recall",
+          "value": 1,
+          "n": 48
+        }
+      ],
+      "baseline": {
+        "agent": "ingestion-agent",
+        "metric": "table.cell_text_recall",
+        "run_values": [
+          1,
+          1
+        ],
+        "n_per_run": [
+          48,
+          48
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1,
+        "variance_between_runs": 0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0,
+        "metric_metadata_per_run": [
+          {
+            "interpretation": "Whole-token cell text present on correct source page. Does not establish row/column association."
+          },
+          {
+            "interpretation": "Whole-token cell text present on correct source page. Does not establish row/column association."
+          }
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 48,
+          "n_observations": 96,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 48,
+        "n_observations": 96
+      }
+    },
+    {
+      "agent": "ingestion-agent",
+      "metric": "table.structured_output_rate",
+      "run_values": [
+        0,
+        0
+      ],
+      "n_per_run": [
+        4,
+        4
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0,
+      "variance_between_runs": 0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.0,
+        "high": 0.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 4,
+        "n_observations": 8,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 4,
+      "n_observations": 8,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/ingestion-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "table.structured_output_rate",
+          "value": 0,
+          "n": 4
+        },
+        {
+          "file": "results/ingestion-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "table.structured_output_rate",
+          "value": 0,
+          "n": 4
+        }
+      ],
+      "baseline": {
+        "agent": "ingestion-agent",
+        "metric": "table.structured_output_rate",
+        "run_values": [
+          0,
+          0
+        ],
+        "n_per_run": [
+          4,
+          4
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0,
+        "variance_between_runs": 0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.0,
+          "high": 0.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 4,
+          "n_observations": 8,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 4,
+        "n_observations": 8
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/hit@5",
+      "run_values": [
+        0.9834710743801653,
+        0.9834710743801653
+      ],
+      "n_per_run": [
+        121,
+        121
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.9834710743801653,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.9586776859504132,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 121,
+        "n_observations": 242,
+        "small_sample_note": null
+      },
+      "n_clusters": 121,
+      "n_observations": 242,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "all/hybrid_runtime/hit@5",
+          "value": 0.9834710743801653,
+          "n": 121
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "all/hybrid_runtime/hit@5",
+          "value": 0.9834710743801653,
+          "n": 121
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "all/hybrid_runtime/hit@5",
+        "run_values": [
+          0.9752066115702479,
+          0.9752066115702479
+        ],
+        "n_per_run": [
+          121,
+          121
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.9752066115702479,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.9421487603305785,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 121,
+          "n_observations": 242,
+          "small_sample_note": null
+        },
+        "n_clusters": 121,
+        "n_observations": 242
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/mrr@5",
+      "run_values": [
+        0.9201101928374655,
+        0.9201101928374655
+      ],
+      "n_per_run": [
+        121,
+        121
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.9201101928374655,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.8771349862258954,
+        "high": 0.9586776859504132,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 121,
+        "n_observations": 242,
+        "small_sample_note": null
+      },
+      "n_clusters": 121,
+      "n_observations": 242,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "all/hybrid_runtime/mrr@5",
+          "value": 0.9201101928374655,
+          "n": 121
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "all/hybrid_runtime/mrr@5",
+          "value": 0.9201101928374655,
+          "n": 121
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "all/hybrid_runtime/mrr@5",
+        "run_values": [
+          0.9308539944903581,
+          0.9308539944903581
+        ],
+        "n_per_run": [
+          121,
+          121
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.9308539944903581,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.888154269972452,
+          "high": 0.9688705234159781,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 121,
+          "n_observations": 242,
+          "small_sample_note": null
+        },
+        "n_clusters": 121,
+        "n_observations": 242
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/ndcg@5",
+      "run_values": [
+        0.8550134027679013,
+        0.8550134027679013
+      ],
+      "n_per_run": [
+        121,
+        121
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.8550134027679013,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.8100894330159999,
+        "high": 0.8973075836107852,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 121,
+        "n_observations": 242,
+        "small_sample_note": null
+      },
+      "n_clusters": 121,
+      "n_observations": 242,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "all/hybrid_runtime/ndcg@5",
+          "value": 0.8550134027679013,
+          "n": 121
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "all/hybrid_runtime/ndcg@5",
+          "value": 0.8550134027679013,
+          "n": 121
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "all/hybrid_runtime/ndcg@5",
+        "run_values": [
+          0.8954996902389009,
+          0.8954996902389009
+        ],
+        "n_per_run": [
+          121,
+          121
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.8954996902389009,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.8557563224975872,
+          "high": 0.9305620262272858,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 121,
+          "n_observations": 242,
+          "small_sample_note": null
+        },
+        "n_clusters": 121,
+        "n_observations": 242
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/precision@5",
+      "run_values": [
+        0.287603305785124,
+        0.287603305785124
+      ],
+      "n_per_run": [
+        121,
+        121
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.287603305785124,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.25950413223140456,
+        "high": 0.31735537190082663,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 121,
+        "n_observations": 242,
+        "small_sample_note": null
+      },
+      "n_clusters": 121,
+      "n_observations": 242,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "all/hybrid_runtime/precision@5",
+          "value": 0.287603305785124,
+          "n": 121
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "all/hybrid_runtime/precision@5",
+          "value": 0.287603305785124,
+          "n": 121
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "all/hybrid_runtime/precision@5",
+        "run_values": [
+          0.33884297520661155,
+          0.33884297520661155
+        ],
+        "n_per_run": [
+          121,
+          121
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.33884297520661155,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.29586776859504105,
+          "high": 0.3851239669421492,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 121,
+          "n_observations": 242,
+          "small_sample_note": null
+        },
+        "n_clusters": 121,
+        "n_observations": 242
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "all/hybrid_runtime/recall@5",
+      "run_values": [
+        0.8049242424242424,
+        0.8049242424242424
+      ],
+      "n_per_run": [
+        121,
+        121
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.8049242424242424,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.7441460055096419,
+        "high": 0.8632920110192837,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 121,
+        "n_observations": 242,
+        "small_sample_note": null
+      },
+      "n_clusters": 121,
+      "n_observations": 242,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "all/hybrid_runtime/recall@5",
+          "value": 0.8049242424242424,
+          "n": 121
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "all/hybrid_runtime/recall@5",
+          "value": 0.8049242424242424,
+          "n": 121
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "all/hybrid_runtime/recall@5",
+        "run_values": [
+          0.8323002754820936,
+          0.8323002754820936
+        ],
+        "n_per_run": [
+          121,
+          121
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.8323002754820936,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.7763429752066116,
+          "high": 0.8861957644628098,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 121,
+          "n_observations": 242,
+          "small_sample_note": null
+        },
+        "n_clusters": 121,
+        "n_observations": 242
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "typo/fuzzy/mrr@5",
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        38,
+        38
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 1.0,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 1.0,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 38,
+        "n_observations": 76,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 38,
+      "n_observations": 76,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "typo/fuzzy/mrr@5",
+          "value": 1.0,
+          "n": 38
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "typo/fuzzy/mrr@5",
+          "value": 1.0,
+          "n": 38
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "typo/fuzzy/mrr@5",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          38,
+          38
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 38,
+          "n_observations": 76,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 38,
+        "n_observations": 76
+      }
+    },
+    {
+      "agent": "retrieval-agent",
+      "metric": "typo/hybrid_runtime/mrr@5",
+      "run_values": [
+        0.9657894736842105,
+        0.9657894736842105
+      ],
+      "n_per_run": [
+        38,
+        38
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.9657894736842105,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.9105263157894735,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 38,
+        "n_observations": 76,
+        "small_sample_note": null
+      },
+      "n_clusters": 38,
+      "n_observations": 76,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "typo/hybrid_runtime/mrr@5",
+          "value": 0.9657894736842105,
+          "n": 38
+        },
+        {
+          "file": "results/retrieval-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "typo/hybrid_runtime/mrr@5",
+          "value": 0.9657894736842105,
+          "n": 38
+        }
+      ],
+      "baseline": {
+        "agent": "retrieval-agent",
+        "metric": "typo/hybrid_runtime/mrr@5",
+        "run_values": [
+          0.9657894736842105,
+          0.9657894736842105
+        ],
+        "n_per_run": [
+          38,
+          38
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.9657894736842105,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.9105263157894735,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 38,
+          "n_observations": 76,
+          "small_sample_note": null
+        },
+        "n_clusters": 38,
+        "n_observations": 76
+      }
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "abstention_recall",
+      "run_values": [
+        1.0
+      ],
+      "n_per_run": [
+        6
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "value": 1.0,
+      "variance_between_runs": null,
+      "standard_deviation_between_runs": null,
+      "absolute_run_difference": null,
+      "metric_metadata_per_run": [
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 1.0,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 6,
+        "n_observations": 6,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 6,
+      "n_observations": 6,
+      "phase": "final",
+      "scope": "single stopped prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "abstention_recall",
+          "value": 1.0,
+          "n": 6
+        }
+      ],
+      "baseline": null,
+      "baseline_comparison": "NOT COMPARABLE: stopped prefix versus full baseline; no matched-subset comparison computed."
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_exact_quote_rate",
+      "run_values": [
+        1.0
+      ],
+      "n_per_run": [
+        36
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "value": 1.0,
+      "variance_between_runs": null,
+      "standard_deviation_between_runs": null,
+      "absolute_run_difference": null,
+      "metric_metadata_per_run": [
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 1.0,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 36,
+        "n_observations": 36,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 36,
+      "n_observations": 36,
+      "phase": "final",
+      "scope": "single stopped prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_exact_quote_rate",
+          "value": 1.0,
+          "n": 36
+        }
+      ],
+      "baseline": null,
+      "baseline_comparison": "NOT COMPARABLE: stopped prefix versus full baseline; no matched-subset comparison computed."
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_f1",
+      "run_values": [
+        0.6307807498983969
+      ],
+      "n_per_run": [
+        37
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "value": 0.6307807498983969,
+      "variance_between_runs": null,
+      "standard_deviation_between_runs": null,
+      "absolute_run_difference": null,
+      "metric_metadata_per_run": [
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.5057725073901544,
+        "high": 0.7545008511184981,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 37,
+        "n_observations": 37,
+        "small_sample_note": null
+      },
+      "n_clusters": 37,
+      "n_observations": 37,
+      "phase": "final",
+      "scope": "single stopped prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_f1",
+          "value": 0.6307807498983969,
+          "n": 37
+        }
+      ],
+      "baseline": null,
+      "baseline_comparison": "NOT COMPARABLE: stopped prefix versus full baseline; no matched-subset comparison computed."
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_page_recall",
+      "run_values": [
+        0.972972972972973
+      ],
+      "n_per_run": [
+        37
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "value": 0.972972972972973,
+      "variance_between_runs": null,
+      "standard_deviation_between_runs": null,
+      "absolute_run_difference": null,
+      "metric_metadata_per_run": [
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.918918918918919,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 37,
+        "n_observations": 37,
+        "small_sample_note": null
+      },
+      "n_clusters": 37,
+      "n_observations": 37,
+      "phase": "final",
+      "scope": "single stopped prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_page_recall",
+          "value": 0.972972972972973,
+          "n": 37
+        }
+      ],
+      "baseline": null,
+      "baseline_comparison": "NOT COMPARABLE: stopped prefix versus full baseline; no matched-subset comparison computed."
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_precision",
+      "run_values": [
+        0.9369369369369369
+      ],
+      "n_per_run": [
+        37
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "value": 0.9369369369369369,
+      "variance_between_runs": null,
+      "standard_deviation_between_runs": null,
+      "absolute_run_difference": null,
+      "metric_metadata_per_run": [
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.867117117117117,
+        "high": 0.9864864864864865,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 37,
+        "n_observations": 37,
+        "small_sample_note": null
+      },
+      "n_clusters": 37,
+      "n_observations": 37,
+      "phase": "final",
+      "scope": "single stopped prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_precision",
+          "value": 0.9369369369369369,
+          "n": 37
+        }
+      ],
+      "baseline": null,
+      "baseline_comparison": "NOT COMPARABLE: stopped prefix versus full baseline; no matched-subset comparison computed."
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "citation_gold_recall",
+      "run_values": [
+        0.5850225225225225
+      ],
+      "n_per_run": [
+        37
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "value": 0.5850225225225225,
+      "variance_between_runs": null,
+      "standard_deviation_between_runs": null,
+      "absolute_run_difference": null,
+      "metric_metadata_per_run": [
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.44648085585585584,
+        "high": 0.722972972972973,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 37,
+        "n_observations": 37,
+        "small_sample_note": null
+      },
+      "n_clusters": 37,
+      "n_observations": 37,
+      "phase": "final",
+      "scope": "single stopped prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "citation_gold_recall",
+          "value": 0.5850225225225225,
+          "n": 37
+        }
+      ],
+      "baseline": null,
+      "baseline_comparison": "NOT COMPARABLE: stopped prefix versus full baseline; no matched-subset comparison computed."
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "false_refusal_rate",
+      "run_values": [
+        0.02702702702702703
+      ],
+      "n_per_run": [
+        37
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "value": 0.02702702702702703,
+      "variance_between_runs": null,
+      "standard_deviation_between_runs": null,
+      "absolute_run_difference": null,
+      "metric_metadata_per_run": [
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.0,
+        "high": 0.08108108108108109,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 37,
+        "n_observations": 37,
+        "small_sample_note": null
+      },
+      "n_clusters": 37,
+      "n_observations": 37,
+      "phase": "final",
+      "scope": "single stopped prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "false_refusal_rate",
+          "value": 0.02702702702702703,
+          "n": 37
+        }
+      ],
+      "baseline": null,
+      "baseline_comparison": "NOT COMPARABLE: stopped prefix versus full baseline; no matched-subset comparison computed."
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "rouge_l",
+      "run_values": [
+        0.18976150365482403
+      ],
+      "n_per_run": [
+        37
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "value": 0.18976150365482403,
+      "variance_between_runs": null,
+      "standard_deviation_between_runs": null,
+      "absolute_run_difference": null,
+      "metric_metadata_per_run": [
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.15578228348771134,
+        "high": 0.22490355553281546,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 37,
+        "n_observations": 37,
+        "small_sample_note": null
+      },
+      "n_clusters": 37,
+      "n_observations": 37,
+      "phase": "final",
+      "scope": "single stopped prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "rouge_l",
+          "value": 0.18976150365482403,
+          "n": 37
+        }
+      ],
+      "baseline": null,
+      "baseline_comparison": "NOT COMPARABLE: stopped prefix versus full baseline; no matched-subset comparison computed."
+    },
+    {
+      "agent": "generation-agent",
+      "metric": "token_f1",
+      "run_values": [
+        0.19331322097985554
+      ],
+      "n_per_run": [
+        37
+      ],
+      "n_runs": 1,
+      "status": "MEASURED",
+      "value": 0.19331322097985554,
+      "variance_between_runs": null,
+      "standard_deviation_between_runs": null,
+      "absolute_run_difference": null,
+      "metric_metadata_per_run": [
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.15878781824198748,
+        "high": 0.22885791402523026,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 37,
+        "n_observations": 37,
+        "small_sample_note": null
+      },
+      "n_clusters": 37,
+      "n_observations": 37,
+      "phase": "final",
+      "scope": "single stopped prefix",
+      "source_refs": [
+        {
+          "file": "results/generation-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "token_f1",
+          "value": 0.19331322097985554,
+          "n": 37
+        }
+      ],
+      "baseline": null,
+      "baseline_comparison": "NOT COMPARABLE: stopped prefix versus full baseline; no matched-subset comparison computed."
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.aggregate_fact_presence",
+      "run_values": [
+        0.6666666666666666,
+        0.6666666666666666
+      ],
+      "n_per_run": [
+        3,
+        3
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.6666666666666666,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {
+          "scope_note": "Whole-boundary fact presence only; not judge correctness. Stateless follow-ups may coincidentally mention expected facts."
+        },
+        {
+          "scope_note": "Whole-boundary fact presence only; not judge correctness. Stateless follow-ups may coincidentally mention expected facts."
+        }
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.0,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 3,
+        "n_observations": 6,
+        "small_sample_note": "Few probes provide weak population evidence."
+      },
+      "n_clusters": 3,
+      "n_observations": 6,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "E.aggregate_fact_presence",
+          "value": 0.6666666666666666,
+          "n": 3
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "E.aggregate_fact_presence",
+          "value": 0.6666666666666666,
+          "n": 3
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "E.aggregate_fact_presence",
+        "run_values": [
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "n_per_run": [
+          3,
+          3
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.3333333333333333,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {
+            "scope_note": "Whole-boundary fact presence only; not judge correctness. Stateless follow-ups may coincidentally mention expected facts."
+          },
+          {
+            "scope_note": "Whole-boundary fact presence only; not judge correctness. Stateless follow-ups may coincidentally mention expected facts."
+          }
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 3,
+          "n_observations": 6,
+          "small_sample_note": "Few probes provide weak population evidence."
+        },
+        "n_clusters": 3,
+        "n_observations": 6
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.container_accuracy",
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        1,
+        1
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 1.0,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 1.0,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 1,
+        "n_observations": 2,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 1,
+      "n_observations": 2,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "E.container_accuracy",
+          "value": 1.0,
+          "n": 1
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "E.container_accuracy",
+          "value": 1.0,
+          "n": 1
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "E.container_accuracy",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          1,
+          1
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 1,
+          "n_observations": 2,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 1,
+        "n_observations": 2
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.document_amount_fact_presence",
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        2,
+        2
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 1.0,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 1.0,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 2,
+        "n_observations": 4,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 2,
+      "n_observations": 4,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "E.document_amount_fact_presence",
+          "value": 1.0,
+          "n": 2
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "E.document_amount_fact_presence",
+          "value": 1.0,
+          "n": 2
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "E.document_amount_fact_presence",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          2,
+          2
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 2,
+          "n_observations": 4,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 2,
+        "n_observations": 4
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.document_date_fact_presence",
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        2,
+        2
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 1.0,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 1.0,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 2,
+        "n_observations": 4,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 2,
+      "n_observations": 4,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "E.document_date_fact_presence",
+          "value": 1.0,
+          "n": 2
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "E.document_date_fact_presence",
+          "value": 1.0,
+          "n": 2
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "E.document_date_fact_presence",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          2,
+          2
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 2,
+          "n_observations": 4,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 2,
+        "n_observations": 4
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.document_identifier_fact_presence",
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        3,
+        3
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 1.0,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 1.0,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 3,
+        "n_observations": 6,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 3,
+      "n_observations": 6,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "E.document_identifier_fact_presence",
+          "value": 1.0,
+          "n": 3
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "E.document_identifier_fact_presence",
+          "value": 1.0,
+          "n": 3
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "E.document_identifier_fact_presence",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          3,
+          3
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 3,
+          "n_observations": 6,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 3,
+        "n_observations": 6
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "E.full_path_accuracy",
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        20,
+        20
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 1.0,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 1.0,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 20,
+        "n_observations": 40,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 20,
+      "n_observations": 40,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "E.full_path_accuracy",
+          "value": 1.0,
+          "n": 20
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "E.full_path_accuracy",
+          "value": 1.0,
+          "n": 20
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "E.full_path_accuracy",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          20,
+          20
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 20,
+          "n_observations": 40,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 20,
+        "n_observations": 40
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.exact_hit_rate",
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        5,
+        5
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 1.0,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 1.0,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 5,
+        "n_observations": 10,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 5,
+      "n_observations": 10,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "H.exact_hit_rate",
+          "value": 1.0,
+          "n": 5
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "H.exact_hit_rate",
+          "value": 1.0,
+          "n": 5
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "H.exact_hit_rate",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          5,
+          5
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 5,
+          "n_observations": 10,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 5,
+        "n_observations": 10
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.move_delete_invalidation",
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        2,
+        2
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 1.0,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 1.0,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 2,
+        "n_observations": 4,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 2,
+      "n_observations": 4,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "H.move_delete_invalidation",
+          "value": 1.0,
+          "n": 2
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "H.move_delete_invalidation",
+          "value": 1.0,
+          "n": 2
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "H.move_delete_invalidation",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          2,
+          2
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 2,
+          "n_observations": 4,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 2,
+        "n_observations": 4
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.near_miss_false_hit_rate",
+      "run_values": [
+        0.0,
+        0.0
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.0,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.0,
+        "high": 0.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 10,
+        "n_observations": 20,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 10,
+      "n_observations": 20,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "H.near_miss_false_hit_rate",
+          "value": 0.0,
+          "n": 10
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "H.near_miss_false_hit_rate",
+          "value": 0.0,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "H.near_miss_false_hit_rate",
+        "run_values": [
+          0.0,
+          0.0
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.0,
+          "high": 0.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.variant_answer_accuracy",
+      "run_values": [
+        1.0,
+        1.0
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 1.0,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 1.0,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 10,
+        "n_observations": 20,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 10,
+      "n_observations": 20,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "H.variant_answer_accuracy",
+          "value": 1.0,
+          "n": 10
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "H.variant_answer_accuracy",
+          "value": 1.0,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "H.variant_answer_accuracy",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.variant_correct_answer_hit_rate",
+      "run_values": [
+        0.8,
+        0.8
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.8,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.5,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 10,
+        "n_observations": 20,
+        "small_sample_note": null
+      },
+      "n_clusters": 10,
+      "n_observations": 20,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "H.variant_correct_answer_hit_rate",
+          "value": 0.8,
+          "n": 10
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "H.variant_correct_answer_hit_rate",
+          "value": 0.8,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "H.variant_correct_answer_hit_rate",
+        "run_values": [
+          0.8,
+          0.8
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.8,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.5,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "homeatlas-agent",
+      "metric": "H.variant_hit_rate",
+      "run_values": [
+        0.8,
+        0.8
+      ],
+      "n_per_run": [
+        10,
+        10
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.8,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {},
+        {}
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.5,
+        "high": 1.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 10,
+        "n_observations": 20,
+        "small_sample_note": null
+      },
+      "n_clusters": 10,
+      "n_observations": 20,
+      "phase": "final",
+      "scope": "paired component runs",
+      "source_refs": [
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "H.variant_hit_rate",
+          "value": 0.8,
+          "n": 10
+        },
+        {
+          "file": "results/homeatlas-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "H.variant_hit_rate",
+          "value": 0.8,
+          "n": 10
+        }
+      ],
+      "baseline": {
+        "agent": "homeatlas-agent",
+        "metric": "H.variant_hit_rate",
+        "run_values": [
+          0.8,
+          0.8
+        ],
+        "n_per_run": [
+          10,
+          10
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 0.8,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {},
+          {}
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 0.5,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 10,
+          "n_observations": 20,
+          "small_sample_note": null
+        },
+        "n_clusters": 10,
+        "n_observations": 20
+      }
+    },
+    {
+      "agent": "security-system-agent",
+      "metric": "sensitive_answer_cache_persistence_rate",
+      "run_values": [
+        0.0,
+        0.0
+      ],
+      "n_per_run": [
+        1,
+        1
+      ],
+      "n_runs": 2,
+      "status": "MEASURED",
+      "value": 0.0,
+      "variance_between_runs": 0.0,
+      "standard_deviation_between_runs": 0.0,
+      "absolute_run_difference": 0.0,
+      "metric_metadata_per_run": [
+        {
+          "target": 0,
+          "direction": "lower_is_better",
+          "interpretation": "Strict zero-sensitive-answer persistence is NOT MET when the synthetic identifier canary is present. Household/user isolation is a separate property. No real personal data read."
+        },
+        {
+          "target": 0,
+          "direction": "lower_is_better",
+          "interpretation": "Strict zero-sensitive-answer persistence is NOT MET when the synthetic identifier canary is present. Household/user isolation is a separate property. No real personal data read."
+        }
+      ],
+      "reason": null,
+      "ci95": {
+        "status": "MEASURED",
+        "low": 0.0,
+        "high": 0.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 1,
+        "n_observations": 2,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "n_clusters": 1,
+      "n_observations": 2,
+      "phase": "final",
+      "scope": "paired live security probes; overall performance group remains incomplete",
+      "source_refs": [
+        {
+          "file": "results/security-system-agent.json",
+          "phase": "final",
+          "run": 1,
+          "metric_id": "sensitive_answer_cache_persistence_rate",
+          "value": 0.0,
+          "n": 1
+        },
+        {
+          "file": "results/security-system-agent.json",
+          "phase": "final",
+          "run": 2,
+          "metric_id": "sensitive_answer_cache_persistence_rate",
+          "value": 0.0,
+          "n": 1
+        }
+      ],
+      "baseline": {
+        "agent": "security-system-agent",
+        "metric": "sensitive_answer_cache_persistence_rate",
+        "run_values": [
+          1.0,
+          1.0
+        ],
+        "n_per_run": [
+          1,
+          1
+        ],
+        "n_runs": 2,
+        "status": "MEASURED",
+        "value": 1.0,
+        "variance_between_runs": 0.0,
+        "standard_deviation_between_runs": 0.0,
+        "absolute_run_difference": 0.0,
+        "metric_metadata_per_run": [
+          {
+            "target": 0,
+            "direction": "lower_is_better",
+            "interpretation": "Strict zero-sensitive-answer persistence is NOT MET when the synthetic identifier canary is present. Household/user isolation is a separate property. No real personal data read."
+          },
+          {
+            "target": 0,
+            "direction": "lower_is_better",
+            "interpretation": "Strict zero-sensitive-answer persistence is NOT MET when the synthetic identifier canary is present. Household/user isolation is a separate property. No real personal data read."
+          }
+        ],
+        "reason": null,
+        "ci95": {
+          "status": "MEASURED",
+          "low": 1.0,
+          "high": 1.0,
+          "level": 0.95,
+          "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+          "estimator": "mean",
+          "draws": 5000,
+          "valid_draws": 5000,
+          "seed": 741,
+          "n_clusters": 1,
+          "n_observations": 2,
+          "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+        },
+        "n_clusters": 1,
+        "n_observations": 2
+      }
+    }
+  ],
+  "paired_retrieval_tests": [
+    {
+      "metric": "all/hybrid_runtime-vs-best-single/precision@5",
+      "subset": "all",
+      "measure": "precision",
+      "k": 5,
+      "n": 121,
+      "n_runs": 2,
+      "hybrid_mean": 0.287603305785124,
+      "best_single": "fuzzy",
+      "best_single_mean": 0.2743801652892562,
+      "difference": 0.01322314049586777,
+      "ci95_difference": {
+        "status": "MEASURED",
+        "low": 0.001652892561983473,
+        "high": 0.02644628099173554,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 121,
+        "n_observations": 121,
+        "small_sample_note": null
+      },
+      "p_value_two_sided": 0.0546875,
+      "test": "Exact paired two-sided sign permutation",
+      "permutations": 256,
+      "seed": 741,
+      "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+      "paired_differences": [
+        {
+          "id": "aggregate-001",
+          "value": 0.0
+        },
+        {
+          "id": "aggregate-002",
+          "value": 0.0
+        },
+        {
+          "id": "aggregate-003",
+          "value": 0.0
+        },
+        {
+          "id": "chart-01",
+          "value": 0.0
+        },
+        {
+          "id": "chart-02",
+          "value": 0.0
+        },
+        {
+          "id": "chart-03",
+          "value": 0.0
+        },
+        {
+          "id": "chart-04",
+          "value": 0.0
+        },
+        {
+          "id": "chart-05",
+          "value": 0.0
+        },
+        {
+          "id": "chart-06",
+          "value": 0.0
+        },
+        {
+          "id": "chart-07",
+          "value": 0.0
+        },
+        {
+          "id": "chart-08",
+          "value": 0.0
+        },
+        {
+          "id": "chart-09",
+          "value": 0.4
+        },
+        {
+          "id": "chart-10",
+          "value": 0.0
+        },
+        {
+          "id": "follow-up-001",
+          "value": 0.0
+        },
+        {
+          "id": "follow-up-002",
+          "value": 0.0
+        },
+        {
+          "id": "follow-up-003",
+          "value": 0.0
+        },
+        {
+          "id": "household-001",
+          "value": 0.0
+        },
+        {
+          "id": "household-002",
+          "value": 0.0
+        },
+        {
+          "id": "household-003",
+          "value": 0.0
+        },
+        {
+          "id": "household-004",
+          "value": 0.0
+        },
+        {
+          "id": "household-005",
+          "value": 0.0
+        },
+        {
+          "id": "household-006",
+          "value": 0.0
+        },
+        {
+          "id": "household-007",
+          "value": 0.0
+        },
+        {
+          "id": "household-008",
+          "value": 0.0
+        },
+        {
+          "id": "household-009",
+          "value": 0.0
+        },
+        {
+          "id": "household-010",
+          "value": 0.0
+        },
+        {
+          "id": "household-011",
+          "value": 0.0
+        },
+        {
+          "id": "household-012",
+          "value": 0.0
+        },
+        {
+          "id": "household-013",
+          "value": 0.0
+        },
+        {
+          "id": "household-014",
+          "value": 0.0
+        },
+        {
+          "id": "household-015",
+          "value": 0.0
+        },
+        {
+          "id": "household-016",
+          "value": 0.0
+        },
+        {
+          "id": "household-017",
+          "value": 0.0
+        },
+        {
+          "id": "household-018",
+          "value": 0.0
+        },
+        {
+          "id": "household-019",
+          "value": 0.0
+        },
+        {
+          "id": "household-020",
+          "value": 0.0
+        },
+        {
+          "id": "household-021",
+          "value": 0.0
+        },
+        {
+          "id": "household-022",
+          "value": 0.0
+        },
+        {
+          "id": "household-023",
+          "value": 0.0
+        },
+        {
+          "id": "household-024",
+          "value": 0.0
+        },
+        {
+          "id": "household-025",
+          "value": 0.0
+        },
+        {
+          "id": "household-026",
+          "value": 0.0
+        },
+        {
+          "id": "household-027",
+          "value": 0.0
+        },
+        {
+          "id": "household-028",
+          "value": 0.0
+        },
+        {
+          "id": "household-029",
+          "value": 0.0
+        },
+        {
+          "id": "household-030",
+          "value": 0.0
+        },
+        {
+          "id": "household-031",
+          "value": 0.0
+        },
+        {
+          "id": "household-032",
+          "value": 0.0
+        },
+        {
+          "id": "household-033",
+          "value": 0.0
+        },
+        {
+          "id": "household-034",
+          "value": 0.0
+        },
+        {
+          "id": "household-035",
+          "value": 0.0
+        },
+        {
+          "id": "household-036",
+          "value": 0.0
+        },
+        {
+          "id": "household-037",
+          "value": 0.0
+        },
+        {
+          "id": "household-038",
+          "value": 0.0
+        },
+        {
+          "id": "household-039",
+          "value": 0.0
+        },
+        {
+          "id": "household-040",
+          "value": 0.0
+        },
+        {
+          "id": "household-041",
+          "value": 0.0
+        },
+        {
+          "id": "household-042",
+          "value": 0.0
+        },
+        {
+          "id": "household-043",
+          "value": 0.0
+        },
+        {
+          "id": "household-044",
+          "value": 0.0
+        },
+        {
+          "id": "household-045",
+          "value": 0.0
+        },
+        {
+          "id": "household-046",
+          "value": 0.0
+        },
+        {
+          "id": "household-047",
+          "value": 0.0
+        },
+        {
+          "id": "household-048",
+          "value": 0.0
+        },
+        {
+          "id": "household-049",
+          "value": 0.0
+        },
+        {
+          "id": "household-050",
+          "value": 0.0
+        },
+        {
+          "id": "household-051",
+          "value": 0.0
+        },
+        {
+          "id": "household-052",
+          "value": 0.0
+        },
+        {
+          "id": "household-053",
+          "value": 0.0
+        },
+        {
+          "id": "household-054",
+          "value": 0.0
+        },
+        {
+          "id": "household-055",
+          "value": 0.0
+        },
+        {
+          "id": "household-056",
+          "value": 0.0
+        },
+        {
+          "id": "household-057",
+          "value": 0.0
+        },
+        {
+          "id": "household-058",
+          "value": 0.0
+        },
+        {
+          "id": "household-059",
+          "value": 0.0
+        },
+        {
+          "id": "household-060",
+          "value": 0.0
+        },
+        {
+          "id": "household-061",
+          "value": 0.0
+        },
+        {
+          "id": "household-062",
+          "value": 0.0
+        },
+        {
+          "id": "household-063",
+          "value": 0.0
+        },
+        {
+          "id": "image-01",
+          "value": 0.19999999999999996
+        },
+        {
+          "id": "image-02",
+          "value": 0.0
+        },
+        {
+          "id": "image-03",
+          "value": 0.0
+        },
+        {
+          "id": "image-04",
+          "value": 0.0
+        },
+        {
+          "id": "image-05",
+          "value": 0.0
+        },
+        {
+          "id": "image-06",
+          "value": 0.0
+        },
+        {
+          "id": "image-07",
+          "value": 0.0
+        },
+        {
+          "id": "image-08",
+          "value": 0.0
+        },
+        {
+          "id": "image-09",
+          "value": 0.4
+        },
+        {
+          "id": "image-10",
+          "value": 0.0
+        },
+        {
+          "id": "location-001",
+          "value": 0.0
+        },
+        {
+          "id": "location-002",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-01",
+          "value": 0.2
+        },
+        {
+          "id": "scanned-02",
+          "value": 0.2
+        },
+        {
+          "id": "scanned-03",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-04",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-05",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-06",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-07",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-08",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-09",
+          "value": 0.20000000000000007
+        },
+        {
+          "id": "scanned-10",
+          "value": -0.19999999999999996
+        },
+        {
+          "id": "table-01",
+          "value": 0.0
+        },
+        {
+          "id": "table-02",
+          "value": 0.0
+        },
+        {
+          "id": "table-03",
+          "value": 0.0
+        },
+        {
+          "id": "table-04",
+          "value": 0.0
+        },
+        {
+          "id": "table-05",
+          "value": 0.0
+        },
+        {
+          "id": "table-06",
+          "value": 0.0
+        },
+        {
+          "id": "table-07",
+          "value": 0.0
+        },
+        {
+          "id": "table-08",
+          "value": 0.0
+        },
+        {
+          "id": "table-09",
+          "value": 0.2
+        },
+        {
+          "id": "table-10",
+          "value": 0.0
+        },
+        {
+          "id": "text-01",
+          "value": 0.0
+        },
+        {
+          "id": "text-02",
+          "value": 0.0
+        },
+        {
+          "id": "text-03",
+          "value": 0.0
+        },
+        {
+          "id": "text-04",
+          "value": 0.0
+        },
+        {
+          "id": "text-05",
+          "value": 0.0
+        },
+        {
+          "id": "text-06",
+          "value": 0.0
+        },
+        {
+          "id": "text-07",
+          "value": 0.0
+        },
+        {
+          "id": "text-08",
+          "value": 0.0
+        },
+        {
+          "id": "text-09",
+          "value": 0.0
+        },
+        {
+          "id": "text-10",
+          "value": 0.0
+        }
+      ],
+      "p_value_holm": 0.3828125,
+      "multiplicity_family_n": 8,
+      "hybrid_significantly_better_at_05": false
+    },
+    {
+      "metric": "all/hybrid_runtime-vs-best-single/recall@5",
+      "subset": "all",
+      "measure": "recall",
+      "k": 5,
+      "n": 121,
+      "n_runs": 2,
+      "hybrid_mean": 0.8049242424242424,
+      "best_single": "fuzzy",
+      "best_single_mean": 0.7951101928374655,
+      "difference": 0.00981404958677686,
+      "ci95_difference": {
+        "status": "MEASURED",
+        "low": 0.0020661157024793385,
+        "high": 0.020833333333333332,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 121,
+        "n_observations": 121,
+        "small_sample_note": null
+      },
+      "p_value_two_sided": 0.015625,
+      "test": "Exact paired two-sided sign permutation",
+      "permutations": 256,
+      "seed": 741,
+      "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+      "paired_differences": [
+        {
+          "id": "aggregate-001",
+          "value": 0.0
+        },
+        {
+          "id": "aggregate-002",
+          "value": 0.0
+        },
+        {
+          "id": "aggregate-003",
+          "value": 0.0
+        },
+        {
+          "id": "chart-01",
+          "value": 0.0
+        },
+        {
+          "id": "chart-02",
+          "value": 0.0
+        },
+        {
+          "id": "chart-03",
+          "value": 0.0
+        },
+        {
+          "id": "chart-04",
+          "value": 0.0
+        },
+        {
+          "id": "chart-05",
+          "value": 0.0
+        },
+        {
+          "id": "chart-06",
+          "value": 0.0
+        },
+        {
+          "id": "chart-07",
+          "value": 0.0
+        },
+        {
+          "id": "chart-08",
+          "value": 0.0
+        },
+        {
+          "id": "chart-09",
+          "value": 0.0625
+        },
+        {
+          "id": "chart-10",
+          "value": 0.0
+        },
+        {
+          "id": "follow-up-001",
+          "value": 0.0
+        },
+        {
+          "id": "follow-up-002",
+          "value": 0.0
+        },
+        {
+          "id": "follow-up-003",
+          "value": 0.0
+        },
+        {
+          "id": "household-001",
+          "value": 0.0
+        },
+        {
+          "id": "household-002",
+          "value": 0.0
+        },
+        {
+          "id": "household-003",
+          "value": 0.0
+        },
+        {
+          "id": "household-004",
+          "value": 0.0
+        },
+        {
+          "id": "household-005",
+          "value": 0.0
+        },
+        {
+          "id": "household-006",
+          "value": 0.0
+        },
+        {
+          "id": "household-007",
+          "value": 0.0
+        },
+        {
+          "id": "household-008",
+          "value": 0.0
+        },
+        {
+          "id": "household-009",
+          "value": 0.0
+        },
+        {
+          "id": "household-010",
+          "value": 0.0
+        },
+        {
+          "id": "household-011",
+          "value": 0.0
+        },
+        {
+          "id": "household-012",
+          "value": 0.0
+        },
+        {
+          "id": "household-013",
+          "value": 0.0
+        },
+        {
+          "id": "household-014",
+          "value": 0.0
+        },
+        {
+          "id": "household-015",
+          "value": 0.0
+        },
+        {
+          "id": "household-016",
+          "value": 0.0
+        },
+        {
+          "id": "household-017",
+          "value": 0.0
+        },
+        {
+          "id": "household-018",
+          "value": 0.0
+        },
+        {
+          "id": "household-019",
+          "value": 0.0
+        },
+        {
+          "id": "household-020",
+          "value": 0.0
+        },
+        {
+          "id": "household-021",
+          "value": 0.0
+        },
+        {
+          "id": "household-022",
+          "value": 0.0
+        },
+        {
+          "id": "household-023",
+          "value": 0.0
+        },
+        {
+          "id": "household-024",
+          "value": 0.0
+        },
+        {
+          "id": "household-025",
+          "value": 0.0
+        },
+        {
+          "id": "household-026",
+          "value": 0.0
+        },
+        {
+          "id": "household-027",
+          "value": 0.0
+        },
+        {
+          "id": "household-028",
+          "value": 0.0
+        },
+        {
+          "id": "household-029",
+          "value": 0.0
+        },
+        {
+          "id": "household-030",
+          "value": 0.0
+        },
+        {
+          "id": "household-031",
+          "value": 0.0
+        },
+        {
+          "id": "household-032",
+          "value": 0.0
+        },
+        {
+          "id": "household-033",
+          "value": 0.0
+        },
+        {
+          "id": "household-034",
+          "value": 0.0
+        },
+        {
+          "id": "household-035",
+          "value": 0.0
+        },
+        {
+          "id": "household-036",
+          "value": 0.0
+        },
+        {
+          "id": "household-037",
+          "value": 0.0
+        },
+        {
+          "id": "household-038",
+          "value": 0.0
+        },
+        {
+          "id": "household-039",
+          "value": 0.0
+        },
+        {
+          "id": "household-040",
+          "value": 0.0
+        },
+        {
+          "id": "household-041",
+          "value": 0.0
+        },
+        {
+          "id": "household-042",
+          "value": 0.0
+        },
+        {
+          "id": "household-043",
+          "value": 0.0
+        },
+        {
+          "id": "household-044",
+          "value": 0.0
+        },
+        {
+          "id": "household-045",
+          "value": 0.0
+        },
+        {
+          "id": "household-046",
+          "value": 0.0
+        },
+        {
+          "id": "household-047",
+          "value": 0.0
+        },
+        {
+          "id": "household-048",
+          "value": 0.0
+        },
+        {
+          "id": "household-049",
+          "value": 0.0
+        },
+        {
+          "id": "household-050",
+          "value": 0.0
+        },
+        {
+          "id": "household-051",
+          "value": 0.0
+        },
+        {
+          "id": "household-052",
+          "value": 0.0
+        },
+        {
+          "id": "household-053",
+          "value": 0.0
+        },
+        {
+          "id": "household-054",
+          "value": 0.0
+        },
+        {
+          "id": "household-055",
+          "value": 0.0
+        },
+        {
+          "id": "household-056",
+          "value": 0.0
+        },
+        {
+          "id": "household-057",
+          "value": 0.0
+        },
+        {
+          "id": "household-058",
+          "value": 0.0
+        },
+        {
+          "id": "household-059",
+          "value": 0.0
+        },
+        {
+          "id": "household-060",
+          "value": 0.0
+        },
+        {
+          "id": "household-061",
+          "value": 0.0
+        },
+        {
+          "id": "household-062",
+          "value": 0.0
+        },
+        {
+          "id": "household-063",
+          "value": 0.0
+        },
+        {
+          "id": "image-01",
+          "value": 0.125
+        },
+        {
+          "id": "image-02",
+          "value": 0.0
+        },
+        {
+          "id": "image-03",
+          "value": 0.0
+        },
+        {
+          "id": "image-04",
+          "value": 0.0
+        },
+        {
+          "id": "image-05",
+          "value": 0.0
+        },
+        {
+          "id": "image-06",
+          "value": 0.0
+        },
+        {
+          "id": "image-07",
+          "value": 0.0
+        },
+        {
+          "id": "image-08",
+          "value": 0.0
+        },
+        {
+          "id": "image-09",
+          "value": 0.125
+        },
+        {
+          "id": "image-10",
+          "value": 0.0
+        },
+        {
+          "id": "location-001",
+          "value": 0.0
+        },
+        {
+          "id": "location-002",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-01",
+          "value": 0.16666666666666666
+        },
+        {
+          "id": "scanned-02",
+          "value": 0.16666666666666666
+        },
+        {
+          "id": "scanned-03",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-04",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-05",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-06",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-07",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-08",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-09",
+          "value": 0.08333333333333331
+        },
+        {
+          "id": "scanned-10",
+          "value": -0.041666666666666685
+        },
+        {
+          "id": "table-01",
+          "value": 0.0
+        },
+        {
+          "id": "table-02",
+          "value": 0.0
+        },
+        {
+          "id": "table-03",
+          "value": 0.0
+        },
+        {
+          "id": "table-04",
+          "value": 0.0
+        },
+        {
+          "id": "table-05",
+          "value": 0.0
+        },
+        {
+          "id": "table-06",
+          "value": 0.0
+        },
+        {
+          "id": "table-07",
+          "value": 0.0
+        },
+        {
+          "id": "table-08",
+          "value": 0.0
+        },
+        {
+          "id": "table-09",
+          "value": 0.5
+        },
+        {
+          "id": "table-10",
+          "value": 0.0
+        },
+        {
+          "id": "text-01",
+          "value": 0.0
+        },
+        {
+          "id": "text-02",
+          "value": 0.0
+        },
+        {
+          "id": "text-03",
+          "value": 0.0
+        },
+        {
+          "id": "text-04",
+          "value": 0.0
+        },
+        {
+          "id": "text-05",
+          "value": 0.0
+        },
+        {
+          "id": "text-06",
+          "value": 0.0
+        },
+        {
+          "id": "text-07",
+          "value": 0.0
+        },
+        {
+          "id": "text-08",
+          "value": 0.0
+        },
+        {
+          "id": "text-09",
+          "value": 0.0
+        },
+        {
+          "id": "text-10",
+          "value": 0.0
+        }
+      ],
+      "p_value_holm": 0.125,
+      "multiplicity_family_n": 8,
+      "hybrid_significantly_better_at_05": false
+    },
+    {
+      "metric": "all/hybrid_runtime-vs-best-single/mrr@5",
+      "subset": "all",
+      "measure": "mrr",
+      "k": 5,
+      "n": 121,
+      "n_runs": 2,
+      "hybrid_mean": 0.9201101928374655,
+      "best_single": "fuzzy",
+      "best_single_mean": 0.9256198347107438,
+      "difference": -0.00550964187327824,
+      "ci95_difference": {
+        "status": "MEASURED",
+        "low": -0.049869146005509644,
+        "high": 0.03636363636363637,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 121,
+        "n_observations": 121,
+        "small_sample_note": null
+      },
+      "p_value_two_sided": 0.8092041015625,
+      "test": "Exact paired two-sided sign permutation",
+      "permutations": 16384,
+      "seed": 741,
+      "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+      "paired_differences": [
+        {
+          "id": "aggregate-001",
+          "value": 0.0
+        },
+        {
+          "id": "aggregate-002",
+          "value": 0.0
+        },
+        {
+          "id": "aggregate-003",
+          "value": 0.0
+        },
+        {
+          "id": "chart-01",
+          "value": 0.0
+        },
+        {
+          "id": "chart-02",
+          "value": 0.0
+        },
+        {
+          "id": "chart-03",
+          "value": 0.0
+        },
+        {
+          "id": "chart-04",
+          "value": 0.0
+        },
+        {
+          "id": "chart-05",
+          "value": 0.0
+        },
+        {
+          "id": "chart-06",
+          "value": 0.0
+        },
+        {
+          "id": "chart-07",
+          "value": 0.0
+        },
+        {
+          "id": "chart-08",
+          "value": 0.0
+        },
+        {
+          "id": "chart-09",
+          "value": 0.5
+        },
+        {
+          "id": "chart-10",
+          "value": 0.0
+        },
+        {
+          "id": "follow-up-001",
+          "value": -0.8
+        },
+        {
+          "id": "follow-up-002",
+          "value": 0.0
+        },
+        {
+          "id": "follow-up-003",
+          "value": 0.0
+        },
+        {
+          "id": "household-001",
+          "value": 0.0
+        },
+        {
+          "id": "household-002",
+          "value": 0.0
+        },
+        {
+          "id": "household-003",
+          "value": 0.0
+        },
+        {
+          "id": "household-004",
+          "value": 0.0
+        },
+        {
+          "id": "household-005",
+          "value": 0.0
+        },
+        {
+          "id": "household-006",
+          "value": 0.0
+        },
+        {
+          "id": "household-007",
+          "value": 0.0
+        },
+        {
+          "id": "household-008",
+          "value": 0.0
+        },
+        {
+          "id": "household-009",
+          "value": -0.5
+        },
+        {
+          "id": "household-010",
+          "value": 0.0
+        },
+        {
+          "id": "household-011",
+          "value": 0.0
+        },
+        {
+          "id": "household-012",
+          "value": 0.0
+        },
+        {
+          "id": "household-013",
+          "value": 0.0
+        },
+        {
+          "id": "household-014",
+          "value": 0.0
+        },
+        {
+          "id": "household-015",
+          "value": 0.0
+        },
+        {
+          "id": "household-016",
+          "value": 0.0
+        },
+        {
+          "id": "household-017",
+          "value": 0.0
+        },
+        {
+          "id": "household-018",
+          "value": 0.0
+        },
+        {
+          "id": "household-019",
+          "value": 0.0
+        },
+        {
+          "id": "household-020",
+          "value": 0.0
+        },
+        {
+          "id": "household-021",
+          "value": 0.0
+        },
+        {
+          "id": "household-022",
+          "value": 0.0
+        },
+        {
+          "id": "household-023",
+          "value": 0.0
+        },
+        {
+          "id": "household-024",
+          "value": 0.0
+        },
+        {
+          "id": "household-025",
+          "value": 0.0
+        },
+        {
+          "id": "household-026",
+          "value": -0.8
+        },
+        {
+          "id": "household-027",
+          "value": 0.0
+        },
+        {
+          "id": "household-028",
+          "value": 0.0
+        },
+        {
+          "id": "household-029",
+          "value": 0.0
+        },
+        {
+          "id": "household-030",
+          "value": 0.0
+        },
+        {
+          "id": "household-031",
+          "value": 0.0
+        },
+        {
+          "id": "household-032",
+          "value": 0.0
+        },
+        {
+          "id": "household-033",
+          "value": 0.0
+        },
+        {
+          "id": "household-034",
+          "value": 0.0
+        },
+        {
+          "id": "household-035",
+          "value": 0.0
+        },
+        {
+          "id": "household-036",
+          "value": 0.0
+        },
+        {
+          "id": "household-037",
+          "value": 0.0
+        },
+        {
+          "id": "household-038",
+          "value": 0.0
+        },
+        {
+          "id": "household-039",
+          "value": 0.0
+        },
+        {
+          "id": "household-040",
+          "value": 0.0
+        },
+        {
+          "id": "household-041",
+          "value": 0.0
+        },
+        {
+          "id": "household-042",
+          "value": 0.0
+        },
+        {
+          "id": "household-043",
+          "value": 0.0
+        },
+        {
+          "id": "household-044",
+          "value": -0.8
+        },
+        {
+          "id": "household-045",
+          "value": -0.6666666666666667
+        },
+        {
+          "id": "household-046",
+          "value": 0.0
+        },
+        {
+          "id": "household-047",
+          "value": 0.0
+        },
+        {
+          "id": "household-048",
+          "value": 0.0
+        },
+        {
+          "id": "household-049",
+          "value": 0.0
+        },
+        {
+          "id": "household-050",
+          "value": 0.0
+        },
+        {
+          "id": "household-051",
+          "value": 0.0
+        },
+        {
+          "id": "household-052",
+          "value": 0.0
+        },
+        {
+          "id": "household-053",
+          "value": 0.0
+        },
+        {
+          "id": "household-054",
+          "value": -0.8
+        },
+        {
+          "id": "household-055",
+          "value": 0.0
+        },
+        {
+          "id": "household-056",
+          "value": -0.8
+        },
+        {
+          "id": "household-057",
+          "value": 0.0
+        },
+        {
+          "id": "household-058",
+          "value": 0.0
+        },
+        {
+          "id": "household-059",
+          "value": 0.0
+        },
+        {
+          "id": "household-060",
+          "value": 0.0
+        },
+        {
+          "id": "household-061",
+          "value": 0.0
+        },
+        {
+          "id": "household-062",
+          "value": 0.0
+        },
+        {
+          "id": "household-063",
+          "value": 0.0
+        },
+        {
+          "id": "image-01",
+          "value": 0.0
+        },
+        {
+          "id": "image-02",
+          "value": 0.0
+        },
+        {
+          "id": "image-03",
+          "value": 0.0
+        },
+        {
+          "id": "image-04",
+          "value": 0.0
+        },
+        {
+          "id": "image-05",
+          "value": 0.0
+        },
+        {
+          "id": "image-06",
+          "value": 0.0
+        },
+        {
+          "id": "image-07",
+          "value": 0.5
+        },
+        {
+          "id": "image-08",
+          "value": 0.0
+        },
+        {
+          "id": "image-09",
+          "value": 0.5
+        },
+        {
+          "id": "image-10",
+          "value": 0.0
+        },
+        {
+          "id": "location-001",
+          "value": 0.0
+        },
+        {
+          "id": "location-002",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-01",
+          "value": 1.0
+        },
+        {
+          "id": "scanned-02",
+          "value": 1.0
+        },
+        {
+          "id": "scanned-03",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-04",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-05",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-06",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-07",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-08",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-09",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-10",
+          "value": 0.0
+        },
+        {
+          "id": "table-01",
+          "value": 0.0
+        },
+        {
+          "id": "table-02",
+          "value": 0.0
+        },
+        {
+          "id": "table-03",
+          "value": 0.0
+        },
+        {
+          "id": "table-04",
+          "value": 0.0
+        },
+        {
+          "id": "table-05",
+          "value": 0.0
+        },
+        {
+          "id": "table-06",
+          "value": 0.0
+        },
+        {
+          "id": "table-07",
+          "value": 0.5
+        },
+        {
+          "id": "table-08",
+          "value": 0.5
+        },
+        {
+          "id": "table-09",
+          "value": 0.0
+        },
+        {
+          "id": "table-10",
+          "value": 0.0
+        },
+        {
+          "id": "text-01",
+          "value": 0.0
+        },
+        {
+          "id": "text-02",
+          "value": 0.0
+        },
+        {
+          "id": "text-03",
+          "value": 0.0
+        },
+        {
+          "id": "text-04",
+          "value": 0.0
+        },
+        {
+          "id": "text-05",
+          "value": 0.0
+        },
+        {
+          "id": "text-06",
+          "value": 0.0
+        },
+        {
+          "id": "text-07",
+          "value": 0.0
+        },
+        {
+          "id": "text-08",
+          "value": 0.0
+        },
+        {
+          "id": "text-09",
+          "value": 0.0
+        },
+        {
+          "id": "text-10",
+          "value": 0.0
+        }
+      ],
+      "p_value_holm": 1.0,
+      "multiplicity_family_n": 8,
+      "hybrid_significantly_better_at_05": false
+    },
+    {
+      "metric": "all/hybrid_runtime-vs-best-single/ndcg@5",
+      "subset": "all",
+      "measure": "ndcg",
+      "k": 5,
+      "n": 121,
+      "n_runs": 2,
+      "hybrid_mean": 0.8550134027679013,
+      "best_single": "fuzzy",
+      "best_single_mean": 0.8648528926782458,
+      "difference": -0.009839489910344506,
+      "ci95_difference": {
+        "status": "MEASURED",
+        "low": -0.04090891862220728,
+        "high": 0.018712417161542032,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 121,
+        "n_observations": 121,
+        "small_sample_note": null
+      },
+      "p_value_two_sided": 0.52072396380181,
+      "test": "Monte Carlo paired two-sided sign permutation; plus-one correction",
+      "permutations": 20000,
+      "seed": 741,
+      "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+      "paired_differences": [
+        {
+          "id": "aggregate-001",
+          "value": 0.0
+        },
+        {
+          "id": "aggregate-002",
+          "value": 0.0
+        },
+        {
+          "id": "aggregate-003",
+          "value": 0.0
+        },
+        {
+          "id": "chart-01",
+          "value": 0.0
+        },
+        {
+          "id": "chart-02",
+          "value": 0.0
+        },
+        {
+          "id": "chart-03",
+          "value": 0.0
+        },
+        {
+          "id": "chart-04",
+          "value": 0.0
+        },
+        {
+          "id": "chart-05",
+          "value": 0.0
+        },
+        {
+          "id": "chart-06",
+          "value": 0.0
+        },
+        {
+          "id": "chart-07",
+          "value": 0.0
+        },
+        {
+          "id": "chart-08",
+          "value": 0.0
+        },
+        {
+          "id": "chart-09",
+          "value": 0.38356636737133565
+        },
+        {
+          "id": "chart-10",
+          "value": 0.0
+        },
+        {
+          "id": "follow-up-001",
+          "value": -0.6131471927654584
+        },
+        {
+          "id": "follow-up-002",
+          "value": 0.0
+        },
+        {
+          "id": "follow-up-003",
+          "value": 0.0
+        },
+        {
+          "id": "household-001",
+          "value": 0.0
+        },
+        {
+          "id": "household-002",
+          "value": 0.0
+        },
+        {
+          "id": "household-003",
+          "value": 0.0
+        },
+        {
+          "id": "household-004",
+          "value": 0.0
+        },
+        {
+          "id": "household-005",
+          "value": 0.0
+        },
+        {
+          "id": "household-006",
+          "value": 0.0
+        },
+        {
+          "id": "household-007",
+          "value": 0.0
+        },
+        {
+          "id": "household-008",
+          "value": 0.0
+        },
+        {
+          "id": "household-009",
+          "value": -0.36907024642854247
+        },
+        {
+          "id": "household-010",
+          "value": 0.0
+        },
+        {
+          "id": "household-011",
+          "value": 0.0
+        },
+        {
+          "id": "household-012",
+          "value": 0.0
+        },
+        {
+          "id": "household-013",
+          "value": 0.0
+        },
+        {
+          "id": "household-014",
+          "value": 0.0
+        },
+        {
+          "id": "household-015",
+          "value": 0.0
+        },
+        {
+          "id": "household-016",
+          "value": 0.0
+        },
+        {
+          "id": "household-017",
+          "value": 0.0
+        },
+        {
+          "id": "household-018",
+          "value": 0.0
+        },
+        {
+          "id": "household-019",
+          "value": 0.0
+        },
+        {
+          "id": "household-020",
+          "value": 0.0
+        },
+        {
+          "id": "household-021",
+          "value": 0.0
+        },
+        {
+          "id": "household-022",
+          "value": 0.0
+        },
+        {
+          "id": "household-023",
+          "value": 0.0
+        },
+        {
+          "id": "household-024",
+          "value": 0.0
+        },
+        {
+          "id": "household-025",
+          "value": 0.0
+        },
+        {
+          "id": "household-026",
+          "value": -0.6131471927654584
+        },
+        {
+          "id": "household-027",
+          "value": 0.0
+        },
+        {
+          "id": "household-028",
+          "value": 0.0
+        },
+        {
+          "id": "household-029",
+          "value": 0.0
+        },
+        {
+          "id": "household-030",
+          "value": 0.0
+        },
+        {
+          "id": "household-031",
+          "value": 0.0
+        },
+        {
+          "id": "household-032",
+          "value": 0.0
+        },
+        {
+          "id": "household-033",
+          "value": 0.0
+        },
+        {
+          "id": "household-034",
+          "value": 0.0
+        },
+        {
+          "id": "household-035",
+          "value": 0.0
+        },
+        {
+          "id": "household-036",
+          "value": 0.0
+        },
+        {
+          "id": "household-037",
+          "value": 0.0
+        },
+        {
+          "id": "household-038",
+          "value": 0.0
+        },
+        {
+          "id": "household-039",
+          "value": 0.0
+        },
+        {
+          "id": "household-040",
+          "value": 0.0
+        },
+        {
+          "id": "household-041",
+          "value": 0.0
+        },
+        {
+          "id": "household-042",
+          "value": 0.0
+        },
+        {
+          "id": "household-043",
+          "value": 0.0
+        },
+        {
+          "id": "household-044",
+          "value": -0.6131471927654584
+        },
+        {
+          "id": "household-045",
+          "value": -0.5
+        },
+        {
+          "id": "household-046",
+          "value": 0.0
+        },
+        {
+          "id": "household-047",
+          "value": 0.0
+        },
+        {
+          "id": "household-048",
+          "value": 0.0
+        },
+        {
+          "id": "household-049",
+          "value": 0.0
+        },
+        {
+          "id": "household-050",
+          "value": 0.0
+        },
+        {
+          "id": "household-051",
+          "value": 0.0
+        },
+        {
+          "id": "household-052",
+          "value": 0.0
+        },
+        {
+          "id": "household-053",
+          "value": 0.0
+        },
+        {
+          "id": "household-054",
+          "value": -0.6131471927654584
+        },
+        {
+          "id": "household-055",
+          "value": 0.0
+        },
+        {
+          "id": "household-056",
+          "value": -0.6131471927654584
+        },
+        {
+          "id": "household-057",
+          "value": 0.0
+        },
+        {
+          "id": "household-058",
+          "value": 0.0
+        },
+        {
+          "id": "household-059",
+          "value": 0.0
+        },
+        {
+          "id": "household-060",
+          "value": 0.0
+        },
+        {
+          "id": "household-061",
+          "value": 0.0
+        },
+        {
+          "id": "household-062",
+          "value": 0.0
+        },
+        {
+          "id": "household-063",
+          "value": 0.0
+        },
+        {
+          "id": "image-01",
+          "value": 0.14606834984270645
+        },
+        {
+          "id": "image-02",
+          "value": 0.0
+        },
+        {
+          "id": "image-03",
+          "value": -0.044406162097719526
+        },
+        {
+          "id": "image-04",
+          "value": -0.02351175279410156
+        },
+        {
+          "id": "image-05",
+          "value": 0.0
+        },
+        {
+          "id": "image-06",
+          "value": 0.0
+        },
+        {
+          "id": "image-07",
+          "value": 0.12517394053908848
+        },
+        {
+          "id": "image-08",
+          "value": 0.0
+        },
+        {
+          "id": "image-09",
+          "value": 0.38356636737133565
+        },
+        {
+          "id": "image-10",
+          "value": -0.044406162097719526
+        },
+        {
+          "id": "location-001",
+          "value": 0.0
+        },
+        {
+          "id": "location-002",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-01",
+          "value": 0.3391602052736161
+        },
+        {
+          "id": "scanned-02",
+          "value": 0.3391602052736161
+        },
+        {
+          "id": "scanned-03",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-04",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-05",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-06",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-07",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-08",
+          "value": 0.0
+        },
+        {
+          "id": "scanned-09",
+          "value": 0.14606834984270634
+        },
+        {
+          "id": "scanned-10",
+          "value": -0.13120507751234178
+        },
+        {
+          "id": "table-01",
+          "value": 0.0
+        },
+        {
+          "id": "table-02",
+          "value": 0.0
+        },
+        {
+          "id": "table-03",
+          "value": 0.0
+        },
+        {
+          "id": "table-04",
+          "value": 0.0
+        },
+        {
+          "id": "table-05",
+          "value": 0.0
+        },
+        {
+          "id": "table-06",
+          "value": 0.0
+        },
+        {
+          "id": "table-07",
+          "value": 0.36907024642854247
+        },
+        {
+          "id": "table-08",
+          "value": 0.36907024642854247
+        },
+        {
+          "id": "table-09",
+          "value": 0.38685280723454163
+        },
+        {
+          "id": "table-10",
+          "value": 0.0
+        },
+        {
+          "id": "text-01",
+          "value": 0.0
+        },
+        {
+          "id": "text-02",
+          "value": 0.0
+        },
+        {
+          "id": "text-03",
+          "value": 0.0
+        },
+        {
+          "id": "text-04",
+          "value": 0.0
+        },
+        {
+          "id": "text-05",
+          "value": 0.0
+        },
+        {
+          "id": "text-06",
+          "value": 0.0
+        },
+        {
+          "id": "text-07",
+          "value": 0.0
+        },
+        {
+          "id": "text-08",
+          "value": 0.0
+        },
+        {
+          "id": "text-09",
+          "value": 0.0
+        },
+        {
+          "id": "text-10",
+          "value": 0.0
+        }
+      ],
+      "p_value_holm": 1.0,
+      "multiplicity_family_n": 8,
+      "hybrid_significantly_better_at_05": false
+    },
+    {
+      "metric": "typo/hybrid_runtime-vs-best-single/precision@5",
+      "subset": "typo",
+      "measure": "precision",
+      "k": 5,
+      "n": 38,
+      "n_runs": 2,
+      "hybrid_mean": 0.2,
+      "best_single": "fuzzy",
+      "best_single_mean": 0.2,
+      "difference": 0.0,
+      "ci95_difference": {
+        "status": "MEASURED",
+        "low": 0.0,
+        "high": 0.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 38,
+        "n_observations": 38,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "p_value_two_sided": 1.0,
+      "test": "Exact paired sign permutation (all differences zero)",
+      "permutations": 1,
+      "seed": 741,
+      "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+      "paired_differences": [
+        {
+          "id": "household-001",
+          "value": 0.0
+        },
+        {
+          "id": "household-002",
+          "value": 0.0
+        },
+        {
+          "id": "household-003",
+          "value": 0.0
+        },
+        {
+          "id": "household-004",
+          "value": 0.0
+        },
+        {
+          "id": "household-005",
+          "value": 0.0
+        },
+        {
+          "id": "household-006",
+          "value": 0.0
+        },
+        {
+          "id": "household-007",
+          "value": 0.0
+        },
+        {
+          "id": "household-008",
+          "value": 0.0
+        },
+        {
+          "id": "household-009",
+          "value": 0.0
+        },
+        {
+          "id": "household-010",
+          "value": 0.0
+        },
+        {
+          "id": "household-011",
+          "value": 0.0
+        },
+        {
+          "id": "household-012",
+          "value": 0.0
+        },
+        {
+          "id": "household-013",
+          "value": 0.0
+        },
+        {
+          "id": "household-014",
+          "value": 0.0
+        },
+        {
+          "id": "household-015",
+          "value": 0.0
+        },
+        {
+          "id": "household-016",
+          "value": 0.0
+        },
+        {
+          "id": "household-017",
+          "value": 0.0
+        },
+        {
+          "id": "household-018",
+          "value": 0.0
+        },
+        {
+          "id": "household-019",
+          "value": 0.0
+        },
+        {
+          "id": "household-020",
+          "value": 0.0
+        },
+        {
+          "id": "household-021",
+          "value": 0.0
+        },
+        {
+          "id": "household-022",
+          "value": 0.0
+        },
+        {
+          "id": "household-023",
+          "value": 0.0
+        },
+        {
+          "id": "household-024",
+          "value": 0.0
+        },
+        {
+          "id": "household-025",
+          "value": 0.0
+        },
+        {
+          "id": "household-026",
+          "value": 0.0
+        },
+        {
+          "id": "household-027",
+          "value": 0.0
+        },
+        {
+          "id": "household-028",
+          "value": 0.0
+        },
+        {
+          "id": "household-029",
+          "value": 0.0
+        },
+        {
+          "id": "household-030",
+          "value": 0.0
+        },
+        {
+          "id": "household-031",
+          "value": 0.0
+        },
+        {
+          "id": "household-032",
+          "value": 0.0
+        },
+        {
+          "id": "household-033",
+          "value": 0.0
+        },
+        {
+          "id": "household-034",
+          "value": 0.0
+        },
+        {
+          "id": "household-035",
+          "value": 0.0
+        },
+        {
+          "id": "household-036",
+          "value": 0.0
+        },
+        {
+          "id": "household-037",
+          "value": 0.0
+        },
+        {
+          "id": "household-038",
+          "value": 0.0
+        }
+      ],
+      "p_value_holm": 1.0,
+      "multiplicity_family_n": 8,
+      "hybrid_significantly_better_at_05": false
+    },
+    {
+      "metric": "typo/hybrid_runtime-vs-best-single/recall@5",
+      "subset": "typo",
+      "measure": "recall",
+      "k": 5,
+      "n": 38,
+      "n_runs": 2,
+      "hybrid_mean": 1.0,
+      "best_single": "fuzzy",
+      "best_single_mean": 1.0,
+      "difference": 0.0,
+      "ci95_difference": {
+        "status": "MEASURED",
+        "low": 0.0,
+        "high": 0.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 38,
+        "n_observations": 38,
+        "small_sample_note": "A degenerate empirical bootstrap interval does not establish a population guarantee, including when no failures were observed."
+      },
+      "p_value_two_sided": 1.0,
+      "test": "Exact paired sign permutation (all differences zero)",
+      "permutations": 1,
+      "seed": 741,
+      "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+      "paired_differences": [
+        {
+          "id": "household-001",
+          "value": 0.0
+        },
+        {
+          "id": "household-002",
+          "value": 0.0
+        },
+        {
+          "id": "household-003",
+          "value": 0.0
+        },
+        {
+          "id": "household-004",
+          "value": 0.0
+        },
+        {
+          "id": "household-005",
+          "value": 0.0
+        },
+        {
+          "id": "household-006",
+          "value": 0.0
+        },
+        {
+          "id": "household-007",
+          "value": 0.0
+        },
+        {
+          "id": "household-008",
+          "value": 0.0
+        },
+        {
+          "id": "household-009",
+          "value": 0.0
+        },
+        {
+          "id": "household-010",
+          "value": 0.0
+        },
+        {
+          "id": "household-011",
+          "value": 0.0
+        },
+        {
+          "id": "household-012",
+          "value": 0.0
+        },
+        {
+          "id": "household-013",
+          "value": 0.0
+        },
+        {
+          "id": "household-014",
+          "value": 0.0
+        },
+        {
+          "id": "household-015",
+          "value": 0.0
+        },
+        {
+          "id": "household-016",
+          "value": 0.0
+        },
+        {
+          "id": "household-017",
+          "value": 0.0
+        },
+        {
+          "id": "household-018",
+          "value": 0.0
+        },
+        {
+          "id": "household-019",
+          "value": 0.0
+        },
+        {
+          "id": "household-020",
+          "value": 0.0
+        },
+        {
+          "id": "household-021",
+          "value": 0.0
+        },
+        {
+          "id": "household-022",
+          "value": 0.0
+        },
+        {
+          "id": "household-023",
+          "value": 0.0
+        },
+        {
+          "id": "household-024",
+          "value": 0.0
+        },
+        {
+          "id": "household-025",
+          "value": 0.0
+        },
+        {
+          "id": "household-026",
+          "value": 0.0
+        },
+        {
+          "id": "household-027",
+          "value": 0.0
+        },
+        {
+          "id": "household-028",
+          "value": 0.0
+        },
+        {
+          "id": "household-029",
+          "value": 0.0
+        },
+        {
+          "id": "household-030",
+          "value": 0.0
+        },
+        {
+          "id": "household-031",
+          "value": 0.0
+        },
+        {
+          "id": "household-032",
+          "value": 0.0
+        },
+        {
+          "id": "household-033",
+          "value": 0.0
+        },
+        {
+          "id": "household-034",
+          "value": 0.0
+        },
+        {
+          "id": "household-035",
+          "value": 0.0
+        },
+        {
+          "id": "household-036",
+          "value": 0.0
+        },
+        {
+          "id": "household-037",
+          "value": 0.0
+        },
+        {
+          "id": "household-038",
+          "value": 0.0
+        }
+      ],
+      "p_value_holm": 1.0,
+      "multiplicity_family_n": 8,
+      "hybrid_significantly_better_at_05": false
+    },
+    {
+      "metric": "typo/hybrid_runtime-vs-best-single/mrr@5",
+      "subset": "typo",
+      "measure": "mrr",
+      "k": 5,
+      "n": 38,
+      "n_runs": 2,
+      "hybrid_mean": 0.9657894736842105,
+      "best_single": "fuzzy",
+      "best_single_mean": 1.0,
+      "difference": -0.034210526315789476,
+      "ci95_difference": {
+        "status": "MEASURED",
+        "low": -0.08947368421052633,
+        "high": 0.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 38,
+        "n_observations": 38,
+        "small_sample_note": null
+      },
+      "p_value_two_sided": 0.5,
+      "test": "Exact paired two-sided sign permutation",
+      "permutations": 4,
+      "seed": 741,
+      "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+      "paired_differences": [
+        {
+          "id": "household-001",
+          "value": 0.0
+        },
+        {
+          "id": "household-002",
+          "value": 0.0
+        },
+        {
+          "id": "household-003",
+          "value": 0.0
+        },
+        {
+          "id": "household-004",
+          "value": 0.0
+        },
+        {
+          "id": "household-005",
+          "value": 0.0
+        },
+        {
+          "id": "household-006",
+          "value": 0.0
+        },
+        {
+          "id": "household-007",
+          "value": 0.0
+        },
+        {
+          "id": "household-008",
+          "value": 0.0
+        },
+        {
+          "id": "household-009",
+          "value": -0.5
+        },
+        {
+          "id": "household-010",
+          "value": 0.0
+        },
+        {
+          "id": "household-011",
+          "value": 0.0
+        },
+        {
+          "id": "household-012",
+          "value": 0.0
+        },
+        {
+          "id": "household-013",
+          "value": 0.0
+        },
+        {
+          "id": "household-014",
+          "value": 0.0
+        },
+        {
+          "id": "household-015",
+          "value": 0.0
+        },
+        {
+          "id": "household-016",
+          "value": 0.0
+        },
+        {
+          "id": "household-017",
+          "value": 0.0
+        },
+        {
+          "id": "household-018",
+          "value": 0.0
+        },
+        {
+          "id": "household-019",
+          "value": 0.0
+        },
+        {
+          "id": "household-020",
+          "value": 0.0
+        },
+        {
+          "id": "household-021",
+          "value": 0.0
+        },
+        {
+          "id": "household-022",
+          "value": 0.0
+        },
+        {
+          "id": "household-023",
+          "value": 0.0
+        },
+        {
+          "id": "household-024",
+          "value": 0.0
+        },
+        {
+          "id": "household-025",
+          "value": 0.0
+        },
+        {
+          "id": "household-026",
+          "value": -0.8
+        },
+        {
+          "id": "household-027",
+          "value": 0.0
+        },
+        {
+          "id": "household-028",
+          "value": 0.0
+        },
+        {
+          "id": "household-029",
+          "value": 0.0
+        },
+        {
+          "id": "household-030",
+          "value": 0.0
+        },
+        {
+          "id": "household-031",
+          "value": 0.0
+        },
+        {
+          "id": "household-032",
+          "value": 0.0
+        },
+        {
+          "id": "household-033",
+          "value": 0.0
+        },
+        {
+          "id": "household-034",
+          "value": 0.0
+        },
+        {
+          "id": "household-035",
+          "value": 0.0
+        },
+        {
+          "id": "household-036",
+          "value": 0.0
+        },
+        {
+          "id": "household-037",
+          "value": 0.0
+        },
+        {
+          "id": "household-038",
+          "value": 0.0
+        }
+      ],
+      "p_value_holm": 1.0,
+      "multiplicity_family_n": 8,
+      "hybrid_significantly_better_at_05": false
+    },
+    {
+      "metric": "typo/hybrid_runtime-vs-best-single/ndcg@5",
+      "subset": "typo",
+      "measure": "ndcg",
+      "k": 5,
+      "n": 38,
+      "n_runs": 2,
+      "hybrid_mean": 0.9741521726527894,
+      "best_single": "fuzzy",
+      "best_single_mean": 1.0,
+      "difference": -0.02584782734721055,
+      "ci95_difference": {
+        "status": "MEASURED",
+        "low": -0.06783110713561737,
+        "high": 0.0,
+        "level": 0.95,
+        "method": "Percentile bootstrap; question/probe ID clusters shared across independent runs",
+        "estimator": "mean",
+        "draws": 5000,
+        "valid_draws": 5000,
+        "seed": 741,
+        "n_clusters": 38,
+        "n_observations": 38,
+        "small_sample_note": null
+      },
+      "p_value_two_sided": 0.5,
+      "test": "Exact paired two-sided sign permutation",
+      "permutations": 4,
+      "seed": 741,
+      "selection_note": "Best single selected on these observed test questions, separately per metric/subset. Exploratory comparison; no held-out selection or superiority guarantee.",
+      "paired_differences": [
+        {
+          "id": "household-001",
+          "value": 0.0
+        },
+        {
+          "id": "household-002",
+          "value": 0.0
+        },
+        {
+          "id": "household-003",
+          "value": 0.0
+        },
+        {
+          "id": "household-004",
+          "value": 0.0
+        },
+        {
+          "id": "household-005",
+          "value": 0.0
+        },
+        {
+          "id": "household-006",
+          "value": 0.0
+        },
+        {
+          "id": "household-007",
+          "value": 0.0
+        },
+        {
+          "id": "household-008",
+          "value": 0.0
+        },
+        {
+          "id": "household-009",
+          "value": -0.36907024642854247
+        },
+        {
+          "id": "household-010",
+          "value": 0.0
+        },
+        {
+          "id": "household-011",
+          "value": 0.0
+        },
+        {
+          "id": "household-012",
+          "value": 0.0
+        },
+        {
+          "id": "household-013",
+          "value": 0.0
+        },
+        {
+          "id": "household-014",
+          "value": 0.0
+        },
+        {
+          "id": "household-015",
+          "value": 0.0
+        },
+        {
+          "id": "household-016",
+          "value": 0.0
+        },
+        {
+          "id": "household-017",
+          "value": 0.0
+        },
+        {
+          "id": "household-018",
+          "value": 0.0
+        },
+        {
+          "id": "household-019",
+          "value": 0.0
+        },
+        {
+          "id": "household-020",
+          "value": 0.0
+        },
+        {
+          "id": "household-021",
+          "value": 0.0
+        },
+        {
+          "id": "household-022",
+          "value": 0.0
+        },
+        {
+          "id": "household-023",
+          "value": 0.0
+        },
+        {
+          "id": "household-024",
+          "value": 0.0
+        },
+        {
+          "id": "household-025",
+          "value": 0.0
+        },
+        {
+          "id": "household-026",
+          "value": -0.6131471927654584
+        },
+        {
+          "id": "household-027",
+          "value": 0.0
+        },
+        {
+          "id": "household-028",
+          "value": 0.0
+        },
+        {
+          "id": "household-029",
+          "value": 0.0
+        },
+        {
+          "id": "household-030",
+          "value": 0.0
+        },
+        {
+          "id": "household-031",
+          "value": 0.0
+        },
+        {
+          "id": "household-032",
+          "value": 0.0
+        },
+        {
+          "id": "household-033",
+          "value": 0.0
+        },
+        {
+          "id": "household-034",
+          "value": 0.0
+        },
+        {
+          "id": "household-035",
+          "value": 0.0
+        },
+        {
+          "id": "household-036",
+          "value": 0.0
+        },
+        {
+          "id": "household-037",
+          "value": 0.0
+        },
+        {
+          "id": "household-038",
+          "value": 0.0
+        }
+      ],
+      "p_value_holm": 1.0,
+      "multiplicity_family_n": 8,
+      "hybrid_significantly_better_at_05": false
+    }
+  ],
+  "partial_generation_telemetry": {
+    "saved_query_total_seconds_p50": 94.84242120798444,
+    "saved_query_total_seconds_p95": 162.59062423780267,
+    "n": 43,
+    "scope": "Observed in-process total query wall time on a shared development host; includes resource waits and same-run resumability effects. Not HTTP end-to-end latency or a production SLA.",
+    "logged_timeout_evidence": {
+      "logged_timeout_warnings": 1,
+      "saved_generation_timeout_question": "text-12",
+      "observed_generation_seconds": 150.4318546249997,
+      "caveat": "Empty completed-response telemetry is not on its own proof of an attempted HTTP call; timeout classification additionally uses the recorded evaluator warning and timed stage."
+    },
+    "http_timeout_rate": {
+      "value": null,
+      "status": "NOT MEASURED",
+      "reason": "Completed-response usage and saved question rows do not enumerate every attempted HTTP request. Logged timeout evidence is reported separately."
+    },
+    "wrapper_counter_note": "generation_model_calls and verification_model_calls count wrapper invocations, not actual HTTP requests. Numeric guards may return before HTTP; usage proves completed responses only."
+  },
+  "security_live_probes": [
+    {
+      "run": 1,
+      "n": 27,
+      "passed": 24,
+      "failed_ids": [
+        "cache-own-exact-hit-A",
+        "cache-second-user-own-hit",
+        "cache-stored-content-policy"
+      ]
+    },
+    {
+      "run": 2,
+      "n": 27,
+      "passed": 24,
+      "failed_ids": [
+        "cache-own-exact-hit-A",
+        "cache-second-user-own-hit",
+        "cache-stored-content-policy"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "agent": "ingestion-agent",
+      "file": "results/ingestion-agent.json",
+      "file_sha256_at_assembly": "3fcc71773c357d4bb27636054e36c3fe0ed6597619d9ae69771c9ffe7bed660e",
+      "source_runs": [
+        {
+          "phase": "final",
+          "run": 1,
+          "run_id": "final-run-01",
+          "app_commit": "d749d394c2cfa1d7790f67201c6a088eab997a74",
+          "timestamp_utc": "2026-10-15T18:03:15.528058+00:00",
+          "complete": true,
+          "partial": null,
+          "result_digest_at_assembly": "c99b0fda13244c364af6a8d57ca2ff49369534f24cfb1ea7bb5b9ca879526243"
+        },
+        {
+          "phase": "final",
+          "run": 2,
+          "run_id": "final-run-02",
+          "app_commit": "d749d394c2cfa1d7790f67201c6a088eab997a74",
+          "timestamp_utc": "2026-10-15T18:03:29.371160+00:00",
+          "complete": true,
+          "partial": null,
+          "result_digest_at_assembly": "96a88e40500ad61c9dbfd5f8129d3af9eb009db859b561d87f4452d836fd4b7c"
+        }
+      ]
+    },
+    {
+      "agent": "retrieval-agent",
+      "file": "results/retrieval-agent.json",
+      "file_sha256_at_assembly": "ac4e956b7d942b356afd3803fe43fc24b3e1850aa3cd1df46705331ec3dbf6bc",
+      "source_runs": [
+        {
+          "phase": "final",
+          "run": 1,
+          "run_id": "final-run-01",
+          "app_commit": "8b18ebce9f774da04cfa7f55e6aad23b48152176",
+          "timestamp_utc": "2026-10-15T18:04:02.525001+00:00",
+          "complete": null,
+          "partial": null,
+          "result_digest_at_assembly": "b5dadb014a7cbd8e5d80d4dde9ddf55fe66f4af4cfa11132f705f06481e9ffcf"
+        },
+        {
+          "phase": "final",
+          "run": 2,
+          "run_id": "final-run-02",
+          "app_commit": "8b18ebce9f774da04cfa7f55e6aad23b48152176",
+          "timestamp_utc": "2026-10-15T18:04:54.608002+00:00",
+          "complete": null,
+          "partial": null,
+          "result_digest_at_assembly": "0b43d5307552593fc99c76feacc523baf7d6370b20e664b287d25541a7cb091e"
+        }
+      ]
+    },
+    {
+      "agent": "generation-agent",
+      "file": "results/generation-agent.json",
+      "file_sha256_at_assembly": "f7691e586c7aa84eff810dd3fe4e86ca647a2a5bdaee3a03bbaef3c2e1a66b82",
+      "source_runs": [
+        {
+          "phase": "final",
+          "run": 1,
+          "run_id": "final-run-01",
+          "app_commit": "30c14c93df94304c44a23f40ab462470dc0c949a",
+          "timestamp_utc": "2026-10-16T06:01:14.352697+00:00",
+          "complete": false,
+          "partial": true,
+          "result_digest_at_assembly": "045bfafd578568079810bacefb9c54730ad9d9bae271349e102e3440d5eda4ed"
+        }
+      ]
+    },
+    {
+      "agent": "homeatlas-agent",
+      "file": "results/homeatlas-agent.json",
+      "file_sha256_at_assembly": "66db32e5dd86cabb443549fd2549b61ceb0e45827ab0971e278629d9bbb308eb",
+      "source_runs": [
+        {
+          "phase": "final",
+          "run": 1,
+          "run_id": "final-run-01",
+          "app_commit": "d749d394c2cfa1d7790f67201c6a088eab997a74",
+          "timestamp_utc": "2026-10-15T18:15:11.768714+00:00",
+          "complete": true,
+          "partial": null,
+          "result_digest_at_assembly": "ec5f696e62659409cee0d8356f74b3562b732b027954798f22c6ec55e5754fcd"
+        },
+        {
+          "phase": "final",
+          "run": 2,
+          "run_id": "final-run-02",
+          "app_commit": "d749d394c2cfa1d7790f67201c6a088eab997a74",
+          "timestamp_utc": "2026-10-15T18:14:50.352870+00:00",
+          "complete": true,
+          "partial": null,
+          "result_digest_at_assembly": "cce1ef0ae3236ecf647d317dca67c4bd1f2bf1f43370c94d89e2c2d3f5e332ec"
+        }
+      ]
+    },
+    {
+      "agent": "security-system-agent",
+      "file": "results/security-system-agent.json",
+      "file_sha256_at_assembly": "784c87c74480a9f860dcfd718cb4f587199fc89a5fe3159f91424a92dab87435",
+      "source_runs": [
+        {
+          "phase": "final",
+          "run": 1,
+          "run_id": "final-run-01",
+          "app_commit": "cb30cae4d09a615bab8c4b5ac69f107032060cff",
+          "timestamp_utc": "2026-10-16T06:06:28.969448+00:00",
+          "complete": false,
+          "partial": null,
+          "result_digest_at_assembly": "fb9f14a5a14c7ab4c9fbb644f64d681f4b023786e98433c84c990b61da2ffe24"
+        },
+        {
+          "phase": "final",
+          "run": 2,
+          "run_id": "final-run-02",
+          "app_commit": "cb30cae4d09a615bab8c4b5ac69f107032060cff",
+          "timestamp_utc": "2026-10-16T06:06:31.164035+00:00",
+          "complete": false,
+          "partial": null,
+          "result_digest_at_assembly": "b6369d923e37e3cccaa8ef14301ead79e350466a283829d45512fa1cb26e1f1e"
+        }
+      ]
+    }
+  ],
+  "confidence_note": "Selected metrics only. Frozen percentile bootstrap, 5,000 draws, seed741; repeated runs cluster by question/probe ID. Degenerate intervals and small synthetic samples do not establish population guarantees. Prefix CIs are conditional on the stopped prefix, not representative multimodal accuracy.",
+  "not_measured": [
+    "Independent-judge faithfulness/semantic correctness/hallucination rate: no external judge credential.",
+    "Full generation final pair, cross-run final variance and three-pass consistency: stopped by user budget.",
+    "Final RAGAS embedding similarity/BERTScore: reference postprocessing was not reached.",
+    "Scanned-PDF generation quality: no scanned questions in the stopped prefix.",
+    "HTTP timeout rate, production capacity/cost, numeric trust calibration and isolated3D FPS: not established."
+  ]
+}
