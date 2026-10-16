@@ -5,6 +5,7 @@ README.md
 components/HomeAtlas.tsx
 evaluation/CHANGELOG.md
 evaluation/CONTRACT.md
+evaluation/INDEPENDENT_JUDGE_REVIEW.md
 evaluation/PUBLICATION_FILES.txt
 evaluation/RAG_EVALUATION_BASELINE_APPENDIX.md
 evaluation/RAG_EVALUATION_REPORT.md
@@ -24,6 +25,10 @@ evaluation/results/docs-agent.json
 evaluation/results/fixer-agent.json
 evaluation/results/generation-agent.json
 evaluation/results/homeatlas-agent.json
+evaluation/results/independent-judge-summary.json
+evaluation/results/independent-judge-table.json
+evaluation/results/independent-judge-text.json
+evaluation/results/independent-judge-visual.json
 evaluation/results/ingestion-agent.json
 evaluation/results/retrieval-agent.json
 evaluation/results/security-system-agent.json
@@ -36,6 +41,7 @@ evaluation/run_eval.py
 evaluation/scenarios.json
 evaluation/security_system_eval.py
 evaluation/security_system_live.mjs
+evaluation/showcase/independent_review.py
 evaluation/showcase/report.py
 evaluation/showcase/requested_coverage.py
 evaluation/showcase_results.json
